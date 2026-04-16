@@ -5,50 +5,83 @@ category: "css"
 order: 8
 ---
 
-## CSS Padding
+**Padding** is the transparent space **inside** an element's border — between the border and the actual content. More padding = more breathing room for your content.
 
-The CSS `padding` properties are used to generate space around an element's content, inside of any defined borders.
-
-With CSS, you have full control over the padding. There are properties for setting the padding for each side of an element (top, right, bottom, and left).
-
-### Example - Try It!
+### Try It — Padding in Action
 
 <Editor 
-    initialHtml={`<div>This element has a padding of 70px.</div>`}
-    initialCss={`div {\n  padding: 70px;\n  border: 1px solid #4CAF50;\n}`}
+    initialHtml={`<h2>CSS Padding Demo</h2>
+
+<h3>No Padding</h3>
+<div class="box-no-pad">This div has no padding — text touches the border.</div>
+
+<h3>Equal Padding (all sides)</h3>
+<div class="box-even">padding: 24px — equal on all sides.</div>
+
+<h3>Individual Side Padding</h3>
+<div class="box-diff">padding-top:40px, right:10px, bottom:10px, left:60px</div>
+
+<h3>Padding vs Margin</h3>
+<div class="outer">
+  <div class="inner">
+    OUTER has margin. INNER has padding. Click CSS tab to explore!
+  </div>
+</div>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; background: #f5f5f5; }
+h2 { color: #04AA6D; }
+h3 { color: #555; margin: 18px 0 6px; }
+
+.box-no-pad {
+  background: #d4edda;
+  border: 2px solid #28a745;
+  color: #155724;
+}
+
+.box-even {
+  background: #d1ecf1;
+  border: 2px solid #0c5460;
+  padding: 24px;
+  color: #0c5460;
+}
+
+.box-diff {
+  background: #fff3cd;
+  border: 2px solid #856404;
+  padding-top: 40px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 60px;
+  color: #856404;
+}
+
+.outer {
+  background: #f8d7da;
+  border: 2px dashed #721c24;
+  margin: 20px;
+}
+
+.inner {
+  background: #04AA6D;
+  color: white;
+  padding: 20px;
+  font-weight: bold;
+}`}
 />
 
-### Padding - Individual Sides
+### Padding Shorthand
 
-CSS has properties for specifying the padding for each side of an element:
+| Shorthand | Sets |
+| :--- | :--- |
+| `padding: 20px` | All 4 sides = 20px |
+| `padding: 10px 30px` | Top & Bottom = 10px, Left & Right = 30px |
+| `padding: 10px 20px 30px 40px` | Top, Right, Bottom, Left (clockwise) |
 
-- `padding-top`
-- `padding-right`
-- `padding-bottom`
-- `padding-left`
+### Padding vs Margin
 
-All the padding properties can have the following values:
+| | Padding | Margin |
+| :--- | :--- | :--- |
+| Location | **Inside** the border | **Outside** the border |
+| Background | Shows element's background | Always transparent |
+| Collapse | Does not collapse | Adjacent margins collapse |
 
-- `length` - specifies a padding in px, pt, cm, etc.
-- `%` - specifies a padding in % of the width of the containing element
-- `inherit` - specifies that the padding should be inherited from the parent element
-
-**Note:** Negative values are not allowed for padding.
-
-### Example
-
-<Editor 
-    initialHtml={`<div>This div element has different padding for each side.</div>`}
-    initialCss={`div {\n  border: 1px solid black;\n  background-color: lightblue;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 80px;\n}`}
-/>
-
-### Padding - Shorthand Property
-
-To shorten the code, it is possible to specify all the padding properties in one property.
-
-The `padding` property is a shorthand property for the following individual padding properties:
-
-<Editor 
-    initialHtml={`<p>This paragraph has 25px padding on top, 50px on the right, 75px on the bottom, and 100px on the left.</p>`}
-    initialCss={`p {\n  border: 1px solid red;\n  padding: 25px 50px 75px 100px;\n}`}
-/>
+> **Tip:** When you need space inside a button or card, use `padding`. When you need space between two elements, use `margin`.

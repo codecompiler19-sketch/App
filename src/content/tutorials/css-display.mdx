@@ -5,54 +5,86 @@ category: "css"
 order: 9
 ---
 
-## The CSS Display Property
+The `display` property controls **how an element behaves in the page flow**. It's the most important property for layout.
 
-The `display` property is the most important CSS property for controlling layout.
+Every HTML element has a default display value — most are either `block` or `inline`.
 
-The `display` property specifies if/how an element is displayed.
-
-Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is `block` or `inline`.
-
-### Block-level Elements
-
-A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
-
-Examples of block-level elements:
-
-- `<div>`
-- `<h1>` - `<h6>`
-- `<p>`
-- `<form>`
-- `<header>`
-- `<footer>`
-- `<section>`
-
-### Inline Elements
-
-An inline element does not start on a new line and only takes up as much width as necessary.
-
-Examples of inline elements:
-
-- `<span>`
-- `<a>`
-- `<img>`
-
-### Example - Display
-
-The following example shows how to change inline elements to block elements and vice versa:
+### Try It — Block vs Inline vs None
 
 <Editor 
-    initialHtml={`<a href="#" class="block">This is a block-level link</a>\n<a href="#" class="block">This is another block-level link</a>\n\n<p class="inline">This is an inline paragraph.</p>\n<p class="inline">This is another inline paragraph.</p>`}
-    initialCss={`.block {\n  display: block;\n  background-color: yellow;\n  margin-bottom: 5px;\n}\n\n.inline {\n  display: inline;\n  background-color: lightgreen;\n}`}
+    initialHtml={`<h2>CSS Display Demo</h2>
+
+<h3>Block Elements (take full width)</h3>
+<div class="block-demo">I am a DIV — block by default</div>
+<p class="block-demo">I am a P — also block</p>
+
+<h3>Inline Elements (only as wide as content)</h3>
+<span class="inline-demo">Span 1</span>
+<span class="inline-demo">Span 2</span>
+<span class="inline-demo">Span 3</span>
+
+<h3>Making a block element inline (inline-block)</h3>
+<div class="iblock">Box A</div>
+<div class="iblock">Box B</div>
+<div class="iblock">Box C</div>
+
+<h3>visibility: hidden vs display: none</h3>
+<p class="vis-hidden">This is visibility:hidden — I take up space but I'm invisible!</p>
+<p class="dis-none">This is display:none — I am completely gone!</p>
+<p>The gap above shows where visibility:hidden sits. The line below is unbroken.</p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+h3 { color: #555; margin: 18px 0 8px; }
+
+.block-demo {
+  display: block;
+  background: #d4edda;
+  border: 2px solid #28a745;
+  padding: 8px 12px;
+  color: #155724;
+  margin-bottom: 6px;
+}
+
+.inline-demo {
+  display: inline;
+  background: #d1ecf1;
+  border: 2px solid #0c5460;
+  padding: 4px 10px;
+  color: #0c5460;
+  margin: 2px;
+}
+
+.iblock {
+  display: inline-block;
+  background: #04AA6D;
+  color: white;
+  padding: 10px 20px;
+  margin: 4px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.vis-hidden {
+  visibility: hidden;
+  background: #f8d7da;
+  padding: 8px;
+  margin: 0;
+}
+
+.dis-none {
+  display: none; /* completely removed from layout */
+}`}
 />
 
-### Display: none vs Visibility: hidden
+### Display Values Reference
 
-Hiding an element can be done by setting the `display` property to `none`. The element will be hidden, and the page will be displayed as if the element is not there.
+| Value | Behaviour |
+| :--- | :--- |
+| `block` | Starts on new line, takes full width |
+| `inline` | Flows within text, only as wide as content |
+| `inline-block` | Like inline but respects width/height/padding |
+| `none` | Removed from page entirely (no space) |
+| `flex` | Flexbox layout (modern, powerful) |
+| `grid` | CSS Grid layout |
 
-`visibility: hidden;` also hides an element. However, the element will still take up the same space as before. The element will be hidden, but still affect the layout.
-
-<Editor 
-    initialHtml={`<h1 class="hidden1">This is a hidden heading</h1>\n<p>Notice that the h1 element above still takes up space.</p>\n\n<h1 class="none">This is a heading with display:none</h1>\n<p>Notice that the h1 element above does not take up any space.</p>`}
-    initialCss={`.hidden1 {\n  visibility: hidden;\n}\n\n.none {\n  display: none;\n}`}
-/>
+> **Tip:** `display: none` vs `visibility: hidden` — `none` removes the element from the layout (no space). `hidden` makes it invisible but **keeps the space**.

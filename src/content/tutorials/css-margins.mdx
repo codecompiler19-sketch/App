@@ -5,54 +5,81 @@ category: "css"
 order: 7
 ---
 
-## CSS Margins
+**Margin** is the transparent space **outside** an element's border — it pushes other elements away. You can set margins for all four sides individually or using shorthand.
 
-The CSS `margin` properties are used to create space around elements, outside of any defined borders.
-
-With CSS, you have full control over the margins. There are properties for setting the margin for each side of an element (top, right, bottom, and left).
-
-### Example - Try It!
+### Try It — Margins in Action
 
 <Editor 
-    initialHtml={`<div>This element has a margin of 70px.</div>`}
-    initialCss={`div {\n  margin: 70px;\n  border: 1px solid #4CAF50;\n}`}
+    initialHtml={`<h2>CSS Margins Demo</h2>
+
+<h3>Individual Side Margins</h3>
+<div class="box-a">margin-top: 30px, margin-left: 60px</div>
+
+<h3>Shorthand (top right bottom left)</h3>
+<div class="box-b">margin: 10px 40px 30px 80px</div>
+
+<h3>Auto Margin (centering)</h3>
+<div class="box-center">margin: 0 auto — centered!</div>
+
+<h3>Margin Collapse (two touching margins)</h3>
+<div class="box-collapse-a">Box A — margin-bottom: 40px</div>
+<div class="box-collapse-b">Box B — margin-top: 20px (gap = 40px not 60px!)</div>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; background: #f5f5f5; }
+h2 { color: #04AA6D; }
+h3 { color: #555; margin: 18px 0 6px; }
+
+.box-a {
+  background: #d1ecf1;
+  border: 2px solid #0c5460;
+  padding: 12px;
+  color: #0c5460;
+  margin-top: 30px;
+  margin-left: 60px;
+}
+
+.box-b {
+  background: #d4edda;
+  border: 2px solid #155724;
+  padding: 12px;
+  color: #155724;
+  margin: 10px 40px 30px 80px;
+}
+
+.box-center {
+  background: #04AA6D;
+  color: white;
+  padding: 14px;
+  width: 260px;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.box-collapse-a {
+  background: #fff3cd;
+  border: 2px solid #856404;
+  padding: 12px;
+  color: #856404;
+  margin-bottom: 40px;
+}
+
+.box-collapse-b {
+  background: #f8d7da;
+  border: 2px solid #721c24;
+  padding: 12px;
+  color: #721c24;
+  margin-top: 20px;
+}`}
 />
 
-### Margin - Individual Sides
+### Margin Shorthand Values
 
-CSS has properties for specifying the margin for each side of an element:
+| Shorthand | Sets |
+| :--- | :--- |
+| `margin: 20px` | All 4 sides = 20px |
+| `margin: 10px 40px` | Top & Bottom = 10px, Left & Right = 40px |
+| `margin: 10px 20px 30px` | Top=10, Left&Right=20, Bottom=30 |
+| `margin: 10px 20px 30px 40px` | Top, Right, Bottom, Left (clockwise) |
 
-- `margin-top`
-- `margin-right`
-- `margin-bottom`
-- `margin-left`
-
-All the margin properties can have the following values:
-
-- `auto` - the browser calculates the margin
-- `length` - specifies a margin in px, pt, cm, etc.
-- `%` - specifies a margin in % of the width of the containing element
-- `inherit` - specifies that the margin should be inherited from the parent element
-
-### Example
-
-<Editor 
-    initialHtml={`<div>This div element has different margins for each side.</div>`}
-    initialCss={`div {\n  border: 1px solid black;\n  margin-top: 100px;\n  margin-bottom: 100px;\n  margin-right: 150px;\n  margin-left: 80px;\n  background-color: lightblue;\n}`}
-/>
-
-### Margin - Shorthand Property
-
-To shorten the code, it is possible to specify all the margin properties in one property.
-
-The `margin` property is a shorthand property for the following individual margin properties:
-
-- `margin-top`
-- `margin-right`
-- `margin-bottom`
-- `margin-left`
-
-<Editor 
-    initialHtml={`<p>This paragraph has a 25px margin on top, 50px on the right, 75px on the bottom, and 100px on the left.</p>`}
-    initialCss={`p {\n  border: 1px solid red;\n  margin: 25px 50px 75px 100px;\n}`}
-/>
+> **Tip:** `margin: 0 auto` is the classic way to **horizontally center** a block element. The element must have a defined `width` for this to work.

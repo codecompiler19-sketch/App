@@ -5,51 +5,64 @@ category: "javascript"
 order: 2
 ---
 
-## JavaScript Display Possibilities
+JavaScript has four ways to display output. The most useful and common is `innerHTML` — it lets you update any element on the page without a full reload.
 
-JavaScript can "display" data in different ways:
-
-- Writing into an HTML element, using `innerHTML`
-- Writing into the HTML output using `document.write()`
-- Writing into the browser console, using `console.log()`
-
-The most common and useful way is using `innerHTML` to update content on the page.
-
-### Try It — All Output Methods
-
-The example below shows all three methods working together. Click **Run** to see the result:
+### Try It — Output Methods Compared
 
 <Editor 
     initialHtml={`<h2>JavaScript Output Demo</h2>
 
-<p>Result from innerHTML:</p>
-<p id="demo" style="color:green; font-weight:bold;"></p>
+<h3>innerHTML — most common</h3>
+<p id="demo1" class="result"></p>
 
-<p>Result from document.write:</p>
-<div id="write-area" style="color:blue; font-weight:bold;"></div>`}
-    initialCss={`body {
-  font-family: Arial, sans-serif;
-  padding: 16px;
-}
+<h3>Direct DOM write</h3>
+<p id="demo2" class="result"></p>
+
+<h3>Button-triggered output</h3>
+<button onclick="showMessage()">Click Me!</button>
+<p id="demo3" class="result"></p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
 h2 { color: #04AA6D; }
-p { margin: 6px 0; }`}
-    initialJs={`// 1. innerHTML — write into an HTML element
-document.getElementById("demo").innerHTML = "5 + 6 = " + (5 + 6);
+h3 { color: #555; margin: 16px 0 6px; }
+.result {
+  background: #f4f4f4;
+  border-left: 4px solid #04AA6D;
+  padding: 10px 14px;
+  font-family: monospace;
+  min-height: 20px;
+  margin: 0;
+}
+button {
+  background: #04AA6D; color: white; border: none;
+  padding: 9px 18px; border-radius: 5px; cursor: pointer; font-size: 14px;
+}
+button:hover { background: #038a58; }`}
+    initialJs={`// 1. innerHTML — write HTML into an element
+document.getElementById("demo1").innerHTML =
+  "Result of 5 + 6 = <strong>" + (5 + 6) + "</strong>";
 
-// 2. document.write — use only for quick testing
-document.getElementById("write-area").innerHTML = "document.write result: " + (10 * 3);
+// 2. textContent — write plain text (no HTML)
+document.getElementById("demo2").textContent =
+  "Today is: " + new Date().toDateString();
 
-// 3. console.log — open DevTools (F12) > Console tab to see this
-console.log("console.log result:", 100 + 200);`}
+// 3. Function called by button click
+function showMessage() {
+  document.getElementById("demo3").innerHTML =
+    "🎉 Button clicked at " + new Date().toLocaleTimeString();
+}
+
+// Note: console.log is for debugging — open F12 to see:
+console.log("Page loaded! JavaScript is working.");`}
 />
 
-### How Each Method Works
+### Output Methods Compared
 
-| Method | Where Output Appears | Best Used For |
+| Method | Where Output Goes | Best For |
 | :--- | :--- | :--- |
-| `innerHTML` | Inside an HTML element | Displaying results on the page |
-| `document.write()` | Directly in the HTML stream | Quick testing only |
-| `window.alert()` | A popup dialog box | Simple alerts (avoid in production) |
-| `console.log()` | Browser DevTools Console | Debugging your code |
+| `innerHTML` | Inside an HTML element | Displaying HTML content |
+| `textContent` | Inside an element (text only) | Safe text updates |
+| `document.write()` | Directly in HTML stream | Quick testing only |
+| `window.alert()` | Browser popup | Simple alerts |
+| `console.log()` | Browser DevTools (F12) | Debugging |
 
-> **Tip:** `innerHTML` is the most practical method. Use it to update page content dynamically without reloading the page.
+> **Tip:** Open your browser's DevTools (press **F12** → **Console** tab) to see the `console.log()` output from the JS editor!

@@ -1,57 +1,65 @@
 ---
 title: "JS Statements"
-description: "JavaScript statements are composed of Values, Operators, Expressions, Keywords, and Comments."
+description: "JavaScript statements are instructions executed by the browser one by one."
 category: "javascript"
 order: 3
 ---
 
-## JavaScript Statements
+A JavaScript **statement** is a single instruction for the browser to execute. A **program** is a series of statements executed top to bottom.
 
-A JavaScript **statement** is an instruction that tells the browser to do something. A JavaScript **program** is a list of these statements run top to bottom.
+Statements are built from: **values**, **operators**, **expressions**, **keywords**, and **comments**.
 
-Statements are made up of: **Values**, **Operators**, **Expressions**, **Keywords**, and **Comments**.
-
-### Try It — Statements in Action
+### Try It — Statements in Practice
 
 <Editor 
     initialHtml={`<h2>JavaScript Statements</h2>
 
-<p>Sum of a + b:</p>
-<p id="sum" style="color:green; font-size:20px; font-weight:bold;"></p>
-
-<p>Semicolons let you put multiple statements on one line:</p>
-<p id="oneLine" style="color:DodgerBlue; font-weight:bold;"></p>
-
-<p>White space is ignored — both lines below produce the same result:</p>
-<p id="spaced1"></p>
-<p id="spaced2"></p>`}
+<div id="s1" class="result"></div>
+<div id="s2" class="result"></div>
+<div id="s3" class="result"></div>
+<div id="s4" class="result"></div>`}
     initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
 h2 { color: #04AA6D; }
-p  { margin: 4px 0; }`}
-    initialJs={`// Statement 1: Calculate a + b
-let a = 5;
-let b = 6;
+.result {
+  background: #f4f4f4;
+  border-left: 4px solid #04AA6D;
+  padding: 10px 14px;
+  font-family: monospace;
+  margin: 8px 0;
+  font-size: 14px;
+}`}
+    initialJs={`// Statement 1 — assign and compute
+let a = 10;
+let b = 25;
 let sum = a + b;
-document.getElementById("sum").innerHTML = a + " + " + b + " = " + sum;
+document.getElementById("s1").textContent =
+  "Statement 1: " + a + " + " + b + " = " + sum;
 
-// Statement 2: Multiple statements on one line (separated by semicolons)
-let x = 1; let y = 2; let z = x + y;
-document.getElementById("oneLine").innerHTML = "x=" + x + ", y=" + y + ", z=" + z;
+// Statement 2 — multiple statements on one line (semicolon separates them)
+let x = 3; let y = 7; let product = x * y;
+document.getElementById("s2").textContent =
+  "Statement 2 (one line): " + x + " × " + y + " = " + product;
 
-// Statement 3: White space is ignored by JavaScript
-let name1 = "Alice";   // with spaces around =
-let name2="Bob";       // without spaces
-document.getElementById("spaced1").innerHTML = "name1 = " + name1;
-document.getElementById("spaced2").innerHTML = "name2 = " + name2;`}
+// Statement 3 — white space is ignored
+let   city   =   "Delhi";
+document.getElementById("s3").textContent =
+  "Statement 3 (extra spaces ignored): city = " + city;
+
+// Statement 4 — a statement can span multiple lines
+let message = "Statements can "
+            + "span multiple "
+            + "lines!";
+document.getElementById("s4").textContent = "Statement 4: " + message;`}
 />
 
-### Key Rules
+### Statement Rules
 
 | Rule | Example |
 | :--- | :--- |
-| End statements with `;` | `let x = 5;` |
-| Statements run top to bottom | First declared → first executed |
-| White space is ignored | `let x=5;` = `let x = 5;` |
-| Multiple statements per line | `let a=1; let b=2;` |
+| End with semicolon `;` | `let x = 5;` |
+| Runs top to bottom | First line → last line |
+| White space ignored | `let x=5;` = `let x = 5;` |
+| Multiple per line | `let a=1; let b=2;` |
+| Can span lines | `let msg = "Hello" + " World";` |
 
-> **Tip:** Always end your statements with a semicolon. It keeps your code clear and avoids unexpected bugs.
+> **Tip:** Always add semicolons at the end of statements. While JavaScript can sometimes guess where they go, omitting them can cause hard-to-find bugs.
