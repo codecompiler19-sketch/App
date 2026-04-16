@@ -1,0 +1,44 @@
+---
+title: "CSS Colors"
+description: "Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values."
+category: "css"
+order: 3
+---
+
+## CSS Colors
+
+Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values.
+
+### CSS Color Names
+In CSS, a color can be specified by using a predefined color name like Red, Green, Blue, Orange, etc.
+
+<h3>Example - Try It!</h3>
+
+<Editor 
+    initialHtml={`<h1 style="background-color:DodgerBlue;">DodgerBlue</h1>\n<p style="background-color:MediumSeaGreen;">MediumSeaGreen</p>\n<p style="background-color:Gray;">Gray</p>`}
+    initialCss={`h1, p {\n  color: white;\n  padding: 10px;\n  text-align: center;\n}`}
+/>
+
+### CSS Background Color
+You can set the background color for HTML elements:
+
+<Editor 
+    initialHtml={`<h1 style="background-color:DodgerBlue;">Hello World</h1>\n<p style="background-color:Tomato;">Lorem ipsum...</p>`}
+    initialCss={`h1, p {\n  color: white;\n  padding: 20px;\n}`}
+/>
+
+### CSS Text Color
+You can set the color of text:
+
+<Editor 
+    initialHtml={`<h1 style="color:Tomato;">Hello World</h1>\n<p style="color:DodgerBlue;">Lorem ipsum...</p>\n<p style="color:MediumSeaGreen;">Ut wisi enim...</p>`}
+    initialCss={`body {\n  font-family: Arial, sans-serif;\n}`}
+/>
+
+### CSS Border Color
+You can set the color of borders:
+
+<Editor 
+    initialHtml={`<h1 style="border: 2px solid Tomato;">Hello World</h1>\n<h1 style="border: 2px solid DodgerBlue;">Hello World</h1>\n<h1 style="border: 2px solid Violet;">Hello World</h1>`}
+    initialCss={`h1 {\n  padding: 10px;\n  margin-bottom: 10px;\n}`}
+/>

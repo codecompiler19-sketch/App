@@ -1,0 +1,32 @@
+---
+title: "CSS Box Model"
+description: "All HTML elements can be considered as boxes. The CSS box model is essentially a box that wraps around every HTML element."
+category: "css"
+order: 4
+---
+
+## CSS Box Model
+
+All HTML elements can be considered as boxes. In CSS, the term "box model" is used when talking about design and layout.
+
+The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content.
+
+- **Content** - The content of the box, where text and images appear
+- **Padding** - Clears an area around the content. The padding is transparent
+- **Border** - A border that goes around the padding and content
+- **Margin** - Clears an area outside the border. The margin is transparent
+
+### Example - Try It!
+
+<Editor 
+    initialHtml={`<div class="box-example">This text is the content of the box. We have added a 50px padding, 20px margin and a 15px green border. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>`}
+    initialCss={`.box-example {\n  background-color: lightgrey;\n  width: 300px;\n  border: 15px solid green;\n  padding: 50px;\n  margin: 20px;\n}`}
+/>
+
+### Width and Height of an Element
+In order to set the width and height of an element correctly in all browsers, you need to know how the box model works.
+
+When you set the width and height properties of an element with CSS, you just set the width and height of the content area. To calculate the full size of an element, you must also add padding, borders and margins.
+
+### Total Element Width Calculation:
+Total element width = width + left padding + right padding + left border + right border + left margin + right margin

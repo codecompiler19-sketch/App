@@ -1,0 +1,38 @@
+---
+title: "CSS Backgrounds"
+description: "The CSS background properties are used to add background effects for elements."
+category: "css"
+order: 5
+---
+
+## CSS Backgrounds
+
+The CSS background properties are used to add background effects for elements.
+
+### CSS background-color
+The `background-color` property specifies the background color of an element.
+
+<Editor 
+    initialHtml={`<h1>Hello World!</h1>\n<p>This page has a light blue background color!</p>`}
+    initialCss={`body {\n  background-color: lightblue;\n}\n\nh1 {\n  background-color: green;\n  color: white;\n}\n\np {\n  background-color: yellow;\n}`}
+/>
+
+### CSS background-image
+The `background-image` property specifies an image to use as the background of an element.
+
+By default, the image is repeated so it covers the entire element.
+
+<Editor 
+    initialHtml={`<h1>Hello World!</h1>\n<p>This page has a background image!</p>`}
+    initialCss={`body {\n  background-image: url("https://www.w3schools.com/cssref/paper.gif");\n  background-color: #cccccc;\n}`}
+/>
+
+### Background Repeat
+By default, the `background-image` property repeats an image both horizontally and vertically.
+
+Some images should be repeated only horizontally or vertically, or they will look strange.
+
+<Editor 
+    initialHtml={`<h1>Hello World!</h1>\n<p>Background image repeated only horizontally!</p>`}
+    initialCss={`body {\n  background-image: url("https://www.w3schools.com/css/gradient_bg.png");\n  background-repeat: repeat-x;\n}`}
+/>

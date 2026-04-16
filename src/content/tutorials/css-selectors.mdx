@@ -1,0 +1,45 @@
+---
+title: "CSS Selectors"
+description: "CSS selectors are used to find or select the HTML elements you want to style."
+category: "css"
+order: 2
+---
+
+## CSS Selectors
+
+A CSS selector selects the HTML element(s) you want to style.
+
+### The Element Selector
+The element selector selects HTML elements based on the element name.
+
+### Example - Try It!
+In this example, all `<p>` elements will be center-aligned, with a red text color:
+
+<Editor 
+    initialHtml={`<p>Every paragraph will be affected by the style.</p>\n<p id="para1">Me too!</p>\n<p>And me!</p>`}
+    initialCss={`p {\n  text-align: center;\n  color: red;\n}`}
+/>
+
+### The Id Selector
+The `id` selector uses the id attribute of an HTML element to select a specific element. The id of an element is unique within a page, so the id selector is used to select one unique element!
+
+To select an element with a specific id, write a hash (#) character, followed by the id of the element.
+
+### Example - Try It!
+The style rule below will be applied to the HTML element with id="para1":
+
+<Editor 
+    initialHtml={`<p id="para1">Hello World!</p>\n<p>This paragraph is not affected by the style.</p>`}
+    initialCss={`#para1 {\n  text-align: center;\n  color: blue;\n}`}
+/>
+
+### The Class Selector
+The `class` selector selects HTML elements with a specific class attribute. To select elements with a specific class, write a period (.) character, followed by the name of the class.
+
+### Example - Try It!
+In this example, all HTML elements with class="center" will be red and center-aligned:
+
+<Editor 
+    initialHtml={`<h1 class="center">Red and center-aligned heading</h1>\n<p class="center">Red and center-aligned paragraph.</p>`}
+    initialCss={`.center {\n  text-align: center;\n  color: red;\n}`}
+/>
