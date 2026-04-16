@@ -151,22 +151,204 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"blog": Record<string, {
-  id: string;
-  slug: string;
-  body: string;
-  collection: "blog";
-  data: any;
-  render(): Render[".md"];
-}>;
-"tutorials": Record<string, {
-  id: string;
-  slug: string;
+		"tutorials": {
+"css-backgrounds.mdx": {
+	id: "css-backgrounds.mdx";
+  slug: "css-backgrounds";
   body: string;
   collection: "tutorials";
-  data: any;
-  render(): Render[".md"];
-}>;
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-borders.mdx": {
+	id: "css-borders.mdx";
+  slug: "css-borders";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-box-model.mdx": {
+	id: "css-box-model.mdx";
+  slug: "css-box-model";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-colors.mdx": {
+	id: "css-colors.mdx";
+  slug: "css-colors";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-display.mdx": {
+	id: "css-display.mdx";
+  slug: "css-display";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-introduction.mdx": {
+	id: "css-introduction.mdx";
+  slug: "css-introduction";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-margins.mdx": {
+	id: "css-margins.mdx";
+  slug: "css-margins";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-padding.mdx": {
+	id: "css-padding.mdx";
+  slug: "css-padding";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-position.mdx": {
+	id: "css-position.mdx";
+  slug: "css-position";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"css-selectors.mdx": {
+	id: "css-selectors.mdx";
+  slug: "css-selectors";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-formatting.mdx": {
+	id: "html-formatting.mdx";
+  slug: "html-formatting";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-headings.mdx": {
+	id: "html-headings.mdx";
+  slug: "html-headings";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-images.mdx": {
+	id: "html-images.mdx";
+  slug: "html-images";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-introduction.mdx": {
+	id: "html-introduction.mdx";
+  slug: "html-introduction";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-links.mdx": {
+	id: "html-links.mdx";
+  slug: "html-links";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-lists.mdx": {
+	id: "html-lists.mdx";
+  slug: "html-lists";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-paragraphs.mdx": {
+	id: "html-paragraphs.mdx";
+  slug: "html-paragraphs";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-styles.mdx": {
+	id: "html-styles.mdx";
+  slug: "html-styles";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"html-tables.mdx": {
+	id: "html-tables.mdx";
+  slug: "html-tables";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-comments.mdx": {
+	id: "js-comments.mdx";
+  slug: "js-comments";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-datatypes.mdx": {
+	id: "js-datatypes.mdx";
+  slug: "js-datatypes";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-functions.mdx": {
+	id: "js-functions.mdx";
+  slug: "js-functions";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-introduction.mdx": {
+	id: "js-introduction.mdx";
+  slug: "js-introduction";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-operators.mdx": {
+	id: "js-operators.mdx";
+  slug: "js-operators";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-output.mdx": {
+	id: "js-output.mdx";
+  slug: "js-output";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-statements.mdx": {
+	id: "js-statements.mdx";
+  slug: "js-statements";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-syntax.mdx": {
+	id: "js-syntax.mdx";
+  slug: "js-syntax";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+"js-variables.mdx": {
+	id: "js-variables.mdx";
+  slug: "js-variables";
+  body: string;
+  collection: "tutorials";
+  data: InferEntrySchema<"tutorials">
+} & { render(): Render[".mdx"] };
+};
 
 	};
 
@@ -176,5 +358,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("./../../src/content/config.js");
 }
