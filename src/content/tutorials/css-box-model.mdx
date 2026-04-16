@@ -1,32 +1,77 @@
 ---
 title: "CSS Box Model"
-description: "All HTML elements can be considered as boxes. The CSS box model is essentially a box that wraps around every HTML element."
+description: "All HTML elements can be considered as boxes. The CSS box model describes the spacing around every element."
 category: "css"
 order: 4
 ---
 
-## CSS Box Model
+Every HTML element is a rectangular **box** made of four layers:
 
-All HTML elements can be considered as boxes. In CSS, the term "box model" is used when talking about design and layout.
+1. **Content** — the text or image inside
+2. **Padding** — space between content and border (inside)
+3. **Border** — a line around the padding
+4. **Margin** — space outside the border (between elements)
 
-The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content.
-
-- **Content** - The content of the box, where text and images appear
-- **Padding** - Clears an area around the content. The padding is transparent
-- **Border** - A border that goes around the padding and content
-- **Margin** - Clears an area outside the border. The margin is transparent
-
-### Example - Try It!
+### Try It — Visualise the Box Model
 
 <Editor 
-    initialHtml={`<div class="box-example">This text is the content of the box. We have added a 50px padding, 20px margin and a 15px green border. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>`}
-    initialCss={`.box-example {\n  background-color: lightgrey;\n  width: 300px;\n  border: 15px solid green;\n  padding: 50px;\n  margin: 20px;\n}`}
+    initialHtml={`<h2>The CSS Box Model</h2>
+
+<div class="box-demo">
+  <p>This box has:<br>
+  • 20px padding (inside space)<br>
+  • 4px solid border<br>
+  • 30px margin (outside space)</p>
+</div>
+
+<div class="box-demo">Another box — notice the gap between them (margin).</div>
+
+<h3>Width Calculation</h3>
+<div class="width-box">
+  width: 300px + padding: 20px each side + border: 4px each side<br>
+  = Total rendered width: 348px
+</div>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; background: #f9f9f9; }
+h2 { color: #04AA6D; }
+h3 { color: #555; margin-top: 20px; }
+
+.box-demo {
+  background-color: #d4edda;
+  width: 300px;
+  padding: 20px;
+  border: 4px solid #28a745;
+  margin: 30px;
+  border-radius: 4px;
+  color: #155724;
+  line-height: 1.7;
+}
+
+.width-box {
+  background: #fff3cd;
+  border: 4px solid #f0ad4e;
+  width: 300px;
+  padding: 20px;
+  margin: 10px 30px;
+  color: #856404;
+  font-size: 13px;
+  line-height: 1.6;
+  border-radius: 4px;
+}`}
 />
 
-### Width and Height of an Element
-In order to set the width and height of an element correctly in all browsers, you need to know how the box model works.
+### Box Model Layers
 
-When you set the width and height properties of an element with CSS, you just set the width and height of the content area. To calculate the full size of an element, you must also add padding, borders and margins.
+| Layer | Property | What it does |
+| :--- | :--- | :--- |
+| Content | `width`, `height` | The size of the content area |
+| Padding | `padding` | Space **inside** the border |
+| Border | `border` | Line around the element |
+| Margin | `margin` | Space **outside** the element |
 
-### Total Element Width Calculation:
-Total element width = width + left padding + right padding + left border + right border + left margin + right margin
+### Total Width Formula
+
+```
+Total width = width + left padding + right padding + left border + right border
+```
+
+> **Tip:** Use `box-sizing: border-box` in your CSS to make `width` include padding and border automatically — this is much more predictable and is what most modern websites use.
