@@ -7,45 +7,50 @@ order: 3
 
 ## HTML Paragraphs
 
-The HTML `<p>` element defines a paragraph:
+The HTML `<p>` element defines a paragraph. Browsers automatically add margin space before and after each paragraph.
 
-A paragraph always starts on a new line, and browsers automatically add some white space (a margin) before and after a paragraph.
-
-### Example - Try It!
+### Try It — Paragraphs, Line Breaks & Dividers
 
 <Editor 
-    initialHtml={`<p>This is a paragraph.</p>\n<p>This is another paragraph.</p>`}
+    initialHtml={`<h2>HTML Paragraphs</h2>
+
+<p>This is the first paragraph. A paragraph always starts on a new line.</p>
+
+<p>This is the second paragraph. Browsers automatically add some white space above and below each paragraph.</p>
+
+<hr>
+
+<h3>Using Line Breaks</h3>
+<p>
+  Line 1 of this paragraph.<br>
+  Line 2 — forced with a &lt;br&gt; tag.<br>
+  Line 3 — still the same paragraph!
+</p>
+
+<hr>
+
+<h3>Extra Spaces Are Ignored</h3>
+<p>Even if you add many   spaces   or
+line
+breaks in the source code,
+the browser just shows it as one continuous paragraph.</p>`}
+    initialCss={`body {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+  line-height: 1.7;
+  color: #333;
+}
+h2 { color: #04AA6D; }
+h3 { color: #555; margin-top: 16px; }
+hr { border: none; border-top: 2px solid #ddd; margin: 16px 0; }`}
 />
 
-### HTML Display
+### Key Elements
 
-You cannot be sure how HTML will be displayed. Large or small screens, and resized windows will create different results.
+| Tag | What it does |
+| :--- | :--- |
+| `<p>` | Defines a paragraph (block-level, adds spacing) |
+| `<br>` | Line break — new line within the same paragraph |
+| `<hr>` | Horizontal rule — a thematic divider line |
 
-With HTML, you cannot change the display by adding extra spaces or extra lines in your HTML code.
-
-The browser will automatically remove any extra spaces and lines when the page is displayed:
-
-### Example
-
-<Editor 
-    initialHtml={`<p>\nThis paragraph\ncontains a lot of lines\nin the source code,\nbut the browser\nignores it.\n</p>\n\n<p>\nThis paragraph\ncontains         a lot of spaces\nin the source         code,\nbut the        browser\nignores it.\n</p>`}
-/>
-
-### HTML Horizontal Rules
-
-The `<hr>` tag defines a thematic break in an HTML page, and is most often displayed as a horizontal rule.
-The `<hr>` element is used to separate content (or define a change) in an HTML page:
-
-<Editor 
-    initialHtml={`<h1>This is heading 1</h1>\n<p>This is some text.</p>\n<hr>\n<h2>This is heading 2</h2>\n<p>This is some other text.</p>\n<hr>`}
-/>
-
-### HTML Line Breaks
-
-The HTML `<br>` element defines a line break.
-
-Use `<br>` if you want a line break (a new line) without starting a new paragraph:
-
-<Editor 
-    initialHtml={`<p>This is<br>a paragraph<br>with line breaks.</p>`}
-/>
+> **Tip:** Use `<br>` only when *line breaks are part of the content* (e.g. addresses or poetry). For general spacing between blocks, use separate `<p>` elements or CSS margin.

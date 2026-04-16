@@ -1,58 +1,76 @@
 ---
 title: "JS Operators"
-description: "JavaScript operators are used to assign values, compare values, perform arithmetic operations, and more."
+description: "JavaScript operators are used to perform arithmetic, assign values, compare values, and more."
 category: "javascript"
 order: 7
 ---
 
-## JavaScript Arithmetic Operators
+## JavaScript Operators
 
-Arithmetic operators are used to perform arithmetic on numbers:
+Operators are symbols that perform operations on values (called **operands**).
 
-| Operator | Description |
-| :------- | :---------- |
-| `+`      | Addition |
-| `-`      | Subtraction |
-| `*`      | Multiplication |
-| `**`     | Exponentiation |
-| `/`      | Division |
-| `%`      | Modulus (Division Remainder) |
-| `++`     | Increment |
-| `--`     | Decrement |
-
-### Example - Try It!
+### Try It — All Operator Types
 
 <Editor 
-    initialHtml={`<h2>JavaScript Arithmetic</h2>\n\n<p>A typical arithmetic operation takes two numbers and produces a new number.</p>\n<p id="demo"></p>`}
-    initialJs={`let a = 100;\nlet b = 50;\nlet x = a + b;\n\ndocument.getElementById("demo").innerHTML = x;`}
+    initialHtml={`<h2>JavaScript Operators</h2>
+
+<h3>Arithmetic Operators</h3>
+<p id="arith"></p>
+
+<h3>Assignment Operators</h3>
+<p id="assign"></p>
+
+<h3>String Concatenation</h3>
+<p id="concat"></p>
+
+<h3>Comparison (results shown as true/false)</h3>
+<p id="compare"></p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+h3 { color: #555; margin: 14px 0 4px; }
+p  { background: #f4f4f4; padding: 8px 12px; border-radius: 4px; font-family: monospace; }`}
+    initialJs={`// Arithmetic Operators: + - * / % **
+let a = 10, b = 3;
+document.getElementById("arith").innerHTML =
+  a + "+" + b + "=" + (a+b) + " | " +
+  a + "-" + b + "=" + (a-b) + " | " +
+  a + "*" + b + "=" + (a*b) + " | " +
+  a + "/" + b + "=" + (a/b).toFixed(2) + " | " +
+  a + "%" + b + "=" + (a%b) + " | " +
+  a + "**" + b + "=" + (a**b);
+
+// Assignment Operators: = += -= *= /=
+let x = 10;
+x += 5;   // x is now 15
+x -= 3;   // x is now 12
+x *= 2;   // x is now 24
+document.getElementById("assign").innerHTML =
+  "Start: 10 → +=5 → -=3 → *=2 → Final: " + x;
+
+// String concatenation with +
+let first = "Codes";
+let last  = "Compiler";
+document.getElementById("concat").innerHTML =
+  '"' + first + '" + "' + last + '" → ' + (first + last);
+
+// Comparison Operators: == === != > < >= <=
+let n = 5;
+document.getElementById("compare").innerHTML =
+  "n=5 | n==5: " + (n==5) +
+  " | n===5: " + (n===5) +
+  " | n>3: " + (n>3) +
+  " | n<3: " + (n<3) +
+  " | n>=5: " + (n>=5);`}
 />
 
-### JavaScript Assignment Operators
+### Operator Reference
 
-Assignment operators assign values to JavaScript variables.
+| Type | Operators | Example |
+| :--- | :--- | :--- |
+| Arithmetic | `+ - * / % **` | `10 % 3 → 1` |
+| Assignment | `= += -= *= /=` | `x += 5` |
+| Comparison | `== === != > < >= <=` | `5 === "5" → false` |
+| Logical | `&& || !` | `true && false → false` |
+| String | `+` | `"Hi" + " there"` |
 
-| Operator | Example | Same As |
-| :------- | :------ | :------ |
-| `=`      | `x = y` | `x = y` |
-| `+=`     | `x += y` | `x = x + y` |
-| `-=`     | `x -= y` | `x = x - y` |
-| `*=`     | `x *= y` | `x = x * y` |
-| `/=`     | `x /= y` | `x = x / y` |
-
-### Example
-
-The `+=` assignment operator adds a value to a variable.
-
-<Editor 
-    initialHtml={`<h2>JavaScript Assignment</h2>\n<p id="demo"></p>`}
-    initialJs={`let x = 10;\nx += 5;\ndocument.getElementById("demo").innerHTML = x;`}
-/>
-
-### JavaScript String Operators
-
-The `+` operator can also be used to add (concatenate) strings.
-
-<Editor 
-    initialHtml={`<h2>JavaScript Strings</h2>\n<p id="demo"></p>`}
-    initialJs={`let text1 = "John";\nlet text2 = "Doe";\nlet text3 = text1 + " " + text2;\ndocument.getElementById("demo").innerHTML = text3;`}
-/>
+> **Tip:** Use `===` (strict equality) instead of `==`. It checks both value AND type, preventing sneaky bugs.

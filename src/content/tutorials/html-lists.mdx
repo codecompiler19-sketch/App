@@ -7,40 +7,59 @@ order: 9
 
 ## HTML Lists
 
-HTML lists allow web developers to group a set of related items in lists.
+HTML provides three types of lists. Use them to present grouped, structured information clearly.
+
+### Try It — All List Types
 
 <Editor 
-    initialHtml={`<h2>HTML Lists</h2>\n\n<h3>An Unordered HTML List</h3>\n<ul>\n  <li>Item</li>\n  <li>Item</li>\n  <li>Item</li>\n  <li>Item</li>\n</ul>\n\n<h3>An Ordered HTML List</h3>\n<ol>\n  <li>First item</li>\n  <li>Second item</li>\n  <li>Third item</li>\n  <li>Fourth item</li>\n</ol>`}
+    initialHtml={`<h2>Types of HTML Lists</h2>
+
+<h3>Unordered List (ul)</h3>
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
+
+<h3>Ordered List (ol)</h3>
+<ol>
+  <li>Learn HTML first</li>
+  <li>Then learn CSS</li>
+  <li>Finally, learn JavaScript</li>
+</ol>
+
+<h3>Description List (dl)</h3>
+<dl>
+  <dt>HTML</dt>
+  <dd>The structure and content of a web page</dd>
+  <dt>CSS</dt>
+  <dd>The visual styling and layout</dd>
+  <dt>JavaScript</dt>
+  <dd>The interactivity and dynamic behaviour</dd>
+</dl>`}
+    initialCss={`body {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+  line-height: 1.8;
+}
+h2 { color: #04AA6D; }
+h3 { color: #333; margin-top: 20px; }
+ul { list-style-type: disc; padding-left: 24px; }
+ol { list-style-type: decimal; padding-left: 24px; }
+dl { background: #f4f4f4; padding: 12px 16px; border-radius: 6px; }
+dt { font-weight: bold; color: #04AA6D; }
+dd { margin: 0 0 8px 16px; color: #555; }`}
 />
 
-### Unordered HTML List
+### List Types Explained
 
-An unordered list starts with the `<ul>` tag. Each list item starts with the `<li>` tag.
+| Tag | Type | Description |
+| :--- | :--- | :--- |
+| `<ul>` | Unordered | Bullet points — order doesn't matter |
+| `<ol>` | Ordered | Numbered — sequence matters |
+| `<dl>` | Description | Term + definition pairs |
+| `<li>` | List Item | Used inside `<ul>` and `<ol>` |
+| `<dt>` | Term | Used inside `<dl>` |
+| `<dd>` | Description | Used inside `<dl>` to describe `<dt>` |
 
-The list items will be marked with bullets (small black circles) by default:
-
-<Editor 
-    initialHtml={`<h2>Unordered List</h2>\n<ul>\n  <li>Coffee</li>\n  <li>Tea</li>\n  <li>Milk</li>\n</ul>`}
-/>
-
-### Ordered HTML List
-
-An ordered list starts with the `<ol>` tag. Each list item starts with the `<li>` tag.
-
-The list items will be marked with numbers by default:
-
-<Editor 
-    initialHtml={`<h2>Ordered List</h2>\n<ol>\n  <li>Coffee</li>\n  <li>Tea</li>\n  <li>Milk</li>\n</ol>`}
-/>
-
-### HTML Description Lists
-
-HTML also supports description lists.
-
-A description list is a list of terms, with a description of each term.
-
-The `<dl>` tag defines the description list, the `<dt>` tag defines the term (name), and the `<dd>` tag describes each term:
-
-<Editor 
-    initialHtml={`<h2>Description List</h2>\n\n<dl>\n  <dt>Coffee</dt>\n  <dd>- black hot drink</dd>\n  <dt>Milk</dt>\n  <dd>- white cold drink</dd>\n</dl>`}
-/>
+> **Tip:** You can customise the bullet style of `<ul>` lists using CSS: `list-style-type: circle`, `square`, or `none`.

@@ -7,39 +7,61 @@ order: 2
 
 ## CSS Selectors
 
-A CSS selector selects the HTML element(s) you want to style.
+A CSS **selector** tells the browser *which* HTML elements to apply styles to. There are three fundamental types.
 
-### The Element Selector
-The element selector selects HTML elements based on the element name.
-
-### Example - Try It!
-In this example, all `<p>` elements will be center-aligned, with a red text color:
+### Try It — All Three Selector Types
 
 <Editor 
-    initialHtml={`<p>Every paragraph will be affected by the style.</p>\n<p id="para1">Me too!</p>\n<p>And me!</p>`}
-    initialCss={`p {\n  text-align: center;\n  color: red;\n}`}
+    initialHtml={`<h2>CSS Selectors Demo</h2>
+
+<h3>Element Selector (targets all &lt;p&gt; tags)</h3>
+<p>First paragraph — styled by element selector.</p>
+<p>Second paragraph — also styled!</p>
+
+<h3>ID Selector (targets only #special)</h3>
+<p id="special">I am the special paragraph with id="special".</p>
+<p>I am a normal paragraph, not affected by the ID selector.</p>
+
+<h3>Class Selector (targets .highlight)</h3>
+<p class="highlight">I have class="highlight" — styled!</p>
+<h4 class="highlight">This heading also has class="highlight"!</h4>
+<p>No class — I am not highlighted.</p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+h3 { color: #555; margin-top: 20px; }
+
+/* Element Selector — targets ALL <p> elements */
+p {
+  font-size: 15px;
+  color: #333;
+}
+
+/* ID Selector — targets the ONE element with id="special" */
+#special {
+  background-color: #fff3cd;
+  border-left: 4px solid #f0ad4e;
+  padding: 8px 12px;
+  font-weight: bold;
+  color: #856404;
+}
+
+/* Class Selector — targets ALL elements with class="highlight" */
+.highlight {
+  background-color: #d4edda;
+  border-left: 4px solid #28a745;
+  padding: 8px 12px;
+  color: #155724;
+}`}
 />
 
-### The Id Selector
-The `id` selector uses the id attribute of an HTML element to select a specific element. The id of an element is unique within a page, so the id selector is used to select one unique element!
+### Selector Quick Reference
 
-To select an element with a specific id, write a hash (#) character, followed by the id of the element.
+| Selector | Syntax | Targets |
+| :--- | :--- | :--- |
+| Element | `p { }` | All `<p>` elements |
+| ID | `#myId { }` | The element with `id="myId"` |
+| Class | `.myClass { }` | All elements with `class="myClass"` |
+| Universal | `* { }` | Every element on the page |
+| Group | `h1, h2, p { }` | All h1, h2, and p elements |
 
-### Example - Try It!
-The style rule below will be applied to the HTML element with id="para1":
-
-<Editor 
-    initialHtml={`<p id="para1">Hello World!</p>\n<p>This paragraph is not affected by the style.</p>`}
-    initialCss={`#para1 {\n  text-align: center;\n  color: blue;\n}`}
-/>
-
-### The Class Selector
-The `class` selector selects HTML elements with a specific class attribute. To select elements with a specific class, write a period (.) character, followed by the name of the class.
-
-### Example - Try It!
-In this example, all HTML elements with class="center" will be red and center-aligned:
-
-<Editor 
-    initialHtml={`<h1 class="center">Red and center-aligned heading</h1>\n<p class="center">Red and center-aligned paragraph.</p>`}
-    initialCss={`.center {\n  text-align: center;\n  color: red;\n}`}
-/>
+> **Tip:** IDs must be unique on a page (one element per ID). Classes can be shared across many elements — that's what makes them so powerful for reusable styles.

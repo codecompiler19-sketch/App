@@ -1,44 +1,65 @@
 ---
 title: "CSS Colors"
-description: "Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values."
+description: "Colors are specified using predefined color names, or RGB, HEX, HSL values."
 category: "css"
 order: 3
 ---
 
 ## CSS Colors
 
-Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values.
+In CSS, colors can be specified in several ways: by **name**, **HEX code**, or **RGB value**.
 
-### CSS Color Names
-In CSS, a color can be specified by using a predefined color name like Red, Green, Blue, Orange, etc.
-
-<h3>Example - Try It!</h3>
+### Try It — All Color Types
 
 <Editor 
-    initialHtml={`<h1 style="background-color:DodgerBlue;">DodgerBlue</h1>\n<p style="background-color:MediumSeaGreen;">MediumSeaGreen</p>\n<p style="background-color:Gray;">Gray</p>`}
-    initialCss={`h1, p {\n  color: white;\n  padding: 10px;\n  text-align: center;\n}`}
+    initialHtml={`<h2>CSS Color Examples</h2>
+
+<h3>Color by Name</h3>
+<p class="color-name">This text uses a color name: Tomato</p>
+
+<h3>Color by HEX Code</h3>
+<p class="color-hex">This text uses a HEX code: #3498db</p>
+
+<h3>Color by RGB Value</h3>
+<p class="color-rgb">This text uses RGB: rgb(46, 204, 113)</p>
+
+<h3>Background Colors</h3>
+<div class="bg-demo">
+  <span class="bg1">DodgerBlue</span>
+  <span class="bg2">Tomato</span>
+  <span class="bg3">MediumSeaGreen</span>
+</div>
+
+<h3>Border Colors</h3>
+<p class="border-example">This paragraph has a colored border!</p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+h3 { margin: 16px 0 6px; color: #444; }
+
+.color-name { color: Tomato; font-size: 18px; font-weight: bold; }
+.color-hex  { color: #3498db; font-size: 18px; font-weight: bold; }
+.color-rgb  { color: rgb(46, 204, 113); font-size: 18px; font-weight: bold; }
+
+.bg-demo { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+.bg1 { background-color: DodgerBlue; color: white; padding: 8px 14px; border-radius: 4px; }
+.bg2 { background-color: Tomato;     color: white; padding: 8px 14px; border-radius: 4px; }
+.bg3 { background-color: MediumSeaGreen; color: white; padding: 8px 14px; border-radius: 4px; }
+
+.border-example {
+  border: 3px solid DodgerBlue;
+  padding: 10px;
+  border-radius: 6px;
+  color: #333;
+}`}
 />
 
-### CSS Background Color
-You can set the background color for HTML elements:
+### Color Value Types
 
-<Editor 
-    initialHtml={`<h1 style="background-color:DodgerBlue;">Hello World</h1>\n<p style="background-color:Tomato;">Lorem ipsum...</p>`}
-    initialCss={`h1, p {\n  color: white;\n  padding: 20px;\n}`}
-/>
+| Type | Syntax | Example |
+| :--- | :--- | :--- |
+| Color Name | `color: red` | 140+ built-in names |
+| HEX Code | `color: #FF5733` | `#RRGGBB` format |
+| RGB | `color: rgb(255, 87, 51)` | Red, Green, Blue values 0–255 |
+| RGBA | `color: rgba(255, 87, 51, 0.5)` | RGB + Opacity (0 to 1) |
 
-### CSS Text Color
-You can set the color of text:
-
-<Editor 
-    initialHtml={`<h1 style="color:Tomato;">Hello World</h1>\n<p style="color:DodgerBlue;">Lorem ipsum...</p>\n<p style="color:MediumSeaGreen;">Ut wisi enim...</p>`}
-    initialCss={`body {\n  font-family: Arial, sans-serif;\n}`}
-/>
-
-### CSS Border Color
-You can set the color of borders:
-
-<Editor 
-    initialHtml={`<h1 style="border: 2px solid Tomato;">Hello World</h1>\n<h1 style="border: 2px solid DodgerBlue;">Hello World</h1>\n<h1 style="border: 2px solid Violet;">Hello World</h1>`}
-    initialCss={`h1 {\n  padding: 10px;\n  margin-bottom: 10px;\n}`}
-/>
+> **Tip:** HEX codes are the most popular format in professional web development. Use tools like [Google's color picker](https://g.co/kgs/colorpicker) to find the perfect HEX value.

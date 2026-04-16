@@ -7,45 +7,62 @@ order: 6
 
 ## JavaScript Variables
 
-Variables are containers for storing data (storing data values).
+Variables are **named containers** for storing data values. You declare a variable once and can reuse it throughout your program.
 
-In this example, `x`, `y`, and `z`, are variables, declared with the `let` keyword:
+JavaScript provides three keywords to declare variables:
 
-<Editor 
-    initialHtml={`<h2>JavaScript Variables</h2>\n\n<p>In this example, x, y, and z are variables.</p>\n<p id="demo"></p>`}
-    initialJs={`let x = 5;\nlet y = 6;\nlet z = x + y;\ndocument.getElementById("demo").innerHTML =\n"The value of z is: " + z;`}
-/>
+| Keyword | Can Reassign? | Scope | Use When |
+| :--- | :--- | :--- | :--- |
+| `var` | ✅ Yes | Function | Old code (avoid in modern JS) |
+| `let` | ✅ Yes | Block | Value will change |
+| `const` | ❌ No | Block | Value will NOT change |
 
-From the example above, you can expect:
-
-- `x` stores the value 5
-- `y` stores the value 6
-- `z` stores the value 11
-
-### Much Like Algebra
-
-In this example, `price1`, `price2`, and `total`, are variables:
+### Try It — Variables in Action
 
 <Editor 
-    initialHtml={`<h2>JavaScript Variables</h2>\n\n<p>The result of adding price1 and price2 is:</p>\n<p id="demo"></p>`}
-    initialJs={`const price1 = 5;\nconst price2 = 6;\nlet total = price1 + price2;\ndocument.getElementById("demo").innerHTML = total;`}
+    initialHtml={`<h2>JavaScript Variables</h2>
+
+<p id="basic"></p>
+<p id="algebra"></p>
+<p id="const-demo"></p>
+<p id="reassign"></p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+p  { margin: 6px 0; font-size: 15px; }`}
+    initialJs={`// Basic variables with let
+let x = 5;
+let y = 6;
+let z = x + y;
+document.getElementById("basic").innerHTML =
+  "x=" + x + ", y=" + y + " → z = x + y = " + z;
+
+// Variables like algebra
+const price1 = 49.99;
+const price2 = 9.99;
+let total = price1 + price2;
+document.getElementById("algebra").innerHTML =
+  "Price1: $" + price1 + " | Price2: $" + price2 + " | Total: $" + total.toFixed(2);
+
+// const — cannot be changed after declaration
+const siteName = "CodesCompiler";
+document.getElementById("const-demo").innerHTML =
+  "Site name (const): " + siteName;
+
+// let — can be reassigned
+let score = 40;
+document.getElementById("reassign").innerHTML = "Score before: " + score;
+score = 95; // reassigned!
+document.getElementById("reassign").innerHTML += " | Score after: " + score;`}
 />
 
-In programming, just like in algebra, we use variables (like `price1`) to hold values.
-In programming, just like in algebra, we use variables in expressions (`total = price1 + price2`).
+### Naming Rules for Variables
 
-### JavaScript Identifiers
+- Must start with a letter, `$`, or `_`
+- Can contain letters, digits, `$`, and `_`
+- **Case sensitive** — `name` and `Name` are different
+- Cannot use reserved keywords like `let`, `const`, `function`
 
-All JavaScript **variables** must be **identified** with **unique names**.
+> **Good names:** `userName`, `totalPrice`, `isLoggedIn`
+> **Bad names:** `x1`, `data2`, `temp`
 
-These unique names are called **identifiers**.
-
-Identifiers can be short names (like x and y) or more descriptive names (age, sum, totalVolume).
-
-The general rules for constructing names for variables (unique identifiers) are:
-
-- Names can contain letters, digits, underscores, and dollar signs.
-- Names must begin with a letter.
-- Names can also begin with $ and _ (but we will not use it in this tutorial).
-- Names are case sensitive (y and Y are different variables).
-- Reserved words (like JavaScript keywords) cannot be used as names.
+> **Tip:** Use `const` by default. Switch to `let` only when you know the value needs to change.

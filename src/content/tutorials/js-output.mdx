@@ -9,55 +9,47 @@ order: 2
 
 JavaScript can "display" data in different ways:
 
-- Writing into an HTML element, using `innerHTML`.
-- Writing into the HTML output using `document.write()`.
-- Writing into an alert box, using `window.alert()`.
-- Writing into the browser console, using `console.log()`.
+- Writing into an HTML element, using `innerHTML`
+- Writing into the HTML output using `document.write()`
+- Writing into the browser console, using `console.log()`
 
-### Using innerHTML
+The most common and useful way is using `innerHTML` to update content on the page.
 
-To access an HTML element, JavaScript can use the `document.getElementById(id)` method.
+### Try It — All Output Methods
 
-The `id` attribute defines the HTML element. The `innerHTML` property defines the HTML content:
-
-<Editor 
-    initialHtml={`<h2>My First Web Page</h2>\n<p>My First Paragraph.</p>\n\n<p id="demo"></p>`}
-    initialJs={`document.getElementById("demo").innerHTML = 5 + 6;`}
-/>
-
-Changing the `innerHTML` property of an HTML element is a common way to display data in HTML.
-
-### Using document.write()
-
-For testing purposes, it is convenient to use `document.write()`:
+The example below shows all three methods working together. Click **Run** to see the result:
 
 <Editor 
-    initialHtml={`<h2>My First Web Page</h2>\n<p>My first paragraph.</p>\n\n<p>Never call document.write after the document has finished loading. It will overwrite the whole document.</p>`}
-    initialJs={`document.write(5 + 6);`}
+    initialHtml={`<h2>JavaScript Output Demo</h2>
+
+<p>Result from innerHTML:</p>
+<p id="demo" style="color:green; font-weight:bold;"></p>
+
+<p>Result from document.write:</p>
+<div id="write-area" style="color:blue; font-weight:bold;"></div>`}
+    initialCss={`body {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+}
+h2 { color: #04AA6D; }
+p { margin: 6px 0; }`}
+    initialJs={`// 1. innerHTML — write into an HTML element
+document.getElementById("demo").innerHTML = "5 + 6 = " + (5 + 6);
+
+// 2. document.write — use only for quick testing
+document.getElementById("write-area").innerHTML = "document.write result: " + (10 * 3);
+
+// 3. console.log — open DevTools (F12) > Console tab to see this
+console.log("console.log result:", 100 + 200);`}
 />
 
-### Using window.alert()
+### How Each Method Works
 
-You can use an alert box to display data:
+| Method | Where Output Appears | Best Used For |
+| :--- | :--- | :--- |
+| `innerHTML` | Inside an HTML element | Displaying results on the page |
+| `document.write()` | Directly in the HTML stream | Quick testing only |
+| `window.alert()` | A popup dialog box | Simple alerts (avoid in production) |
+| `console.log()` | Browser DevTools Console | Debugging your code |
 
-<Editor 
-    initialHtml={`<h2>My First Web Page</h2>\n<p>My first paragraph.</p>`}
-    initialJs={`window.alert(5 + 6);`}
-/>
-
-You can skip the `window` keyword. In JavaScript, the window object is the global scope object, that means that variables, properties, and methods by default belong to the window object.
-
-<Editor 
-    initialHtml={`<h2>My First Web Page</h2>\n<p>My first paragraph.</p>`}
-    initialJs={`alert(5 + 6);`}
-/>
-
-### Using console.log()
-
-For debugging purposes, you can call the `console.log()` method in the browser to display data.
-(Press F12 to activate debugging in the browser, and select "Console" in the debugger menu.)
-
-<Editor 
-    initialHtml={`<h2>My First Web Page</h2>\n<p>My first paragraph.</p>`}
-    initialJs={`console.log(5 + 6);`}
-/>
+> **Tip:** `innerHTML` is the most practical method. Use it to update page content dynamically without reloading the page.

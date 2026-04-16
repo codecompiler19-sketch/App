@@ -1,69 +1,78 @@
 ---
 title: "JS Data Types"
-description: "JavaScript variables can hold many data types: numbers, strings, objects and more."
+description: "JavaScript variables can hold many data types: numbers, strings, booleans, objects and more."
 category: "javascript"
 order: 8
 ---
 
 ## JavaScript Data Types
 
-JavaScript variables can hold different data types: numbers, strings, objects and more:
+JavaScript is a **dynamically typed** language — a variable can hold any type of value, and type can change at runtime.
+
+The most common data types are:
+
+| Type | Example | Description |
+| :--- | :--- | :--- |
+| `String` | `"Hello"` | Text in quotes |
+| `Number` | `42`, `3.14` | Any numeric value |
+| `Boolean` | `true`, `false` | Logical true or false |
+| `Undefined` | `let x;` | Declared but no value assigned |
+| `Null` | `null` | Intentionally empty value |
+| `Object` | `{name: "Alice"}` | Key-value pairs |
+| `Array` | `[1, 2, 3]` | Ordered list |
+
+### Try It — All Data Types
 
 <Editor 
-    initialHtml={`<h2>JavaScript Data Types</h2>\n<p id="demo"></p>`}
-    initialJs={`let length = 16;                               // Number\nlet lastName = "Johnson";                      // String\nlet x = {firstName:"John", lastName:"Doe"};    // Object\n\ndocument.getElementById("demo").innerHTML = \nlength + "<br>" + lastName + "<br>" + x;`}
+    initialHtml={`<h2>JavaScript Data Types</h2>
+<p id="str"></p>
+<p id="num"></p>
+<p id="bool"></p>
+<p id="undef"></p>
+<p id="obj"></p>
+<p id="arr"></p>
+<p id="dynamic"></p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+p  { background: #f4f4f4; padding: 6px 12px; border-radius: 4px;
+     margin: 5px 0; font-family: monospace; font-size: 14px; }`}
+    initialJs={`// String — text in single or double quotes
+let greeting = "Hello, CodesCompiler!";
+document.getElementById("str").innerHTML =
+  "String: " + greeting + " (type: " + typeof greeting + ")";
+
+// Number — integers and decimals
+let price = 29.99;
+document.getElementById("num").innerHTML =
+  "Number: " + price + " (type: " + typeof price + ")";
+
+// Boolean — true or false
+let isStudent = true;
+document.getElementById("bool").innerHTML =
+  "Boolean: " + isStudent + " (type: " + typeof isStudent + ")";
+
+// Undefined — declared but not assigned
+let score;
+document.getElementById("undef").innerHTML =
+  "Undefined: " + score + " (type: " + typeof score + ")";
+
+// Object — key-value pairs
+let user = { name: "Alice", age: 25 };
+document.getElementById("obj").innerHTML =
+  "Object: name=" + user.name + ", age=" + user.age + " (type: " + typeof user + ")";
+
+// Array — ordered list (also an object in JS)
+let colors = ["red", "green", "blue"];
+document.getElementById("arr").innerHTML =
+  "Array: [" + colors.join(", ") + "] | Length: " + colors.length;
+
+// Dynamic typing — same variable, different types
+let x = 42;
+document.getElementById("dynamic").innerHTML =
+  "Dynamic typing: x starts as " + typeof x + " (" + x + ")";
+x = "now I am a string";
+document.getElementById("dynamic").innerHTML +=
+  " → then becomes " + typeof x + " (" + x + ")";`}
 />
 
-### The Concept of Data Types
-
-In programming, data types is an important concept.
-
-To be able to operate on variables, it is important to know something about the type.
-
-Without data types, a computer cannot safely solve this:
-
-`let x = 16 + "Volvo";`
-
-Does it make any sense to add "Volvo" to sixteen? Will it produce an error or will it produce a result?
-
-JavaScript will treat the example above as:
-
-`let x = "16Volvo";`
-
-JavaScript evaluates expressions from left to right. Different sequences can produce different results:
-
-<Editor 
-    initialHtml={`<h2>JavaScript Strings</h2>\n<p id="demo"></p>`}
-    initialJs={`let x = 16 + 4 + "Volvo";\ndocument.getElementById("demo").innerHTML = x;`}
-/>
-
-### JavaScript Types are Dynamic
-
-JavaScript has dynamic types. This means that the same variable can be used to hold different data types:
-
-<Editor 
-    initialHtml={`<h2>JavaScript Data Types</h2>\n<p id="demo"></p>`}
-    initialJs={`let x;         // Now x is undefined\nx = 5;         // Now x is a Number\nx = "John";    // Now x is a String\n\ndocument.getElementById("demo").innerHTML = x;`}
-/>
-
-### JavaScript Strings
-
-A string (or a text string) is a series of characters like "John Doe".
-
-Strings are written with quotes. You can use single or double quotes:
-
-<Editor 
-    initialHtml={`<h2>JavaScript Strings</h2>\n<p id="demo"></p>`}
-    initialJs={`let carName1 = "Volvo XC60";   // Using double quotes\nlet carName2 = 'Volvo XC60';   // Using single quotes\n\ndocument.getElementById("demo").innerHTML =\ncarName1 + "<br>" + carName2;`}
-/>
-
-### JavaScript Numbers
-
-All JavaScript numbers are stored as decimal numbers (floating point).
-
-Numbers can be written with, or without decimals:
-
-<Editor 
-    initialHtml={`<h2>JavaScript Numbers</h2>\n<p id="demo"></p>`}
-    initialJs={`let x1 = 34.00;     // Written with decimals\nlet x2 = 34;        // Written without decimals\n\ndocument.getElementById("demo").innerHTML =\nx1 + "<br>" + x2;`}
-/>
+> **Tip:** Use `typeof variableName` in your browser console to check the data type of any variable at runtime.
