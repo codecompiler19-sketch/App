@@ -1,0 +1,22 @@
+---
+export interface Props {
+  format?: 'rectangle' | 'vertical' | 'horizontal';
+  className?: string;
+}
+const { format = 'rectangle', className = '' } = Astro.props;
+
+const styles = {
+  rectangle: 'w-full max-w-[300px] h-[250px]',
+  vertical: 'w-full max-w-[160px] md:max-w-[300px] h-[600px]',
+  horizontal: 'w-full h-[90px]',
+};
+---
+
+<div class={`bg-gray-50 border border-dashed border-gray-300 rounded flex flex-col items-center justify-center text-gray-400 overflow-hidden text-center relative ${styles[format]} ${className}`}>
+  <span class="absolute top-2 left-0 right-0 text-[10px] uppercase tracking-widest font-semibold text-gray-400">Advertisement</span>
+  
+  <!-- Add your Google AdSense <ins> tag here inside this div -->
+  <div class="text-xs font-medium text-gray-400 px-4 mt-4">
+    Google AdSense<br/>Block Ready
+  </div>
+</div>
