@@ -5,34 +5,81 @@ category: "css"
 order: 5
 ---
 
-## CSS Backgrounds
+CSS background properties let you style the background of any element with **colors**, **images**, **gradients**, and control their **position and repeat** behaviour.
 
-The CSS background properties are used to add background effects for elements.
-
-### CSS background-color
-The `background-color` property specifies the background color of an element.
+### Try It — All Background Types
 
 <Editor 
-    initialHtml={`<h1>Hello World!</h1>\n<p>This page has a light blue background color!</p>`}
-    initialCss={`body {\n  background-color: lightblue;\n}\n\nh1 {\n  background-color: green;\n  color: white;\n}\n\np {\n  background-color: yellow;\n}`}
+    initialHtml={`<h2>CSS Backgrounds Demo</h2>
+
+<h3>1. Background Color</h3>
+<div class="bg-color">background-color: #e8f5e9</div>
+
+<h3>2. CSS Gradient Background</h3>
+<div class="bg-gradient">Linear gradient background</div>
+
+<h3>3. No-Repeat Background</h3>
+<div class="bg-norepeat">background-repeat: no-repeat</div>
+
+<h3>4. Full Page Background (body)</h3>
+<p class="note">The page background is set on the body element.</p>`}
+    initialCss={`body {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+  background-color: #f8f9fa;
+}
+h2 { color: #04AA6D; }
+h3 { color: #555; margin: 18px 0 6px; }
+
+.bg-color {
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  padding: 20px;
+  border-radius: 6px;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.bg-gradient {
+  background: linear-gradient(135deg, #04AA6D, #3498db);
+  color: white;
+  padding: 30px 20px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.bg-norepeat {
+  background-image: url("https://picsum.photos/id/1015/80/80");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-color: #fff3e0;
+  padding: 20px;
+  min-height: 80px;
+  border: 1px solid #ffcc80;
+  border-radius: 6px;
+  color: #e65100;
+  font-weight: bold;
+}
+
+.note {
+  background-color: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 10px 14px;
+  margin: 0;
+  color: #555;
+}`}
 />
 
-### CSS background-image
-The `background-image` property specifies an image to use as the background of an element.
+### Background Properties Reference
 
-By default, the image is repeated so it covers the entire element.
+| Property | What it does | Example |
+| :--- | :--- | :--- |
+| `background-color` | Solid fill color | `background-color: #f0f0f0` |
+| `background-image` | Image or gradient | `background-image: url(...)` |
+| `background-repeat` | Controls image repeat | `no-repeat`, `repeat-x`, `repeat-y` |
+| `background-position` | Where to place background | `center`, `top right` |
+| `background-size` | Scale the background | `cover`, `contain` |
 
-<Editor 
-    initialHtml={`<h1>Hello World!</h1>\n<p>This page has a background image!</p>`}
-    initialCss={`body {\n  background-image: url("https://picsum.photos/id/1011/800/600");\n  background-color: #cccccc;\n}`}
-/>
-
-### Background Repeat
-By default, the `background-image` property repeats an image both horizontally and vertically.
-
-Some images should be repeated only horizontally or vertically, or they will look strange.
-
-<Editor 
-    initialHtml={`<h1>Hello World!</h1>\n<p>Background image repeated only horizontally!</p>`}
-    initialCss={`body {\n  background-image: url("https://picsum.photos/id/1043/800/100");\n  background-repeat: repeat-x;\n}`}
-/>
+> **Tip:** Use `background: linear-gradient(to right, #color1, #color2)` to create smooth gradient backgrounds without any images!
