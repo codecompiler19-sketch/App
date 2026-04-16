@@ -75,7 +75,7 @@ const uid = Math.random().toString(36).slice(2, 9);
 </div>
 
 <!-- Single initialiser — runs once, finds every .tiy-root on the page -->
-<script>
+<script is:inline>
   // Guard: only run the initialiser once per page load
   if (!window.__tiyInit) {
     window.__tiyInit = true;
