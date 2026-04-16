@@ -213,7 +213,9 @@ const runBtnId = `run-${uniqueId}`;
 <body>
 \${docs.html}
 <script>
-try { \${docs.js} } catch(e) { console.error(e); }
+try {
+  \${docs.js}
+} catch(e) { console.error(e); }
 <\/script>
 </body>
 </html>\`;
