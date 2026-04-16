@@ -1,0 +1,51 @@
+---
+title: "HTML Paragraphs"
+description: "A paragraph always starts on a new line, and is usually a block of text."
+category: "html"
+order: 3
+---
+
+## HTML Paragraphs
+
+The HTML `<p>` element defines a paragraph:
+
+A paragraph always starts on a new line, and browsers automatically add some white space (a margin) before and after a paragraph.
+
+### Example - Try It!
+
+<Editor 
+    initialHtml={`<p>This is a paragraph.</p>\n<p>This is another paragraph.</p>`}
+/>
+
+### HTML Display
+
+You cannot be sure how HTML will be displayed. Large or small screens, and resized windows will create different results.
+
+With HTML, you cannot change the display by adding extra spaces or extra lines in your HTML code.
+
+The browser will automatically remove any extra spaces and lines when the page is displayed:
+
+### Example
+
+<Editor 
+    initialHtml={`<p>\nThis paragraph\ncontains a lot of lines\nin the source code,\nbut the browser\nignores it.\n</p>\n\n<p>\nThis paragraph\ncontains         a lot of spaces\nin the source         code,\nbut the        browser\nignores it.\n</p>`}
+/>
+
+### HTML Horizontal Rules
+
+The `<hr>` tag defines a thematic break in an HTML page, and is most often displayed as a horizontal rule.
+The `<hr>` element is used to separate content (or define a change) in an HTML page:
+
+<Editor 
+    initialHtml={`<h1>This is heading 1</h1>\n<p>This is some text.</p>\n<hr>\n<h2>This is heading 2</h2>\n<p>This is some other text.</p>\n<hr>`}
+/>
+
+### HTML Line Breaks
+
+The HTML `<br>` element defines a line break.
+
+Use `<br>` if you want a line break (a new line) without starting a new paragraph:
+
+<Editor 
+    initialHtml={`<p>This is<br>a paragraph<br>with line breaks.</p>`}
+/>

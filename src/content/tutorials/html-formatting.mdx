@@ -1,0 +1,68 @@
+---
+title: "HTML Formatting"
+description: "HTML contains several elements for defining text with a special meaning."
+category: "html"
+order: 5
+---
+
+## HTML Text Formatting
+
+HTML contains several elements for defining text with a special meaning.
+
+<Editor 
+    initialHtml={`<p><b>This text is bold</b></p>\n<p><i>This text is italic</i></p>\n<p>This is<sub> subscript</sub> and <sup>superscript</sup></p>`}
+/>
+
+### HTML Formatting Elements
+
+Formatting elements were designed to display special types of text:
+
+- `<b>` - Bold text
+- `<strong>` - Important text
+- `<i>` - Italic text
+- `<em>` - Emphasized text
+- `<mark>` - Marked text
+- `<small>` - Smaller text
+- `<del>` - Deleted text
+- `<ins>` - Inserted text
+- `<sub>` - Subscript text
+- `<sup>` - Superscript text
+
+### HTML `<b>` and `<strong>` Elements
+
+The HTML `<b>` element defines bold text, without any extra importance.
+
+<Editor 
+    initialHtml={`<p>This is normal text - and <b>this is bold text</b>.</p>`}
+/>
+
+The HTML `<strong>` element defines text with strong importance. The content inside is typically displayed in bold.
+
+<Editor 
+    initialHtml={`<p>This is normal text - and <strong>this is important text!</strong>.</p>`}
+/>
+
+### HTML `<i>` and `<em>` Elements
+
+The HTML `<i>` element defines a part of text in an alternate voice or mood. The content inside is typically displayed in italic.
+
+The `<i>` tag is often used to indicate a technical term, a phrase from another language, a thought, a ship name, etc.
+
+<Editor 
+    initialHtml={`<p>This is normal text - and <i>this is italic text</i>.</p>`}
+/>
+
+The HTML `<em>` element defines emphasized text. The content inside is typically displayed in italic.
+A screen reader will pronounce the words in `<em>` with an emphasis, using verbal stress.
+
+<Editor 
+    initialHtml={`<p>This is normal text - and <em>this is emphasized text</em>.</p>`}
+/>
+
+### HTML `<mark>` Element
+
+The HTML `<mark>` element defines text that should be marked or highlighted:
+
+<Editor 
+    initialHtml={`<p>Do not forget to buy <mark>milk</mark> today.</p>`}
+/>

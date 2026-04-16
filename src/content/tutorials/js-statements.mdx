@@ -1,0 +1,55 @@
+---
+title: "JS Statements"
+description: "JavaScript statements are composed of Values, Operators, Expressions, Keywords, and Comments."
+category: "javascript"
+order: 3
+---
+
+## JavaScript Programs
+
+A **computer program** is a list of "instructions" to be "executed" by a computer.
+
+In a programming language, these programming instructions are called **statements**.
+
+A **JavaScript program** is a list of programming **statements**.
+
+In HTML, JavaScript programs are executed by the web browser.
+
+### JavaScript Statements
+
+JavaScript statements are composed of:
+
+Values, Operators, Expressions, Keywords, and Comments.
+
+This statement tells the browser to write "Hello Dolly." inside an HTML element with id="demo":
+
+### Example
+
+<Editor 
+    initialHtml={`<h2>JavaScript Statements</h2>\n\n<p>A <b>JavaScript program</b> is a list of <b>statements</b> to be executed by a computer.</p>\n\n<p id="demo"></p>`}
+    initialJs={`document.getElementById("demo").innerHTML = "Hello Dolly.";`}
+/>
+
+### Semicolons ;
+
+Semicolons separate JavaScript statements.
+
+Add a semicolon at the end of each executable statement:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Statements</h2>\n\n<p>Multiple statements on one line are allowed if they are separated with a semicolon.</p>\n\n<p id="demo1"></p>\n<p id="demo2"></p>`}
+    initialJs={`let a, b, c;  // Declare 3 variables\na = 5;        // Assign the value 5 to a\nb = 6;        // Assign the value 6 to b\nc = a + b;    // Assign the sum of a and b to c\n\ndocument.getElementById("demo1").innerHTML = c;\n\na = 1; b = 2; c = a + b; \ndocument.getElementById("demo2").innerHTML = c;`}
+/>
+
+When separated by semicolons, multiple statements on one line are allowed.
+
+### JavaScript White Space
+
+JavaScript ignores multiple spaces. You can add white space to your script to make it more readable.
+
+The following lines are equivalent:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Statements</h2>\n\n<p>JavaScript ignores multiple spaces. You can add white space to your script to make it more readable.</p>\n\n<p id="demo1"></p>\n<p id="demo2"></p>`}
+    initialJs={`let person = "Hege";\nlet person2="Hege";\n\ndocument.getElementById("demo1").innerHTML = person;\ndocument.getElementById("demo2").innerHTML = person2;`}
+/>

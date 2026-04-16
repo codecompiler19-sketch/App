@@ -1,0 +1,57 @@
+---
+title: "JS Syntax"
+description: "JavaScript syntax is the set of rules, how JavaScript programs are constructed."
+category: "javascript"
+order: 4
+---
+
+## JavaScript Syntax
+
+JavaScript syntax is the set of rules, how JavaScript programs are constructed:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Syntax</h2>\n\n<p>How to create variables:</p>\n<p id="demo"></p>`}
+    initialJs={`// How to create variables:\nvar x;\nlet y;\n\n// How to use variables:\nx = 5;\ny = 6;\nlet z = x + y;\n\ndocument.getElementById("demo").innerHTML = "The value of z is: " + z;`}
+/>
+
+### JavaScript Values
+
+The JavaScript syntax defines two types of values:
+
+- Fixed values
+- Variable values
+
+Fixed values are called **Literals**. Variable values are called **Variables**.
+
+### JavaScript Literals
+
+The two most important syntax rules for fixed values are:
+
+1. **Numbers** are written with or without decimals:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Numbers</h2>\n\n<p>Numbers can be written with, or without, decimals:</p>\n\n<p id="demo"></p>`}
+    initialJs={`document.getElementById("demo").innerHTML = 10.50 + "<br>" + 1001;`}
+/>
+
+2. **Strings** are text, written within double or single quotes:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Strings</h2>\n\n<p>Strings can be written with double or single quotes:</p>\n\n<p id="demo"></p>`}
+    initialJs={`document.getElementById("demo").innerHTML = 'John Doe' + "<br>" + "John Doe";`}
+/>
+
+### JavaScript Variables
+
+In a programming language, **variables** are used to **store** data values.
+
+JavaScript uses the keywords `var`, `let` and `const` to declare variables.
+
+An equal sign is used to assign values to variables.
+
+In this example, x is defined as a variable. Then, x is assigned (given) the value 6:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Variables</h2>\n\n<p id="demo"></p>`}
+    initialJs={`let x;\nx = 6;\ndocument.getElementById("demo").innerHTML = x;`}
+/>
