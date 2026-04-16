@@ -1,76 +1,92 @@
 ---
 title: "JS Operators"
-description: "JavaScript operators are used to perform arithmetic, assign values, compare values, and more."
+description: "JavaScript operators perform arithmetic, assign values, compare values, and more."
 category: "javascript"
 order: 7
 ---
 
-## JavaScript Operators
-
-Operators are symbols that perform operations on values (called **operands**).
+Operators are symbols that perform operations on **operands** (values and variables). JavaScript has operators for arithmetic, assignment, comparison, and logic.
 
 ### Try It — All Operator Types
 
 <Editor 
     initialHtml={`<h2>JavaScript Operators</h2>
 
-<h3>Arithmetic Operators</h3>
-<p id="arith"></p>
+<h3>Arithmetic</h3>
+<div id="arith" class="result"></div>
 
-<h3>Assignment Operators</h3>
-<p id="assign"></p>
+<h3>Assignment</h3>
+<div id="assign" class="result"></div>
 
-<h3>String Concatenation</h3>
-<p id="concat"></p>
+<h3>Comparison (returns true/false)</h3>
+<div id="compare" class="result"></div>
 
-<h3>Comparison (results shown as true/false)</h3>
-<p id="compare"></p>`}
+<h3>Logical</h3>
+<div id="logical" class="result"></div>
+
+<h3>String Concatenation (+)</h3>
+<div id="concat" class="result"></div>`}
     initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
 h2 { color: #04AA6D; }
-h3 { color: #555; margin: 14px 0 4px; }
-p  { background: #f4f4f4; padding: 8px 12px; border-radius: 4px; font-family: monospace; }`}
-    initialJs={`// Arithmetic Operators: + - * / % **
+h3 { color: #555; margin: 16px 0 4px; }
+.result {
+  background: #f4f4f4;
+  border-left: 4px solid #04AA6D;
+  padding: 10px 14px;
+  font-family: monospace;
+  font-size: 14px;
+  margin: 0;
+}`}
+    initialJs={`// ARITHMETIC: + - * / % **
 let a = 10, b = 3;
-document.getElementById("arith").innerHTML =
-  a + "+" + b + "=" + (a+b) + " | " +
-  a + "-" + b + "=" + (a-b) + " | " +
-  a + "*" + b + "=" + (a*b) + " | " +
-  a + "/" + b + "=" + (a/b).toFixed(2) + " | " +
-  a + "%" + b + "=" + (a%b) + " | " +
-  a + "**" + b + "=" + (a**b);
+document.getElementById("arith").textContent =
+  a+"+"+b+"="+(a+b) + "  |  " +
+  a+"-"+b+"="+(a-b) + "  |  " +
+  a+"*"+b+"="+(a*b) + "  |  " +
+  a+"/"+b+"="+((a/b).toFixed(2)) + "  |  " +
+  a+"%"+b+"="+(a%b) + "  |  " +
+  a+"**"+b+"="+(a**b);
 
-// Assignment Operators: = += -= *= /=
+// ASSIGNMENT: = += -= *= /= %=
 let x = 10;
-x += 5;   // x is now 15
-x -= 3;   // x is now 12
-x *= 2;   // x is now 24
-document.getElementById("assign").innerHTML =
-  "Start: 10 → +=5 → -=3 → *=2 → Final: " + x;
+x += 5;   // x = x + 5 = 15
+x -= 3;   // x = x - 3 = 12
+x *= 2;   // x = x * 2 = 24
+document.getElementById("assign").textContent =
+  "Start: 10  → +=5 → -=3 → *=2  → Final: " + x;
 
-// String concatenation with +
-let first = "Codes";
-let last  = "Compiler";
-document.getElementById("concat").innerHTML =
-  '"' + first + '" + "' + last + '" → ' + (first + last);
-
-// Comparison Operators: == === != > < >= <=
+// COMPARISON: == === != !== > < >= <=
 let n = 5;
-document.getElementById("compare").innerHTML =
-  "n=5 | n==5: " + (n==5) +
-  " | n===5: " + (n===5) +
-  " | n>3: " + (n>3) +
-  " | n<3: " + (n<3) +
-  " | n>=5: " + (n>=5);`}
+document.getElementById("compare").textContent =
+  "n=5  |  n==5: "+(n==5)+
+  "  |  n==='5': "+(n==="5")+
+  "  |  n===5: "+(n===5)+
+  "  |  n>3: "+(n>3)+
+  "  |  n<=4: "+(n<=4);
+
+// LOGICAL: && || !
+let isRaining = true;
+let hasUmbrella = false;
+document.getElementById("logical").textContent =
+  "isRaining && hasUmbrella: "+(isRaining && hasUmbrella)+
+  "  |  isRaining || hasUmbrella: "+(isRaining || hasUmbrella)+
+  "  |  !isRaining: "+(!isRaining);
+
+// STRING CONCATENATION with +
+let first = "Codes";
+let last = "Compiler";
+document.getElementById("concat").textContent =
+  '"' + first + '" + "' + last + '" = ' + (first + last);`}
 />
 
-### Operator Reference
+### Operator Quick Reference
 
 | Type | Operators | Example |
 | :--- | :--- | :--- |
 | Arithmetic | `+ - * / % **` | `10 % 3 → 1` |
 | Assignment | `= += -= *= /=` | `x += 5` |
-| Comparison | `== === != > < >= <=` | `5 === "5" → false` |
-| Logical | `&& || !` | `true && false → false` |
+| Comparison | `== === != !== > < >= <=` | `5 === "5" → false` |
+| Logical | `&& \|\| !` | `true && false → false` |
 | String | `+` | `"Hi" + " there"` |
 
-> **Tip:** Use `===` (strict equality) instead of `==`. It checks both value AND type, preventing sneaky bugs.
+> **Tip:** Always use `===` (strict equality) instead of `==`. It checks both **value** AND **type**, preventing sneaky `"5" == 5` bugs.

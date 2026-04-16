@@ -1,72 +1,84 @@
 ---
 title: "JS Syntax"
-description: "JavaScript syntax is the set of rules, how JavaScript programs are constructed."
+description: "JavaScript syntax is the set of rules defining how JavaScript programs are written."
 category: "javascript"
 order: 4
 ---
 
-## JavaScript Syntax
+JavaScript syntax defines the rules for writing valid programs. The three core building blocks are **literals** (fixed values), **variables** (named storage), and **expressions** (computed values).
 
-JavaScript syntax is the set of rules that define how JavaScript programs are written.
-
-There are two types of values in JavaScript:
-- **Literals** — Fixed values (e.g. `42`, `"Hello"`)
-- **Variables** — Named containers that store values (e.g. `let x = 5;`)
-
-### Try It — Literals, Variables & Expressions
+### Try It — Syntax Building Blocks
 
 <Editor 
-    initialHtml={`<h2>JavaScript Syntax Demo</h2>
+    initialHtml={`<h2>JavaScript Syntax</h2>
 
 <h3>Literals (fixed values)</h3>
-<p id="numLiteral"></p>
-<p id="strLiteral"></p>
+<div id="literals" class="result"></div>
 
-<h3>Variables (named containers)</h3>
-<p id="varDemo"></p>
+<h3>Variables (named storage)</h3>
+<div id="vars" class="result"></div>
 
 <h3>Expressions (computed values)</h3>
-<p id="exprDemo"></p>
+<div id="expr" class="result"></div>
 
-<h3>Keywords</h3>
-<p id="kwDemo"></p>`}
+<h3>Keywords in action</h3>
+<div id="keywords" class="result"></div>`}
     initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
 h2 { color: #04AA6D; }
-h3 { color: #555; margin: 14px 0 4px; }
-p  { margin: 2px 0; color: #222; }`}
-    initialJs={`// Literals — fixed values written directly in code
-document.getElementById("numLiteral").innerHTML = "Number literal: " + 10.50;
-document.getElementById("strLiteral").innerHTML = 'String literal: "Hello, World!"';
+h3 { color: #555; margin: 16px 0 4px; }
+.result {
+  background: #f4f4f4;
+  border-left: 4px solid #04AA6D;
+  padding: 10px 14px;
+  font-family: monospace;
+  font-size: 14px;
+  margin: 0;
+}`}
+    initialJs={`// LITERALS — fixed values written directly
+let numLiteral = 42;         // number literal
+let strLiteral = "Hello!";   // string literal
+let boolLiteral = true;      // boolean literal
+document.getElementById("literals").textContent =
+  numLiteral + " | " + strLiteral + " | " + boolLiteral;
 
-// Variables — use let, const, or var to store values
-let firstName = "Alice";
-const age = 25;
-document.getElementById("varDemo").innerHTML =
-  "Name: " + firstName + " | Age: " + age;
+// VARIABLES — containers for data (let, const, var)
+let firstName = "Ravi";
+const country = "India";   // const = cannot change
+document.getElementById("vars").textContent =
+  "Name: " + firstName + " | Country: " + country;
 
-// Expressions — values combined with operators
-let a = 10;
-let b = 3;
-document.getElementById("exprDemo").innerHTML =
-  a + " + " + b + " = " + (a + b) + " | " +
-  a + " * " + b + " = " + (a * b);
+// EXPRESSIONS — operations that produce a value
+let width = 8;
+let height = 5;
+let area = width * height;          // arithmetic expression
+let greeting = "Hello, " + firstName;  // string expression
+document.getElementById("expr").textContent =
+  "Area: " + area + " | Greeting: " + greeting;
 
-// Keywords — let / const / var / if / return etc.
-let score = 85;
-let result = (score >= 60) ? "Pass ✅" : "Fail ❌";
-document.getElementById("kwDemo").innerHTML =
-  "Score: " + score + " → " + result;`}
+// KEYWORDS — reserved words with special meaning
+let score = 72;
+let grade;
+if (score >= 75) {
+  grade = "Distinction";
+} else if (score >= 60) {
+  grade = "Pass";
+} else {
+  grade = "Fail";
+}
+document.getElementById("keywords").textContent =
+  "Score: " + score + " → Grade: " + grade;`}
 />
 
 ### Syntax Quick Reference
 
-| Concept | Syntax | Example |
-| :--- | :--- | :--- |
-| Declare with `let` | `let name = value;` | `let x = 5;` |
-| Declare constant | `const name = value;` | `const PI = 3.14;` |
-| String literal | `"text"` or `'text'` | `"Hello"` |
-| Number literal | digits | `42` or `3.14` |
-| Expression | value + operator | `x + y` |
-| Comment | `// text` | `// this is a comment` |
+| Concept | Example |
+| :--- | :--- |
+| Number literal | `42`, `3.14` |
+| String literal | `"Hello"`, `'World'` |
+| Boolean literal | `true`, `false` |
+| `let` variable | `let name = "Alice";` |
+| `const` constant | `const PI = 3.14;` |
+| Expression | `width * height` |
+| Comment | `// this is a comment` |
 
-> **Tip:** Use `const` when the value won't change, and `let` when it will. Avoid `var` in modern JavaScript.
+> **Tip:** Use `const` for values that won't change (most things). Use `let` when the value will be reassigned. Avoid `var` in modern JavaScript.

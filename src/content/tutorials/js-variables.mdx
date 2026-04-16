@@ -5,64 +5,67 @@ category: "javascript"
 order: 6
 ---
 
-## JavaScript Variables
+Variables are **named containers** that store values you can reuse throughout your program. JavaScript gives you three keywords to declare them.
 
-Variables are **named containers** for storing data values. You declare a variable once and can reuse it throughout your program.
-
-JavaScript provides three keywords to declare variables:
-
-| Keyword | Can Reassign? | Scope | Use When |
+| Keyword | Reassignable | Scope | Use When |
 | :--- | :--- | :--- | :--- |
-| `var` | ✅ Yes | Function | Old code (avoid in modern JS) |
+| `const` | ❌ No | Block | Value won't change *(recommended default)* |
 | `let` | ✅ Yes | Block | Value will change |
-| `const` | ❌ No | Block | Value will NOT change |
+| `var` | ✅ Yes | Function | Old code — avoid in modern JS |
 
 ### Try It — Variables in Action
 
 <Editor 
     initialHtml={`<h2>JavaScript Variables</h2>
 
-<p id="basic"></p>
-<p id="algebra"></p>
-<p id="const-demo"></p>
-<p id="reassign"></p>`}
+<div id="r1" class="result"></div>
+<div id="r2" class="result"></div>
+<div id="r3" class="result"></div>
+<div id="r4" class="result"></div>
+<div id="r5" class="result"></div>`}
     initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
 h2 { color: #04AA6D; }
-p  { margin: 6px 0; font-size: 15px; }`}
-    initialJs={`// Basic variables with let
-let x = 5;
-let y = 6;
-let z = x + y;
-document.getElementById("basic").innerHTML =
-  "x=" + x + ", y=" + y + " → z = x + y = " + z;
-
-// Variables like algebra
-const price1 = 49.99;
-const price2 = 9.99;
-let total = price1 + price2;
-document.getElementById("algebra").innerHTML =
-  "Price1: $" + price1 + " | Price2: $" + price2 + " | Total: $" + total.toFixed(2);
-
-// const — cannot be changed after declaration
+.result {
+  background: #f4f4f4;
+  border-left: 4px solid #04AA6D;
+  padding: 10px 14px;
+  font-family: monospace;
+  font-size: 14px;
+  margin: 8px 0;
+}`}
+    initialJs={`// const — value cannot be reassigned
 const siteName = "CodesCompiler";
-document.getElementById("const-demo").innerHTML =
-  "Site name (const): " + siteName;
+document.getElementById("r1").textContent = "const siteName = " + siteName;
 
-// let — can be reassigned
+// let — value CAN be reassigned
 let score = 40;
-document.getElementById("reassign").innerHTML = "Score before: " + score;
-score = 95; // reassigned!
-document.getElementById("reassign").innerHTML += " | Score after: " + score;`}
+score = 95;  // updated!
+document.getElementById("r2").textContent = "let score (updated): " + score;
+
+// Arithmetic with variables
+const price1 = 49.99;
+const price2 = 19.99;
+let total = price1 + price2;
+document.getElementById("r3").textContent =
+  "Total: $" + price1 + " + $" + price2 + " = $" + total.toFixed(2);
+
+// Variables are case-sensitive
+let colour = "Blue";
+let Colour = "Red";
+document.getElementById("r4").textContent =
+  "colour = " + colour + " | Colour = " + Colour + " (different variables!)";
+
+// Undefined — declared but not yet assigned
+let city;
+document.getElementById("r5").textContent =
+  "city before assignment: " + city + " (type: " + typeof city + ")";`}
 />
 
-### Naming Rules for Variables
+### Variable Naming Rules
 
 - Must start with a letter, `$`, or `_`
-- Can contain letters, digits, `$`, and `_`
-- **Case sensitive** — `name` and `Name` are different
-- Cannot use reserved keywords like `let`, `const`, `function`
+- Can contain letters, digits, `$`, `_`
+- **Case sensitive** — `name` ≠ `Name`
+- Cannot be a reserved keyword (`let`, `if`, `return`, etc.)
 
-> **Good names:** `userName`, `totalPrice`, `isLoggedIn`
-> **Bad names:** `x1`, `data2`, `temp`
-
-> **Tip:** Use `const` by default. Switch to `let` only when you know the value needs to change.
+> **Tip:** Good variable names describe what the value means: `userName`, `totalPrice`, `isLoggedIn`. Avoid single letters like `x` or vague names like `data`.
