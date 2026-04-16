@@ -1,0 +1,44 @@
+---
+title: "CSS Borders"
+description: "The CSS border properties allow you to specify the style, width, and color of an element's border."
+category: "css"
+order: 6
+---
+
+## CSS Borders
+
+The CSS border properties allow you to specify the style, width, and color of an element's border.
+
+### CSS Border Style
+The `border-style` property specifies what kind of border to display.
+
+The following values are allowed:
+- `dotted` - Defines a dotted border
+- `dashed` - Defines a dashed border
+- `solid` - Defines a solid border
+- `double` - Defines a double border
+- `none` - Defines no border
+- `hidden` - Defines a hidden border
+
+### Example - Try It!
+
+<Editor 
+    initialHtml={`<p class="dotted">A dotted border.</p>\n<p class="dashed">A dashed border.</p>\n<p class="solid">A solid border.</p>\n<p class="double">A double border.</p>\n<p class="none">No border.</p>\n<p class="hidden">A hidden border.</p>`}
+    initialCss={`p.dotted {border-style: dotted;}\np.dashed {border-style: dashed;}\np.solid {border-style: solid;}\np.double {border-style: double;}\np.none {border-style: none;}\np.hidden {border-style: hidden;}`}
+/>
+
+### CSS Border Width
+The `border-width` property specifies the width of the four borders.
+
+<Editor 
+    initialHtml={`<p class="one">Some text.</p>\n<p class="two">Some text.</p>\n<p class="three">Some text.</p>`}
+    initialCss={`p.one {\n  border-style: solid;\n  border-width: 5px;\n}\n\np.two {\n  border-style: solid;\n  border-width: medium;\n}\n\np.three {\n  border-style: solid;\n  border-width: 2px 10px 4px 20px;\n}`}
+/>
+
+### CSS Border Color
+The `border-color` property is used to set the color of the four borders.
+
+<Editor 
+    initialHtml={`<p class="one">One-colored border</p>\n<p class="two">Two-colored border</p>\n<p class="three">Four-colored border</p>`}
+    initialCss={`p.one {\n  border-style: solid;\n  border-color: red;\n}\n\np.two {\n  border-style: solid;\n  border-color: red green;\n}\n\np.three {\n  border-style: solid;\n  border-color: red green blue yellow;\n}`}
+/>
