@@ -5,63 +5,64 @@ category: "css"
 order: 2
 ---
 
-## CSS Selectors
+CSS selectors tell the browser **which** HTML elements to apply styles to. The three most essential selectors are the **element**, **id**, and **class** selectors.
 
-A CSS **selector** tells the browser *which* HTML elements to apply styles to. There are three fundamental types.
-
-### Try It — All Three Selector Types
+### Try It — All Three Selectors
 
 <Editor 
     initialHtml={`<h2>CSS Selectors Demo</h2>
 
-<h3>Element Selector (targets all &lt;p&gt; tags)</h3>
-<p>First paragraph — styled by element selector.</p>
-<p>Second paragraph — also styled!</p>
+<!-- Element Selector: targets all <p> tags -->
+<p>I am a paragraph — styled by the element selector.</p>
+<p>Me too — all paragraphs are affected!</p>
 
-<h3>ID Selector (targets only #special)</h3>
-<p id="special">I am the special paragraph with id="special".</p>
-<p>I am a normal paragraph, not affected by the ID selector.</p>
+<!-- ID Selector: targets only this one element -->
+<p id="special">I have id="special" — unique style!</p>
+<p>I am a normal paragraph — not affected by #special.</p>
 
-<h3>Class Selector (targets .highlight)</h3>
+<!-- Class Selector: targets any element with this class -->
 <p class="highlight">I have class="highlight" — styled!</p>
-<h4 class="highlight">This heading also has class="highlight"!</h4>
-<p>No class — I am not highlighted.</p>`}
+<h3 class="highlight">This heading also has class="highlight"!</h3>
+<p>No class — I am unstyled.</p>`}
     initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
-h2 { color: #04AA6D; }
-h3 { color: #555; margin-top: 20px; }
+h2 { color: #04AA6D; margin-bottom: 16px; }
+h3 { margin: 8px 0; }
 
-/* Element Selector — targets ALL <p> elements */
+/* 1. Element Selector — targets ALL <p> elements */
 p {
   font-size: 15px;
-  color: #333;
+  color: #444;
+  margin: 6px 0;
 }
 
-/* ID Selector — targets the ONE element with id="special" */
+/* 2. ID Selector — targets the ONE element with id="special" */
 #special {
   background-color: #fff3cd;
   border-left: 4px solid #f0ad4e;
-  padding: 8px 12px;
+  padding: 8px 14px;
   font-weight: bold;
   color: #856404;
+  border-radius: 4px;
 }
 
-/* Class Selector — targets ALL elements with class="highlight" */
+/* 3. Class Selector — targets ALL elements with class="highlight" */
 .highlight {
   background-color: #d4edda;
   border-left: 4px solid #28a745;
-  padding: 8px 12px;
+  padding: 8px 14px;
   color: #155724;
+  border-radius: 4px;
 }`}
 />
 
-### Selector Quick Reference
+### Selector Reference
 
 | Selector | Syntax | Targets |
 | :--- | :--- | :--- |
-| Element | `p { }` | All `<p>` elements |
-| ID | `#myId { }` | The element with `id="myId"` |
-| Class | `.myClass { }` | All elements with `class="myClass"` |
-| Universal | `* { }` | Every element on the page |
-| Group | `h1, h2, p { }` | All h1, h2, and p elements |
+| Element | `p { }` | All `<p>` elements on the page |
+| ID | `#myId { }` | The **one** element with `id="myId"` |
+| Class | `.myClass { }` | **All** elements with `class="myClass"` |
+| Universal | `* { }` | Every single element on the page |
+| Grouping | `h1, h2, p { }` | All h1, h2, and p elements together |
 
-> **Tip:** IDs must be unique on a page (one element per ID). Classes can be shared across many elements — that's what makes them so powerful for reusable styles.
+> **Tip:** IDs must be **unique** — one per page. Classes can be **reused** across many elements. Use classes for styles you want to apply to multiple things.

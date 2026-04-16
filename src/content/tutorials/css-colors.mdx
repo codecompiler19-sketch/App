@@ -1,65 +1,70 @@
 ---
 title: "CSS Colors"
-description: "Colors are specified using predefined color names, or RGB, HEX, HSL values."
+description: "CSS colors can be specified using names, HEX codes, RGB, and RGBA values."
 category: "css"
 order: 3
 ---
 
-## CSS Colors
+CSS lets you apply color to text, backgrounds, and borders using different formats: **color names**, **HEX codes**, **RGB**, and **RGBA** (with transparency).
 
-In CSS, colors can be specified in several ways: by **name**, **HEX code**, or **RGB value**.
-
-### Try It — All Color Types
+### Try It — All Color Types in One Page
 
 <Editor 
-    initialHtml={`<h2>CSS Color Examples</h2>
+    initialHtml={`<h2>CSS Color Demo</h2>
 
-<h3>Color by Name</h3>
-<p class="color-name">This text uses a color name: Tomato</p>
-
-<h3>Color by HEX Code</h3>
-<p class="color-hex">This text uses a HEX code: #3498db</p>
-
-<h3>Color by RGB Value</h3>
-<p class="color-rgb">This text uses RGB: rgb(46, 204, 113)</p>
+<h3>Text Colors</h3>
+<p class="c-name">Color Name: Tomato</p>
+<p class="c-hex">HEX Code: #3498db</p>
+<p class="c-rgb">RGB: rgb(46, 204, 113)</p>
 
 <h3>Background Colors</h3>
-<div class="bg-demo">
+<div class="bg-row">
   <span class="bg1">DodgerBlue</span>
   <span class="bg2">Tomato</span>
   <span class="bg3">MediumSeaGreen</span>
+  <span class="bg4">#8e44ad</span>
 </div>
 
 <h3>Border Colors</h3>
-<p class="border-example">This paragraph has a colored border!</p>`}
-    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+<p class="border-demo">Solid colored border</p>
+
+<h3>Transparency (RGBA)</h3>
+<div class="rgba-row">
+  <div class="r1">opacity: 1.0</div>
+  <div class="r2">opacity: 0.6</div>
+  <div class="r3">opacity: 0.3</div>
+</div>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; line-height: 1.8; }
 h2 { color: #04AA6D; }
-h3 { margin: 16px 0 6px; color: #444; }
+h3 { color: #444; margin: 18px 0 6px; }
 
-.color-name { color: Tomato; font-size: 18px; font-weight: bold; }
-.color-hex  { color: #3498db; font-size: 18px; font-weight: bold; }
-.color-rgb  { color: rgb(46, 204, 113); font-size: 18px; font-weight: bold; }
+.c-name { color: Tomato;              font-size:17px; font-weight:bold; }
+.c-hex  { color: #3498db;             font-size:17px; font-weight:bold; }
+.c-rgb  { color: rgb(46, 204, 113);   font-size:17px; font-weight:bold; }
 
-.bg-demo { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
-.bg1 { background-color: DodgerBlue; color: white; padding: 8px 14px; border-radius: 4px; }
-.bg2 { background-color: Tomato;     color: white; padding: 8px 14px; border-radius: 4px; }
-.bg3 { background-color: MediumSeaGreen; color: white; padding: 8px 14px; border-radius: 4px; }
+.bg-row { display:flex; gap:10px; flex-wrap:wrap; }
+.bg1,.bg2,.bg3,.bg4 { color:white; padding:8px 16px; border-radius:5px; font-size:13px; font-weight:bold; }
+.bg1 { background-color: DodgerBlue; }
+.bg2 { background-color: Tomato; }
+.bg3 { background-color: MediumSeaGreen; }
+.bg4 { background-color: #8e44ad; }
 
-.border-example {
-  border: 3px solid DodgerBlue;
-  padding: 10px;
-  border-radius: 6px;
-  color: #333;
-}`}
+.border-demo { border: 3px solid DodgerBlue; padding:10px 14px; border-radius:6px; color:#333; margin:0; }
+
+.rgba-row { display:flex; gap:10px; margin-top:6px; }
+.r1,.r2,.r3 { padding:12px 20px; border-radius:5px; color:white; font-weight:bold; font-size:13px; }
+.r1 { background-color: rgba(231, 76, 60, 1.0); }
+.r2 { background-color: rgba(231, 76, 60, 0.6); }
+.r3 { background-color: rgba(231, 76, 60, 0.3); }`}
 />
 
-### Color Value Types
+### Color Format Reference
 
-| Type | Syntax | Example |
+| Format | Syntax | Example |
 | :--- | :--- | :--- |
 | Color Name | `color: red` | 140+ built-in names |
-| HEX Code | `color: #FF5733` | `#RRGGBB` format |
-| RGB | `color: rgb(255, 87, 51)` | Red, Green, Blue values 0–255 |
-| RGBA | `color: rgba(255, 87, 51, 0.5)` | RGB + Opacity (0 to 1) |
+| HEX | `color: #FF5733` | `#RRGGBB` |
+| RGB | `color: rgb(255, 87, 51)` | 0–255 per channel |
+| RGBA | `color: rgba(255, 87, 51, 0.5)` | RGB + alpha (0–1) |
 
-> **Tip:** HEX codes are the most popular format in professional web development. Use tools like [Google's color picker](https://g.co/kgs/colorpicker) to find the perfect HEX value.
+> **Tip:** HEX codes are the most popular format in professional projects. Tools like the Chrome DevTools color picker let you visually pick any HEX value.
