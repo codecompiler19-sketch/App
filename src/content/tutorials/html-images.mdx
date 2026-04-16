@@ -5,39 +5,62 @@ category: "html"
 order: 7
 ---
 
-## HTML Images
+The HTML `<img>` tag is used to embed images in a web page. Images are not *inserted* — they are **linked** from a source URL.
 
-Images can improve the design and the appearance of a web page.
+The `<img>` tag is self-closing (no end tag needed) and has two **required** attributes:
 
-<Editor 
-    initialHtml={`<h2>HTML Image</h2>\n<img src="https://picsum.photos/id/1015/500/333" alt="Trulli" width="500" height="333">`}
-/>
+- `src` — the path or URL to the image file
+- `alt` — a text description shown if the image fails to load
 
-### HTML Images Syntax
-
-The HTML `<img>` tag is used to embed an image in a web page.
-
-Images are not technically inserted into a web page; images are linked to web pages. The `<img>` tag creates a holding space for the referenced image.
-
-The `<img>` tag is empty, it contains attributes only, and does not have a closing tag.
-
-The `<img>` tag has two required attributes:
-
-- `src` - Specifies the path to the image
-- `alt` - Specifies an alternate text for the image
-
-### The src Attribute
-
-The required `src` attribute specifies the path (URL) to the image.
-
-**Note:** When a web page loads, it is the browser, at that moment, that gets the image from a web server and inserts it into the page. Therefore, make sure that the image actually stays in the same spot in relation to the web page, otherwise your visitors will get a broken link icon. The broken link icon and the `alt` text are shown if the browser cannot find the image.
-
-### The alt Attribute
-
-The required `alt` attribute provides an alternate text for an image, if the user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
-
-The value of the `alt` attribute should describe the image:
+### Try It — Images with src, alt, and sizing
 
 <Editor 
-    initialHtml={`<img src="https://picsum.photos/id/1025/500/600" alt="Girl in a jacket" width="500" height="600">`}
+    initialHtml={`<h2>HTML Images Demo</h2>
+
+<!-- Basic image with src and alt -->
+<h3>1. Basic Image</h3>
+<img src="https://picsum.photos/id/1015/400/250" alt="A scenic mountain landscape" width="400" height="250">
+
+<!-- Image with a caption using figure tag -->
+<h3>2. Image with Caption</h3>
+<figure>
+  <img src="https://picsum.photos/id/1043/400/250" alt="A beautiful forest" width="400" height="250">
+  <figcaption>Fig.1 - A beautiful forest scene</figcaption>
+</figure>
+
+<!-- What happens with a broken image -->
+<h3>3. Broken Image (alt text shows)</h3>
+<img src="this-image-does-not-exist.jpg" alt="[This image could not be loaded]" width="400" height="100">`}
+    initialCss={`body {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+}
+h2 { color: #04AA6D; }
+h3 { color: #555; margin-top: 20px; }
+img {
+  border-radius: 8px;
+  display: block;
+  max-width: 100%;
+  margin: 8px 0;
+}
+figure {
+  margin: 0;
+}
+figcaption {
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+  margin-top: 4px;
+}`}
 />
+
+### Image Attributes Reference
+
+| Attribute | Required? | What it does |
+| :--- | :--- | :--- |
+| `src` | ✅ Yes | Path or URL to the image |
+| `alt` | ✅ Yes | Fallback text if image fails to load |
+| `width` | No | Sets image width in pixels |
+| `height` | No | Sets image height in pixels |
+
+> **Tip:** Always include the `alt` attribute! It improves accessibility for screen reader users and helps search engines understand your content.

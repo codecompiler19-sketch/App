@@ -1,58 +1,50 @@
 ---
 title: "JS Comments"
-description: "JavaScript comments can be used to explain JavaScript code, and to make it more readable."
+description: "JavaScript comments can be used to explain code and make it more readable."
 category: "javascript"
 order: 5
 ---
 
-## JavaScript Comments
+JavaScript comments are ignored by the browser — they exist only to help **you and other developers** understand the code.
 
-JavaScript comments can be used to explain JavaScript code, and to make it more readable.
+There are two types of comments:
 
-JavaScript comments can also be used to prevent execution, when testing alternative code.
+| Type | Syntax | Use |
+| :--- | :--- | :--- |
+| Single-line | `// your comment` | Short note on one line |
+| Multi-line | `/* your comment */` | Longer explanations spanning multiple lines |
 
-### Single Line Comments
-
-Single line comments start with `//`.
-
-Any text between `//` and the end of the line will be ignored by JavaScript (will not be executed).
-
-This example uses a single-line comment before each code line:
+### Try It — Comments in Action
 
 <Editor 
-    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
-    initialJs={`// Change heading:\ndocument.getElementById("demo").innerHTML = "Hello JavaScript!";`}
+    initialHtml={`<h2>JavaScript Comments</h2>
+<p id="result1"></p>
+<p id="result2"></p>
+<p id="result3"></p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+p { background: #f4f4f4; padding: 8px 12px; border-radius: 4px; margin: 6px 0; }`}
+    initialJs={`// Single-line comment: Change heading content
+document.getElementById("result1").innerHTML = "✅ Single-line comment: This line runs normally.";
+
+/*
+  Multi-line comment:
+  This block explains what the code below does.
+  It can span as many lines as needed.
+*/
+let x = 5;
+let y = 10;
+document.getElementById("result2").innerHTML = "✅ Multi-line comment above this code. x + y = " + (x + y);
+
+// To DISABLE code, comment it out:
+// document.getElementById("result3").innerHTML = "❌ This line is commented OUT — it won't run.";
+document.getElementById("result3").innerHTML = "✅ This line IS active and runs.";`}
 />
 
-This example uses a single line comment at the end of each line to explain the code:
+### When to Use Comments
 
-<Editor 
-    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
-    initialJs={`let x = 5;      // Declare x, give it the value of 5\nlet y = x + 2;  // Declare y, give it the value of x + 2\n\ndocument.getElementById("demo").innerHTML = y;`}
-/>
+- Explain **why** you wrote the code (not just what it does)
+- Temporarily **disable** a line of code while debugging
+- Add **section headers** to organise long scripts
 
-### Multi-line Comments
-
-Multi-line comments start with `/*` and end with `*/`.
-
-Any text between `/*` and `*/` will be ignored by JavaScript.
-
-This example uses a multi-line comment (a comment block) to explain the code:
-
-<Editor 
-    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
-    initialJs={`/*\nThe code below will change\nthe heading with id = "myH"\nand the paragraph with id = "myP"\nin my web page:\n*/\ndocument.getElementById("demo").innerHTML = "My first paragraph.";`}
-/>
-
-**Note:** It is most common to use single line comments. Block comments are often used for formal documentation.
-
-### Using Comments to Prevent Execution
-
-Using comments to prevent execution of code is suitable for code testing.
-
-Adding `//` in front of a code line changes the code lines from an executable line to a comment.
-
-<Editor 
-    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
-    initialJs={`//document.getElementById("demo").innerHTML = "Hello World!";\ndocument.getElementById("demo").innerHTML = "Hello JavaScript!";`}
-/>
+> **Tip:** Use `Ctrl + /` in most code editors to quickly toggle comments on the selected line(s).

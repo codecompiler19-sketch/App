@@ -5,59 +5,71 @@ category: "javascript"
 order: 9
 ---
 
-## JavaScript Functions
+A function is defined once and can be **called (invoked) as many times as needed**. This prevents code repetition and keeps your programs organised.
 
-A JavaScript function is a block of code designed to perform a particular task.
-
-A JavaScript function is executed when "something" invokes it (calls it).
-
-### Example - Try It!
-
-<Editor 
-    initialHtml={`<h2>JavaScript Functions</h2>\n<p>This example calls a function which performs a calculation, and returns the result:</p>\n<p id="demo"></p>`}
-    initialJs={`function myFunction(p1, p2) {\n  return p1 * p2;\n}\n\ndocument.getElementById("demo").innerHTML = myFunction(4, 3);`}
-/>
-
-### JavaScript Function Syntax
-
-A JavaScript function is defined with the `function` keyword, followed by a **name**, followed by parentheses **()**.
-
-Function names can contain letters, digits, underscores, and dollar signs (same rules as variables).
-
-The parentheses may include parameter names separated by commas:
-`(parameter1, parameter2, ...)`
-
-The code to be executed, by the function, is placed inside curly brackets: **{}**
-
-```javascript
-function name(parameter1, parameter2, parameter3) {
-  // code to be executed
+**Syntax:**
+```js
+function functionName(parameter1, parameter2) {
+  // code to run
+  return result;
 }
 ```
 
-### Function Invocation
-
-The code inside the function will execute when "something" **invokes** (calls) the function:
-
-- When an event occurs (when a user clicks a button)
-- When it is invoked (called) from JavaScript code
-- Automatically (self invoked)
-
-### Function Return
-
-When JavaScript reaches a `return` statement, the function will stop executing.
-
-If the function was invoked from a statement, JavaScript will "return" to execute the code after the invoking statement.
-
-Functions often compute a **return value**. The return value is "returned" back to the "caller":
+### Try It — Functions in Action
 
 <Editor 
-    initialHtml={`<h2>JavaScript Functions</h2>\n<p>Calculate the product of two numbers, and return the result:</p>\n<p id="demo"></p>`}
-    initialJs={`let x = myFunction(4, 3);\ndocument.getElementById("demo").innerHTML = x;\n\nfunction myFunction(a, b) {\n  return a * b;\n}`}
+    initialHtml={`<h2>JavaScript Functions</h2>
+
+<p id="multiply"></p>
+<p id="greet"></p>
+<p id="area"></p>
+
+<hr style="margin:16px 0">
+<button onclick="changeGreeting('Alice')">Greet Alice</button>
+<button onclick="changeGreeting('Bob')">Greet Bob</button>
+<p id="dynamic"></p>`}
+    initialCss={`body { font-family: Arial, sans-serif; padding: 16px; }
+h2 { color: #04AA6D; }
+p { background: #f4f4f4; padding: 8px 12px; border-radius: 4px; margin: 6px 0; font-family: monospace; }
+button {
+  background: #04AA6D; color: white; border: none;
+  padding: 8px 16px; border-radius: 5px; cursor: pointer; margin: 4px;
+}
+button:hover { background: #038a58; }`}
+    initialJs={`// Function with parameters and return value
+function multiply(a, b) {
+  return a * b;
+}
+document.getElementById("multiply").innerHTML =
+  "multiply(4, 3) = " + multiply(4, 3);
+
+// Function that builds a greeting string
+function greet(name) {
+  return "Hello, " + name + "! Welcome to CodesCompiler.";
+}
+document.getElementById("greet").innerHTML = greet("World");
+
+// Function that calculates a rectangle area
+function rectArea(width, height) {
+  return width * height;
+}
+document.getElementById("area").innerHTML =
+  "Area of 8 x 5 rectangle = " + rectArea(8, 5) + " sq units";
+
+// Function called by button clicks
+function changeGreeting(name) {
+  document.getElementById("dynamic").innerHTML =
+    "👋 " + greet(name);
+}`}
 />
 
-### Why Functions?
+### Key Concepts
 
-You can reuse code: Define the code once, and use it many times.
+| Concept | Description | Example |
+| :--- | :--- | :--- |
+| Definition | Declare the function | `function add(a, b) { ... }` |
+| Parameter | Input the function receives | `a` and `b` above |
+| Return | Value the function sends back | `return a + b;` |
+| Invocation | Calling the function | `add(3, 5)` → `8` |
 
-You can use the same code many times with different arguments, to produce different results.
+> **Tip:** Functions that return a value can be used directly in expressions: `let result = multiply(4, 3) + 10;`
