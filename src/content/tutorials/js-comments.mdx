@@ -1,0 +1,58 @@
+---
+title: "JS Comments"
+description: "JavaScript comments can be used to explain JavaScript code, and to make it more readable."
+category: "javascript"
+order: 5
+---
+
+## JavaScript Comments
+
+JavaScript comments can be used to explain JavaScript code, and to make it more readable.
+
+JavaScript comments can also be used to prevent execution, when testing alternative code.
+
+### Single Line Comments
+
+Single line comments start with `//`.
+
+Any text between `//` and the end of the line will be ignored by JavaScript (will not be executed).
+
+This example uses a single-line comment before each code line:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
+    initialJs={`// Change heading:\ndocument.getElementById("demo").innerHTML = "Hello JavaScript!";`}
+/>
+
+This example uses a single line comment at the end of each line to explain the code:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
+    initialJs={`let x = 5;      // Declare x, give it the value of 5\nlet y = x + 2;  // Declare y, give it the value of x + 2\n\ndocument.getElementById("demo").innerHTML = y;`}
+/>
+
+### Multi-line Comments
+
+Multi-line comments start with `/*` and end with `*/`.
+
+Any text between `/*` and `*/` will be ignored by JavaScript.
+
+This example uses a multi-line comment (a comment block) to explain the code:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
+    initialJs={`/*\nThe code below will change\nthe heading with id = "myH"\nand the paragraph with id = "myP"\nin my web page:\n*/\ndocument.getElementById("demo").innerHTML = "My first paragraph.";`}
+/>
+
+**Note:** It is most common to use single line comments. Block comments are often used for formal documentation.
+
+### Using Comments to Prevent Execution
+
+Using comments to prevent execution of code is suitable for code testing.
+
+Adding `//` in front of a code line changes the code lines from an executable line to a comment.
+
+<Editor 
+    initialHtml={`<h2>JavaScript Comments</h2>\n<p id="demo"></p>`}
+    initialJs={`//document.getElementById("demo").innerHTML = "Hello World!";\ndocument.getElementById("demo").innerHTML = "Hello JavaScript!";`}
+/>

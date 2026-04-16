@@ -1,0 +1,58 @@
+---
+title: "CSS Margins"
+description: "The CSS margin properties are used to create space around elements, outside of any defined borders."
+category: "css"
+order: 7
+---
+
+## CSS Margins
+
+The CSS `margin` properties are used to create space around elements, outside of any defined borders.
+
+With CSS, you have full control over the margins. There are properties for setting the margin for each side of an element (top, right, bottom, and left).
+
+### Example - Try It!
+
+<Editor 
+    initialHtml={`<div>This element has a margin of 70px.</div>`}
+    initialCss={`div {\n  margin: 70px;\n  border: 1px solid #4CAF50;\n}`}
+/>
+
+### Margin - Individual Sides
+
+CSS has properties for specifying the margin for each side of an element:
+
+- `margin-top`
+- `margin-right`
+- `margin-bottom`
+- `margin-left`
+
+All the margin properties can have the following values:
+
+- `auto` - the browser calculates the margin
+- `length` - specifies a margin in px, pt, cm, etc.
+- `%` - specifies a margin in % of the width of the containing element
+- `inherit` - specifies that the margin should be inherited from the parent element
+
+### Example
+
+<Editor 
+    initialHtml={`<div>This div element has different margins for each side.</div>`}
+    initialCss={`div {\n  border: 1px solid black;\n  margin-top: 100px;\n  margin-bottom: 100px;\n  margin-right: 150px;\n  margin-left: 80px;\n  background-color: lightblue;\n}`}
+/>
+
+### Margin - Shorthand Property
+
+To shorten the code, it is possible to specify all the margin properties in one property.
+
+The `margin` property is a shorthand property for the following individual margin properties:
+
+- `margin-top`
+- `margin-right`
+- `margin-bottom`
+- `margin-left`
+
+<Editor 
+    initialHtml={`<p>This paragraph has a 25px margin on top, 50px on the right, 75px on the bottom, and 100px on the left.</p>`}
+    initialCss={`p {\n  border: 1px solid red;\n  margin: 25px 50px 75px 100px;\n}`}
+/>

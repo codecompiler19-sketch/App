@@ -1,0 +1,58 @@
+---
+title: "JS Operators"
+description: "JavaScript operators are used to assign values, compare values, perform arithmetic operations, and more."
+category: "javascript"
+order: 7
+---
+
+## JavaScript Arithmetic Operators
+
+Arithmetic operators are used to perform arithmetic on numbers:
+
+| Operator | Description |
+| :------- | :---------- |
+| `+`      | Addition |
+| `-`      | Subtraction |
+| `*`      | Multiplication |
+| `**`     | Exponentiation |
+| `/`      | Division |
+| `%`      | Modulus (Division Remainder) |
+| `++`     | Increment |
+| `--`     | Decrement |
+
+### Example - Try It!
+
+<Editor 
+    initialHtml={`<h2>JavaScript Arithmetic</h2>\n\n<p>A typical arithmetic operation takes two numbers and produces a new number.</p>\n<p id="demo"></p>`}
+    initialJs={`let a = 100;\nlet b = 50;\nlet x = a + b;\n\ndocument.getElementById("demo").innerHTML = x;`}
+/>
+
+### JavaScript Assignment Operators
+
+Assignment operators assign values to JavaScript variables.
+
+| Operator | Example | Same As |
+| :------- | :------ | :------ |
+| `=`      | `x = y` | `x = y` |
+| `+=`     | `x += y` | `x = x + y` |
+| `-=`     | `x -= y` | `x = x - y` |
+| `*=`     | `x *= y` | `x = x * y` |
+| `/=`     | `x /= y` | `x = x / y` |
+
+### Example
+
+The `+=` assignment operator adds a value to a variable.
+
+<Editor 
+    initialHtml={`<h2>JavaScript Assignment</h2>\n<p id="demo"></p>`}
+    initialJs={`let x = 10;\nx += 5;\ndocument.getElementById("demo").innerHTML = x;`}
+/>
+
+### JavaScript String Operators
+
+The `+` operator can also be used to add (concatenate) strings.
+
+<Editor 
+    initialHtml={`<h2>JavaScript Strings</h2>\n<p id="demo"></p>`}
+    initialJs={`let text1 = "John";\nlet text2 = "Doe";\nlet text3 = text1 + " " + text2;\ndocument.getElementById("demo").innerHTML = text3;`}
+/>

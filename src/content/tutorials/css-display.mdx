@@ -1,0 +1,58 @@
+---
+title: "CSS Display"
+description: "The display property is the most important CSS property for controlling layout."
+category: "css"
+order: 9
+---
+
+## The CSS Display Property
+
+The `display` property is the most important CSS property for controlling layout.
+
+The `display` property specifies if/how an element is displayed.
+
+Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is `block` or `inline`.
+
+### Block-level Elements
+
+A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
+
+Examples of block-level elements:
+
+- `<div>`
+- `<h1>` - `<h6>`
+- `<p>`
+- `<form>`
+- `<header>`
+- `<footer>`
+- `<section>`
+
+### Inline Elements
+
+An inline element does not start on a new line and only takes up as much width as necessary.
+
+Examples of inline elements:
+
+- `<span>`
+- `<a>`
+- `<img>`
+
+### Example - Display
+
+The following example shows how to change inline elements to block elements and vice versa:
+
+<Editor 
+    initialHtml={`<a href="#" class="block">This is a block-level link</a>\n<a href="#" class="block">This is another block-level link</a>\n\n<p class="inline">This is an inline paragraph.</p>\n<p class="inline">This is another inline paragraph.</p>`}
+    initialCss={`.block {\n  display: block;\n  background-color: yellow;\n  margin-bottom: 5px;\n}\n\n.inline {\n  display: inline;\n  background-color: lightgreen;\n}`}
+/>
+
+### Display: none vs Visibility: hidden
+
+Hiding an element can be done by setting the `display` property to `none`. The element will be hidden, and the page will be displayed as if the element is not there.
+
+`visibility: hidden;` also hides an element. However, the element will still take up the same space as before. The element will be hidden, but still affect the layout.
+
+<Editor 
+    initialHtml={`<h1 class="hidden1">This is a hidden heading</h1>\n<p>Notice that the h1 element above still takes up space.</p>\n\n<h1 class="none">This is a heading with display:none</h1>\n<p>Notice that the h1 element above does not take up any space.</p>`}
+    initialCss={`.hidden1 {\n  visibility: hidden;\n}\n\n.none {\n  display: none;\n}`}
+/>

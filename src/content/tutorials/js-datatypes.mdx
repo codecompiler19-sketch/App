@@ -1,0 +1,69 @@
+---
+title: "JS Data Types"
+description: "JavaScript variables can hold many data types: numbers, strings, objects and more."
+category: "javascript"
+order: 8
+---
+
+## JavaScript Data Types
+
+JavaScript variables can hold different data types: numbers, strings, objects and more:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Data Types</h2>\n<p id="demo"></p>`}
+    initialJs={`let length = 16;                               // Number\nlet lastName = "Johnson";                      // String\nlet x = {firstName:"John", lastName:"Doe"};    // Object\n\ndocument.getElementById("demo").innerHTML = \nlength + "<br>" + lastName + "<br>" + x;`}
+/>
+
+### The Concept of Data Types
+
+In programming, data types is an important concept.
+
+To be able to operate on variables, it is important to know something about the type.
+
+Without data types, a computer cannot safely solve this:
+
+`let x = 16 + "Volvo";`
+
+Does it make any sense to add "Volvo" to sixteen? Will it produce an error or will it produce a result?
+
+JavaScript will treat the example above as:
+
+`let x = "16Volvo";`
+
+JavaScript evaluates expressions from left to right. Different sequences can produce different results:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Strings</h2>\n<p id="demo"></p>`}
+    initialJs={`let x = 16 + 4 + "Volvo";\ndocument.getElementById("demo").innerHTML = x;`}
+/>
+
+### JavaScript Types are Dynamic
+
+JavaScript has dynamic types. This means that the same variable can be used to hold different data types:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Data Types</h2>\n<p id="demo"></p>`}
+    initialJs={`let x;         // Now x is undefined\nx = 5;         // Now x is a Number\nx = "John";    // Now x is a String\n\ndocument.getElementById("demo").innerHTML = x;`}
+/>
+
+### JavaScript Strings
+
+A string (or a text string) is a series of characters like "John Doe".
+
+Strings are written with quotes. You can use single or double quotes:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Strings</h2>\n<p id="demo"></p>`}
+    initialJs={`let carName1 = "Volvo XC60";   // Using double quotes\nlet carName2 = 'Volvo XC60';   // Using single quotes\n\ndocument.getElementById("demo").innerHTML =\ncarName1 + "<br>" + carName2;`}
+/>
+
+### JavaScript Numbers
+
+All JavaScript numbers are stored as decimal numbers (floating point).
+
+Numbers can be written with, or without decimals:
+
+<Editor 
+    initialHtml={`<h2>JavaScript Numbers</h2>\n<p id="demo"></p>`}
+    initialJs={`let x1 = 34.00;     // Written with decimals\nlet x2 = 34;        // Written without decimals\n\ndocument.getElementById("demo").innerHTML =\nx1 + "<br>" + x2;`}
+/>
