@@ -14,23 +14,24 @@ You've probably seen typing effects in JS, but have you ever seen an actual smoo
 
 ## The Secret: Stroke Dash Array
 
-If you make an SVG path dotted, and make the dot the exact length of the path itself, you can offset it to hide it. Then animate the offset to 0 to "draw" it.
+If you make an SVG path dotted, and make the dot the exact length of the path itself, you can offset it to hide it. Then animate the offset to 0 to "draw" it. 
+
+To make this scale to any SVG path length perfectly, we use JavaScript `getTotalLength()` and pass it to CSS variables!
 
 ```css
 .path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: drawLine 4s linear forwards;
+  stroke-dasharray: var(--length);
+  stroke-dashoffset: var(--length);
+  animation: drawLine 3s ease forwards alternate;
 }
 
 @keyframes drawLine {
-  to {
-    stroke-dashoffset: 0;
-  }
+  from { stroke-dashoffset: var(--length); fill: transparent; }
+  to { stroke-dashoffset: 0; fill: transparent; }
 }
 ```
 
-## The SVG
+## The Javascript & HTML
 
 You just export any text from Illustrator or Figma as an SVG Path and apply the class.
 
@@ -39,6 +40,13 @@ You just export any text from Illustrator or Figma as an SVG Path and apply the 
   <path class="path" fill="none" stroke="#04AA6D" stroke-width="3" 
     d="M50.5,100.5 c0,0,10.5-50.5,40.5-30.5 s-20.5,50.5-20.5... " />
 </svg>
+
+<script>
+  document.querySelectorAll('.path').forEach(path => {
+    const length = path.getTotalLength();
+    path.style.setProperty('--length', length);
+  });
+</script>
 ```
 
 Open the Live Demo to see the glowing neon "CodesCompiler" svg practically draw itself onto the screen!

@@ -12,31 +12,43 @@
       stroke-width: 4;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 2000;
-      stroke-dashoffset: 2000;
-      animation: drawLine 4s ease forwards infinite 1s;
+      /* Lengths set by JS */
+      stroke-dasharray: var(--length);
+      stroke-dashoffset: var(--length);
+      animation: drawLine 3s ease forwards alternate infinite 1s;
     }
-    .draw-delay { animation-delay: 1.5s; stroke: #38bdf8; filter: drop-shadow(0 0 10px #38bdf8);}
+    .draw:nth-child(even) { stroke: #38bdf8; filter: drop-shadow(0 0 10px #38bdf8); animation-delay: 1.5s;}
     @keyframes drawLine {
-      40% { stroke-dashoffset: 0; fill: transparent; }
-      80% { stroke-dashoffset: 0; fill: currentColor; }
-      100% { stroke-dashoffset: 0; fill: currentColor; }
+      from { stroke-dashoffset: var(--length); fill: transparent; }
+      to { stroke-dashoffset: 0; fill: transparent; }
     }
   </style>
 </head>
 <body>
-  <!-- Simplified SVG for demo purposes -->
-  <svg viewBox="0 0 400 100">
-    <path class="draw" d="M30 70 A 20 20 0 0 1 50 30 A 20 20 0 0 1 70 70" />
-    <path class="draw draw-delay" d="M 90 70 L 90 30 L 110 30 M 90 50 L 110 50 M 90 70 L 110 70" />
-    <path class="draw" d="M 130 30 L 130 70 L 150 70" />
-    <path class="draw draw-delay" d="M 170 30 L 170 70 L 190 70" />
-    <path class="draw" d="M 210 30 C 210 70 230 70 230 30 C 230 -10 210 -10 210 30" />
+  <svg viewBox="0 0 250 100">
+    <!-- Letter C -->
+    <path class="draw" d="M 60 30 C 30 30, 30 70, 60 70" />
+    <!-- Letter O -->
+    <path class="draw" d="M 90 30 C 60 30, 60 70, 90 70 C 120 70, 120 30, 90 30" />
+    <!-- Letter D -->
+    <path class="draw" d="M 110 30 L 110 70 C 140 70, 140 30, 110 30" />
+    <!-- Letter E -->
+    <path class="draw" d="M 160 70 L 140 70 L 140 30 L 160 30 M 140 50 L 155 50" />
+    <!-- Letter S -->
+    <path class="draw" d="M 200 30 C 160 30, 190 50, 180 50 C 220 50, 170 70, 200 70" />
     
-    <text x="50%" y="95" fill="white" font-family="sans-serif" font-size="12" text-anchor="middle" style="opacity:0; animation: fadeIn 4s infinite 2s;">CODESCOMPILER SVG DEMO</text>
+    <text x="50%" y="95" fill="white" font-family="sans-serif" font-size="10" text-anchor="middle" style="opacity:0; animation: fadeIn 2s forwards 3s;">CODESCOMPILER</text>
   </svg>
   <style>
-    @keyframes fadeIn { 0%, 50% {opacity:0} 60%, 100% {opacity:0.5} }
+    @keyframes fadeIn { to {opacity:0.8} }
   </style>
+
+  <script>
+    // Dynamically calculate exact path lengths for perfect animation pacing
+    document.querySelectorAll('.draw').forEach(path => {
+      const length = path.getTotalLength();
+      path.style.setProperty('--length', length);
+    });
+  </script>
 </body>
 </html>
