@@ -1,0 +1,44 @@
+---
+title: "Animated SVG Line Typing Effect"
+description: "A super creative technique to write text on the screen by animating SVG stroke-dashoffset to mimic handwriting."
+date: "2026-04-18"
+category: "Website Designs"
+tags: ["css", "svg", "animations", "creative", "design"]
+image: "/images/posts/post_nav_menu.png"
+featured: false
+hasDemo: true
+author: "CodesCompiler"
+---
+
+You've probably seen typing effects in JS, but have you ever seen an actual smooth, cursive *hand-drawing* effect? By converting text to SVG paths, we can use CSS animations to draw it.
+
+## The Secret: Stroke Dash Array
+
+If you make an SVG path dotted, and make the dot the exact length of the path itself, you can offset it to hide it. Then animate the offset to 0 to "draw" it.
+
+```css
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 4s linear forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+```
+
+## The SVG
+
+You just export any text from Illustrator or Figma as an SVG Path and apply the class.
+
+```html
+<svg viewBox="0 0 500 150">
+  <path class="path" fill="none" stroke="#04AA6D" stroke-width="3" 
+    d="M50.5,100.5 c0,0,10.5-50.5,40.5-30.5 s-20.5,50.5-20.5... " />
+</svg>
+```
+
+Open the Live Demo to see the glowing neon "CodesCompiler" svg practically draw itself onto the screen!

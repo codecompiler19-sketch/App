@@ -36,24 +36,58 @@
     <div class="temp"><span id="tempVal">18</span>°C</div>
     <div class="desc" id="descTxt">Partly cloudy</div>
   </div>
-
   <script>
-    // Mocking API for demo purposes
-    const mockWeather = {
-      'london': { t: 18, d: 'partly cloudy', i: '🌥️' },
-      'new york': { t: 24, d: 'sunny', i: '☀️' },
-      'tokyo': { t: 22, d: 'rainy', i: '🌧️' },
-      'sydney': { t: 26, d: 'clear', i: '☀️' }
-    };
+    async function getWeather(city) {
+      const btn = document.getElementById('searchBtn');
+      btn.innerText = '...';
+      try {
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
+        const geoData = await geoRes.json();
+        
+        if (!geoData.results || geoData.results.length === 0) throw new Error('Not found');
+        
+        const { latitude, longitude, name } = geoData.results[0];
+        
+        const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+        const wData = await wRes.json();
+        const w = wData.current_weather;
+        
+        document.getElementById('cityName').innerText = name;
+        document.getElementById('tempVal').innerText = Math.round(w.temperature);
+        
+        let icon = '☀️', desc = 'Clear';
+        if (w.weathercode >= 1 && w.weathercode <= 3) { icon = '🌥️'; desc = 'Cloudy'; }
+        if (w.weathercode >= 45 && w.weathercode <= 48) { icon = '🌫️'; desc = 'Foggy'; }
+        if (w.weathercode >= 51 && w.weathercode <= 67) { icon = '🌧️'; desc = 'Rain'; }
+        if (w.weathercode >= 71 && w.weathercode <= 77) { icon = '❄️'; desc = 'Snow'; }
+        if (w.weathercode >= 95) { icon = '⛈️'; desc = 'Thunderstorm'; }
+        
+        document.getElementById('descTxt').innerText = desc;
+        document.getElementById('wIcon').innerText = icon;
+      } catch (e) {
+        document.getElementById('cityName').innerText = "Not found";
+        document.getElementById('tempVal').innerText = "--";
+        document.getElementById('descTxt').innerText = "Try another city";
+        document.getElementById('wIcon').innerText = "❌";
+      }
+      btn.innerText = 'Search';
+    }
 
     document.getElementById('searchBtn').addEventListener('click', () => {
-      const city = document.getElementById('cityInput').value.toLowerCase();
-      const w = mockWeather[city] || { t: 20, d: 'windy', i: '💨' };
-      document.getElementById('cityName').innerText = city.charAt(0).toUpperCase() + city.slice(1);
-      document.getElementById('tempVal').innerText = w.t;
-      document.getElementById('descTxt').innerText = w.d;
-      document.getElementById('wIcon').innerText = w.i;
+      const city = document.getElementById('cityInput').value.trim();
+      if(city) getWeather(city);
     });
+
+    // Handle enter key
+    document.getElementById('cityInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const city = e.target.value.trim();
+        if(city) getWeather(city);
+      }
+    });
+
+    // Initial weather load
+    getWeather('London');
   </script>
 </body>
 </html>
