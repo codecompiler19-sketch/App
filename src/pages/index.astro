@@ -1,5 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+
+const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
+  'HTML & CSS':           { color: '#E34F26', bg: '#fff4f0' },
+  'JavaScript':           { color: '#ca8a04', bg: '#fefce8' },
+  'HTML CSS JavaScript':  { color: '#04AA6D', bg: '#f0fff8' },
+};
 ---
 
 <BaseLayout 
@@ -264,6 +276,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </div>
 </section>
+
+<!-- ============================================================ -->
+<!-- LATEST POSTS SECTION                                         -->
+<!-- ============================================================ -->
+{latestPosts.length > 0 && (
+<section class="w-full bg-gray-50 py-20 px-5 border-t border-gray-100">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="text-[#04AA6D] text-xs font-bold uppercase tracking-widest">Coding Projects</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mt-2">Latest Posts &amp; Examples</h2>
+      <p class="text-gray-500 mt-3 max-w-lg mx-auto">Real-world coding projects with full source code. Build and learn by doing.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {latestPosts.map(post => {
+        const catColor = CATEGORY_COLORS[post.data.category] ?? { color: '#6b7280', bg: '#f3f4f6' };
+        return (
+          <a href={`/blog/${post.slug}`}
+             class="group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col block no-underline">
+            {post.data.image ? (
+              <div class="overflow-hidden h-44">
+                <img src={post.data.image} alt={post.data.title}
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+            ) : (
+              <div class="h-36 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-4xl">💻</div>
+            )}
+            <div class="p-5 flex flex-col gap-2 flex-1">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full"
+                      style={`color:${catColor.color};background:${catColor.bg}`}>
+                  {post.data.category}
+                </span>
+                <span class="text-xs text-gray-400">
+                  {new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </span>
+              </div>
+              <h3 class="text-base font-bold text-gray-900 leading-snug line-clamp-2">{post.data.title}</h3>
+              <p class="text-sm text-gray-500 leading-relaxed line-clamp-2 flex-1">{post.data.description}</p>
+              <div class="text-sm font-bold text-[#04AA6D] flex items-center gap-1 mt-1">
+                Read Post
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+    <div class="text-center mt-10">
+      <a href="/blog"
+         class="inline-flex items-center gap-2 px-8 py-3 bg-white border-2 border-[#04AA6D] text-[#04AA6D] font-bold rounded-lg hover:bg-[#04AA6D] hover:text-white transition-all duration-200">
+        View All Posts →
+      </a>
+    </div>
+  </div>
+</section>
+)}
 
 <!-- ============================================================ -->
 <!--  BOTTOM CTA                                                   -->
