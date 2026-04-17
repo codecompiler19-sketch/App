@@ -11,9 +11,11 @@ interface Props {
   category?: string;
   tags?: string[];
   author?: string;
+  slug?: string;
+  hasDemo?: boolean;
 }
 
-const { title, description, image, date, category, tags = [], author = 'CodesCompiler' } = Astro.props;
+const { title, description, image, date, category, tags = [], author = 'CodesCompiler', slug = '', hasDemo = false } = Astro.props;
 
 // Fetch all posts for sidebar panels
 const allPosts = await getCollection('blog');
@@ -66,6 +68,14 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
   <!-- THREE-COLUMN BODY: [LEFT SIDEBAR] [ARTICLE] [RIGHT AD]   -->
   <!-- ======================================================== -->
   <div class="post-container post-body">
+
+    <!-- Mobile sidebar toggle button -->
+    <button class="mobile-sidebar-btn" id="postSidebarToggle" aria-label="Open sidebar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      Filters &amp; Categories
+    </button>
 
     <!-- ── LEFT SIDEBAR ─────────────────────────────────────── -->
     <aside class="post-sidebar" id="postSidebar">
@@ -173,6 +183,37 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
             width="900"
             height="475"
           />
+        </div>
+      )}
+
+      <!-- Demo + Download Action Bar (shown when hasDemo=true) -->
+      {hasDemo && slug && (
+        <div class="post-demo-bar">
+          <div class="demo-bar-left">
+            <span class="demo-bar-icon">🚀</span>
+            <span class="demo-bar-text">See it in action</span>
+          </div>
+          <div class="demo-bar-actions">
+            <a
+              href={`/blog-demo/${slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="demo-btn demo-btn-green"
+              id="btn-live-demo"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Live Demo
+            </a>
+            <a
+              href={`/demos/${slug}.html`}
+              download={`${slug}.html`}
+              class="demo-btn demo-btn-outline"
+              id="btn-download"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download
+            </a>
+          </div>
         </div>
       )}
 
@@ -619,4 +660,192 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
     .post-content { padding: 4px 18px 24px; }
     .post-footer-nav { padding: 0 18px 24px; }
   }
+
+  /* ── DEMO + DOWNLOAD ACTION BAR ────────────────────────────────── */
+  .post-demo-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    border-bottom: 1px solid #d1fae5;
+  }
+  .demo-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .demo-bar-icon { font-size: 20px; }
+  .demo-bar-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #065f46;
+  }
+  .demo-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .demo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border-radius: 9px;
+    font-size: 13.5px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all .2s;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .demo-btn-green {
+    background: #04AA6D;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(4,170,109,0.3);
+  }
+  .demo-btn-green:hover {
+    background: #038a58;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(4,170,109,0.4);
+  }
+  .demo-btn-outline {
+    background: #fff;
+    color: #374151;
+    border-color: #d1d5db;
+  }
+  .demo-btn-outline:hover {
+    border-color: #04AA6D;
+    color: #04AA6D;
+    transform: translateY(-2px);
+  }
+
+  /* ── MOBILE SIDEBAR HAMBURGER ──────────────────────────────────── */
+  .mobile-sidebar-btn {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #374151;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s, border-color .15s;
+    margin-bottom: 16px;
+    /* spans the full column on mobile */
+    grid-column: 1 / -1;
+  }
+  .mobile-sidebar-btn:hover { background: #f9fafb; border-color: #04AA6D; color: #04AA6D; }
+  @media (max-width: 768px) {
+    .mobile-sidebar-btn { display: flex; }
+  }
+
+  /* Mobile sidebar — becomes full-screen overlay slide-in */
+  @media (max-width: 768px) {
+    .post-sidebar {
+      display: block !important;   /* override the display:none */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: min(300px, 85vw);
+      height: 100dvh;
+      background: #fff;
+      z-index: 200;
+      padding: 20px 16px;
+      box-shadow: 4px 0 32px rgba(0,0,0,0.18);
+      transform: translateX(-110%);
+      transition: transform .28s cubic-bezier(0.4, 0, 0.2, 1);
+      max-height: none;
+      overflow-y: auto;
+    }
+    .post-sidebar.sidebar-open {
+      transform: translateX(0);
+    }
+    /* Close button inside sidebar */
+    .sidebar-close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+    .sidebar-close-btn button {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      background: #f3f4f6;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #374151;
+      cursor: pointer;
+      font-family: inherit;
+    }
+  }
+  @media (min-width: 769px) {
+    .sidebar-close-btn { display: none; }
+  }
+
+  /* Overlay backdrop for mobile sidebar */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 199;
+    backdrop-filter: blur(2px);
+  }
+  .sidebar-overlay.show { display: block; }
 </style>
+
+<!-- ============================================================ -->
+<!-- MOBILE SIDEBAR JS                                            -->
+<!-- ============================================================ -->
+<script is:inline>
+  (function () {
+    const toggleBtn = document.getElementById('postSidebarToggle');
+    const sidebar   = document.getElementById('postSidebar');
+    if (!toggleBtn || !sidebar) return;
+
+    // Inject close button at top of sidebar (only mobile)
+    const closeRow = document.createElement('div');
+    closeRow.className = 'sidebar-close-btn';
+    closeRow.innerHTML = '<button id="sidebarCloseBtn">✕ Close</button>';
+    sidebar.prepend(closeRow);
+
+    // Inject overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    overlay.id = 'sidebarOverlay';
+    document.body.appendChild(overlay);
+
+    function openSidebar() {
+      sidebar.classList.add('sidebar-open');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('sidebar-open');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    toggleBtn.addEventListener('click', openSidebar);
+    document.getElementById('sidebarCloseBtn').addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 769) closeSidebar();
+    });
+  })();
+</script>
+

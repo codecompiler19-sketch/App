@@ -49,8 +49,14 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
   <!-- ============================================================ -->
   <div class="posts-container posts-body">
 
+    <!-- Mobile sidebar toggle -->
+    <button class="mob-sidebar-btn" id="mobSidebarToggle" aria-label="Open sidebar">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      Filter &amp; Categories
+    </button>
+
     <!-- ── LEFT SIDEBAR ───────────────────────────────────────── -->
-    <aside class="posts-sidebar">
+    <aside class="posts-sidebar" id="postsSidebar">
 
       <!-- Search -->
       <div class="sidebar-widget">
@@ -600,4 +606,98 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
   /* ── RIGHT AD ─────────────────────────────────────────────────── */
   .posts-ad-col { min-width: 0; }
   .ad-sticky-wrap { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* ── MOBILE SIDEBAR HAMBURGER ──────────────────────────────────── */
+  .mob-sidebar-btn {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s, border-color .15s;
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+  .mob-sidebar-btn:hover { background: #f9fafb; border-color: #04AA6D; color: #04AA6D; }
+  @media (max-width: 768px) {
+    .mob-sidebar-btn { display: flex; }
+  }
+
+  /* Mobile sidebar slide-in overlay */
+  @media (max-width: 768px) {
+    .posts-sidebar {
+      display: block !important;
+      position: fixed;
+      top: 0; left: 0;
+      width: min(300px, 85vw);
+      height: 100dvh;
+      background: #fff;
+      z-index: 200;
+      padding: 20px 16px;
+      box-shadow: 4px 0 32px rgba(0,0,0,0.2);
+      transform: translateX(-110%);
+      transition: transform .28s cubic-bezier(0.4, 0, 0.2, 1);
+      max-height: none;
+      overflow-y: auto;
+      top: 0;
+    }
+    .posts-sidebar.open { transform: translateX(0); }
+    .mob-close-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 14px;
+    }
+    .mob-close-row button {
+      display: flex; align-items: center; gap: 5px;
+      padding: 7px 14px;
+      background: #f3f4f6;
+      border: none; border-radius: 8px;
+      font-size: 12px; font-weight: 700; color: #374151;
+      cursor: pointer; font-family: inherit;
+    }
+  }
+  @media (min-width: 769px) { .mob-close-row { display: none !important; } }
+
+  .mob-sidebar-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 199;
+    backdrop-filter: blur(2px);
+  }
+  .mob-sidebar-overlay.show { display: block; }
 </style>
+
+<script is:inline>
+  (function () {
+    const btn     = document.getElementById('mobSidebarToggle');
+    const sidebar = document.getElementById('postsSidebar');
+    if (!btn || !sidebar) return;
+
+    // Inject close button inside sidebar
+    const closeRow = document.createElement('div');
+    closeRow.className = 'mob-close-row';
+    closeRow.innerHTML = '<button id="mobCloseBtn">✕ Close</button>';
+    sidebar.prepend(closeRow);
+
+    // Inject overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'mob-sidebar-overlay';
+    document.body.appendChild(overlay);
+
+    function open()  { sidebar.classList.add('open'); overlay.classList.add('show'); document.body.style.overflow = 'hidden'; }
+    function close() { sidebar.classList.remove('open'); overlay.classList.remove('show'); document.body.style.overflow = ''; }
+
+    btn.addEventListener('click', open);
+    document.getElementById('mobCloseBtn').addEventListener('click', close);
+    overlay.addEventListener('click', close);
+    window.addEventListener('resize', () => { if (window.innerWidth >= 769) close(); });
+  })();
+</script>

@@ -26,6 +26,8 @@ const { Content } = await post.render();
   category={post.data.category}
   tags={post.data.tags ?? []}
   author={post.data.author ?? 'CodesCompiler'}
+  slug={post.slug}
+  hasDemo={post.data.hasDemo ?? false}
 >
   <Content />
 </PostLayout>
