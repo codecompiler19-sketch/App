@@ -20,7 +20,8 @@ const blogCollection = defineCollection({
       'HTML & CSS', 'JavaScript', 'JavaScript Projects', 'Login Form',
       'Card Design', 'Navigation Bar', 'Blog', 'Website Designs',
       'Image Slider', 'API Projects', 'Sidebar Menu', 'CSS Buttons',
-      'JavaScript Games', 'Preloader or Loader', 'Form Validation'
+      'JavaScript Games', 'Preloader or Loader', 'Form Validation',
+      'Accordion', 'Bootstrap', 'Tabs', 'Calendar'
     ]),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
