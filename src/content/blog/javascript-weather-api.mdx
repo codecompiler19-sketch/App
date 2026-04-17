@@ -1,0 +1,57 @@
+---
+title: "Weather App using Fetch API"
+description: "Build a beautiful weather card UI that fetches live data from an external API, featuring minimalist design and glassmorphism."
+date: "2026-04-18"
+category: "API Projects"
+tags: ["javascript", "api", "fetch", "weather", "project"]
+image: "/images/posts/todo-app.png"
+featured: false
+hasDemo: true
+author: "CodesCompiler"
+---
+
+Calling external APIs and rendering the data is a staple JavaScript skill. In this tutorial we'll use `fetch()` to hit a weather API and display the results in a beautiful glassmorphism card.
+
+## Fetching Data
+
+We'll use standard `async/await` to get the weather data. 
+*(Note: For the demo we use static data, but this is the real flow!)*
+
+```javascript
+async function getWeather(city) {
+  const apiKey = 'YOUR_API_KEY';
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('City not found');
+    const data = await response.json();
+    displayWeather(data);
+  } catch (error) {
+    showError(error.message);
+  }
+}
+```
+
+## The Glassmorphism UI
+
+```css
+.weather-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+}
+
+.temp {
+  font-size: 64px;
+  font-weight: 900;
+  margin: 10px 0;
+}
+```
+
+Open the Live Demo to interact with the search functionality and see the glassmorphism in action!

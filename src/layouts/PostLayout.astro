@@ -38,9 +38,21 @@ const formattedDate = date
 
 // Category badge colors + slugs
 const CATEGORY_MAP: Record<string, { color: string; bg: string; href: string }> = {
-  'HTML & CSS':           { color: '#E34F26', bg: '#fff4f0', href: '/blog?cat=html-css' },
-  'JavaScript':           { color: '#F7DF1E', bg: '#fffbe6', href: '/blog?cat=javascript' },
-  'HTML CSS JavaScript':  { color: '#04AA6D', bg: '#f0fff8', href: '/blog?cat=html-css-js' },
+  'HTML & CSS':          { color: '#E34F26', bg: '#fff4f0', href: '/blog?cat=html-css' },
+  'JavaScript':          { color: '#ca8a04', bg: '#fefce8', href: '/blog?cat=javascript' },
+  'JavaScript Projects': { color: '#eab308', bg: '#fef9c3', href: '/blog?cat=javascript-projects' },
+  'Login Form':          { color: '#3b82f6', bg: '#eff6ff', href: '/blog?cat=login-form' },
+  'Card Design':         { color: '#8b5cf6', bg: '#f5f3ff', href: '/blog?cat=card-design' },
+  'Navigation Bar':      { color: '#ec4899', bg: '#fdf2f8', href: '/blog?cat=navigation-bar' },
+  'Blog':                { color: '#10b981', bg: '#ecfdf5', href: '/blog?cat=blog' },
+  'Website Designs':     { color: '#06b6d4', bg: '#ecfeff', href: '/blog?cat=website-designs' },
+  'Image Slider':        { color: '#f97316', bg: '#fff7ed', href: '/blog?cat=image-slider' },
+  'API Projects':        { color: '#6366f1', bg: '#eef2ff', href: '/blog?cat=api-projects' },
+  'Sidebar Menu':        { color: '#84cc16', bg: '#f7fee7', href: '/blog?cat=sidebar-menu' },
+  'CSS Buttons':         { color: '#f43f5e', bg: '#fff1f2', href: '/blog?cat=css-buttons' },
+  'JavaScript Games':    { color: '#a855f7', bg: '#faf5ff', href: '/blog?cat=javascript-games' },
+  'Preloader or Loader': { color: '#0ea5e9', bg: '#f0f9ff', href: '/blog?cat=preloader-or-loader' },
+  'Form Validation':     { color: '#14b8a6', bg: '#f0fdfa', href: '/blog?cat=form-validation' }
 };
 const catMeta = category ? (CATEGORY_MAP[category] ?? { color: '#6b7280', bg: '#f3f4f6', href: '/blog' }) : null;
 

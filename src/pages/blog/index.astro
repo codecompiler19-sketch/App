@@ -13,17 +13,29 @@ const featured   = sorted.filter(p => p.data.featured);
 const recentPosts = sorted.slice(0, 6);
 
 // Category counts
-const cats = ['HTML & CSS', 'JavaScript', 'HTML CSS JavaScript'];
+const CATEGORY_MAP: Record<string, { color: string; bg: string; icon: string }> = {
+  'HTML & CSS':          { color: '#E34F26', bg: '#fff4f0', icon: '🎨' },
+  'JavaScript':          { color: '#ca8a04', bg: '#fefce8', icon: '⚡' },
+  'JavaScript Projects': { color: '#eab308', bg: '#fef9c3', icon: '🚀' },
+  'Login Form':          { color: '#3b82f6', bg: '#eff6ff', icon: '🔐' },
+  'Card Design':         { color: '#8b5cf6', bg: '#f5f3ff', icon: '🃏' },
+  'Navigation Bar':      { color: '#ec4899', bg: '#fdf2f8', icon: '🧭' },
+  'Blog':                { color: '#10b981', bg: '#ecfdf5', icon: '📝' },
+  'Website Designs':     { color: '#06b6d4', bg: '#ecfeff', icon: '🌐' },
+  'Image Slider':        { color: '#f97316', bg: '#fff7ed', icon: '🖼️' },
+  'API Projects':        { color: '#6366f1', bg: '#eef2ff', icon: '🔌' },
+  'Sidebar Menu':        { color: '#84cc16', bg: '#f7fee7', icon: '📋' },
+  'CSS Buttons':         { color: '#f43f5e', bg: '#fff1f2', icon: '🔘' },
+  'JavaScript Games':    { color: '#a855f7', bg: '#faf5ff', icon: '🎮' },
+  'Preloader or Loader': { color: '#0ea5e9', bg: '#f0f9ff', icon: '⏳' },
+  'Form Validation':     { color: '#14b8a6', bg: '#f0fdfa', icon: '✅' }
+};
+
+const cats = Object.keys(CATEGORY_MAP);
 const catCounts = cats.reduce((acc, c) => {
   acc[c] = allPosts.filter(p => p.data.category === c).length;
   return acc;
 }, {} as Record<string, number>);
-
-const CATEGORY_MAP: Record<string, { color: string; bg: string; icon: string }> = {
-  'HTML & CSS':           { color: '#E34F26', bg: '#fff4f0', icon: '🎨' },
-  'JavaScript':           { color: '#ca8a04', bg: '#fefce8', icon: '⚡' },
-  'HTML CSS JavaScript':  { color: '#04AA6D', bg: '#f0fff8', icon: '🚀' },
-};
 
 // All unique tags
 const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();

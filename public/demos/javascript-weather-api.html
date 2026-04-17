@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather API - Demo</title>
+  <style>
+    body { background: linear-gradient(135deg, #1e3a8a, #3b82f6); font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+    .weather-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      color: white;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+    }
+    .search { display: flex; gap: 10px; margin-bottom: 30px; }
+    .search input { flex: 1; padding: 10px; border-radius: 8px; border: none; outline: none; }
+    .search button { background: #10b981; color: white; border: none; border-radius: 8px; padding: 10px 15px; cursor: pointer; }
+    .city { font-size: 28px; font-weight: bold; margin: 0; }
+    .temp { font-size: 64px; font-weight: 900; margin: 10px 0; }
+    .desc { font-size: 18px; opacity: 0.8; text-transform: capitalize; }
+    .icon { font-size: 64px; margin: 10px 0; line-height: 1; }
+  </style>
+</head>
+<body>
+  <div class="weather-card">
+    <div class="search">
+      <input type="text" id="cityInput" placeholder="Enter city" value="London">
+      <button id="searchBtn">Search</button>
+    </div>
+    <h2 class="city" id="cityName">London</h2>
+    <div class="icon" id="wIcon">🌥️</div>
+    <div class="temp"><span id="tempVal">18</span>°C</div>
+    <div class="desc" id="descTxt">Partly cloudy</div>
+  </div>
+
+  <script>
+    // Mocking API for demo purposes
+    const mockWeather = {
+      'london': { t: 18, d: 'partly cloudy', i: '🌥️' },
+      'new york': { t: 24, d: 'sunny', i: '☀️' },
+      'tokyo': { t: 22, d: 'rainy', i: '🌧️' },
+      'sydney': { t: 26, d: 'clear', i: '☀️' }
+    };
+
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const city = document.getElementById('cityInput').value.toLowerCase();
+      const w = mockWeather[city] || { t: 20, d: 'windy', i: '💨' };
+      document.getElementById('cityName').innerText = city.charAt(0).toUpperCase() + city.slice(1);
+      document.getElementById('tempVal').innerText = w.t;
+      document.getElementById('descTxt').innerText = w.d;
+      document.getElementById('wIcon').innerText = w.i;
+    });
+  </script>
+</body>
+</html>

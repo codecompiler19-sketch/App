@@ -16,7 +16,12 @@ const blogCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.string(),
-    category: z.enum(['HTML & CSS', 'JavaScript', 'HTML CSS JavaScript']),
+    category: z.enum([
+      'HTML & CSS', 'JavaScript', 'JavaScript Projects', 'Login Form',
+      'Card Design', 'Navigation Bar', 'Blog', 'Website Designs',
+      'Image Slider', 'API Projects', 'Sidebar Menu', 'CSS Buttons',
+      'JavaScript Games', 'Preloader or Loader', 'Form Validation'
+    ]),
     tags: z.array(z.string()).optional(),
     image: z.string().optional(),
     featured: z.boolean().optional().default(false),
