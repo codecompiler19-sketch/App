@@ -14,6 +14,7 @@ const tutorialLinks = [
   { label: 'CSS Tutorial', href: '/tutorial/css-introduction', cat: 'CSS' },
   { label: 'JavaScript Tutorial', href: '/tutorial/js-introduction', cat: 'JavaScript' },
   { label: 'SEO Tutorial', href: '/tutorial/seo-overview', cat: 'SEO' },
+  { label: 'Python Tutorial', href: '/tutorial/python-guide', cat: 'Python' },
 ];
 ---
 
@@ -38,6 +39,13 @@ const tutorialLinks = [
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    {Astro.url.pathname.includes('/tutorial/python-') && (
+      <>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+        <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+      </>
+    )}
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-900 antialiased" style="font-family: 'Source Sans 3', sans-serif;">
 
@@ -105,6 +113,7 @@ const tutorialLinks = [
           { label: 'CSS', href: '/tutorial/css-introduction', color: '#264DE4' },
           { label: 'JavaScript', href: '/tutorial/js-introduction', color: '#F7DF1E' },
           { label: 'SEO', href: '/tutorial/seo-overview', color: '#04AA6D' },
+          { label: 'Python', href: '/tutorial/python-guide', color: '#3776AB' },
           { label: 'Posts', href: '/blog', color: '#04AA6D' },
           { label: 'Privacy', href: '/privacy-policy', color: '#9CA3AF' },
           { label: 'About', href: '/about', color: '#9CA3AF' },
