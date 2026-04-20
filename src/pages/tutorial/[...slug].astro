@@ -2,6 +2,8 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import TutorialLayout from '../../layouts/TutorialLayout.astro';
 import Editor from '../../components/Editor.astro';
+import SqlEditor from '../../components/SqlEditor.astro';
+import PythonEditor from '../../components/PythonEditor.astro';
 
 export async function getStaticPaths() {
   const tutorials = await getCollection('tutorials');
@@ -24,6 +26,7 @@ const categoryLabel = {
   javascript: 'JavaScript',
   seo: 'SEO',
   python: 'Python',
+  sql: 'SQL',
 }[tutorial.data.category] ?? tutorial.data.category;
 ---
 
@@ -33,5 +36,5 @@ const categoryLabel = {
   category={tutorial.data.category}
   categoryLabel={categoryLabel}
 >
-  <Content components={{ Editor }} />
+  <Content components={{ Editor, SqlEditor, PythonEditor }} />
 </TutorialLayout>
