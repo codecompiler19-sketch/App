@@ -1,0 +1,55 @@
+---
+title: "Semantic HTML & SEO"
+description: "Why the structure of your HTML matters just as much as the content for search engines."
+category: "seo"
+order: 3
+---
+
+# Structure as Strategy: Semantic HTML
+
+Search engines don't "see" your website the way humans do; they read the code. **Semantic HTML** uses tags that provide meaning to the content, rather than just defining its appearance.
+
+## Hierarchy with Heading Tags
+
+Heading tags (`<h1>` to `<h6>`) are the skeleton of your SEO.
+
+- **`<h1>`**: The primary topic. Use only ONE per page.
+- **`<h2>`**: The main sub-sections.
+- **`<h3>`**: Sub-sections under H2s.
+
+**Bad Example:**
+```html
+<p class="big-bold-text">Main Header</p>
+```
+*Search engines see this as just another paragraph.*
+
+**Good Example:**
+```html
+<h1>The Future of Web Development</h1>
+```
+
+## Meaningful Container Elements
+
+Stop using `<div>` for everything. Use semantic containers to define parts of your document:
+
+- **`<header>`**: Introductory content or set of nav links.
+- **`<nav>`**: Navigation menus.
+- **`<main>`**: The unique content of the page.
+- **`<article>`**: Self-contained content (like a blog post).
+- **`<section>`**: Generic standalone section.
+- **`<footer>`**: Closing information, social links, or copyright.
+
+## Why Semantics Matter for SEO
+
+1. **Better Context**: It helps algorithms understand which parts of your page are most important.
+2. **Accessibility**: Screen readers rely on semantic structures, and Google rewards accessible sites.
+3. **Featured Snippets**: Well-structured lists (`<ul>`, `<ol>`) and headers are more likely to appear as "Position Zero" snippets in search results.
+
+## The Role of Links (`<a>`)
+
+How you link matters. Avoid "Click here." Use descriptive anchor text.
+
+- **Bad**: `Click <a href="/seo">here</a> to learn about SEO.`
+- **Good**: `Check out our <a href="/seo">comprehensive SEO tutorial</a>.`
+
+By using the right tags for the right job, you make your site "crawl-friendly," ensuring search engines can map out your content with precision.

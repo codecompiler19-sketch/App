@@ -5,7 +5,7 @@ const tutorialsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    category: z.enum(['html', 'css', 'javascript']),
+    category: z.enum(['html', 'css', 'javascript', 'seo']),
     order: z.number(),
   }),
 });
