@@ -228,7 +228,23 @@ const uid = Math.random().toString(36).slice(2, 9);
 </html>`;
           } else {
             // Standard Web Environment (HTML/CSS/JS)
-            fullDoc = `<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="UTF-8"/>\n  <meta name="viewport" content="width=device-width,initial-scale=1"/>\n  <style>${docs.css}</style>\n</head>\n<body>\n${docs.html}\n<script>\ntry {\n  ${docs.js}\n} catch(e) { console.error(e); }\n<\\/script>\n</body>\n</html>`;
+            // IMPORTANT: JS runs at top-level so function declarations are globally accessible.
+            // If wrapped in try{}, block-scoped function declarations break onclick handlers.
+            const safeJs = docs.js.replace(/<\/script>/gi, '<\\/script>');
+            fullDoc = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <style>${docs.css}</style>
+</head>
+<body>
+${docs.html}
+<script>
+${safeJs}
+<\/script>
+</body>
+</html>`;
           }
 
           const blob = new Blob([fullDoc], { type: 'text/html' });
