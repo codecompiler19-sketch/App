@@ -209,7 +209,11 @@ const uid = Math.random().toString(36).slice(2, 9);
   php.addEventListener('ready', () => {
     outputDiv.innerHTML = '';
     const code = document.getElementById('phpCode').value;
-    php.run('<?php\\n' + code + '\\n?>')
+    let finalCode = code;
+    if (!finalCode.includes('<?php')) {
+      finalCode = '<?php\\n' + finalCode;
+    }
+    php.run(finalCode)
     .catch(err => {
        outputDiv.innerHTML += '<br><span style="color:red">Error: ' + err + '</span>';
     });
