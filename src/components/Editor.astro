@@ -243,8 +243,17 @@ ${safeJs}
 </html>`;
           }
 
+          // PHP-WASM needs Web Workers → requires allow-same-origin.
+          // HTML/CSS/JS keeps allow-scripts only for security.
+          if (wrapper.dataset.php !== '') {
+            preview.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+          } else {
+            preview.setAttribute('sandbox', 'allow-scripts');
+          }
+
           const blob = new Blob([fullDoc], { type: 'text/html' });
-          preview.src = URL.createObjectURL(blob);
+          const blobUrl = URL.createObjectURL(blob);
+          preview.src = blobUrl;
         }
 
         // Tab switching
