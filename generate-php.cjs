@@ -211,29 +211,29 @@ for (const line of lines) {
 
   const title = line.replace('PHP – ', 'PHP \\u2013 '); // Use unicode en-dash
   const slug = line.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  const fileName = \`\${slug}.mdx\`;
+  const fileName = `${slug}.mdx`;
   const filePath = path.join(dir, fileName);
 
   if (!fs.existsSync(filePath)) {
     // Generate a basic template for the missing files
-    let content = \`---
-title: "\${line.replace('PHP – ', 'PHP \\u2013 ')}"
-description: "Learn about \${line.replace('PHP – ', '')} in PHP with interactive examples."
+    let content = `---
+title: "${line.replace('PHP – ', 'PHP \\u2013 ')}"
+description: "Learn about ${line.replace('PHP – ', '')} in PHP with interactive examples."
 category: "php"
-order: \${order}
-\`;
+order: ${order}
+`;
 
     if (currentGroup) {
-      content += \`group: "\${currentGroup}"\n\`;
+      content += `group: "${currentGroup}"\n`;
     }
 
-    content += \`---
+    content += `---
 
 import Editor from '../../components/Editor.astro';
 
-# \${line.replace('PHP – ', 'PHP \\u2013 ')}
+# ${line.replace('PHP – ', 'PHP \\u2013 ')}
 
-Welcome to the **\${line.replace('PHP – ', '')}** tutorial in PHP! In this section, we will explore how this concept works and how you can implement it in your dynamic web applications.
+Welcome to the **${line.replace('PHP – ', '')}** tutorial in PHP! In this section, we will explore how this concept works and how you can implement it in your dynamic web applications.
 
 ## Overview
 
@@ -246,7 +246,7 @@ Test out the concept in the interactive PHP WASM editor below. Modify the code a
 <Editor 
   initialPhp={\`<?php
 // Your PHP code here
-echo "Exploring \${line.replace('PHP – ', '')}!";
+echo "Exploring ${line.replace('PHP – ', '')}!";
 ?>\`}
   activeTab="php" 
 />
@@ -257,20 +257,23 @@ echo "Exploring \${line.replace('PHP – ', '')}!";
 - Keep your PHP logic separate from your HTML presentation where possible.
 - Use strict comparison (\`===\`) instead of loose comparison (\`==\`).
 
-\`;
+`;
     fs.writeFileSync(filePath, content, 'utf8');
-    console.log(\`Generated \${fileName}\`);
+    console.log(`Generated ${fileName}`);
   } else {
     // File exists, but we might want to update its order and group
     let existingContent = fs.readFileSync(filePath, 'utf8');
-    existingContent = existingContent.replace(/^order:.*$/m, \`order: \${order}\`);
+    existingContent = existingContent.replace(/^order:.*$/m, `order: ${order}`);
     
     if (currentGroup) {
       if (existingContent.match(/^group:/m)) {
-        existingContent = existingContent.replace(/^group:.*$/m, \`group: "\${currentGroup}"\`);
+        existingContent = existingContent.replace(/^group:.*$/m, `group: "${currentGroup}"`);
       } else {
-        existingContent = existingContent.replace(/^order:.*$/m, \`order: \${order}\\ngroup: "\${currentGroup}"\`);
+        existingContent = existingContent.replace(/^order:.*$/m, `order: ${order}\ngroup: "${currentGroup}"`);
       }
+    } else {
+      // Remove group if there is none
+      existingContent = existingContent.replace(/^group:.*\r?\n/m, '');
     }
     fs.writeFileSync(filePath, existingContent, 'utf8');
   }
