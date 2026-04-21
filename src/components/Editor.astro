@@ -147,11 +147,16 @@ const uid = Math.random().toString(36).slice(2, 9);
         const tabs     = wrapper.querySelectorAll('.tiy-tab');
 
         // Read initial code from data attributes
+        const unescapeText = (txt) => {
+          if (!txt) return '';
+          return txt.replace(/\\n/g, '\\n').replace(/\\\\n/g, '\\n');
+        };
+
         const docs = {
-          html: wrapper.dataset.html || '',
-          css:  wrapper.dataset.css  || '',
-          js:   wrapper.dataset.js   || '',
-          php:  wrapper.dataset.php  || '',
+          html: unescapeText(wrapper.dataset.html),
+          css:  unescapeText(wrapper.dataset.css),
+          js:   unescapeText(wrapper.dataset.js),
+          php:  unescapeText(wrapper.dataset.php),
         };
 
         let currentLang = wrapper.dataset.active || 'html';
