@@ -184,8 +184,12 @@ const uid = Math.random().toString(36).slice(2, 9);
 
           // Determine the runtime environment
           if (wrapper.dataset.php !== '') {
-            // PHP WASM Environment
-            const safePhp = docs.php.replace(/</g, '\\x3C');
+            // PHP WASM Environment — pass code via JSON.stringify to avoid HTML-escaping issues
+            let phpCode = docs.php;
+            if (!phpCode.trimStart().startsWith('<?php') && !phpCode.trimStart().startsWith('<?')) {
+              phpCode = '<?php\n' + phpCode;
+            }
+            const jsonCode = JSON.stringify(phpCode);
             fullDoc = `<!DOCTYPE html>
 <html>
 <head>
@@ -194,36 +198,28 @@ const uid = Math.random().toString(36).slice(2, 9);
   <style>body { font-family: sans-serif; padding: 1.5rem; background: #fff; }</style>
 </head>
 <body>
-<div id="output"></div>
-<textarea id="phpCode" style="display:none;">${safePhp}</textarea>
+<div id="output"><span style="color:#aaa;font-family:monospace;">Executing PHP...</span></div>
 <script type="module">
   import { PhpWeb } from 'https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs';
   const php = new PhpWeb();
   const outputDiv = document.getElementById('output');
-  
+  const code = ${jsonCode};
+
   php.addEventListener('output', (event) => {
     outputDiv.innerHTML += event.detail;
   });
-  
+
   php.addEventListener('error', (event) => {
     outputDiv.innerHTML += '<br><span style="color:red">' + event.detail + '</span>';
   });
-  
-  outputDiv.innerHTML = '<span style="color:#aaa; font-family: monospace;">Executing PHP...</span><hr/>';
-  
+
   php.addEventListener('ready', () => {
     outputDiv.innerHTML = '';
-    const code = document.getElementById('phpCode').value;
-    let finalCode = code;
-    if (!finalCode.includes('<?php')) {
-      finalCode = '<?php\\n' + finalCode;
-    }
-    php.run(finalCode)
-    .catch(err => {
-       outputDiv.innerHTML += '<br><span style="color:red">Error: ' + err + '</span>';
+    php.run(code).catch(err => {
+      outputDiv.innerHTML += '<br><span style="color:red">Error: ' + err + '</span>';
     });
   });
-<\\/script>
+<\/script>
 </body>
 </html>`;
           } else {
