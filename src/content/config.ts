@@ -7,6 +7,7 @@ const tutorialsCollection = defineCollection({
     description: z.string().optional(),
     category: z.enum(['html', 'css', 'javascript', 'seo', 'python', 'sql', 'php']),
     order: z.number(),
+    group: z.string().optional(),
   }),
 });
 

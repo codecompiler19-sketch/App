@@ -20,6 +20,19 @@ const categoryTutorials = tutorials
 
 const currentSlug = Astro.url.pathname.replace(/\/$/, '').split('/').pop();
 
+// Build grouped sidebar structure
+type TutorialEntry = (typeof categoryTutorials)[number];
+const sidebarGroups: { label: string | null; items: TutorialEntry[] }[] = [];
+for (const t of categoryTutorials) {
+  const g = t.data.group ?? null;
+  const last = sidebarGroups[sidebarGroups.length - 1];
+  if (!last || last.label !== g) {
+    sidebarGroups.push({ label: g, items: [t] });
+  } else {
+    last.items.push(t);
+  }
+}
+
 // UI colors for categories
 const CATEGORY_COLORS: Record<string, { bg: string; text: string }> = {
   html: { bg: 'bg-orange-100', text: 'text-orange-700' },
@@ -47,24 +60,33 @@ const catColor = CATEGORY_COLORS[category] ?? { bg: 'bg-gray-100', text: 'text-g
         </span>
       </div>
 
-      <!-- Chapter links -->
+      <!-- Chapter links with optional group headers -->
       <nav class="py-2 flex flex-col" aria-label={`${categoryLabel} chapters`}>
-        {categoryTutorials.map((tutorial) => {
-          const isActive = tutorial.slug === currentSlug;
-          return (
-            <a
-              href={`/tutorial/${tutorial.slug}`}
-              aria-current={isActive ? 'page' : undefined}
-              class={`block px-4 py-2 text-[0.85rem] font-medium border-l-4 transition-colors ${
-                isActive
-                  ? 'border-[#04AA6D] bg-[#04AA6D] text-white'
-                  : 'border-transparent text-gray-700 hover:bg-gray-100 hover:text-[#04AA6D]'
-              }`}
-            >
-              {tutorial.data.title}
-            </a>
-          );
-        })}
+        {sidebarGroups.map((group) => (
+          <>
+            {group.label && (
+              <div class="px-4 pt-4 pb-1 text-[0.7rem] font-extrabold uppercase tracking-widest text-gray-400 select-none">
+                {group.label}
+              </div>
+            )}
+            {group.items.map((tutorial) => {
+              const isActive = tutorial.slug === currentSlug;
+              return (
+                <a
+                  href={`/tutorial/${tutorial.slug}`}
+                  aria-current={isActive ? 'page' : undefined}
+                  class={`block px-4 py-1.5 text-[0.82rem] font-medium border-l-4 transition-colors ${
+                    isActive
+                      ? 'border-[#04AA6D] bg-[#04AA6D] text-white'
+                      : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-[#04AA6D]'
+                  }`}
+                >
+                  {tutorial.data.title}
+                </a>
+              );
+            })}
+          </>
+        ))}
       </nav>
     </aside>
 
