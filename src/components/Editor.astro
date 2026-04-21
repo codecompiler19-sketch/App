@@ -149,7 +149,7 @@ const uid = Math.random().toString(36).slice(2, 9);
         // Read initial code from data attributes
         const unescapeText = (txt) => {
           if (!txt) return '';
-          return txt.replace(/\\n/g, '\\n').replace(/\\\\n/g, '\\n');
+          return txt.replace(/\\n/g, '\n');
         };
 
         const docs = {
@@ -228,7 +228,7 @@ const uid = Math.random().toString(36).slice(2, 9);
 </html>`;
           } else {
             // Standard Web Environment (HTML/CSS/JS)
-            fullDoc = `<!DOCTYPE html>\\n<html>\\n<head>\\n  <meta charset="UTF-8"/>\\n  <meta name="viewport" content="width=device-width,initial-scale=1"/>\\n  <style>${docs.css}</style>\\n</head>\\n<body>\\n${docs.html}\\n<script>\\ntry {\\n  ${docs.js}\\n} catch(e) { console.error(e); }\\n<\\/script>\\n</body>\\n</html>`;
+            fullDoc = `<!DOCTYPE html>\n<html>\n<head>\n  <meta charset="UTF-8"/>\n  <meta name="viewport" content="width=device-width,initial-scale=1"/>\n  <style>${docs.css}</style>\n</head>\n<body>\n${docs.html}\n<script>\ntry {\n  ${docs.js}\n} catch(e) { console.error(e); }\n<\\/script>\n</body>\n</html>`;
           }
 
           const blob = new Blob([fullDoc], { type: 'text/html' });
