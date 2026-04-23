@@ -222,7 +222,7 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
             </a>
             <a
               href={`/demos/${slug}.html`}
-              download={`${slug}.html`}
+              download={`${title}.html`}
               class="demo-btn demo-btn-outline"
               id="btn-download"
             >
