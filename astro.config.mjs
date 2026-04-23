@@ -5,6 +5,12 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), tailwind(), sitemap()],
-  site: 'https://codescompiler.com',
+  integrations: [
+    mdx(), 
+    tailwind(), 
+    sitemap({
+      filter: (page) => !page.includes('/admin') && !page.includes('/blog-demo')
+    })
+  ],
+  site: 'https://app.codescompiler.com',
 });
