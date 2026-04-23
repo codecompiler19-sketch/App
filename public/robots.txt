@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://app.codescompiler.com/sitemap-index.xml

@@ -1,0 +1,14 @@
+{
+  "siteTitle": "CodesCompiler",
+  "siteUrl": "https://app.codescompiler.com",
+  "siteDescription": "Free web development tutorials for everyone.",
+  "adsenseId": "",
+  "adsenseAutoAds": false,
+  "searchConsoleTag": "",
+  "customHeadScripts": "",
+  "customBodyScripts": "",
+  "permalinkStructure": "/blog/{slug}/",
+  "tutorialPermalinkStructure": "/tutorial/{slug}/",
+  "robotsTxt": "User-agent: *\nAllow: /\nSitemap: https://app.codescompiler.com/sitemap-index.xml",
+  "cacheControl": "public, max-age=3600"
+}
