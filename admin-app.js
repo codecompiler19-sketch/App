@@ -15,10 +15,16 @@ function toast(m,ok=true){const d=document.createElement('div');d.className='toa
 async function api(p,o){return(await fetch(API+p,o)).json()}
 async function post(p,b){return api(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})}
 
-// Modal
-function openModal(t,html,cb,info){$('mtitle').textContent=t;$('mbody').innerHTML=html;modalCb=cb;$('minfo').textContent=info||'';$('modal').classList.add('open')}
-function closeModal(){$('modal').classList.remove('open');modalCb=null}
-function saveModal(){if(modalCb)modalCb()}
+// Inline Editor (replaces modal popup - opens full-page inside content area)
+let editorSaveCb=null, editorBackFn=null;
+function openEditor(title, html, saveCb, backFn, statusBadge=''){
+  editorSaveCb=saveCb; editorBackFn=backFn;
+  $('ptitle').innerHTML=`<button class="btn bg bs" onclick="closeEditor()" style="margin-right:10px;font-size:13px">← Back</button>${esc(title)}`;
+  $('tact').innerHTML=`${statusBadge}<button class="btn bp" onclick="saveEditor()">✅ Save & Publish</button>`;
+  $('content').innerHTML=html;
+}
+function closeEditor(){if(editorBackFn)editorBackFn();editorSaveCb=null;editorBackFn=null;}
+async function saveEditor(){if(editorSaveCb)await editorSaveCb();}
 function openConfirm(m,cb){confirmCb=cb;$('cmsg').textContent=m;$('cfm').classList.add('open');}
 function closeConfirm(){$('cfm').classList.remove('open');confirmCb=null}
 function doConfirm(){const cb=confirmCb; closeConfirm(); if(cb)cb()}
@@ -49,7 +55,7 @@ async function loadAll(){
   renderSidebar();
 }
 
-function goTo(p){page=p;renderSidebar();({dashboard:renderDash,tutorials:renderTuts,blogs:renderBlogs,nav:renderNav,settings:renderSettings,permalinks:renderPermalinks,pages:renderPages,ads:renderAds,trash:renderTrash})[p]?.()}
+function goTo(p){page=p;location.hash=p;renderSidebar();({dashboard:renderDash,tutorials:renderTuts,blogs:renderBlogs,nav:renderNav,settings:renderSettings,permalinks:renderPermalinks,pages:renderPages,ads:renderAds,trash:renderTrash})[p]?.()}
 
 // ══ DASHBOARD ══
 function renderDash(){
@@ -104,24 +110,30 @@ function tutForm(t={}){
 }
 
 function newTut(){
-  openModal('Add New Tutorial',tutForm(),async()=>{
-    let fn=$('tf_f').value.trim();if(!fn)return toast('URL slug is required',false);
-    if(!fn.endsWith('.mdx'))fn+='.mdx';
-    await post('/api/tutorials/save',{filename:fn,content:buildTutContent()});
-    toast('Tutorial published! 🎉');closeModal();await loadAll();renderTuts();
-  },'New tutorial');
-  $('mstatus').innerHTML='<span class="badge bpub">New</span>';
+  openEditor('Add New Tutorial', tutForm(),
+    async()=>{
+      let fn=$('tf_f').value.trim();if(!fn)return toast('URL slug is required',false);
+      if(!fn.endsWith('.mdx'))fn+='.mdx';
+      await post('/api/tutorials/save',{filename:fn,content:buildTutContent()});
+      toast('Tutorial published! 🎉');await loadAll();renderTuts();
+    },
+    ()=>renderTuts(),
+    '<span class="badge bpub" style="margin-right:8px">New</span>'
+  );
 }
 
 async function editTut(file){
   const d=await api('/api/tutorials/get?file='+encodeURIComponent(file));
   if(d.error)return toast('File not found',false);
   const fm=parseFM(d.content),body=extractBody(d.content);
-  openModal('Edit Tutorial',tutForm({...fm,file}),async()=>{
-    await post('/api/tutorials/save',{filename:file,content:buildTutContent()});
-    toast('Changes published! ✅');closeModal();await loadAll();renderTuts();
-  },file);
-  $('mstatus').innerHTML='<span class="badge bpub">Published</span>';
+  openEditor('Edit Tutorial: '+file, tutForm({...fm,file}),
+    async()=>{
+      await post('/api/tutorials/save',{filename:file,content:buildTutContent()});
+      toast('Changes published! ✅');
+    },
+    ()=>renderTuts(),
+    '<span class="badge bpub" style="margin-right:8px">Published</span>'
+  );
   setTimeout(()=>{if($('tf_b'))$('tf_b').value=body},60);
 }
 
@@ -220,24 +232,30 @@ function blogForm(b={}){
 }
 
 function newBlog(){
-  openModal('Add New Post',blogForm(),async()=>{
-    let fn=$('bf_f').value.trim();if(!fn)return toast('URL slug is required',false);
-    if(!fn.endsWith('.mdx'))fn+='.mdx';
-    await post('/api/blogs/save',{filename:fn,content:buildBlogContent()});
-    toast('Post published! 🎉');closeModal();await loadAll();renderBlogs();
-  },'New post');
-  $('mstatus').innerHTML='<span class="badge bpub">New</span>';
+  openEditor('Add New Post', blogForm(),
+    async()=>{
+      let fn=$('bf_f').value.trim();if(!fn)return toast('URL slug is required',false);
+      if(!fn.endsWith('.mdx'))fn+='.mdx';
+      await post('/api/blogs/save',{filename:fn,content:buildBlogContent()});
+      toast('Post published! 🎉');await loadAll();renderBlogs();
+    },
+    ()=>renderBlogs(),
+    '<span class="badge bpub" style="margin-right:8px">New</span>'
+  );
 }
 
 async function editBlog(file){
   const d=await api('/api/blogs/get?file='+encodeURIComponent(file));
   if(d.error)return toast('File not found',false);
   const fm=parseFM(d.content),body=extractBody(d.content);
-  openModal('Edit Post',blogForm({...fm,file}),async()=>{
-    await post('/api/blogs/save',{filename:file,content:buildBlogContent()});
-    toast('Changes published! ✅');closeModal();await loadAll();renderBlogs();
-  },file);
-  $('mstatus').innerHTML='<span class="badge bpub">Published</span>';
+  openEditor('Edit Post: '+file, blogForm({...fm,file}),
+    async()=>{
+      await post('/api/blogs/save',{filename:file,content:buildBlogContent()});
+      toast('Changes published! ✅');
+    },
+    ()=>renderBlogs(),
+    '<span class="badge bpub" style="margin-right:8px">Published</span>'
+  );
   setTimeout(()=>{if($('bf_b'))$('bf_b').value=body},60);
 }
 
@@ -526,25 +544,29 @@ function newPage(){
   if(!slug) return;
   const fn=slug.replace(/[^a-z0-9-]/gi,'-').toLowerCase()+'.astro';
   const template=`---\nimport BaseLayout from '../layouts/BaseLayout.astro';\n---\n<BaseLayout title="${slug.charAt(0).toUpperCase()+slug.slice(1)}" description="${slug} page">\n  <div class="max-w-screen-xl mx-auto px-5 py-12">\n    <h1 class="text-3xl font-bold mb-6">${slug.charAt(0).toUpperCase()+slug.slice(1)}</h1>\n    <p>Your content here...</p>\n  </div>\n</BaseLayout>`;
-  openModal('New Page: '+fn,
-    `<div class="field"><label>File: ${fn}</label></div><div class="field" style="margin-top:10px"><label>Page Content</label><textarea class="editor" id="pg_body" style="min-height:350px">${esc(template)}</textarea></div>`,
+  openEditor('New Page: '+fn,
+    `<div class="card"><div class="ch"><h3>Page Content</h3><span style="color:var(--dim);font-size:12px">${fn}</span></div><div style="padding:16px"><textarea class="editor" id="pg_body" style="min-height:500px">${esc(template)}</textarea></div></div>`,
     async()=>{
       await post('/api/pages/save',{filename:fn,content:$('pg_body').value});
-      toast('Page created! \ud83c\udf89');closeModal();await loadAll();renderPages();
-    },fn);
-  $('mstatus').innerHTML='<span class="badge bpub">New</span>';
+      toast('Page created! 🎉');await loadAll();renderPages();
+    },
+    ()=>renderPages(),
+    '<span class="badge bpub" style="margin-right:8px">New</span>'
+  );
 }
 
 async function editPage(file){
   const d=await api('/api/pages/get?file='+encodeURIComponent(file));
   if(d.error)return toast('File not found',false);
-  openModal('Edit Page: '+file,
-    `<div class="field"><label>Page Content (.astro template)</label><textarea class="editor" id="pg_body" style="min-height:400px">${esc(d.content)}</textarea></div>`,
+  openEditor('Edit Page: '+file,
+    `<div class="card"><div class="ch"><h3>Page Content (.astro template)</h3><span style="color:var(--dim);font-size:12px">${file}</span></div><div style="padding:16px"><textarea class="editor" id="pg_body" style="min-height:500px">${esc(d.content)}</textarea></div></div>`,
     async()=>{
       await post('/api/pages/save',{filename:file,content:$('pg_body').value});
-      toast('Page saved! \u2705');closeModal();await loadAll();renderPages();
-    },file);
-  $('mstatus').innerHTML='<span class="badge bpub">Published</span>';
+      toast('Page saved! ✅');
+    },
+    ()=>renderPages(),
+    '<span class="badge bpub" style="margin-right:8px">Published</span>'
+  );
 }
 
 function delPage(f){
@@ -645,4 +667,13 @@ function deleteTrash(type, file){
 }
 
 // ══ INIT ══
-(async()=>{await loadAll();goTo('dashboard')})();
+(async()=>{
+  await loadAll();
+  const validPages=['dashboard','tutorials','blogs','nav','settings','permalinks','pages','ads','trash'];
+  const hash=(location.hash||'').replace('#','');
+  goTo(validPages.includes(hash)?hash:'dashboard');
+  window.addEventListener('hashchange',()=>{
+    const h=(location.hash||'').replace('#','');
+    if(validPages.includes(h)&&h!==page) goTo(h);
+  });
+})();
