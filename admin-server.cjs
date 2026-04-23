@@ -129,6 +129,44 @@ function injectHeadScripts(settings) {
   fs.writeFileSync(path.join(publicDir, 'robots.txt'), settings.robotsTxt || 'User-agent: *\nAllow: /', 'utf-8');
 }
 
+function generateSitemap() {
+  const publicDir = path.join(APP_DIR, 'public');
+  if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
+  
+  const siteUrl = readJSON(SETTINGS_FILE, {}).siteUrl || 'https://app.codescompiler.com';
+  let urls = [];
+  
+  // Add static pages
+  if (fs.existsSync(PAGES_DIR)) {
+    const pages = fs.readdirSync(PAGES_DIR).filter(f => f.endsWith('.astro') && !f.startsWith('admin') && f !== '404.astro');
+    pages.forEach(p => {
+      const slug = p === 'index.astro' ? '' : p.replace('.astro', '/');
+      urls.push(`${siteUrl}/${slug}`);
+    });
+  }
+  
+  // Add Blogs
+  listBlogs().forEach(b => {
+    if (b.draft !== 'true' && b.draft !== true) {
+      urls.push(`${siteUrl}/blog/${b.file.replace(/\.mdx?$/, '/')}`);
+    }
+  });
+  
+  // Add Tutorials
+  listTutorials().forEach(t => {
+    urls.push(`${siteUrl}/tutorial/${t.file.replace(/\.mdx?$/, '/')}`);
+  });
+
+  // Create XML
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n  </url>`).join('\n')}\n</urlset>`;
+  
+  fs.writeFileSync(path.join(publicDir, 'sitemap-index.xml'), xml, 'utf-8');
+  console.log('  ✅ Custom Sitemap Generated (' + urls.length + ' URLs)');
+}
+
+// Generate on startup
+generateSitemap();
+
 // ── Server ────────────────────────────────────────────────────────────────────
 const server = http.createServer(async (req, res) => {
   const parsed   = url.parse(req.url, true);
@@ -168,12 +206,14 @@ const server = http.createServer(async (req, res) => {
       const b = await collectBody(req);
       if (!b.filename || !b.content) { jsonRes(res, { ok: false, error: 'Missing fields' }, 400); return; }
       fs.writeFileSync(path.join(TUTORIALS_DIR, b.filename), b.content, 'utf-8');
+      generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
     if (pathname === '/api/tutorials/delete' && req.method === 'POST') {
       const b = await collectBody(req);
       const p = path.join(TUTORIALS_DIR, b.filename);
       if (fs.existsSync(p)) fs.unlinkSync(p);
+      generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
 
@@ -188,12 +228,14 @@ const server = http.createServer(async (req, res) => {
       const b = await collectBody(req);
       if (!b.filename || !b.content) { jsonRes(res, { ok: false, error: 'Missing fields' }, 400); return; }
       fs.writeFileSync(path.join(BLOG_DIR, b.filename), b.content, 'utf-8');
+      generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
     if (pathname === '/api/blogs/delete' && req.method === 'POST') {
       const b = await collectBody(req);
       const p = path.join(BLOG_DIR, b.filename);
       if (fs.existsSync(p)) fs.unlinkSync(p);
+      generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
 
@@ -241,6 +283,7 @@ const server = http.createServer(async (req, res) => {
       if (!fs.existsSync(oldPath)) { jsonRes(res, { ok: false, error: 'File not found' }, 404); return; }
       if (fs.existsSync(newPath) && b.oldFile !== newFile) { jsonRes(res, { ok: false, error: 'A file with that slug already exists' }, 409); return; }
       fs.renameSync(oldPath, newPath);
+      generateSitemap();
       jsonRes(res, { ok: true, newFile }); return;
     }
 
@@ -273,12 +316,14 @@ const server = http.createServer(async (req, res) => {
       const b = await collectBody(req);
       if (!b.filename || !b.content) { jsonRes(res, { ok: false, error: 'Missing fields' }, 400); return; }
       fs.writeFileSync(path.join(PAGES_DIR, b.filename), b.content, 'utf-8');
+      generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
     if (pathname === '/api/pages/delete' && req.method === 'POST') {
       const b = await collectBody(req);
       const p = path.join(PAGES_DIR, b.filename);
       if (fs.existsSync(p)) fs.unlinkSync(p);
+      generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
 

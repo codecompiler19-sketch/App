@@ -1,16 +1,12 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     mdx(), 
-    tailwind(), 
-    sitemap({
-      filter: (page) => !page.includes('/admin') && !page.includes('/blog-demo')
-    })
+    tailwind()
   ],
   site: 'https://app.codescompiler.com',
 });
