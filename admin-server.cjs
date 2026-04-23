@@ -17,9 +17,13 @@ const NAV_FILE      = path.join(APP_DIR, 'src/nav.json');
 const SETTINGS_FILE = path.join(APP_DIR, 'src/site-settings.json');
 const ADS_FILE      = path.join(APP_DIR, 'src/ads-config.json');
 const PAGES_DIR     = path.join(APP_DIR, 'src/pages');
+const TRASH_DIR     = path.join(APP_DIR, 'src/content/trash');
+const TRASH_BLOGS   = path.join(TRASH_DIR, 'blogs');
+const TRASH_TUTS    = path.join(TRASH_DIR, 'tutorials');
+const TRASH_PAGES   = path.join(TRASH_DIR, 'pages');
 const UI_FILE       = path.join(APP_DIR, 'admin-ui.html');
 
-[TUTORIALS_DIR, BLOG_DIR].forEach(d => { if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true }); });
+[TUTORIALS_DIR, BLOG_DIR, TRASH_DIR, TRASH_BLOGS, TRASH_TUTS, TRASH_PAGES].forEach(d => { if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true }); });
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function parseFrontmatter(raw) {
@@ -212,7 +216,7 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/tutorials/delete' && req.method === 'POST') {
       const b = await collectBody(req);
       const p = path.join(TUTORIALS_DIR, b.filename);
-      if (fs.existsSync(p)) fs.unlinkSync(p);
+      if (fs.existsSync(p)) fs.renameSync(p, path.join(TRASH_TUTS, b.filename));
       generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
@@ -234,7 +238,7 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/blogs/delete' && req.method === 'POST') {
       const b = await collectBody(req);
       const p = path.join(BLOG_DIR, b.filename);
-      if (fs.existsSync(p)) fs.unlinkSync(p);
+      if (fs.existsSync(p)) fs.renameSync(p, path.join(TRASH_BLOGS, b.filename));
       generateSitemap();
       jsonRes(res, { ok: true }); return;
     }
@@ -322,8 +326,40 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/pages/delete' && req.method === 'POST') {
       const b = await collectBody(req);
       const p = path.join(PAGES_DIR, b.filename);
-      if (fs.existsSync(p)) fs.unlinkSync(p);
+      if (fs.existsSync(p)) fs.renameSync(p, path.join(TRASH_PAGES, b.filename));
       generateSitemap();
+      jsonRes(res, { ok: true }); return;
+    }
+
+    // ══ TRASH BIN ══
+    if (pathname === '/api/trash/list') {
+      const trash = [];
+      ['tutorials', 'blogs', 'pages'].forEach(type => {
+        const dir = path.join(TRASH_DIR, type);
+        if (fs.existsSync(dir)) {
+          fs.readdirSync(dir).forEach(f => {
+            trash.push({ type, file: f, deletedAt: fs.statSync(path.join(dir, f)).mtime });
+          });
+        }
+      });
+      trash.sort((a,b) => b.deletedAt - a.deletedAt);
+      jsonRes(res, trash); return;
+    }
+    if (pathname === '/api/trash/restore' && req.method === 'POST') {
+      const b = await collectBody(req);
+      const typeMap = { 'tutorials': TUTORIALS_DIR, 'blogs': BLOG_DIR, 'pages': PAGES_DIR };
+      const destDir = typeMap[b.type];
+      const srcPath = path.join(TRASH_DIR, b.type, b.file);
+      if (destDir && fs.existsSync(srcPath)) {
+        fs.renameSync(srcPath, path.join(destDir, b.file));
+        generateSitemap();
+      }
+      jsonRes(res, { ok: true }); return;
+    }
+    if (pathname === '/api/trash/delete' && req.method === 'POST') {
+      const b = await collectBody(req);
+      const srcPath = path.join(TRASH_DIR, b.type, b.file);
+      if (fs.existsSync(srcPath)) fs.unlinkSync(srcPath);
       jsonRes(res, { ok: true }); return;
     }
 

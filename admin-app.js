@@ -1,6 +1,6 @@
 // CodesCompiler Content Manager — WordPress-style CMS
 const API='';
-let page='dashboard',stats={},tutorials=[],blogs=[],navItems=[],siteSettings={},pages=[],adsConfig={};
+let page='dashboard',stats={},tutorials=[],blogs=[],navItems=[],siteSettings={},pages=[],adsConfig={},trashBin=[];
 let modalCb=null,confirmCb=null;
 
 const TCAT=['html','css','javascript','seo','python','sql','php'];
@@ -21,7 +21,7 @@ function closeModal(){$('modal').classList.remove('open');modalCb=null}
 function saveModal(){if(modalCb)modalCb()}
 function openConfirm(m,cb){confirmCb=cb;$('cmsg').textContent=m;$('cfm').classList.add('open');}
 function closeConfirm(){$('cfm').classList.remove('open');confirmCb=null}
-function doConfirm(){closeConfirm();if(confirmCb)confirmCb()}
+function doConfirm(){const cb=confirmCb; closeConfirm(); if(cb)cb()}
 
 // Sidebar
 function renderSidebar(){
@@ -34,6 +34,7 @@ function renderSidebar(){
     {id:'ads',ico:'💰',label:'Ad Manager'},
     {id:'permalinks',ico:'🔗',label:'Permalinks'},
     {id:'settings',ico:'⚙️',label:'Settings'},
+    {id:'trash',ico:'🗑️',label:'Trash',ct:trashBin.length},
   ];
   let h='<div class="slab">Content</div>';
   items.forEach(i=>{h+=`<div class="si ${page===i.id?'on':''}" onclick="goTo('${i.id}')"><span class="ico">${i.ico}</span>${i.label}${i.ct!=null?`<span class="ct">${i.ct}</span>`:''}</div>`});
@@ -43,12 +44,12 @@ function renderSidebar(){
 
 // Load all
 async function loadAll(){
-  try{[stats,tutorials,blogs,navItems,siteSettings,pages,adsConfig]=await Promise.all([api('/api/stats'),api('/api/tutorials/list'),api('/api/blogs/list'),api('/api/nav/get'),api('/api/settings/get'),api('/api/pages/list'),api('/api/ads/get')])}
+  try{[stats,tutorials,blogs,navItems,siteSettings,pages,adsConfig,trashBin]=await Promise.all([api('/api/stats'),api('/api/tutorials/list'),api('/api/blogs/list'),api('/api/nav/get'),api('/api/settings/get'),api('/api/pages/list'),api('/api/ads/get'),api('/api/trash/list')])}
   catch(e){toast('Failed to connect to server',false)}
   renderSidebar();
 }
 
-function goTo(p){page=p;renderSidebar();({dashboard:renderDash,tutorials:renderTuts,blogs:renderBlogs,nav:renderNav,settings:renderSettings,permalinks:renderPermalinks,pages:renderPages,ads:renderAds})[p]?.()}
+function goTo(p){page=p;renderSidebar();({dashboard:renderDash,tutorials:renderTuts,blogs:renderBlogs,nav:renderNav,settings:renderSettings,permalinks:renderPermalinks,pages:renderPages,ads:renderAds,trash:renderTrash})[p]?.()}
 
 // ══ DASHBOARD ══
 function renderDash(){
@@ -605,6 +606,42 @@ async function saveAds(){
   await post('/api/ads/save',config);
   adsConfig=config;
   toast('Ad configuration saved! \ud83d\udcb0');
+}
+
+// ══ TRASH BIN ══
+function renderTrash(){
+  $('ptitle').textContent='Trash';
+  $('tact').innerHTML='';
+  let h=`<div class="card"><div class="ch"><h3>🗑️ Deleted Items</h3><span style="color:var(--dim);font-size:12px">${trashBin.length} items</span></div>
+  <table><thead><tr><th>Type</th><th>File</th><th>Deleted At</th><th style="width:160px">Actions</th></tr></thead><tbody>`;
+  if(!trashBin.length) h+=`<tr><td colspan="4" class="empty">Trash is empty 🎉</td></tr>`;
+  trashBin.forEach(t=>{
+    const d=new Date(t.deletedAt).toLocaleString();
+    const typeLabel=t.type==='tutorials'?'📖 Tutorial':t.type==='blogs'?'✍️ Post':'📄 Page';
+    h+=`<tr><td><strong>${typeLabel}</strong></td><td style="font-size:12px;color:var(--dim);font-family:monospace">${esc(t.file)}</td><td style="font-size:12px;color:var(--muted)">${d}</td>
+    <td><button class="btn bk bs" onclick="restoreTrash('${t.type}','${esc(t.file)}')">♻️ Restore</button> <button class="btn bd bs" onclick="deleteTrash('${t.type}','${esc(t.file)}')">✕</button></td></tr>`;
+  });
+  h+=`</tbody></table></div>
+  <div style="background:rgba(239,68,68,.08);padding:14px 18px;border-radius:10px;font-size:13px;color:var(--muted)">⚠️ Items in the trash are completely hidden from your live website. Restoring them will instantly publish them back. Clicking the (✕) icon will permanently delete the file from your computer.</div>`;
+  $('content').innerHTML=h;
+}
+
+function restoreTrash(type, file){
+  openConfirm(`Restore "${file}"? It will instantly reappear on your site.`, async()=>{
+    await post('/api/trash/restore', {type, file});
+    toast('Item restored ✅');
+    await loadAll();
+    renderTrash();
+  });
+}
+
+function deleteTrash(type, file){
+  openConfirm(`Permanently delete "${file}"? This CANNOT be undone.`, async()=>{
+    await post('/api/trash/delete', {type, file});
+    toast('Permanently deleted 🗑️');
+    await loadAll();
+    renderTrash();
+  });
 }
 
 // ══ INIT ══
