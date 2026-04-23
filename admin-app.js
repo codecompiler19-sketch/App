@@ -19,8 +19,9 @@ async function post(p,b){return api(p,{method:'POST',headers:{'Content-Type':'ap
 function openModal(t,html,cb,info){$('mtitle').textContent=t;$('mbody').innerHTML=html;modalCb=cb;$('minfo').textContent=info||'';$('modal').classList.add('open')}
 function closeModal(){$('modal').classList.remove('open');modalCb=null}
 function saveModal(){if(modalCb)modalCb()}
-function openConfirm(m,cb){$('cmsg').textContent=m;$('cfm').classList.add('open');confirmCb=cb;$('cok').onclick=()=>{closeConfirm();if(confirmCb)confirmCb()}}
+function openConfirm(m,cb){confirmCb=cb;$('cmsg').textContent=m;$('cfm').classList.add('open');}
 function closeConfirm(){$('cfm').classList.remove('open');confirmCb=null}
+function doConfirm(){closeConfirm();if(confirmCb)confirmCb()}
 
 // Sidebar
 function renderSidebar(){

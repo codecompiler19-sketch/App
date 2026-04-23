@@ -156,7 +156,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
 <div class="modal-bg" id="modal"><div class="modal"><div class="mh"><h3 id="mtitle">Edit</h3><div id="mstatus"></div><button class="btn bg bs" onclick="closeModal()">✕ Close</button></div><div class="mb" id="mbody"></div><div class="mf"><span id="minfo" style="font-size:11px;color:var(--dim)"></span><div class="spacer"></div><button class="btn bg" onclick="closeModal()">Discard</button><button class="btn bp" id="msave" onclick="saveModal()">✅ Publish</button></div></div></div>
 
 <!-- Confirm -->
-<div class="confirm-bg" id="cfm"><div class="cbox"><div class="warn-icon">🗑️</div><h4>Move to Trash?</h4><p id="cmsg">This will permanently delete this content.</p><div class="row"><button class="btn bg" onclick="closeConfirm()">Keep It</button><button class="btn bd" id="cok">Delete Permanently</button></div></div></div>
+<div class="confirm-bg" id="cfm"><div class="cbox"><div class="warn-icon">🗑️</div><h4>Move to Trash?</h4><p id="cmsg">This will permanently delete this content.</p><div class="row"><button class="btn bg" onclick="closeConfirm()">Keep It</button><button class="btn bd" id="cok" onclick="doConfirm()">Delete Permanently</button></div></div></div>
 
 <!-- Toasts -->
 <div class="toast-box" id="toasts"></div>
