@@ -6,7 +6,7 @@ import TopicLayout from '../../layouts/TopicLayout.astro';
   <p>Cheat sheets are concise quick-reference guides containing the most commonly used syntax, commands, or concepts for a language or tool. Every developer keeps these bookmarked — even experienced ones!</p>
 
   <h2>HTML Cheat Sheet</h2>
-  <pre><code>&lt;!-- Document Structure --&gt;
+  <pre is:raw><code>&lt;!-- Document Structure --&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -24,7 +24,7 @@ import TopicLayout from '../../layouts/TopicLayout.astro';
 &lt;/html&gt;</code></pre>
 
   <h2>CSS Cheat Sheet</h2>
-  <pre><code>/* Selectors */
+  <pre is:raw><code>/* Selectors */
 element { }        /* Tag selector */
 .class { }         /* Class selector */
 #id { }            /* ID selector */
@@ -47,7 +47,7 @@ gap: 1rem;
 color: var(--primary);</code></pre>
 
   <h2>JavaScript Cheat Sheet</h2>
-  <pre><code>// Variables
+  <pre is:raw><code>// Variables
 const name = "Alice";    // constant
 let age = 25;            // mutable
 
@@ -67,7 +67,7 @@ const { name, age } = person;
 const [first, ...rest] = array;</code></pre>
 
   <h2>Git Quick Reference</h2>
-  <pre><code>git init                    # New repo
+  <pre is:raw><code>git init                    # New repo
 git clone &lt;url&gt;             # Clone
 git add . && git commit -m "msg" # Stage and commit
 git push origin main        # Push
