@@ -51,6 +51,14 @@ const tutorialLinks = [
   <!-- ADMIN-INJECTED-START -->
     <meta http-equiv="Cache-Control" content="public, max-age=3600" />
     <!-- ADMIN-INJECTED-END -->
+    <!-- Dark Mode Init -->
+    <script is:inline>
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark-theme');
+      } else {
+        document.documentElement.classList.remove('dark-theme');
+      }
+    </script>
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-900 antialiased" style="font-family: 'Source Sans 3', sans-serif;">
 
@@ -78,10 +86,10 @@ const tutorialLinks = [
           </div>
         </div>
 
-        <!-- Dark Mode Toggle (Placeholder) -->
-        <button class="flex-shrink-0 p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors" aria-label="Toggle Dark Mode" onclick="alert('Dark mode toggle coming soon!')">
-          <!-- Sun/Moon icon -->
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" class="flex-shrink-0 p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600 dark-hover-bg" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()">
+          <svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Default Moon -->
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
           </svg>
         </button>
@@ -417,12 +425,59 @@ const tutorialLinks = [
         }
       }
 
+      // Dark Mode JS
+      const themeIcon = document.getElementById('theme-icon');
+      const sunIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
+      const moonIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>`;
+
+      // Set initial icon
+      if (document.documentElement.classList.contains('dark-theme')) {
+        if(themeIcon) themeIcon.innerHTML = sunIcon;
+      }
+
+      function toggleDarkMode() {
+        if (document.documentElement.classList.contains('dark-theme')) {
+            document.documentElement.classList.remove('dark-theme');
+            localStorage.setItem('color-theme', 'light');
+            if(themeIcon) themeIcon.innerHTML = moonIcon;
+        } else {
+            document.documentElement.classList.add('dark-theme');
+            localStorage.setItem('color-theme', 'dark');
+            if(themeIcon) themeIcon.innerHTML = sunIcon;
+        }
+      }
+
       // Add to window so inline onclicks work
       window.toggleMenu = toggleMenu;
       window.toggleSection = toggleSection;
+      window.toggleDarkMode = toggleDarkMode;
     </script>
 
     <style is:global>
+      /* ============================================================ */
+      /* QUICK DARK MODE OVERRIDES                                    */
+      /* ============================================================ */
+      html.dark-theme body { background-color: #0f172a; color: #cbd5e1; }
+      html.dark-theme .bg-white, 
+      html.dark-theme header, 
+      html.dark-theme aside, 
+      html.dark-theme .mobile-drawer, 
+      html.dark-theme .dropdown,
+      html.dark-theme article { background-color: #0f172a !important; }
+      html.dark-theme .bg-\[\#f9f9f9\], html.dark-theme .bg-gray-50 { background-color: #1e293b !important; }
+      html.dark-theme .text-gray-900, html.dark-theme .text-gray-800, html.dark-theme .logo, html.dark-theme .m-header,
+      html.dark-theme h1, html.dark-theme h2, html.dark-theme h3 { color: #f8fafc !important; }
+      html.dark-theme .text-gray-600, html.dark-theme .text-gray-500, html.dark-theme .nav-links > li > a, html.dark-theme p { color: #94a3b8 !important; }
+      html.dark-theme .border-gray-100, html.dark-theme .border-gray-200, html.dark-theme .border-b, html.dark-theme .border-t, html.dark-theme .border-r { border-color: #334155 !important; }
+      html.dark-theme input { background-color: #1e293b !important; color: #f8fafc !important; border-color: #334155 !important; }
+      html.dark-theme .hover\:bg-gray-100:hover, html.dark-theme .hover\:bg-gray-50:hover, html.dark-theme .nav-links > li > a:hover, html.dark-theme .dropdown a:hover, html.dark-theme .m-body a:hover, html.dark-theme .dark-hover-bg:hover { background-color: #334155 !important; color: #04AA6D !important; }
+      html.dark-theme .hamburger span { background: #cbd5e1; }
+      html.dark-theme .prose code, html.dark-theme .post-content code { background-color: #1e293b; color: #f472b6; }
+      html.dark-theme .prose blockquote, html.dark-theme .post-content blockquote { background-color: #1e293b; border-left-color: #04AA6D; color: #94a3b8; }
+      html.dark-theme .prose th, html.dark-theme .post-content th { background-color: #1e293b; color: #f8fafc; border-color: #334155; }
+      html.dark-theme .prose td, html.dark-theme .post-content td { border-color: #334155; color: #cbd5e1; }
+      html.dark-theme .prose tr:nth-child(even) td, html.dark-theme .post-content tr:nth-child(even) td { background-color: #1e293b; }
+      
       /* ============================================================ */
       /* NEW HEADER CSS                                               */
       /* ============================================================ */
