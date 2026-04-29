@@ -57,155 +57,154 @@ const tutorialLinks = [
     <!-- ============================================================ -->
     <!-- NEW HEADER & NAVBAR                                          -->
     <!-- ============================================================ -->
-    <!-- Top Bar -->
-    <div class="top-bar hidden md:flex">
-      <a href="/blog">Posts</a>
-      <a href="/kids">👶 Kids</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-      <a href="/tutorial/html-introduction" class="btn-started">Get Started</a>
-    </div>
+    <header class="bg-white sticky top-0 z-50 shadow-sm flex flex-col relative">
+      <!-- ROW 1: Mobile Hamburger, Logo, Desktop Search, Theme Toggle -->
+      <div class="max-w-screen-2xl w-full mx-auto px-3 sm:px-5 py-3 flex items-center justify-between gap-4 relative z-20 bg-white">
+        
+        <!-- Mobile Global Hamburger -->
+        <button class="hamburger md:hidden" id="ham" onclick="toggleMenu()" aria-label="Toggle Global Menu">
+          <span></span><span></span><span></span>
+        </button>
 
-    <!-- Main Navbar -->
-    <nav class="navbar">
-      <div class="flex items-center gap-2">
-        <!-- Sidebar Toggle for Tutorial pages (Desktop/Mobile) -->
-        <button id="sidebar-toggle" class="flex-shrink-0 p-2 rounded hover:bg-gray-100 transition-colors md:hidden" aria-label="Toggle sidebar">
-          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        <!-- Logo -->
+        <a href="/" class="logo !py-0 flex-shrink-0">Codes<span>Compiler</span></a>
+
+        <!-- Desktop Search -->
+        <div class="hidden md:block flex-1 max-w-2xl mx-auto relative" id="search-wrapper">
+          <div class="search-wrap w-full !max-w-none">
+            <input type="text" id="main-search" placeholder="Search tutorials, e.g. HTML" autocomplete="off" class="w-full">
+            <span class="search-icon">🔍</span>
+            <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+          </div>
+        </div>
+
+        <!-- Dark Mode Toggle (Placeholder) -->
+        <button class="flex-shrink-0 p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors" aria-label="Toggle Dark Mode" onclick="alert('Dark mode toggle coming soon!')">
+          <!-- Sun/Moon icon -->
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
           </svg>
         </button>
-        <!-- Logo -->
-        <a href="/" class="logo">Codes<span>Compiler</span></a>
       </div>
 
-      <!-- Search Bar -->
-      <div class="search-wrap" id="search-wrapper">
-        <input type="text" id="main-search" placeholder="Search tutorials..." autocomplete="off">
-        <span class="search-icon">🔍</span>
-        <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+      <!-- ROW 2 (Mobile only): Full Width Search -->
+      <div class="md:hidden px-3 pb-3 bg-white relative z-20" id="mobile-search-wrapper">
+        <div class="search-wrap w-full !max-w-none">
+          <input type="text" id="mobile-search" placeholder="Search tutorials..." autocomplete="off" class="w-full">
+          <span class="search-icon">🔍</span>
+          <div id="mobile-search-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+        </div>
       </div>
 
-      <!-- Desktop Nav -->
-      <ul class="nav-links">
-        <!-- WEB -->
-        <li>
-          <a href="#">🌐 Web <span class="arr">▼</span></a>
-          <div class="dropdown">
-            <div class="section-label">Already Available</div>
-            <a href="/tutorial/html-introduction"><span class="di">📄</span> HTML</a>
-            <a href="/tutorial/css-introduction"><span class="di">🎨</span> CSS</a>
-            <a href="/tutorial/js-introduction"><span class="di">⚡</span> JavaScript</a>
-            <a href="/tutorial/php-guide"><span class="di">🐘</span> PHP</a>
-            <a href="/tutorial/seo-overview"><span class="di">🔍</span> SEO</a>
-            <hr>
-            <div class="section-label">Coming Soon</div>
-            <a href="#"><span class="di">🅱️</span> Bootstrap <span class="badge">New</span></a>
-            <a href="#"><span class="di">🌬️</span> Tailwind CSS <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🔷</span> TypeScript <span class="badge soon">Soon</span></a>
-          </div>
-        </li>
-
-        <!-- LANGUAGES -->
-        <li>
-          <a href="#">🔤 Languages <span class="arr">▼</span></a>
-          <div class="dropdown">
-            <div class="section-label">Already Available</div>
-            <a href="/tutorial/python-guide"><span class="di">🐍</span> Python</a>
-            <a href="/tutorial/sql-guide"><span class="di">🗄️</span> SQL</a>
-            <hr>
-            <div class="section-label">Coming Soon</div>
-            <a href="#"><span class="di">🔵</span> C Programming <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🟣</span> C++ <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">☕</span> Java <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">💎</span> Ruby <span class="badge soon">Soon</span></a>
-          </div>
-        </li>
-
-        <!-- CS FUNDAMENTALS -->
-        <li>
-          <a href="#">💻 CS Basics <span class="arr">▼</span></a>
-          <div class="dropdown">
-            <a href="#"><span class="di">🖥️</span> Computer Basics <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">⚙️</span> Operating Systems <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">📊</span> Data Structures <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🧮</span> Algorithms <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🗄️</span> DBMS <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🏗️</span> Software Engineering <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🏛️</span> Computer Architecture <span class="badge soon">Soon</span></a>
-          </div>
-        </li>
-
-        <!-- NETWORKING -->
-        <li>
-          <a href="#">🌐 Networking <span class="arr">▼</span></a>
-          <div class="dropdown">
-            <a href="#"><span class="di">📡</span> Computer Networks <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🔗</span> OSI Model <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🌍</span> TCP/IP <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🔒</span> HTTP & HTTPS <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">📶</span> DNS Explained <span class="badge soon">Soon</span></a>
-          </div>
-        </li>
-
-        <!-- SECURITY -->
-        <li>
-          <a href="#">🔐 Security <span class="arr">▼</span></a>
-          <div class="dropdown">
-            <a href="#"><span class="di">🛡️</span> Cyber Security <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🕵️</span> Ethical Hacking <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🔑</span> Passwords & Privacy <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🦠</span> Viruses & Malware <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🔏</span> VPN & Firewall <span class="badge soon">Soon</span></a>
-          </div>
-        </li>
-
-        <!-- AI & DATA -->
-        <li>
-          <a href="#">🤖 AI & Data <span class="arr">▼</span></a>
-          <div class="dropdown">
-            <a href="#"><span class="di">🤖</span> Artificial Intelligence <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🧠</span> Machine Learning <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">📊</span> Data Science <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">☁️</span> Big Data <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">💬</span> Prompt Engineering <span class="badge soon">Soon</span></a>
-          </div>
-        </li>
-
-        <!-- TOOLS -->
-        <li>
-          <a href="#">🛠️ Tools <span class="arr">▼</span></a>
-          <div class="dropdown">
-            <a href="#"><span class="di">🐙</span> Git & GitHub <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">📝</span> VS Code Tips <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">💻</span> Command Line <span class="badge soon">Soon</span></a>
-            <hr>
-            <a href="#"><span class="di">📋</span> Cheat Sheets <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">❓</span> Interview Q&A <span class="badge soon">Soon</span></a>
-            <a href="#"><span class="di">🏆</span> Quizzes <span class="badge soon">Soon</span></a>
-          </div>
-        </li>
-
-        <!-- KIDS -->
-        <li><a href="/kids">👶 Kids</a></li>
-
-        <!-- BLOG -->
-        <li><a href="/blog">📝 Blog</a></li>
-      </ul>
-
-      <!-- Hamburger -->
-      <button class="hamburger" id="ham" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
+      <!-- ROW 3 (Desktop only): Menu Strip -->
+      <div class="hidden md:block border-t border-b border-gray-100 bg-[#f9f9f9] relative z-10">
+        <div class="max-w-screen-2xl mx-auto px-3 sm:px-5">
+          <ul class="nav-links !h-[48px]">
+            <!-- WEB -->
+            <li>
+              <a href="#">🌐 Web <span class="arr">▼</span></a>
+              <div class="dropdown">
+                <div class="section-label">Already Available</div>
+                <a href="/tutorial/html-introduction"><span class="di">📄</span> HTML</a>
+                <a href="/tutorial/css-introduction"><span class="di">🎨</span> CSS</a>
+                <a href="/tutorial/js-introduction"><span class="di">⚡</span> JavaScript</a>
+                <a href="/tutorial/php-guide"><span class="di">🐘</span> PHP</a>
+                <a href="/tutorial/seo-overview"><span class="di">🔍</span> SEO</a>
+                <hr>
+                <div class="section-label">Coming Soon</div>
+                <a href="#"><span class="di">🅱️</span> Bootstrap <span class="badge">New</span></a>
+                <a href="#"><span class="di">🌬️</span> Tailwind CSS <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🔷</span> TypeScript <span class="badge soon">Soon</span></a>
+              </div>
+            </li>
+            <!-- LANGUAGES -->
+            <li>
+              <a href="#">🔤 Languages <span class="arr">▼</span></a>
+              <div class="dropdown">
+                <div class="section-label">Already Available</div>
+                <a href="/tutorial/python-guide"><span class="di">🐍</span> Python</a>
+                <a href="/tutorial/sql-guide"><span class="di">🗄️</span> SQL</a>
+                <hr>
+                <div class="section-label">Coming Soon</div>
+                <a href="#"><span class="di">🔵</span> C Programming <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🟣</span> C++ <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">☕</span> Java <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">💎</span> Ruby <span class="badge soon">Soon</span></a>
+              </div>
+            </li>
+            <!-- CS FUNDAMENTALS -->
+            <li>
+              <a href="#">💻 CS Basics <span class="arr">▼</span></a>
+              <div class="dropdown">
+                <a href="#"><span class="di">🖥️</span> Computer Basics <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">⚙️</span> Operating Systems <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">📊</span> Data Structures <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🧮</span> Algorithms <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🗄️</span> DBMS <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🏗️</span> Software Engineering <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🏛️</span> Computer Architecture <span class="badge soon">Soon</span></a>
+              </div>
+            </li>
+            <!-- NETWORKING -->
+            <li>
+              <a href="#">🌐 Networking <span class="arr">▼</span></a>
+              <div class="dropdown">
+                <a href="#"><span class="di">📡</span> Computer Networks <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🔗</span> OSI Model <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🌍</span> TCP/IP <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🔒</span> HTTP & HTTPS <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">📶</span> DNS Explained <span class="badge soon">Soon</span></a>
+              </div>
+            </li>
+            <!-- SECURITY -->
+            <li>
+              <a href="#">🔐 Security <span class="arr">▼</span></a>
+              <div class="dropdown">
+                <a href="#"><span class="di">🛡️</span> Cyber Security <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🕵️</span> Ethical Hacking <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🔑</span> Passwords & Privacy <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🦠</span> Viruses & Malware <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🔏</span> VPN & Firewall <span class="badge soon">Soon</span></a>
+              </div>
+            </li>
+            <!-- AI & DATA -->
+            <li>
+              <a href="#">🤖 AI & Data <span class="arr">▼</span></a>
+              <div class="dropdown">
+                <a href="#"><span class="di">🤖</span> Artificial Intelligence <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🧠</span> Machine Learning <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">📊</span> Data Science <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">☁️</span> Big Data <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">💬</span> Prompt Engineering <span class="badge soon">Soon</span></a>
+              </div>
+            </li>
+            <!-- TOOLS -->
+            <li>
+              <a href="#">🛠️ Tools <span class="arr">▼</span></a>
+              <div class="dropdown">
+                <a href="#"><span class="di">🐙</span> Git & GitHub <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">📝</span> VS Code Tips <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">💻</span> Command Line <span class="badge soon">Soon</span></a>
+                <hr>
+                <a href="#"><span class="di">📋</span> Cheat Sheets <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">❓</span> Interview Q&A <span class="badge soon">Soon</span></a>
+                <a href="#"><span class="di">🏆</span> Quizzes <span class="badge soon">Soon</span></a>
+              </div>
+            </li>
+            <!-- KIDS -->
+            <li><a href="/kids">👶 Kids</a></li>
+            <!-- BLOG -->
+            <li><a href="/blog">📝 Blog</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Slot for Tutorial Sub-Header (Kids/Tutorial sidebars) -->
+      <slot name="sub-header" />
+    </header>
 
     <!-- Mobile Drawer -->
-    <div class="mobile-drawer" id="drawer">
-      <!-- Mobile Search -->
-      <div class="mobile-search" id="mobile-search-wrapper">
-        <input type="text" id="mobile-search" placeholder="Search tutorials..." autocomplete="off">
-        <span class="si">🔍</span>
-        <div id="mobile-search-dropdown" class="hidden absolute left-0 right-0 top-full mt-0 bg-white border border-gray-200 shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+    <div class="mobile-drawer" id="drawer">  <div id="mobile-search-dropdown" class="hidden absolute left-0 right-0 top-full mt-0 bg-white border border-gray-200 shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
       </div>
 
       <!-- Web -->
