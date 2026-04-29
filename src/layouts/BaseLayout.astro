@@ -55,87 +55,265 @@ const tutorialLinks = [
   <body class="min-h-screen flex flex-col bg-white text-gray-900 antialiased" style="font-family: 'Source Sans 3', sans-serif;">
 
     <!-- ============================================================ -->
-    <!-- TOP WHITE NAV BAR                                            -->
+    <!-- NEW HEADER & NAVBAR                                          -->
     <!-- ============================================================ -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div class="max-w-screen-2xl mx-auto px-3 sm:px-5">
-        <div class="flex items-center h-14 gap-3">
+    <!-- Top Bar -->
+    <div class="top-bar hidden md:flex">
+      <a href="/blog">Posts</a>
+      <a href="/kids">👶 Kids</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/tutorial/html-introduction" class="btn-started">Get Started</a>
+    </div>
 
-          <!-- Hamburger (mobile sidebar toggle) -->
-          <button id="sidebar-toggle" class="flex-shrink-0 p-2 rounded hover:bg-gray-100 transition-colors md:hidden" aria-label="Toggle sidebar">
-            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-          </button>
+    <!-- Main Navbar -->
+    <nav class="navbar">
+      <div class="flex items-center gap-2">
+        <!-- Sidebar Toggle for Tutorial pages (Desktop/Mobile) -->
+        <button id="sidebar-toggle" class="flex-shrink-0 p-2 rounded hover:bg-gray-100 transition-colors md:hidden" aria-label="Toggle sidebar">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <!-- Logo -->
+        <a href="/" class="logo">Codes<span>Compiler</span></a>
+      </div>
 
-          <!-- Logo -->
-          <a href="/" class="flex-shrink-0 flex items-center gap-1.5 no-underline">
-            <span class="font-bold text-lg text-gray-900 tracking-tight whitespace-nowrap">
-              <span class="text-[#04AA6D]">Codes</span>Compiler
-            </span>
-          </a>
+      <!-- Search Bar -->
+      <div class="search-wrap" id="search-wrapper">
+        <input type="text" id="main-search" placeholder="Search tutorials..." autocomplete="off">
+        <span class="search-icon">🔍</span>
+        <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+      </div>
 
-          <!-- Center Search Bar -->
-          <div class="flex-1 min-w-0 flex justify-center px-2 sm:px-6 max-w-2xl mx-auto relative" id="search-wrapper">
-            <div class="w-full relative min-w-0">
-              <input
-                id="main-search"
-                type="text"
-                placeholder="Search tutorials, e.g. HTML"
-                autocomplete="off"
-                class="w-full pl-4 pr-12 py-2 border-2 border-gray-200 focus:border-[#04AA6D] rounded-md text-sm outline-none transition-colors bg-gray-50 focus:bg-white"
-              />
-              <button class="absolute right-0 top-0 h-full px-4 bg-[#04AA6D] hover:bg-[#038a58] rounded-r-md transition-colors flex items-center justify-center" aria-label="Search">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-              </button>
-              <!-- Autocomplete Dropdown -->
-              <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto">
-                <!-- Results injected by JS -->
-              </div>
-            </div>
+      <!-- Desktop Nav -->
+      <ul class="nav-links">
+        <!-- WEB -->
+        <li>
+          <a href="#">🌐 Web <span class="arr">▼</span></a>
+          <div class="dropdown">
+            <div class="section-label">Already Available</div>
+            <a href="/tutorial/html-introduction"><span class="di">📄</span> HTML</a>
+            <a href="/tutorial/css-introduction"><span class="di">🎨</span> CSS</a>
+            <a href="/tutorial/js-introduction"><span class="di">⚡</span> JavaScript</a>
+            <a href="/tutorial/php-guide"><span class="di">🐘</span> PHP</a>
+            <a href="/tutorial/seo-overview"><span class="di">🔍</span> SEO</a>
+            <hr>
+            <div class="section-label">Coming Soon</div>
+            <a href="#"><span class="di">🅱️</span> Bootstrap <span class="badge">New</span></a>
+            <a href="#"><span class="di">🌬️</span> Tailwind CSS <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🔷</span> TypeScript <span class="badge soon">Soon</span></a>
           </div>
+        </li>
 
-          <!-- Nav links (desktop only) -->
-          <nav class="hidden lg:flex items-center gap-1 flex-shrink-0">
-            <a href="/blog" class="text-sm font-medium text-gray-600 hover:text-[#04AA6D] px-3 py-2 rounded hover:bg-gray-50 transition-colors whitespace-nowrap">Posts</a>
-            <a href="/kids" class="text-sm font-medium text-gray-600 hover:text-[#04AA6D] px-3 py-2 rounded hover:bg-gray-50 transition-colors whitespace-nowrap">👶 Kids</a>
-            <a href="/about" class="text-sm font-medium text-gray-600 hover:text-[#04AA6D] px-3 py-2 rounded hover:bg-gray-50 transition-colors whitespace-nowrap">About</a>
-            <a href="/contact" class="text-sm font-medium text-gray-600 hover:text-[#04AA6D] px-3 py-2 rounded hover:bg-gray-50 transition-colors whitespace-nowrap">Contact</a>
-            <a href="/tutorial/html-introduction" class="ml-2 text-sm font-semibold text-white bg-[#04AA6D] hover:bg-[#038a58] px-4 py-2 rounded transition-colors whitespace-nowrap">Get Started</a>
-          </nav>
+        <!-- LANGUAGES -->
+        <li>
+          <a href="#">🔤 Languages <span class="arr">▼</span></a>
+          <div class="dropdown">
+            <div class="section-label">Already Available</div>
+            <a href="/tutorial/python-guide"><span class="di">🐍</span> Python</a>
+            <a href="/tutorial/sql-guide"><span class="di">🗄️</span> SQL</a>
+            <hr>
+            <div class="section-label">Coming Soon</div>
+            <a href="#"><span class="di">🔵</span> C Programming <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🟣</span> C++ <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">☕</span> Java <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">💎</span> Ruby <span class="badge soon">Soon</span></a>
+          </div>
+        </li>
+
+        <!-- CS FUNDAMENTALS -->
+        <li>
+          <a href="#">💻 CS Basics <span class="arr">▼</span></a>
+          <div class="dropdown">
+            <a href="#"><span class="di">🖥️</span> Computer Basics <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">⚙️</span> Operating Systems <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">📊</span> Data Structures <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🧮</span> Algorithms <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🗄️</span> DBMS <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🏗️</span> Software Engineering <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🏛️</span> Computer Architecture <span class="badge soon">Soon</span></a>
+          </div>
+        </li>
+
+        <!-- NETWORKING -->
+        <li>
+          <a href="#">🌐 Networking <span class="arr">▼</span></a>
+          <div class="dropdown">
+            <a href="#"><span class="di">📡</span> Computer Networks <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🔗</span> OSI Model <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🌍</span> TCP/IP <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🔒</span> HTTP & HTTPS <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">📶</span> DNS Explained <span class="badge soon">Soon</span></a>
+          </div>
+        </li>
+
+        <!-- SECURITY -->
+        <li>
+          <a href="#">🔐 Security <span class="arr">▼</span></a>
+          <div class="dropdown">
+            <a href="#"><span class="di">🛡️</span> Cyber Security <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🕵️</span> Ethical Hacking <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🔑</span> Passwords & Privacy <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🦠</span> Viruses & Malware <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🔏</span> VPN & Firewall <span class="badge soon">Soon</span></a>
+          </div>
+        </li>
+
+        <!-- AI & DATA -->
+        <li>
+          <a href="#">🤖 AI & Data <span class="arr">▼</span></a>
+          <div class="dropdown">
+            <a href="#"><span class="di">🤖</span> Artificial Intelligence <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🧠</span> Machine Learning <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">📊</span> Data Science <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">☁️</span> Big Data <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">💬</span> Prompt Engineering <span class="badge soon">Soon</span></a>
+          </div>
+        </li>
+
+        <!-- TOOLS -->
+        <li>
+          <a href="#">🛠️ Tools <span class="arr">▼</span></a>
+          <div class="dropdown">
+            <a href="#"><span class="di">🐙</span> Git & GitHub <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">📝</span> VS Code Tips <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">💻</span> Command Line <span class="badge soon">Soon</span></a>
+            <hr>
+            <a href="#"><span class="di">📋</span> Cheat Sheets <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">❓</span> Interview Q&A <span class="badge soon">Soon</span></a>
+            <a href="#"><span class="di">🏆</span> Quizzes <span class="badge soon">Soon</span></a>
+          </div>
+        </li>
+
+        <!-- KIDS -->
+        <li><a href="/kids">👶 Kids</a></li>
+
+        <!-- BLOG -->
+        <li><a href="/blog">📝 Blog</a></li>
+      </ul>
+
+      <!-- Hamburger -->
+      <button class="hamburger" id="ham" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="drawer">
+      <!-- Mobile Search -->
+      <div class="mobile-search" id="mobile-search-wrapper">
+        <input type="text" id="mobile-search" placeholder="Search tutorials..." autocomplete="off">
+        <span class="si">🔍</span>
+        <div id="mobile-search-dropdown" class="hidden absolute left-0 right-0 top-full mt-0 bg-white border border-gray-200 shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+      </div>
+
+      <!-- Web -->
+      <div class="m-item">
+        <div class="m-header" onclick="toggleSection(this)">
+          🌐 Web <span class="m-arr">▼</span>
+        </div>
+        <div class="m-body">
+          <a href="/tutorial/html-introduction"><span class="di">📄</span> HTML</a>
+          <a href="/tutorial/css-introduction"><span class="di">🎨</span> CSS</a>
+          <a href="/tutorial/js-introduction"><span class="di">⚡</span> JavaScript</a>
+          <a href="/tutorial/php-guide"><span class="di">🐘</span> PHP</a>
+          <a href="/tutorial/seo-overview"><span class="di">🔍</span> SEO</a>
+          <a href="#"><span class="di">🅱️</span> Bootstrap <span class="mbadge">New</span></a>
+          <a href="#"><span class="di">🌬️</span> Tailwind CSS <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🔷</span> TypeScript <span class="mbadge soon">Soon</span></a>
         </div>
       </div>
-    </header>
 
-    <!-- ============================================================ -->
-    <!-- DARK LANGUAGE NAV STRIP (W3Schools-style)                    -->
-    <!-- ============================================================ -->
-    <div class="bg-[#282A35] border-b border-gray-700 sticky top-14 z-40 overflow-x-auto scrollbar-hide">
-      <div class="max-w-screen-2xl mx-auto flex items-center min-w-max px-3 sm:px-5 h-10">
-        {[
-          { label: 'HTML', href: '/tutorial/html-introduction', color: '#E34F26' },
-          { label: 'CSS', href: '/tutorial/css-introduction', color: '#264DE4' },
-          { label: 'JavaScript', href: '/tutorial/js-introduction', color: '#F7DF1E' },
-          { label: 'SEO', href: '/tutorial/seo-overview', color: '#04AA6D' },
-          { label: 'Python', href: '/tutorial/python-guide', color: '#3776AB' },
-          { label: 'SQL', href: '/tutorial/sql-guide', color: '#336791' },
-          { label: 'PHP', href: '/tutorial/php-guide', color: '#777BB4' },
-          { label: '👶 Kids', href: '/kids', color: '#04AA6D' },
-          { label: 'Posts', href: '/blog', color: '#04AA6D' },
-          { label: 'Privacy', href: '/privacy-policy', color: '#9CA3AF' },
-          { label: 'About', href: '/about', color: '#9CA3AF' },
-          { label: 'Contact', href: '/contact', color: '#9CA3AF' },
-        ].map(item => (
-          <a
-            href={item.href}
-            class="flex-shrink-0 text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/10 px-4 py-2 transition-colors rounded whitespace-nowrap"
-          >
-            {item.label}
-          </a>
-        ))}
+      <!-- Languages -->
+      <div class="m-item">
+        <div class="m-header" onclick="toggleSection(this)">
+          🔤 Languages <span class="m-arr">▼</span>
+        </div>
+        <div class="m-body">
+          <a href="/tutorial/python-guide"><span class="di">🐍</span> Python</a>
+          <a href="/tutorial/sql-guide"><span class="di">🗄️</span> SQL</a>
+          <a href="#"><span class="di">🔵</span> C Programming <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🟣</span> C++ <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">☕</span> Java <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">💎</span> Ruby <span class="mbadge soon">Soon</span></a>
+        </div>
       </div>
+
+      <!-- CS Basics -->
+      <div class="m-item">
+        <div class="m-header" onclick="toggleSection(this)">
+          💻 CS Basics <span class="m-arr">▼</span>
+        </div>
+        <div class="m-body">
+          <a href="#"><span class="di">🖥️</span> Computer Basics <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">⚙️</span> Operating Systems <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">📊</span> Data Structures <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🧮</span> Algorithms <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🗄️</span> DBMS <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🏗️</span> Software Engineering <span class="mbadge soon">Soon</span></a>
+        </div>
+      </div>
+
+      <!-- Networking -->
+      <div class="m-item">
+        <div class="m-header" onclick="toggleSection(this)">
+          🌐 Networking <span class="m-arr">▼</span>
+        </div>
+        <div class="m-body">
+          <a href="#"><span class="di">📡</span> Computer Networks <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🔗</span> OSI Model <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🌍</span> TCP/IP <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🔒</span> HTTP & HTTPS <span class="mbadge soon">Soon</span></a>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="m-item">
+        <div class="m-header" onclick="toggleSection(this)">
+          🔐 Security <span class="m-arr">▼</span>
+        </div>
+        <div class="m-body">
+          <a href="#"><span class="di">🛡️</span> Cyber Security <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🕵️</span> Ethical Hacking <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🔑</span> Passwords & Privacy <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🦠</span> Viruses & Malware <span class="mbadge soon">Soon</span></a>
+        </div>
+      </div>
+
+      <!-- AI & Data -->
+      <div class="m-item">
+        <div class="m-header" onclick="toggleSection(this)">
+          🤖 AI & Data <span class="m-arr">▼</span>
+        </div>
+        <div class="m-body">
+          <a href="#"><span class="di">🤖</span> Artificial Intelligence <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🧠</span> Machine Learning <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">📊</span> Data Science <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">☁️</span> Big Data <span class="mbadge soon">Soon</span></a>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="m-item">
+        <div class="m-header" onclick="toggleSection(this)">
+          🛠️ Tools <span class="m-arr">▼</span>
+        </div>
+        <div class="m-body">
+          <a href="#"><span class="di">🐙</span> Git & GitHub <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">📋</span> Cheat Sheets <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">❓</span> Interview Q&A <span class="mbadge soon">Soon</span></a>
+          <a href="#"><span class="di">🏆</span> Quizzes <span class="mbadge soon">Soon</span></a>
+        </div>
+      </div>
+
+      <!-- Single links -->
+      <a href="/kids" class="m-single">👶 Kids</a>
+      <a href="/blog" class="m-single">📝 Blog</a>
+      <a href="/about" class="m-single">About</a>
+      <a href="/contact" class="m-single">Contact</a>
+
+      <a href="/tutorial/html-introduction" class="m-getstarted">🚀 Get Started Free</a>
     </div>
 
     <!-- ============================================================ -->
@@ -174,12 +352,14 @@ const tutorialLinks = [
     <script is:inline define:vars={{ tutorialLinks }}>
       const searchInput = document.getElementById('main-search');
       const dropdown = document.getElementById('search-dropdown');
+      const mobileSearchInput = document.getElementById('mobile-search');
+      const mobileDropdown = document.getElementById('mobile-search-dropdown');
 
       const allItems = tutorialLinks;
 
-      function renderDropdown(query) {
+      function renderDropdown(query, ddEl) {
         if (!query || query.length < 1) {
-          dropdown.classList.add('hidden');
+          ddEl.classList.add('hidden');
           return;
         }
         const q = query.toLowerCase();
@@ -187,31 +367,138 @@ const tutorialLinks = [
           item => item.label.toLowerCase().includes(q) || item.cat.toLowerCase().includes(q)
         );
         if (matches.length === 0) {
-          dropdown.innerHTML = `<div class="px-4 py-3 text-sm text-gray-400 italic">No results found</div>`;
-          dropdown.classList.remove('hidden');
+          ddEl.innerHTML = `<div class="px-4 py-3 text-sm text-gray-400 italic">No results found</div>`;
+          ddEl.classList.remove('hidden');
           return;
         }
-        dropdown.innerHTML = matches.map(item => `
+        ddEl.innerHTML = matches.map(item => `
           <a href="${item.href}" class="flex items-center gap-4 px-4 py-2.5 hover:bg-gray-50 border-b border-gray-100 last:border-none group">
             <span class="text-xs font-bold text-[#04AA6D] uppercase w-16 flex-shrink-0">${item.cat}</span>
             <span class="text-sm text-gray-800 group-hover:text-[#04AA6D]">${item.label}</span>
           </a>
         `).join('');
-        dropdown.classList.remove('hidden');
+        ddEl.classList.remove('hidden');
       }
 
-      searchInput?.addEventListener('input', (e) => renderDropdown(e.target.value));
-      searchInput?.addEventListener('focus', (e) => renderDropdown(e.target.value));
+      searchInput?.addEventListener('input', (e) => renderDropdown(e.target.value, dropdown));
+      searchInput?.addEventListener('focus', (e) => renderDropdown(e.target.value, dropdown));
+
+      mobileSearchInput?.addEventListener('input', (e) => renderDropdown(e.target.value, mobileDropdown));
+      mobileSearchInput?.addEventListener('focus', (e) => renderDropdown(e.target.value, mobileDropdown));
 
       document.addEventListener('click', (e) => {
         if (!document.getElementById('search-wrapper')?.contains(e.target)) {
           dropdown?.classList.add('hidden');
         }
+        if (!document.getElementById('mobile-search-wrapper')?.contains(e.target)) {
+          mobileDropdown?.classList.add('hidden');
+        }
       });
+
+      // Mobile Menu JS
+      function toggleMenu() {
+        const ham = document.getElementById('ham');
+        const drawer = document.getElementById('drawer');
+        if(ham && drawer) {
+          ham.classList.toggle('open');
+          drawer.classList.toggle('open');
+        }
+      }
+
+      function toggleSection(header) {
+        const body = header.nextElementSibling;
+        const isOpen = body.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.m-body').forEach(b => b.classList.remove('open'));
+        document.querySelectorAll('.m-header').forEach(h => h.classList.remove('active'));
+
+        // Open clicked if it was closed
+        if (!isOpen) {
+          body.classList.add('open');
+          header.classList.add('active');
+        }
+      }
+
+      // Add to window so inline onclicks work
+      window.toggleMenu = toggleMenu;
+      window.toggleSection = toggleSection;
     </script>
 
     <style is:global>
-      /* Hide scrollbar on language nav strip */
+      /* ============================================================ */
+      /* NEW HEADER CSS                                               */
+      /* ============================================================ */
+      .top-bar { background: #1b1b2f; padding: 7px 32px; display: flex; align-items: center; justify-content: flex-end; gap: 22px; }
+      .top-bar a { color: #bbb; text-decoration: none; font-size: 13px; transition: color 0.2s; }
+      .top-bar a:hover { color: #04AA6D; }
+      .top-bar .btn-started { background: #04AA6D; color: #fff !important; padding: 5px 16px; border-radius: 5px; font-weight: 600; font-size: 13px; }
+      .top-bar .btn-started:hover { background: #038a58 !important; }
+
+      .navbar { background: #fff; border-bottom: 3px solid #04AA6D; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; position: sticky; top: 0; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+      .logo { font-size: 22px; font-weight: 800; color: #1b1b2f; text-decoration: none; white-space: nowrap; padding: 14px 0; flex-shrink: 0; }
+      .logo span { color: #04AA6D; }
+
+      .search-wrap { flex: 1; max-width: 340px; position: relative; }
+      .search-wrap input { width: 100%; padding: 8px 40px 8px 16px; border: 1.5px solid #ddd; border-radius: 50px; font-size: 13.5px; outline: none; background: #f9f9f9; color: #333; transition: border 0.2s, box-shadow 0.2s; }
+      .search-wrap input:focus { border-color: #04AA6D; box-shadow: 0 0 0 3px rgba(4,170,109,0.12); background: #fff; }
+      .search-wrap input::placeholder { color: #aaa; }
+      .search-wrap .search-icon { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: #04AA6D; font-size: 15px; pointer-events: none; }
+
+      .nav-links { display: flex; align-items: stretch; list-style: none; gap: 0; height: 56px; flex-shrink: 0; margin: 0; padding: 0; }
+      .nav-links > li { position: relative; display: flex; align-items: stretch; }
+      .nav-links > li > a { display: flex; align-items: center; gap: 4px; padding: 0 13px; color: #333; text-decoration: none; font-size: 13.5px; font-weight: 600; white-space: nowrap; transition: color 0.2s, background 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+      .nav-links > li > a:hover, .nav-links > li:hover > a { color: #04AA6D; background: #f5fff9; border-bottom-color: #04AA6D; }
+      .nav-links > li > a .arr { font-size: 9px; margin-top: 1px; transition: transform 0.2s; }
+      .nav-links > li:hover > a .arr { transform: rotate(180deg); }
+
+      .dropdown { display: none; position: absolute; top: calc(100% + 3px); left: 0; background: #fff; border: 1px solid #e5e5e5; border-top: 3px solid #04AA6D; border-radius: 0 0 10px 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.11); min-width: 210px; z-index: 99999; padding: 6px 0; animation: dropFade 0.15s ease; }
+      @keyframes dropFade { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+      .nav-links > li:hover .dropdown { display: block; }
+      .dropdown a { display: flex; align-items: center; gap: 10px; padding: 9px 18px; color: #333; text-decoration: none; font-size: 13.5px; transition: background 0.15s, color 0.15s; font-weight: 500; }
+      .dropdown a:hover { background: #f0fff8; color: #04AA6D; }
+      .dropdown a .di { font-size: 15px; width: 20px; text-align: center; }
+      .dropdown .badge { margin-left: auto; background: #04AA6D; color: #fff; font-size: 10px; padding: 1px 7px; border-radius: 20px; font-weight: 700; }
+      .dropdown .badge.soon { background: #ff9800; }
+      .dropdown hr { border: none; border-top: 1px solid #f0f0f0; margin: 5px 0; }
+      .dropdown .section-label { padding: 6px 18px 2px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; font-weight: 700; }
+
+      .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px 6px; background: none; border: none; flex-shrink: 0; }
+      .hamburger span { display: block; width: 24px; height: 2.5px; background: #333; border-radius: 2px; transition: all 0.3s; }
+      .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .hamburger.open span:nth-child(2) { opacity: 0; }
+      .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+      .mobile-drawer { display: none; flex-direction: column; background: #fff; border-top: 1px solid #eee; max-height: 80vh; overflow-y: auto; position: absolute; top: 100%; left: 0; z-index: 9998; width: 100%; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+      .mobile-drawer.open { display: flex; }
+      .mobile-search { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; position: relative; }
+      .mobile-search input { width: 100%; padding: 9px 40px 9px 16px; border: 1.5px solid #ddd; border-radius: 50px; font-size: 13.5px; outline: none; background: #f9f9f9; }
+      .mobile-search input:focus { border-color: #04AA6D; }
+      .mobile-search .si { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); color: #04AA6D; }
+      .m-item { border-bottom: 1px solid #f2f2f2; }
+      .m-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; font-size: 14px; font-weight: 600; color: #1b1b2f; cursor: pointer; background: #fafafa; user-select: none; }
+      .m-header:hover { background: #f0fff8; color: #04AA6D; }
+      .m-header .m-arr { font-size: 11px; color: #04AA6D; transition: transform 0.25s; }
+      .m-header.active .m-arr { transform: rotate(180deg); }
+      .m-header.active { color: #04AA6D; background: #f0fff8; }
+      .m-body { display: none; flex-direction: column; background: #fff; padding: 4px 0 8px; }
+      .m-body.open { display: flex; }
+      .m-body a { display: flex; align-items: center; gap: 10px; padding: 9px 32px; color: #444; text-decoration: none; font-size: 13.5px; transition: color 0.15s, background 0.15s; }
+      .m-body a:hover { color: #04AA6D; background: #f5fff9; }
+      .m-body a .di { font-size: 14px; width: 18px; text-align: center; }
+      .m-body .mbadge { margin-left: auto; background: #04AA6D; color: #fff; font-size: 10px; padding: 1px 7px; border-radius: 20px; font-weight: 700; }
+      .m-body .mbadge.soon { background: #ff9800; }
+      .m-single { display: flex; align-items: center; gap: 10px; padding: 13px 18px; font-size: 14px; font-weight: 500; color: #333; text-decoration: none; border-bottom: 1px solid #f2f2f2; transition: color 0.15s, background 0.15s; }
+      .m-single:hover { color: #04AA6D; background: #f5fff9; }
+      .m-getstarted { margin: 14px 18px; display: block; background: #04AA6D; color: #fff; text-align: center; padding: 11px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; }
+
+      @media (max-width: 900px) {
+        .nav-links, .search-wrap, .top-bar { display: none; }
+        .hamburger { display: flex; }
+        .navbar { padding: 0 16px; position: relative; }
+      }
+
+      /* Hide scrollbar on language nav strip (if needed elsewhere) */
       .scrollbar-hide::-webkit-scrollbar { display: none; }
       .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
