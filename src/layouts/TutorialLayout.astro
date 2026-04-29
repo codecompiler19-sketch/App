@@ -63,7 +63,8 @@ const catColor = CATEGORY_COLORS[category] ?? { bg: 'bg-gray-100', text: 'text-g
     </nav>
   </div>
 
-  <div class="flex-1 flex overflow-hidden">
+  <div class="w-full" style="max-width: 1600px; margin: 0 auto;">
+  <div class="flex-1 flex overflow-hidden" style="min-height: 0;">
     <!-- Sidebar -->
     <aside
       id="page-sidebar"
@@ -175,6 +176,7 @@ const catColor = CATEGORY_COLORS[category] ?? { bg: 'bg-gray-100', text: 'text-g
         </div>
       </aside>
     </div>
+  </div>
   </div>
 
   <script is:inline>
