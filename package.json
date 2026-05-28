@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "cms": "start cmd /k \"npx decap-server\" && astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

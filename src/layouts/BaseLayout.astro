@@ -1,12 +1,34 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+import AdSlot from '../components/AdSlot.astro';
+import navData from '../data/navigation.json';
+const { navItems } = navData;
+
 export interface Props {
-  title: string;
-  description: string;
   image?: string;
   canonicalURL?: string | URL;
+  // Extended SEO props from blog/tutorial frontmatter
+  seoTitle?: string;      // Custom browser-tab/Google title (overrides title)
+  ogImage?: string;       // Custom OG image (overrides image)
+  noindex?: boolean;      // Add noindex meta tag
+  schemaData?: object[];  // Array of Schema.org JSON-LD objects
 }
 
-const { title, description, image = '/og-image.png', canonicalURL = new URL(Astro.url.pathname, Astro.site) } = Astro.props;
+const {
+  title,
+  description,
+  image = '/og-image.png',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  seoTitle,
+  ogImage,
+  noindex = false,
+  schemaData = [],
+} = Astro.props;
+
+// The title that goes in <title> tag and OG title
+const pageTitle = seoTitle || title;
+// The image used for OG/Twitter cards
+const socialImage = ogImage || image;
 
 // All tutorials for the search index (flat list for auto-suggest)
 const tutorialLinks = [
@@ -25,22 +47,28 @@ const tutorialLinks = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} | CodesCompiler</title>
-    <meta name="title" content={`${title} | CodesCompiler`} />
+    <title>{pageTitle} | CodesCompiler</title>
+    <meta name="title" content={`${pageTitle} | CodesCompiler`} />
     <meta name="description" content={description} />
-    <meta property="og:type" content="website" />
+    <link rel="canonical" href={String(canonicalURL)} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content="article" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} | CodesCompiler`} />
+    <meta property="og:title" content={`${pageTitle} | CodesCompiler`} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:image" content={new URL(socialImage, Astro.url)} />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={`${title} | CodesCompiler`} />
+    <meta property="twitter:title" content={`${pageTitle} | CodesCompiler`} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <meta property="twitter:image" content={new URL(socialImage, Astro.url)} />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    {schemaData.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+    )}
 
     {Astro.url.pathname.includes('/tutorial/python-') && (
       <>
@@ -108,103 +136,36 @@ const tutorialLinks = [
       <div class="hidden md:block w-full border-t border-gray-800 bg-[#1b1b2f]">
         <div class="max-w-screen-2xl mx-auto flex items-center justify-center">
           <ul class="nav-links !h-[48px]">
-            <!-- WEB -->
-            <li>
-              <a href="#">🌐 Web <span class="arr">▼</span></a>
-              <div class="dropdown">
-                <div class="section-label">Already Available</div>
-                <a href="/tutorial/html-introduction"><span class="di">📄</span> HTML</a>
-                <a href="/tutorial/css-introduction"><span class="di">🎨</span> CSS</a>
-                <a href="/tutorial/js-introduction"><span class="di">⚡</span> JavaScript</a>
-                <a href="/tutorial/php-guide"><span class="di">🐘</span> PHP</a>
-                <a href="/tutorial/seo-overview"><span class="di">🔍</span> SEO</a>
-                <hr>
-                <div class="section-label">Coming Soon</div>
-                <a href="#"><span class="di">🅱️</span> Bootstrap <span class="badge">New</span></a>
-                <a href="#"><span class="di">🌬️</span> Tailwind CSS <span class="badge soon">Soon</span></a>
-                <a href="#"><span class="di">🔷</span> TypeScript <span class="badge soon">Soon</span></a>
-              </div>
-            </li>
-            <!-- LANGUAGES -->
-            <li>
-              <a href="#">🔤 Languages <span class="arr">▼</span></a>
-              <div class="dropdown">
-                <div class="section-label">Already Available</div>
-                <a href="/tutorial/python-guide"><span class="di">🐍</span> Python</a>
-                <a href="/tutorial/sql-guide"><span class="di">🗄️</span> SQL</a>
-                <hr>
-                <div class="section-label">Coming Soon</div>
-                <a href="#"><span class="di">🔵</span> C Programming <span class="badge soon">Soon</span></a>
-                <a href="#"><span class="di">🟣</span> C++ <span class="badge soon">Soon</span></a>
-                <a href="#"><span class="di">☕</span> Java <span class="badge soon">Soon</span></a>
-                <a href="#"><span class="di">💎</span> Ruby <span class="badge soon">Soon</span></a>
-              </div>
-            </li>
-            <!-- CS FUNDAMENTALS -->
-            <li>
-              <a href="/cs-basics/computer-basics">💻 CS Basics <span class="arr">▼</span></a>
-              <div class="dropdown">
-                <a href="/cs-basics/computer-basics"><span class="di">🖥️</span> Computer Basics</a>
-                <a href="/cs-basics/operating-systems"><span class="di">⚙️</span> Operating Systems</a>
-                <a href="/cs-basics/data-structures"><span class="di">📊</span> Data Structures</a>
-                <a href="/cs-basics/algorithms"><span class="di">🧮</span> Algorithms</a>
-                <a href="/cs-basics/dbms"><span class="di">🗄️</span> DBMS</a>
-                <a href="/cs-basics/software-engineering"><span class="di">🏗️</span> Software Engineering</a>
-                <a href="/cs-basics/computer-architecture"><span class="di">🏛️</span> Computer Architecture</a>
-              </div>
-            </li>
-            <!-- NETWORKING -->
-            <li>
-              <a href="/networking/computer-networks">🌐 Networking <span class="arr">▼</span></a>
-              <div class="dropdown">
-                <a href="/networking/computer-networks"><span class="di">📡</span> Computer Networks</a>
-                <a href="/networking/osi-model"><span class="di">🔗</span> OSI Model</a>
-                <a href="/networking/tcp-ip"><span class="di">🌍</span> TCP/IP</a>
-                <a href="/networking/http-https"><span class="di">🔒</span> HTTP &amp; HTTPS</a>
-                <a href="/networking/dns-explained"><span class="di">📶</span> DNS Explained</a>
-              </div>
-            </li>
-            <!-- SECURITY -->
-            <li>
-              <a href="/security/cyber-security">🔐 Security <span class="arr">▼</span></a>
-              <div class="dropdown">
-                <a href="/security/cyber-security"><span class="di">🛡️</span> Cyber Security</a>
-                <a href="/security/ethical-hacking"><span class="di">🕵️</span> Ethical Hacking</a>
-                <a href="/security/passwords-privacy"><span class="di">🔑</span> Passwords &amp; Privacy</a>
-                <a href="/security/viruses-malware"><span class="di">🦠</span> Viruses &amp; Malware</a>
-                <a href="/security/vpn-firewall"><span class="di">🔏</span> VPN &amp; Firewall</a>
-                <a href="/security/social-engineering"><span class="di">🎣</span> Social Engineering</a>
-                <a href="/security/cryptography-encryption"><span class="di">🔐</span> Cryptography &amp; Encryption</a>
-              </div>
-            </li>
-            <!-- AI & DATA -->
-            <li>
-              <a href="/ai-data/artificial-intelligence">🤖 AI &amp; Data <span class="arr">▼</span></a>
-              <div class="dropdown">
-                <a href="/ai-data/artificial-intelligence"><span class="di">🤖</span> Artificial Intelligence</a>
-                <a href="/ai-data/machine-learning"><span class="di">🧠</span> Machine Learning</a>
-                <a href="/ai-data/data-science"><span class="di">📊</span> Data Science</a>
-                <a href="/ai-data/big-data"><span class="di">☁️</span> Big Data</a>
-                <a href="/ai-data/prompt-engineering"><span class="di">💬</span> Prompt Engineering</a>
-              </div>
-            </li>
-            <!-- TOOLS -->
-            <li>
-              <a href="/tools/git-github">🛠️ Tools <span class="arr">▼</span></a>
-              <div class="dropdown">
-                <a href="/tools/git-github"><span class="di">🐙</span> Git &amp; GitHub</a>
-                <a href="/tools/vs-code-tips"><span class="di">📝</span> VS Code Tips</a>
-                <a href="/tools/command-line"><span class="di">💻</span> Command Line</a>
-                <hr>
-                <a href="/tools/cheat-sheets"><span class="di">📋</span> Cheat Sheets</a>
-                <a href="/tools/interview-qa"><span class="di">❓</span> Interview Q&amp;A</a>
-                <a href="/tools/quizzes"><span class="di">🏆</span> Quizzes</a>
-              </div>
-            </li>
-            <!-- KIDS -->
-            <li><a href="/kids">👶 Kids</a></li>
-            <!-- BLOG -->
-            <li><a href="/blog">📝 Blog</a></li>
+            {navItems.map((item: any) => {
+              if (item.type === 'link') {
+                return <li><a href={item.href}>{item.label}</a></li>;
+              }
+              if (item.type === 'dropdown') {
+                return (
+                  <li>
+                    <a href="#">{item.label} <span class="arr">▼</span></a>
+                    <div class="dropdown">
+                      {item.sections.map((sec: any, idx: number) => (
+                        <>
+                          {idx > 0 && <hr />}
+                          {sec.title && <div class="section-label">{sec.title}</div>}
+                          {sec.links.map((link: any) => (
+                            <a href={link.href}>
+                              {link.icon && <span class="di">{link.icon}</span>} {link.label}
+                              {link.badge && (
+                                <span class={`badge ${link.badgeColor === 'orange' ? 'soon' : ''}`}>
+                                  {link.badge}
+                                </span>
+                              )}
+                            </a>
+                          ))}
+                        </>
+                      ))}
+                    </div>
+                  </li>
+                );
+              }
+            })}
           </ul>
         </div>
       </div>
@@ -214,118 +175,39 @@ const tutorialLinks = [
 
       <!-- Mobile Drawer -->
       <div class="mobile-drawer" id="drawer">
-      <!-- Web -->
-      <div class="m-item">
-        <div class="m-header" onclick="toggleSection(this)">
-          🌐 Web <span class="m-arr">▼</span>
-        </div>
-        <div class="m-body">
-          <a href="/tutorial/html-introduction"><span class="di">📄</span> HTML</a>
-          <a href="/tutorial/css-introduction"><span class="di">🎨</span> CSS</a>
-          <a href="/tutorial/js-introduction"><span class="di">⚡</span> JavaScript</a>
-          <a href="/tutorial/php-guide"><span class="di">🐘</span> PHP</a>
-          <a href="/tutorial/seo-overview"><span class="di">🔍</span> SEO</a>
-          <a href="#"><span class="di">🅱️</span> Bootstrap <span class="mbadge">New</span></a>
-          <a href="#"><span class="di">🌬️</span> Tailwind CSS <span class="mbadge soon">Soon</span></a>
-          <a href="#"><span class="di">🔷</span> TypeScript <span class="mbadge soon">Soon</span></a>
-        </div>
-      </div>
+        {navItems.map((item: any) => {
+          if (item.type === 'dropdown') {
+            return (
+              <div class="m-item">
+                <div class="m-header" onclick="toggleSection(this)">
+                  {item.label} <span class="m-arr">▼</span>
+                </div>
+                <div class="m-body">
+                  {item.sections.map((sec: any) => (
+                    <>
+                      {sec.links.map((link: any) => (
+                        <a href={link.href}>
+                          {link.icon && <span class="di">{link.icon}</span>} {link.label}
+                          {link.badge && (
+                            <span class={`mbadge ${link.badgeColor === 'orange' ? 'soon' : ''}`}>
+                              {link.badge}
+                            </span>
+                          )}
+                        </a>
+                      ))}
+                    </>
+                  ))}
+                </div>
+              </div>
+            );
+          } else if (item.type === 'link') {
+            return <a href={item.href} class="m-single">{item.label}</a>;
+          }
+        })}
 
-      <!-- Languages -->
-      <div class="m-item">
-        <div class="m-header" onclick="toggleSection(this)">
-          🔤 Languages <span class="m-arr">▼</span>
-        </div>
-        <div class="m-body">
-          <a href="/tutorial/python-guide"><span class="di">🐍</span> Python</a>
-          <a href="/tutorial/sql-guide"><span class="di">🗄️</span> SQL</a>
-          <a href="#"><span class="di">🔵</span> C Programming <span class="mbadge soon">Soon</span></a>
-          <a href="#"><span class="di">🟣</span> C++ <span class="mbadge soon">Soon</span></a>
-          <a href="#"><span class="di">☕</span> Java <span class="mbadge soon">Soon</span></a>
-          <a href="#"><span class="di">💎</span> Ruby <span class="mbadge soon">Soon</span></a>
-        </div>
-      </div>
+        <a href="/about" class="m-single">About</a>
+        <a href="/contact" class="m-single">Contact</a>
 
-      <!-- CS Basics -->
-      <div class="m-item">
-        <div class="m-header" onclick="toggleSection(this)">
-          💻 CS Basics <span class="m-arr">▼</span>
-        </div>
-        <div class="m-body">
-          <a href="/cs-basics/computer-basics"><span class="di">🖥️</span> Computer Basics</a>
-          <a href="/cs-basics/operating-systems"><span class="di">⚙️</span> Operating Systems</a>
-          <a href="/cs-basics/data-structures"><span class="di">📊</span> Data Structures</a>
-          <a href="/cs-basics/algorithms"><span class="di">🧮</span> Algorithms</a>
-          <a href="/cs-basics/dbms"><span class="di">🗄️</span> DBMS</a>
-          <a href="/cs-basics/software-engineering"><span class="di">🏗️</span> Software Engineering</a>
-          <a href="/cs-basics/computer-architecture"><span class="di">🏛️</span> Computer Architecture</a>
-        </div>
-      </div>
-
-      <!-- Networking -->
-      <div class="m-item">
-        <div class="m-header" onclick="toggleSection(this)">
-          🌐 Networking <span class="m-arr">▼</span>
-        </div>
-        <div class="m-body">
-          <a href="/networking/computer-networks"><span class="di">📡</span> Computer Networks</a>
-          <a href="/networking/osi-model"><span class="di">🔗</span> OSI Model</a>
-          <a href="/networking/tcp-ip"><span class="di">🌍</span> TCP/IP</a>
-          <a href="/networking/http-https"><span class="di">🔒</span> HTTP &amp; HTTPS</a>
-          <a href="/networking/dns-explained"><span class="di">📶</span> DNS Explained</a>
-        </div>
-      </div>
-
-      <!-- Security -->
-      <div class="m-item">
-        <div class="m-header" onclick="toggleSection(this)">
-          🔐 Security <span class="m-arr">▼</span>
-        </div>
-        <div class="m-body">
-          <a href="/security/cyber-security"><span class="di">🛡️</span> Cyber Security</a>
-          <a href="/security/ethical-hacking"><span class="di">🕵️</span> Ethical Hacking</a>
-          <a href="/security/passwords-privacy"><span class="di">🔑</span> Passwords &amp; Privacy</a>
-          <a href="/security/viruses-malware"><span class="di">🦠</span> Viruses &amp; Malware</a>
-          <a href="/security/vpn-firewall"><span class="di">🔏</span> VPN &amp; Firewall</a>
-          <a href="/security/social-engineering"><span class="di">🎣</span> Social Engineering</a>
-          <a href="/security/cryptography-encryption"><span class="di">🔐</span> Cryptography &amp; Encryption</a>
-        </div>
-      </div>
-
-      <!-- AI & Data -->
-      <div class="m-item">
-        <div class="m-header" onclick="toggleSection(this)">
-          🤖 AI &amp; Data <span class="m-arr">▼</span>
-        </div>
-        <div class="m-body">
-          <a href="/ai-data/artificial-intelligence"><span class="di">🤖</span> Artificial Intelligence</a>
-          <a href="/ai-data/machine-learning"><span class="di">🧠</span> Machine Learning</a>
-          <a href="/ai-data/data-science"><span class="di">📊</span> Data Science</a>
-          <a href="/ai-data/big-data"><span class="di">☁️</span> Big Data</a>
-          <a href="/ai-data/prompt-engineering"><span class="di">💬</span> Prompt Engineering</a>
-        </div>
-      </div>
-
-      <!-- Tools -->
-      <div class="m-item">
-        <div class="m-header" onclick="toggleSection(this)">
-          🛠️ Tools <span class="m-arr">▼</span>
-        </div>
-        <div class="m-body">
-          <a href="/tools/git-github"><span class="di">🐙</span> Git &amp; GitHub</a>
-          <a href="/tools/vs-code-tips"><span class="di">📝</span> VS Code Tips</a>
-          <a href="/tools/command-line"><span class="di">💻</span> Command Line</a>
-          <a href="/tools/cheat-sheets"><span class="di">📋</span> Cheat Sheets</a>
-          <a href="/tools/interview-qa"><span class="di">❓</span> Interview Q&amp;A</a>
-          <a href="/tools/quizzes"><span class="di">🏆</span> Quizzes</a>
-        </div>
-      </div>
-
-      <!-- Single links -->
-      <a href="/kids" class="m-single">👶 Kids</a>
-      <a href="/blog" class="m-single">📝 Blog</a>
-      <a href="/about" class="m-single">About</a>
-      <a href="/contact" class="m-single">Contact</a>
 
       <a href="/tutorial/html-introduction" class="m-getstarted">🚀 Get Started Free</a>
     </div>
@@ -464,6 +346,9 @@ const tutorialLinks = [
     </script>
 
     <style is:global>
+      /* Smooth scrolling for anchor links */
+      html { scroll-behavior: smooth; }
+
       /* ============================================================ */
       /* QUICK DARK MODE OVERRIDES                                    */
       /* ============================================================ */
@@ -567,6 +452,11 @@ const tutorialLinks = [
       /* ============================================================ */
       /* GLOBAL TYPOGRAPHY FOR MDX (Tutorials & Posts)                */
       /* ============================================================ */
+      .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6,
+      .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+        scroll-margin-top: 110px; /* Prevents sticky navbar from covering heading */
+      }
+
       .prose, .post-content {
         color: #374151;
         line-height: 1.75;

@@ -3,7 +3,11 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/AdSlot.astro';
 
-const allPosts = await getCollection('blog');
+const allPostsRaw = await getCollection('blog');
+// Only show published posts publicly (draft & scheduled are hidden)
+const allPosts = allPostsRaw.filter(
+  p => !p.data.status || p.data.status === 'published'
+);
 const sorted   = allPosts.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
