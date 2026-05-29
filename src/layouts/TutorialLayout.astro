@@ -10,9 +10,10 @@ interface Props {
   categoryLabel: string;
   headings?: { depth: number; slug: string; text: string }[];
   currentSlug?: string;
+  seoTitle?: string;
 }
 
-const { title, description, category, categoryLabel, headings = [], currentSlug: propCurrentSlug } = Astro.props;
+const { title, description, category, categoryLabel, headings = [], currentSlug: propCurrentSlug, seoTitle } = Astro.props;
 
 // Get all tutorials for the current category to build the sidebar
 const tutorials = await getCollection('tutorials');

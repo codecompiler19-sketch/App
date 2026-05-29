@@ -24,7 +24,8 @@ const { Content, headings } = await post.render();
 
 <PostLayout
   title={post.data.title}
-  description={post.data.description}
+  seoTitle={post.data.seoTitle}
+  description={post.data.description ?? ''}
   image={post.data.image}
   date={post.data.date}
   category={post.data.category}
@@ -32,7 +33,6 @@ const { Content, headings } = await post.render();
   author={post.data.author ?? 'CodesCompiler'}
   slug={post.data.permalink || post.slug}
   hasDemo={post.data.hasDemo ?? false}
-  seoTitle={post.data.seoTitle}
   canonicalUrl={post.data.canonicalUrl}
   ogImage={post.data.ogImage}
   noindex={post.data.noindex ?? false}
