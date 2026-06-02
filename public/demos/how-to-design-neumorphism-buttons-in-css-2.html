@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphism Buttons</title>
+    <style>
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #e0e5ec; font-family: 'Inter', sans-serif; }
+
+        .neumorphism-container {
+          display: flex;
+          gap: 40px;
+          align-items: center;
+        }
+
+        .neu-btn {
+          background-color: #e0e5ec;
+          border: none;
+          outline: none;
+          color: #555;
+          font-size: 1.1rem;
+          font-weight: 600;
+          padding: 15px 30px;
+          border-radius: 15px;
+          cursor: pointer;
+          box-shadow: 
+            9px 9px 16px rgb(163,177,198,0.6), 
+            -9px -9px 16px rgba(255,255,255, 0.5);
+          transition: all 0.2s ease-in-out;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .neu-btn .icon {
+          font-size: 1.2rem;
+          color: #ff4757;
+        }
+
+        /* Active / Clicked State */
+        .neu-btn:active {
+          box-shadow: 
+            inset 6px 6px 10px rgb(163,177,198,0.6), 
+            inset -6px -6px 10px rgba(255,255,255, 0.5);
+          color: #3b82f6;
+        }
+
+        /* Circular Button */
+        .neu-btn-circle {
+          width: 60px;
+          height: 60px;
+          padding: 0;
+          border-radius: 50%;
+          justify-content: center;
+        }
+        .neu-btn-circle .icon { color: #2ed573; margin: 0; }
+
+        /* Inset Button (Always Pressed) */
+        .neu-btn-inset {
+          box-shadow: 
+            inset 6px 6px 10px rgb(163,177,198,0.6), 
+            inset -6px -6px 10px rgba(255,255,255, 0.5);
+          color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="neumorphism-container">
+      <button class="neu-btn"><span class="icon">♥</span> Like</button>
+      <button class="neu-btn neu-btn-circle"><span class="icon">▶</span></button>
+      <button class="neu-btn neu-btn-inset">Pressed</button>
+    </div>
+</body>
+</html>

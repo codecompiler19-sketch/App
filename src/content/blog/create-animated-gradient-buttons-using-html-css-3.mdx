@@ -1,0 +1,76 @@
+---
+title: "Animated Gradient Buttons"
+seoTitle: "Create Animated Gradient Buttons using HTML CSS"
+description: "Learn create animated gradient buttons with this comprehensive guide containing source code."
+date: "2026-06-03"
+category: "CSS Buttons"
+tags: ["button","css","gradient"]
+image: "/images/posts/default-coding.png"
+featured: false
+hasDemo: true
+author: "CodesCompiler"
+---
+
+Welcome to this tutorial on **Create Animated Gradient Buttons using HTML CSS**.
+
+## HTML Structure
+
+```html
+<div class="gradient-buttons-container">
+  <button class="gradient-btn gradient-btn-1">Hover Me</button>
+  <button class="gradient-btn gradient-btn-2">Hover Me</button>
+</div>
+```
+
+## CSS Styling
+
+```css
+body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #111; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+.gradient-buttons-container {
+  display: flex;
+  gap: 40px;
+}
+
+.gradient-btn {
+  padding: 15px 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  background-size: 300% 100%;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.gradient-btn:hover {
+  background-position: 100% 0;
+  transform: translateY(-3px);
+}
+
+/* Gradient Button 1 (Warm) */
+.gradient-btn-1 {
+  background-image: linear-gradient(to right, #f12711, #f5af19, #f12711);
+  box-shadow: 0 4px 15px rgba(241, 39, 17, 0.4);
+}
+.gradient-btn-1:hover {
+  box-shadow: 0 10px 20px rgba(241, 39, 17, 0.6);
+}
+
+/* Gradient Button 2 (Cool) */
+.gradient-btn-2 {
+  background-image: linear-gradient(to right, #00c6ff, #0072ff, #00c6ff);
+  box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+}
+.gradient-btn-2:hover {
+  box-shadow: 0 10px 20px rgba(0, 198, 255, 0.6);
+}
+```
+
+## JavaScript Logic
+
+```javascript
+// Pure CSS!
+```
