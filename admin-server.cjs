@@ -137,7 +137,7 @@ function generateSitemap() {
   const publicDir = path.join(APP_DIR, 'public');
   if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
   
-  const siteUrl = readJSON(SETTINGS_FILE, {}).siteUrl || 'https://app.codescompiler.com';
+  const siteUrl = readJSON(SETTINGS_FILE, {}).siteUrl || 'https://codescompiler.com';
   let urls = [];
   
   // Add static pages
@@ -165,6 +165,7 @@ function generateSitemap() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(url => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n  </url>`).join('\n')}\n</urlset>`;
   
   fs.writeFileSync(path.join(publicDir, 'sitemap-index.xml'), xml, 'utf-8');
+  fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), xml, 'utf-8');
   console.log('  ✅ Custom Sitemap Generated (' + urls.length + ' URLs)');
 }
 
@@ -259,11 +260,11 @@ const server = http.createServer(async (req, res) => {
       customHeadScripts: '',
       customBodyScripts: '',
       siteTitle: 'CodesCompiler',
-      siteDescription: 'Free web development tutorials for everyone.',
-      siteUrl: 'https://app.codescompiler.com',
+      siteDescription: 'Free web development tutorials for HTML, CSS, and JavaScript. Learn step-by-step with a live code editor. Perfect for beginners. No sign-up needed. Start coding today.',
+      siteUrl: 'https://codescompiler.com',
       permalinkStructure: '/blog/{slug}/',
       tutorialPermalinkStructure: '/tutorial/{slug}/',
-      robotsTxt: 'User-agent: *\nAllow: /\nSitemap: https://app.codescompiler.com/sitemap-index.xml',
+      robotsTxt: 'User-agent: *\nAllow: /\nSitemap: https://codescompiler.com/sitemap.xml\nSitemap: https://codescompiler.com/sitemap-index.xml',
       cacheControl: 'public, max-age=3600'
     };
     if (pathname === '/api/settings/get') {

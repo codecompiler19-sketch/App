@@ -16,5 +16,5 @@ export default defineConfig({
     }),
     tailwind()
   ],
-  site: 'https://app.codescompiler.com',
+  site: 'https://codescompiler.com',
 });

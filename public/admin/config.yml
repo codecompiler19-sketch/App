@@ -355,7 +355,7 @@ collections:
           - label: "Site URL"
             name: "siteUrl"
             widget: "string"
-            hint: "Your full domain. e.g. https://app.codescompiler.com"
+            hint: "Your full domain. e.g. https://codescompiler.com"
 
           - label: "Default Meta Description"
             name: "siteDescription"
