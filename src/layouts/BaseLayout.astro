@@ -31,6 +31,9 @@ const displayTitle = pageTitle.includes('CodesCompiler') ? pageTitle : `${pageTi
 // The image used for OG/Twitter cards
 const socialImage = ogImage || image;
 
+// og:type is article only for blog posts; otherwise website
+const ogType = Astro.url.pathname.startsWith('/blog/') ? 'article' : 'website';
+
 // All tutorials for the search index (flat list for auto-suggest)
 const tutorialLinks = [
   { label: 'HTML Tutorial', href: '/tutorial/html-introduction', cat: 'HTML' },
@@ -53,7 +56,7 @@ const tutorialLinks = [
     <meta name="description" content={description} />
     <link rel="canonical" href={String(canonicalURL)} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={displayTitle} />
     <meta property="og:description" content={description} />
@@ -67,9 +70,9 @@ const tutorialLinks = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-    {schemaData.length > 0 && (
-      <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
-    )}
+    {schemaData.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
 
     {Astro.url.pathname.includes('/tutorial/python-') && (
       <>
