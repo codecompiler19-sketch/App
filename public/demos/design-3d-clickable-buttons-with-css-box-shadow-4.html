@@ -1,12 +1,41 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>design-3d-clickable-buttons-with-css-box-shadow-4 - Live Demo</title>\n  <style>\n.premium-layout { min-height: 100vh; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 2rem; font-family: 'Segoe UI', sans-serif; }
-.header h1 { text-align: center; color: #2c3e50; font-weight: 800; font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem; }
-.grid-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
-.card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); transition: transform 0.3s, box-shadow 0.3s; }
-.card:hover { transform: translateY(-10px); box-shadow: 0 25px 45px rgba(0,0,0,0.15); }
-.card h3 { color: #34495e; margin-bottom: 1rem; }\n  </style>\n</head>\n<body>\n<div class="premium-layout">
-  <header class="header"><h1>design-3d-clickable-buttons-with-css-box-shadow-4</h1></header>
-  <main class="grid-content">
-    <section class="card"><h3>Flexbox Area</h3><p>Smooth glassmorphism and modern shadows.</p></section>
-    <section class="card"><h3>CSS Grid Area</h3><p>Responsive layout structure.</p></section>
-  </main>
-</div>\n  <script>\nconsole.log('HTML & CSS layout initialized.');\n  </script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design 3D Clickable Buttons with CSS Box-Shadow</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #e2e8f0; font-family: 'Fredoka One', cursive; }
+
+.container-3d { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;}
+
+.btn-3d { position: relative; padding: 20px 40px; font-size: 1.5rem; color: #fff; border: none; border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: transform 0.1s, box-shadow 0.1s; display: inline-block; text-align: center; font-family: 'Fredoka One', cursive; }
+
+.btn-3d:active { transform: translateY(8px); }
+
+/* Red Button */
+.push-red { background: #ef4444; box-shadow: 0 8px 0 #b91c1c, 0 15px 20px rgba(0,0,0,0.2); }
+.push-red:active { box-shadow: 0 0 0 #b91c1c, 0 5px 10px rgba(0,0,0,0.2); }
+
+/* Blue Button */
+.push-blue { background: #3b82f6; box-shadow: 0 8px 0 #1d4ed8, 0 15px 20px rgba(0,0,0,0.2); }
+.push-blue:active { box-shadow: 0 0 0 #1d4ed8, 0 5px 10px rgba(0,0,0,0.2); }
+
+/* Yellow Button */
+.push-yellow { background: #f59e0b; box-shadow: 0 8px 0 #b45309, 0 15px 20px rgba(0,0,0,0.2); }
+.push-yellow:active { box-shadow: 0 0 0 #b45309, 0 5px 10px rgba(0,0,0,0.2); }
+  </style>
+</head>
+<body>
+<div class="container-3d">
+  <button class="btn-3d push-red">PLAY NOW</button>
+  <button class="btn-3d push-blue">START GAME</button>
+  <button class="btn-3d push-yellow">UPGRADE</button>
+</div>
+  <script>
+// No JS needed for 3D box-shadow effects!
+  </script>
+</body>
+</html>

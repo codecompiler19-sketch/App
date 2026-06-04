@@ -47,19 +47,19 @@
     <div class="coverflow-container">
       <div class="coverflow-slider">
         <div class="coverflow-item">
-          <img src="https://images.unsplash.com/photo-1506744626753-143d3f0a1c6a?auto=format&fit=crop&w=400&q=80" alt="Img">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80" alt="Img">
         </div>
         <div class="coverflow-item">
-          <img src="https://images.unsplash.com/photo-1511576661531-b34d7da5d0f4?auto=format&fit=crop&w=400&q=80" alt="Img">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Img">
         </div>
         <div class="coverflow-item active">
-          <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=400&q=80" alt="Img">
+          <img src="https://images.unsplash.com/photo-1494522855154-9297ac14b55f?auto=format&fit=crop&w=400&q=80" alt="Img">
         </div>
         <div class="coverflow-item">
-          <img src="https://images.unsplash.com/photo-1533446002934-2e9b110bc595?auto=format&fit=crop&w=400&q=80" alt="Img">
+          <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=400&q=80" alt="Img">
         </div>
         <div class="coverflow-item">
-          <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=400&q=80" alt="Img">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=400&q=80" alt="Img">
         </div>
       </div>
     </div>
@@ -67,6 +67,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const items = document.querySelectorAll('.coverflow-item');
+            const slider = document.querySelector('.coverflow-slider');
             if(!items.length) return;
             
             let currentIndex = 2; // middle item
@@ -77,24 +78,62 @@
                     let offset = index - currentIndex;
                     
                     let zIndex = items.length - Math.abs(offset);
-                    let translateX = offset * 120;
-                    let translateZ = Math.abs(offset) * -100;
+                    // Increased spacing for better clickability
+                    let translateX = offset * 150; 
+                    let translateZ = Math.abs(offset) * -150;
                     let rotateY = offset === 0 ? 0 : (offset > 0 ? -45 : 45);
                     let opacity = Math.abs(offset) > 2 ? 0 : 1;
+                    
+                    // Add slight scale down for side items
+                    let scale = offset === 0 ? 1 : 0.8;
 
-                    item.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+                    item.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
                     item.style.zIndex = zIndex;
                     item.style.opacity = opacity;
+                    item.style.pointerEvents = Math.abs(offset) > 2 ? 'none' : 'auto'; // Disable clicking invisible items
                     
                     if(offset === 0) item.classList.add('active');
                 });
             }
 
+            // Click Support
             items.forEach((item, index) => {
                 item.addEventListener('click', () => {
                     currentIndex = index;
                     updateCoverflow();
                 });
+            });
+
+            // Touch / Swipe Support
+            let startX = 0;
+            let endX = 0;
+
+            slider.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            }, {passive: true});
+
+            slider.addEventListener('touchmove', (e) => {
+                endX = e.touches[0].clientX;
+            }, {passive: true});
+
+            slider.addEventListener('touchend', () => {
+                const threshold = 50; // minimum pixels swiped to trigger a change
+                if (startX - endX > threshold) {
+                    // Swiped left (go next)
+                    if (currentIndex < items.length - 1) {
+                        currentIndex++;
+                        updateCoverflow();
+                    }
+                } else if (endX - startX > threshold) {
+                    // Swiped right (go prev)
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateCoverflow();
+                    }
+                }
+                // Reset
+                startX = 0;
+                endX = 0;
             });
 
             updateCoverflow();

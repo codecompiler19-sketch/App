@@ -50,7 +50,7 @@ const categoryCounts = allPosts.reduce((acc, post) => {
 // Related Posts (same category, not this post)
 const relatedPosts = allPosts
   .filter(p => p.data.category === category && p.slug !== slug)
-  .slice(0, 3);
+  .slice(0, 4);
 
 // Format date
 const formattedDate = date
