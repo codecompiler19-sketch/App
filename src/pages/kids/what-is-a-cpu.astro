@@ -2,39 +2,128 @@
 import KidsLayout from '../../layouts/KidsLayout.astro';
 ---
 <KidsLayout
-  title="What is a CPU?"
-  description="Discover what a CPU is, why it's called the brain of the computer, and how it processes millions of instructions every second!"
+  title="What is a CPU? — The Brain of a Computer Explained for Kids"
+  description="What is a CPU? Learn how the Central Processing Unit works, what cores and clock speed mean, and why the CPU is called the brain of the computer — simple explanation for kids!"
   currentSlug="what-is-a-cpu"
   topicIcon="🧠"
 >
+
   <h2>What is a CPU?</h2>
   <p>
-    <strong>CPU</strong> stands for <strong>Central Processing Unit</strong>. It is the most important chip inside your computer — often called the <em>brain</em> of the computer. Every time you click, type, or watch a video, the CPU is hard at work!
+    <strong>CPU</strong> stands for <strong>Central Processing Unit</strong>. It is the most important chip inside every computer — from your laptop and smartphone to your gaming console and smart TV. The CPU is often called the <em>brain</em> of the computer because it does all the thinking and decision-making!
+  </p>
+  <p>
+    Every time you click a button, open an app, watch a video, or play a game — the CPU is the one making it happen. It processes millions of instructions every single second!
   </p>
 
-  <h2>What Does the CPU Do?</h2>
-  <p>The CPU follows a simple three-step cycle over and over, billions of times per second:</p>
+  <h2>What Does the CPU Actually Do?</h2>
+  <p>The CPU follows a simple but super-fast three-step cycle over and over again — billions of times per second:</p>
   <ul>
-    <li>📥 <strong>Fetch</strong> — Gets the next instruction from memory.</li>
-    <li>🔍 <strong>Decode</strong> — Figures out what the instruction means.</li>
-    <li>⚡ <strong>Execute</strong> — Carries out the instruction.</li>
+    <li>📥 <strong>Fetch</strong> — The CPU reads the next instruction from memory (RAM). Instructions are written in a language called <em>machine code</em> (just 0s and 1s).</li>
+    <li>🔍 <strong>Decode</strong> — The CPU figures out what the instruction means. "Should I add these numbers? Move some data? Draw something on screen?"</li>
+    <li>⚡ <strong>Execute</strong> — The CPU carries out the instruction! Then it immediately moves on to the next one.</li>
   </ul>
-
-  <h2>How Fast is a CPU?</h2>
   <p>
-    Modern CPUs run at speeds measured in <strong>GHz (Gigahertz)</strong>. A 3 GHz CPU can perform 3 <em>billion</em> cycles per second. That's faster than you can blink your eye!
-  </p>
-
-  <h2>CPU Cores</h2>
-  <p>
-    Modern CPUs have multiple <strong>cores</strong> — think of each core as a separate brain. A <em>quad-core</em> CPU has 4 cores and can work on 4 tasks at the same time!
+    This cycle — <strong>Fetch → Decode → Execute</strong> — happens billions of times every second. That's why computers feel so fast!
   </p>
 
   <blockquote>
-    Imagine the CPU is a chef. A single-core CPU is one chef doing all the cooking. A quad-core CPU is four chefs cooking different dishes at the same time — much faster!
+    Imagine the CPU is a chef in a busy restaurant. The waiter (RAM) brings in order slips. The chef reads each order (fetch), understands what to cook (decode), and prepares the dish (execute). A fast chef = a fast CPU!
   </blockquote>
 
+  <h2>What is Clock Speed?</h2>
   <p>
-    <em>More detailed content coming soon! Your teacher will upload the full lesson here.</em>
+    Clock speed tells you how many cycles a CPU can do every second. It is measured in <strong>GHz (Gigahertz)</strong>.
   </p>
+  <ul>
+    <li>1 GHz = 1 <em>billion</em> cycles per second</li>
+    <li>3 GHz = 3 <em>billion</em> cycles per second</li>
+    <li>5 GHz = 5 <em>billion</em> cycles per second</li>
+  </ul>
+  <p>
+    Modern CPUs run at speeds between <strong>2 GHz and 5+ GHz</strong>. That's faster than you can blink your eye thousands of times!
+  </p>
+  <p>
+    However, clock speed isn't the only thing that matters. A CPU with more <strong>cores</strong> can often be faster even at a lower clock speed — here's why:
+  </p>
+
+  <h2>What are CPU Cores?</h2>
+  <p>
+    A <strong>core</strong> is like a separate mini-brain inside the CPU. Modern CPUs have multiple cores that can each work on different tasks at the same time — this is called <em>parallel processing</em>.
+  </p>
+  <ul>
+    <li>🧠 <strong>Single-Core</strong> — One brain, does one thing at a time. (Old computers)</li>
+    <li>🧠🧠 <strong>Dual-Core</strong> — Two brains working together. (Older laptops)</li>
+    <li>🧠🧠🧠🧠 <strong>Quad-Core</strong> — Four brains! Great for gaming and school work.</li>
+    <li>🧠×8 <strong>Octa-Core</strong> — Eight cores — used in high-performance laptops and phones.</li>
+    <li>🧠×16+ <strong>Many-Core</strong> — 16, 32, even 64 cores — used in professional workstations and servers.</li>
+  </ul>
+
+  <blockquote>
+    Think of cores like checkout lanes at a supermarket. One lane = slow when it's busy. Four lanes = four customers served at the same time = much faster!
+  </blockquote>
+
+  <h2>What's Inside a CPU?</h2>
+  <p>The CPU is a tiny chip — about the size of a postage stamp — but packed with billions of microscopic parts:</p>
+  <ul>
+    <li>🔢 <strong>ALU (Arithmetic Logic Unit)</strong> — Does math (addition, subtraction, multiplication) and logical decisions (true/false).</li>
+    <li>🗂️ <strong>Registers</strong> — Tiny, super-fast memory slots inside the CPU that hold data being used right this moment.</li>
+    <li>📬 <strong>Cache</strong> — A small but very fast memory area that stores frequently used data so the CPU doesn't have to wait for RAM.</li>
+    <li>🚌 <strong>Bus Interface</strong> — The system that connects the CPU to RAM, storage, and other parts of the computer.</li>
+    <li>🎛️ <strong>Control Unit</strong> — Directs all the other parts, telling them what to do and when.</li>
+  </ul>
+
+  <h2>CPU vs GPU — What's the Difference?</h2>
+  <p>You might have heard of a <strong>GPU (Graphics Processing Unit)</strong> too. Here's how they're different:</p>
+  <ul>
+    <li>🧠 <strong>CPU</strong> — A few powerful cores that handle all general tasks: running apps, making decisions, calculations. The "brain."</li>
+    <li>🎮 <strong>GPU</strong> — Hundreds or thousands of smaller cores that handle graphics, 3D rendering, and gaming. The "artist."</li>
+  </ul>
+  <p>
+    When you play a video game, the <strong>CPU</strong> handles the game logic (enemies moving, score counting), while the <strong>GPU</strong> handles drawing all the beautiful images on screen.
+  </p>
+
+  <h2>Famous CPU Brands</h2>
+  <p>Most CPUs come from two main companies:</p>
+  <ul>
+    <li>🔵 <strong>Intel</strong> — Makes the popular "Core i3, i5, i7, i9" series. Used in many laptops and desktops.</li>
+    <li>🔴 <strong>AMD</strong> — Makes the "Ryzen" series. Often a great value for gaming PCs.</li>
+    <li>🍎 <strong>Apple</strong> — Makes their own CPUs called "Apple Silicon" (M1, M2, M3) — found in MacBooks and iPads.</li>
+    <li>📱 <strong>Qualcomm & MediaTek</strong> — Make CPUs for Android smartphones and tablets.</li>
+  </ul>
+
+  <h2>How Are CPUs Made?</h2>
+  <p>
+    CPUs are made from <strong>silicon</strong> — the same material found in sand! Scientists etch billions of tiny circuits called <strong>transistors</strong> onto a silicon wafer using light. Modern CPUs contain over <strong>10 billion transistors</strong> — each one smaller than a virus!
+  </p>
+  <ul>
+    <li>🏭 CPU chips are made in special factories called <em>fabs</em>.</li>
+    <li>🔬 Modern transistors are just <strong>3–5 nanometers</strong> wide — 20,000 times thinner than a human hair!</li>
+    <li>💰 A single factory to make CPUs costs over <strong>$10 billion</strong> to build.</li>
+  </ul>
+
+  <h2>Fun Facts About CPUs</h2>
+  <ul>
+    <li>🤯 The first commercial CPU (Intel 4004, 1971) had just 2,300 transistors. Today's CPUs have over 100 billion!</li>
+    <li>🔥 CPUs get hot when working hard — that's why computers have fans and heat sinks to cool them down.</li>
+    <li>⚡ If the CPU is the brain, RAM is like short-term memory, and the hard drive is long-term memory.</li>
+    <li>🌡️ The CPU can reach temperatures of 90°C when running heavy tasks. Cooling is critical!</li>
+    <li>🚀 The CPU in the NASA Voyager probe (launched 1977) ran at just 0.000077 GHz — your phone is millions of times faster!</li>
+  </ul>
+
+  <h2>Quick Quiz: Test Your CPU Knowledge!</h2>
+  <ul>
+    <li>❓ What does CPU stand for?</li>
+    <li>❓ What are the three steps the CPU does (Fetch → ? → ?)  </li>
+    <li>❓ What unit is clock speed measured in?</li>
+    <li>❓ What is a CPU "core"?</li>
+    <li>❓ Name one difference between a CPU and a GPU.</li>
+  </ul>
+  <p><em>All the answers are on this page — challenge yourself to find them!</em></p>
+
+  <h2>What's Next?</h2>
+  <p>
+    Amazing work! 🎉 You now understand how the CPU — the brain of every computer — works. Next up, we'll explore <strong>Memory &amp; Storage</strong>: the difference between RAM (short-term memory) and hard drives (long-term memory). Ready? Let's go!
+  </p>
+
 </KidsLayout>
