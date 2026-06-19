@@ -37,7 +37,7 @@ export const books: Book[] = [
     tagline: 'A Fun and Easy Guide to Learn HTML and Build Your Own Websites',
     description: 'Step into the exciting world of web development! This book guides kids aged 8–15 through the essentials of building websites from scratch using simple language, colorful illustrations, and hands-on projects. Perfect for beginners with zero coding experience.',
     coverImage: '/images/books/html-for-kids.png',
-    pages: 150,
+    pages: 50,
     downloads: '2,350',
     updated: 'June 2026',
     level: 'Beginner Friendly',
@@ -106,7 +106,7 @@ export const books: Book[] = [
   <tr><th style="text-align:left;padding:10px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0;font-weight:700;color:#1b1b2f;">Detail</th><th style="text-align:left;padding:10px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0;font-weight:700;color:#1b1b2f;">Info</th></tr>
   <tr><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b;font-weight:600;">Publisher</td><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">CodesCompiler Educational Press</td></tr>
   <tr><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b;font-weight:600;">Language</td><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">English</td></tr>
-  <tr><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b;font-weight:600;">Pages</td><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">150 Pages</td></tr>
+  <tr><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b;font-weight:600;">Pages</td><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">50 Pages</td></tr>
   <tr><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b;font-weight:600;">Edition</td><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">1st Edition (2026)</td></tr>
   <tr><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b;font-weight:600;">File Format</td><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">PDF (High Quality)</td></tr>
   <tr><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b;font-weight:600;">Age Group</td><td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">8 – 15 Years</td></tr>
