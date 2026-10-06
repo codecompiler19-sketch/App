@@ -134,7 +134,7 @@ const tutorialLinks = [
     <!-- NEW HEADER & NAVBAR                                          -->
     <!-- ============================================================ -->
     <header class="bg-white sticky top-0 z-50 shadow-sm flex flex-col relative">
-      <div class="w-full border-b border-slate-200 bg-white">
+      <div id="cc-topbar" class="cc-topbar w-full border-b border-slate-200 bg-white">
         <div class="max-w-screen-2xl mx-auto px-4 lg:px-8">
           <div class="flex items-center justify-between gap-4 min-h-[48px]">
             <nav class="flex items-center gap-1 overflow-x-auto whitespace-nowrap scrollbar-hide" aria-label="Primary navigation">
@@ -224,7 +224,7 @@ const tutorialLinks = [
     </header>
 
     <style is:global>
-      .cc-top-link{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .7rem;color:#0f172a;font-size:.95rem;font-weight:600;text-decoration:none;border-bottom:2px solid transparent;transition:all .18s ease}
+      .cc-topbar{max-height:64px;opacity:1;overflow:hidden;transition:max-height .28s ease,opacity .2s ease,border-color .28s ease;will-change:max-height,opacity}.cc-topbar.cc-topbar-hidden{max-height:0;opacity:0;border-bottom-color:transparent}.cc-top-link{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .7rem;color:#0f172a;font-size:.95rem;font-weight:600;text-decoration:none;border-bottom:2px solid transparent;transition:all .18s ease}
       .cc-top-link:hover{color:#0f172a;background:#f8fafc}
       .cc-top-link.cc-active{border-bottom-color:#fbbf24}
       .cc-top-icon{font-size:1rem;line-height:1;min-width:1.1rem;text-align:center}
@@ -1076,6 +1076,43 @@ const tutorialLinks = [
         </a>
       </div>
     </div>
+
+    <!-- Hide the utility top bar while scrolling down; reveal it when scrolling up. -->
+    <script is:inline>
+      (() => {
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        const updateTopbar = () => {
+          const topbar = document.getElementById('cc-topbar');
+          const currentY = window.scrollY;
+
+          if (topbar) {
+            if (currentY <= 8 || currentY < lastScrollY) {
+              topbar.classList.remove('cc-topbar-hidden');
+            } else if (currentY > lastScrollY + 4) {
+              topbar.classList.add('cc-topbar-hidden');
+            }
+          }
+
+          lastScrollY = Math.max(currentY, 0);
+          ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateTopbar);
+            ticking = true;
+          }
+        }, { passive: true });
+
+        document.addEventListener('astro:after-swap', () => {
+          lastScrollY = window.scrollY;
+          const topbar = document.getElementById('cc-topbar');
+          if (topbar) topbar.classList.remove('cc-topbar-hidden');
+        });
+      })();
+    </script>
 
     <!-- Client-side script to handle social sidebar toggle and persistence -->
     <script is:inline>
