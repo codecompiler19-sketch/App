@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const definitions = [
+  ['HTML','HyperText Markup Language — the standard markup language used to structure web pages.','/tutorial/html-introduction/'],
+  ['CSS','Cascading Style Sheets — used to style and lay out web pages.','/tutorial/css-introduction/'],
+  ['JavaScript','A programming language used to add behavior and interactivity to web pages.','/tutorial/javascript-introduction/'],
+  ['Python','A general-purpose programming language known for readable syntax and broad use.','/tutorial/python-introduction/'],
+  ['SQL','Structured Query Language used to work with relational databases.','/tutorial/sql-introduction/'],
+  ['SEO','Search Engine Optimization — practices that help pages become easier to discover in search engines.','/tutorial/seo-introduction/'],
+  ['Algorithm','A step-by-step procedure for solving a problem or completing a task.','/cs-basics/algorithms/'],
+  ['Data Structure','A way of organizing and storing data so it can be accessed and modified efficiently.','/cs-basics/data-structures/'],
+];
+---
+
+<BaseLayout title="Programming Definitions" description="Easy-to-understand programming and computer science definitions for HTML, CSS, JavaScript, Python, SQL, SEO and core concepts.">
+  <section class="hero"><span>CODING GLOSSARY</span><h1>Programming Definitions</h1><p>Understand common programming and computer science terms in simple language.</p></section>
+  <main class="wrap">
+    <h2>Popular Definitions</h2>
+    <div class="grid">
+      {definitions.map(([term,definition,href]) => (
+        <a class="card" href={href}>
+          <h3>{term}</h3>
+          <p>{definition}</p>
+          <strong>Learn more →</strong>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+.hero{background:linear-gradient(135deg,#10243d,#173d67);color:#fff;text-align:center;padding:56px 20px}.hero span{color:#f5b900;font-size:.78rem;font-weight:800;letter-spacing:.12em}.hero h1{font-size:clamp(2rem,4vw,3rem);margin:12px 0}.hero p{color:#dbe7f5;font-size:1.08rem}.wrap{max-width:1120px;margin:auto;padding:44px 20px 70px}.wrap h2{text-align:center;color:#10243d;font-size:1.8rem;margin:0 0 28px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{padding:22px;border:1px solid #e2e8f0;border-radius:14px;background:#fff;text-decoration:none;box-shadow:0 3px 12px rgba(15,23,42,.05);transition:.2s}.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,23,42,.12)}.card h3{color:#10243d;font-size:1.2rem;margin:0 0 10px}.card p{color:#64748b;line-height:1.55;min-height:78px}.card strong{color:#0f766e}@media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
