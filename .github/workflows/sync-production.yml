@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          rsync -a --delete --exclude='.git/' /tmp/codescompiler/ ./
+          rsync -a --delete --exclude='.git/' --exclude='.github/workflows/' /tmp/codescompiler/ ./
 
           printf 'app.codescompiler.com\n' > CNAME
 
