@@ -1,4 +1,4 @@
-name: Deploy CodesCompiler to GitHub Pages
+name: Deploy AppCompiler to GitHub Pages
 
 on:
   push:
@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,6 +32,8 @@ jobs:
         run: npm install
 
       - name: Build site with Astro
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
         run: npm run build
 
       - name: Upload artifact for GitHub Pages
@@ -42,7 +44,7 @@ jobs:
   deploy:
     name: Deploy
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
