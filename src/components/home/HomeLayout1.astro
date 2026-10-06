@@ -15,48 +15,77 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
 };
 ---
 
-<section class="relative w-full overflow-hidden bg-[#282A35]">
-  <div class="absolute inset-0 bg-[linear-gradient(rgba(4,170,109,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(4,170,109,0.05)_1px,transparent_1px)] bg-[size:3rem_3rem]"></div>
-  <div class="absolute top-0 left-1/4 w-96 h-96 bg-[#04AA6D]/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div aria-hidden="true" class="hidden lg:block absolute top-12 left-6 font-mono text-xs text-[#04AA6D]/40 leading-relaxed select-none float-1">
-    &lt;<span class="text-orange-400/50">html</span>&gt;<br/>
-    &nbsp;&lt;<span class="text-orange-400/50">head</span>&gt;&lt;/<span class="text-orange-400/50">head</span>&gt;<br/>
-    &nbsp;&lt;<span class="text-orange-400/50">body</span>&gt;<br/>
-    &nbsp;&nbsp;&lt;<span class="text-orange-400/50">h1</span>&gt;Hello!&lt;/<span class="text-orange-400/50">h1</span>&gt;<br/>
-    &nbsp;&lt;/<span class="text-orange-400/50">body</span>&gt;<br/>
-    &lt;/<span class="text-orange-400/50">html</span>&gt;
-  </div>
-  <div aria-hidden="true" class="hidden lg:block absolute top-16 right-6 font-mono text-xs text-blue-400/40 leading-relaxed select-none text-right float-2">
-    <span class="text-purple-400/50">.hero</span> &#123;<br/>
-    &nbsp;&nbsp;<span class="text-blue-300/50">display</span>: flex;<br/>
-    &nbsp;&nbsp;<span class="text-blue-300/50">color</span>: <span class="text-green-400/50">#04AA6D</span>;<br/>
-    &nbsp;&nbsp;<span class="text-blue-300/50">gap</span>: 1rem;<br/>
-    &#125;
-  </div>
-  <div aria-hidden="true" class="hidden xl:block absolute bottom-20 left-12 font-mono text-xs text-yellow-400/30 leading-relaxed select-none float-3">
-    <span class="text-yellow-300/40">const</span> <span class="text-white/30">learn</span> = () =&gt; &#123;<br/>
-    &nbsp;&nbsp;<span class="text-yellow-300/40">return</span> <span class="text-green-400/40">'success'</span>;<br/>
-    &#125;;
-  </div>
+<section class="cc-home-hero relative w-full overflow-hidden">
+  <div class="cc-hero-glow cc-hero-glow-a"></div>
+  <div class="cc-hero-glow cc-hero-glow-b"></div>
+  <div class="relative z-10 max-w-screen-2xl mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
+    <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
+      <div class="max-w-3xl">
+        <p class="cc-hero-kicker">FREE PROGRAMMING TUTORIALS</p>
+        <h1 class="cc-hero-title">Learn to Code with<br/><span>Step-by-Step</span> Tutorials</h1>
+        <p class="cc-hero-copy">Free programming tutorials, examples, definitions, interview questions and more. Learn HTML, CSS, JavaScript, Python, SQL, PHP and SEO with easy-to-follow guides.</p>
+        <form id="hero-search-form" class="cc-hero-search" role="search">
+          <span class="cc-hero-search-icon" aria-hidden="true">⌕</span>
+          <input id="hero-search" type="search" autocomplete="off" placeholder="Search tutorials, examples, questions..." aria-label="Search tutorials, examples and questions" />
+          <button type="submit">⌕ <span>Search</span></button>
+        </form>
+        <div class="cc-hero-benefits">
+          <div><span class="cc-benefit-icon cc-benefit-green">◆</span><span><strong>Free</strong><small>Tutorials</small></span></div>
+          <div><span class="cc-benefit-icon cc-benefit-blue">&lt;/&gt;</span><span><strong>Practical</strong><small>Examples</small></span></div>
+          <div><span class="cc-benefit-icon cc-benefit-purple">▤</span><span><strong>Interview</strong><small>Questions</small></span></div>
+          <div><span class="cc-benefit-icon cc-benefit-orange">▤</span><span><strong>Detailed</strong><small>Explanations</small></span></div>
+        </div>
+      </div>
 
-  <div class="relative z-10 max-w-5xl mx-auto px-5 py-24 sm:py-32 text-center">
-    <div class="inline-flex items-center gap-2 bg-[#04AA6D]/10 border border-[#04AA6D]/30 rounded-full px-4 py-2 mb-8"><span class="w-2 h-2 rounded-full bg-[#04AA6D] animate-pulse"></span><span class="text-[#04AA6D] text-sm font-semibold">Free · No Sign-up · Start Instantly</span></div>
-    {theme.heroTitle ? (<h1 class="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-none tracking-tight mb-6" set:html={theme.heroTitle} />) : (<h1 class="text-5xl sm:text-6xl md:text-7xl font-black text-white leading-none tracking-tight mb-6">Learn HTML, CSS &amp;<br/><span class="relative inline-block mt-2"><span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#04AA6D] to-emerald-300">JavaScript Online</span><span class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-[#04AA6D] to-emerald-300 rounded-full opacity-50"></span></span><span class="block text-2xl sm:text-3xl text-gray-300 font-medium mt-4">Free &amp; Interactive</span></h1>)}
-    {theme.heroSubtitle ? (<p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10" set:html={theme.heroSubtitle} />) : (<p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10">Interactive, hands-on tutorials for <strong class="text-orange-400">HTML</strong>, <strong class="text-blue-400">CSS</strong>, and <strong class="text-yellow-400">JavaScript</strong>. Write real code in the browser and see results instantly — no setup, no downloads.</p>)}
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-      <a href={theme.heroBtnUrl || "/tutorial/html-introduction/"} class="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold text-white bg-[#04AA6D] hover:bg-[#038a58] rounded-lg shadow-lg shadow-[#04AA6D]/20 hover:shadow-[#04AA6D]/40 hover:-translate-y-0.5 transition-all duration-200">{theme.heroBtnText || "Start Learning Free"}<svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></a>
-      <a href={theme.heroSecondaryBtnUrl || "#courses"} class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold text-gray-300 border border-gray-600 hover:border-gray-400 hover:text-white rounded-lg transition-all duration-200">{theme.heroSecondaryBtnText || "Browse All Courses"}</a>
+      <div class="cc-hero-visual" aria-label="Coding workspace illustration">
+        <div class="cc-code-orbit cc-orbit-html"><b>5</b><span>HTML</span></div>
+        <div class="cc-code-orbit cc-orbit-css"><b>3</b><span>CSS</span></div>
+        <div class="cc-code-orbit cc-orbit-js"><b>JS</b><span>JavaScript</span></div>
+        <div class="cc-code-orbit cc-orbit-py"><b>Py</b><span>Python</span></div>
+        <div class="cc-code-orbit cc-orbit-sql"><b>DB</b><span>SQL</span></div>
+        <div class="cc-code-orbit cc-orbit-php"><b>php</b><span>PHP</span></div>
+        <div class="cc-code-orbit cc-orbit-seo"><b>↗</b><span>SEO</span></div>
+
+        <div class="cc-laptop">
+          <div class="cc-laptop-screen">
+            <div class="cc-editor-top"><i></i><i></i><i></i><span>index.html</span></div>
+            <div class="cc-editor-code">
+              <div><em>1</em><span><b>&lt;!DOCTYPE</b> html&gt;</span></div>
+              <div><em>2</em><span><b>&lt;html</b> lang=<mark>"en"</mark>&gt;</span></div>
+              <div><em>3</em><span><b>&lt;head&gt;</b></span></div>
+              <div><em>4</em><span>&nbsp;&nbsp;&lt;meta charset=<mark>"UTF-8"</mark>&gt;</span></div>
+              <div><em>5</em><span>&nbsp;&nbsp;&lt;title&gt;<strong>CodesCompiler</strong>&lt;/title&gt;</span></div>
+              <div><em>6</em><span><b>&lt;/head&gt;</b></span></div>
+              <div><em>7</em><span><b>&lt;body&gt;</b></span></div>
+              <div><em>8</em><span>&nbsp;&nbsp;&lt;h1&gt;<strong>Learn Coding</strong>&lt;/h1&gt;</span></div>
+              <div><em>9</em><span>&nbsp;&nbsp;&lt;p&gt;Build your skills step by step.&lt;/p&gt;</span></div>
+              <div><em>10</em><span><b>&lt;/body&gt;</b></span></div>
+              <div><em>11</em><span><b>&lt;/html&gt;</b></span></div>
+            </div>
+          </div>
+          <div class="cc-laptop-base"></div>
+        </div>
+      </div>
     </div>
-    <div class="max-w-2xl mx-auto bg-[#1a1b26] rounded-2xl border border-white/10 shadow-2xl overflow-hidden text-left">
-      <div class="flex items-center gap-2 px-4 py-3 bg-[#13131e] border-b border-white/10"><span class="w-2.5 h-2.5 rounded-full bg-red-500/70"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/70"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/70"></span><div class="flex-1 flex justify-center"><span class="text-gray-500 text-xs font-mono">index.html — CodesCompiler Try It Yourself</span></div></div>
-      <div class="p-5 font-mono text-sm leading-relaxed"><div><span class="text-gray-500">1 </span><span class="text-orange-400">&lt;h1</span> <span class="text-yellow-300">style</span><span class="text-white">=</span><span class="text-green-400">"color:#04AA6D"</span><span class="text-orange-400">&gt;</span><span class="text-white">Hello, World!</span><span class="text-orange-400">&lt;/h1&gt;</span></div><div><span class="text-gray-500">2 </span><span class="text-orange-400">&lt;p&gt;</span><span class="text-white">I am learning <span class="text-blue-300">HTML</span> at CodesCompiler.</span><span class="text-orange-400">&lt;/p&gt;</span></div><div><span class="text-gray-500">3 </span><span class="text-orange-400">&lt;button</span> <span class="text-yellow-300">onclick</span><span class="text-white">=</span><span class="text-green-400">"alert('It works! 🎉')"</span><span class="text-orange-400">&gt;</span><span class="text-white">Click Me</span><span class="text-orange-400">&lt;/button&gt;</span></div><div class="mt-2 pt-2 border-t border-white/5 text-gray-500 text-xs">▶ Output: <span class="text-white font-sans">Hello, World!</span> &nbsp; <span class="text-[#04AA6D]">I am learning HTML at CodesCompiler.</span> &nbsp; <span class="bg-gray-700 text-white px-2 py-0.5 rounded text-xs">Click Me</span></div></div>
+    <div class="cc-slider-controls" aria-label="Hero slider">
+      <button type="button" aria-label="Previous slide">‹</button>
+      <span class="active"></span><span></span><span></span><span></span><span></span>
+      <button type="button" aria-label="Next slide">›</button>
     </div>
   </div>
 </section>
 
-<section class="w-full border-y border-emerald-700/20 bg-gradient-to-r from-emerald-600 via-[#04AA6D] to-emerald-600 text-white" aria-label="CodesCompiler highlights"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4"><div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">{[{ v: '50+', l: 'Tutorial Chapters', icon: 'book' },{ v: '200+', l: 'Code Examples', icon: 'code' },{ v: '3', l: 'Learning Paths', icon: 'route' },{ v: '$0', l: 'Always Free', icon: 'spark' }].map(s => (<div class="stats-card group flex items-center sm:justify-center gap-3 sm:gap-4 min-h-[68px] sm:min-h-[76px] rounded-xl px-3 sm:px-5 py-2.5 sm:py-3 transition-all duration-200 hover:bg-white/10"><span class="stats-icon flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/15 text-white" aria-hidden="true">{s.icon === 'book' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 sm:h-[22px] sm:w-[22px]"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z"/><path stroke-linecap="round" d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20M8 7h8M8 11h6"/></svg>}{s.icon === 'code' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 sm:h-[22px] sm:w-[22px]"><path stroke-linecap="round" stroke-linejoin="round" d="m8.5 8-4 4 4 4M15.5 8l4 4-4 4M13.5 5l-3 14"/></svg>}{s.icon === 'route' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 sm:h-[22px] sm:w-[22px]"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M8.5 6c4 0 1.5 8 6 8h1M18 15.5c0-3.5-2-5.5-5-5.5H12"/></svg>}{s.icon === 'spark' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 sm:h-[22px] sm:w-[22px]"><path stroke-linecap="round" stroke-linejoin="round" d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></svg>}</span><span class="min-w-0 text-left sm:text-center"><span class="block text-[1.45rem] sm:text-3xl font-extrabold tracking-tight leading-none">{s.v}</span><span class="mt-1 block text-[11px] sm:text-sm font-medium text-emerald-50/95 leading-tight truncate sm:whitespace-normal">{s.l}</span></span></div>))}</div></div></section>
-
+<section class="cc-feature-strip" aria-label="CodesCompiler features">
+  <div class="max-w-screen-2xl mx-auto px-5 sm:px-8 lg:px-10 py-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div class="cc-feature-card"><span class="cc-feature-icon blue">&lt;/&gt;</span><span><strong>Beginner Friendly</strong><small>Easy to follow guides</small></span></div>
+      <div class="cc-feature-card"><span class="cc-feature-icon green">▮▮▮</span><span><strong>Step-by-Step</strong><small>Learn with examples</small></span></div>
+      <div class="cc-feature-card"><span class="cc-feature-icon yellow">◆</span><span><strong>Interview Ready</strong><small>Practice questions</small></span></div>
+      <div class="cc-feature-card"><span class="cc-feature-icon blue">▤</span><span><strong>All in One Place</strong><small>Tutorials, programs &amp; more</small></span></div>
+      <div class="cc-feature-card"><span class="cc-feature-icon orange">➜</span><span><strong>Improve Your Skills</strong><small>From basics to advanced</small></span></div>
+    </div>
+  </div>
+</section>
 {theme.showTutorialCategories !== false && (<section id="courses" class="relative w-full overflow-hidden bg-slate-50 py-20 sm:py-24 px-4 sm:px-6"><div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_15%_15%,rgba(59,130,246,0.08),transparent_28%),radial-gradient(circle_at_85%_25%,rgba(168,85,247,0.08),transparent_28%),radial-gradient(circle_at_70%_85%,rgba(16,185,129,0.07),transparent_30%)]"></div><div class="relative max-w-7xl mx-auto"><div class="max-w-3xl mx-auto text-center mb-12 sm:mb-14"><span class="inline-flex items-center rounded-full bg-blue-50 px-4 py-2 text-xs sm:text-sm font-bold tracking-[0.18em] text-blue-600 uppercase">Learn by Topics</span><h2 class="mt-5 text-4xl sm:text-5xl font-black tracking-tight text-slate-950" set:html={theme.coursesTitle || 'Explore Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">Tutorial Library</span>'} /><p class="mt-4 text-base sm:text-lg leading-7 text-slate-500" set:html={theme.coursesSubtitle || 'Step-by-step guides, real examples, and practical projects to help you learn web development and programming skills for free.'} /></div><div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-5 sm:gap-6">
   
   <a href="/tutorial/html-introduction/" class="course-card group xl:col-span-2 relative overflow-hidden rounded-[24px] border border-orange-100 bg-gradient-to-br from-white via-orange-50/60 to-orange-100/60 p-6 sm:p-7 shadow-[0_12px_35px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(249,115,22,0.14)]"><div class="absolute -right-8 -top-10 h-36 w-36 rounded-full bg-orange-200/40 blur-2xl"></div><div class="absolute right-5 top-5 text-orange-300/40" aria-hidden="true"><svg viewBox="0 0 64 64" class="h-20 w-20"><path fill="currentColor" d="M12 4h40l-4 48-16 8-16-8L12 4Z"/><path fill="#fff" d="M21 14h22l-.7 7H28l.5 6h13.7l-1.3 14-9.1 4-9-4-.6-7h7l.3 3 2.4 1 2.5-1 .4-4H21l-1.8-19Z"/></svg></div><div class="relative min-h-[330px] sm:min-h-[355px] flex flex-col"><span class="self-start rounded-full bg-orange-100 px-3.5 py-2 text-xs font-bold text-orange-700">Beginner</span><div class="mt-6 pr-20"><h3 class="text-3xl font-black text-slate-950">HTML</h3><p class="mt-3 text-sm sm:text-[15px] leading-6 text-slate-600">The skeleton of every webpage. Learn to structure content, create forms, add images, and build solid foundations.</p></div><div class="mt-auto"><div class="flex flex-wrap items-center gap-4 text-sm text-slate-500"><span>📚 12 chapters</span><span>◷ ~3 hours</span></div><div class="mt-5 inline-flex w-full items-center justify-center gap-3 rounded-full bg-orange-500 px-5 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-orange-500/20 transition group-hover:bg-orange-600">Start HTML <span class="text-lg transition-transform group-hover:translate-x-1">→</span></div></div></div></a>
@@ -98,6 +127,44 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
 
 {(theme.showRecentPosts !== false && latestPosts.length > 0) && (<section class="w-full bg-gray-50 py-20 px-5 border-t border-gray-100"><div class="max-w-5xl mx-auto"><div class="text-center mb-14"><h2 class="text-3xl sm:text-4xl font-black text-gray-900 mt-2" set:html={theme.postsTitle || 'Latest from the Blog'} /><p class="text-gray-500 mt-3 max-w-lg mx-auto" set:html={theme.postsSubtitle || 'Read our newest tips, tricks, and tutorials.'} /></div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{latestPosts.map(post => {const catColor = CATEGORY_COLORS[post.data.category] ?? { color: '#6b7280', bg: '#f3f4f6' };return (<a href={`/blog/${post.slug}`} class="group bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col block no-underline">{post.data.image ? (<div class="overflow-hidden h-44"><img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" /></div>) : (<div class="h-36 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-4xl">💻</div>)}<div class="p-5 flex flex-col gap-2 flex-1"><div class="flex items-center justify-between gap-2"><span class="text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full" style={`color:${catColor.color};background:${catColor.bg}`}>{post.data.category}</span><span class="text-xs text-gray-400">{new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span></div><h3 class="text-base font-bold text-gray-900 leading-snug line-clamp-2">{post.data.title}</h3><p class="text-sm text-gray-500 leading-relaxed line-clamp-2 flex-1">{post.data.description}</p><div class="text-sm font-bold text-[#04AA6D] flex items-center gap-1 mt-1">Read Post <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></div></div></a>);})}</div></div></section>)}
 
+
+<style>
+  .cc-home-hero{background:linear-gradient(115deg,#061d35 0%,#062b4e 48%,#075087 100%);color:#fff;isolation:isolate}
+  .cc-home-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 45%,rgba(0,168,255,.18),transparent 28%),radial-gradient(circle at 30% 20%,rgba(255,193,7,.08),transparent 30%);pointer-events:none}
+  .cc-hero-glow{position:absolute;border-radius:9999px;filter:blur(55px);pointer-events:none}.cc-hero-glow-a{width:280px;height:280px;right:16%;top:4%;background:rgba(14,165,233,.16)}.cc-hero-glow-b{width:220px;height:220px;left:28%;bottom:0;background:rgba(37,99,235,.12)}
+  .cc-hero-kicker{margin:0 0 10px;font-size:.78rem;letter-spacing:.28em;font-weight:700;color:#dbeafe}
+  .cc-hero-title{margin:0;font-size:clamp(2.6rem,5vw,4.6rem);line-height:1.03;letter-spacing:-.045em;font-weight:900;color:#fff}
+  .cc-hero-title span{color:#ffc400}.cc-hero-copy{max-width:760px;margin:22px 0 28px;color:#d8e7f5;font-size:clamp(1rem,1.55vw,1.28rem);line-height:1.55}
+  .cc-hero-search{max-width:805px;display:flex;align-items:center;gap:0;background:#fff;border:5px solid rgba(255,255,255,.16);border-radius:999px;overflow:hidden;box-shadow:0 15px 45px rgba(0,0,0,.2)}
+  .cc-hero-search-icon{color:#10233b;font-size:2rem;margin-left:18px;line-height:1;transform:rotate(-20deg)}.cc-hero-search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#172033;font-size:1.02rem;padding:14px 12px}.cc-hero-search input::placeholder{color:#7b8797}
+  .cc-hero-search button{margin:4px;border:0;border-radius:999px;background:#ffc928;color:#111827;font-weight:800;padding:13px 23px;cursor:pointer;white-space:nowrap}.cc-hero-search button:hover{background:#ffd54a}
+  .cc-hero-benefits{display:flex;flex-wrap:wrap;gap:24px;margin-top:25px}.cc-hero-benefits>div{display:flex;align-items:center;gap:9px}.cc-hero-benefits strong,.cc-hero-benefits small{display:block}.cc-hero-benefits strong{font-size:.98rem}.cc-hero-benefits small{color:#dbe7f2;font-size:.88rem}.cc-benefit-icon{width:48px;height:48px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;box-shadow:0 8px 20px rgba(0,0,0,.16)}.cc-benefit-green{background:#13b96a}.cc-benefit-blue{background:#1478ea}.cc-benefit-purple{background:#8b4de8}.cc-benefit-orange{background:#ff6b21}
+  .cc-hero-visual{position:relative;min-height:420px}.cc-laptop{position:absolute;left:10%;right:2%;bottom:10px;transform:perspective(1200px) rotateY(-7deg) rotateX(2deg);filter:drop-shadow(0 25px 28px rgba(0,0,0,.34));z-index:3}
+  .cc-laptop-screen{height:310px;border:8px solid #101827;border-radius:22px 22px 12px 12px;background:#0b1220;overflow:hidden;box-shadow:inset 0 0 0 1px #263348}.cc-editor-top{height:34px;background:#151f31;display:flex;align-items:center;gap:7px;padding:0 12px;color:#cbd5e1;font:600 12px 'Fira Code',monospace}.cc-editor-top i{width:9px;height:9px;border-radius:50%;background:#ef4444}.cc-editor-top i:nth-child(2){background:#f59e0b}.cc-editor-top i:nth-child(3){background:#22c55e}.cc-editor-top span{margin-left:10px}
+  .cc-editor-code{padding:13px 18px;color:#d9e4f2;font:500 12px/1.75 'Fira Code',monospace}.cc-editor-code div{display:flex}.cc-editor-code em{width:24px;color:#64748b;font-style:normal}.cc-editor-code b{color:#ff6b8a;font-weight:500}.cc-editor-code mark{background:none;color:#ffd34d}.cc-editor-code strong{color:#7dd3fc;font-weight:500}
+  .cc-laptop-base{height:25px;width:112%;margin-left:-6%;background:linear-gradient(#64748b,#1f2937);border-radius:0 0 24px 24px;clip-path:polygon(4% 0,96% 0,100% 65%,92% 100%,8% 100%,0 65%)}.cc-laptop-base:after{content:"";display:block;width:24%;height:6px;margin:8px auto;background:#94a3b8;border-radius:999px;opacity:.55}
+  .cc-code-orbit{position:absolute;z-index:4;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}.cc-code-orbit b{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;box-shadow:0 10px 24px rgba(0,0,0,.22)}.cc-orbit-html{left:2%;top:8%;color:#fff}.cc-orbit-html b{background:#f05a28}.cc-orbit-css{left:25%;top:0;color:#fff}.cc-orbit-css b{background:#1976d2}.cc-orbit-js{left:46%;top:-3%;color:#fff}.cc-orbit-js b{background:#f1cf17;color:#111827}.cc-orbit-py{right:20%;top:0;color:#fff}.cc-orbit-py b{background:linear-gradient(135deg,#3776ab 0 50%,#ffd343 50% 100%)}.cc-orbit-sql{right:2%;top:16%;color:#fff}.cc-orbit-sql b{background:#7378d1}.cc-orbit-php{right:0;top:47%;color:#fff}.cc-orbit-php b{background:#8892bf;font-style:italic}.cc-orbit-seo{right:9%;bottom:5%;color:#fff}.cc-orbit-seo b{background:#16a34a}
+  .cc-slider-controls{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:6px}.cc-slider-controls button{width:44px;height:44px;border:0;border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font-size:2rem;line-height:1;cursor:pointer}.cc-slider-controls span{width:10px;height:10px;border-radius:50%;background:#b8c4d2}.cc-slider-controls span.active{width:23px;border-radius:999px;background:#ffc400}
+  .cc-feature-strip{background:#fff;border-bottom:1px solid #e5e7eb}.cc-feature-card{min-height:84px;border:1px solid #e5e7eb;border-radius:17px;background:linear-gradient(180deg,#fff,#f8fafc);display:flex;align-items:center;gap:13px;padding:13px 16px;box-shadow:0 4px 14px rgba(15,23,42,.04)}.cc-feature-card strong,.cc-feature-card small{display:block}.cc-feature-card strong{font-size:.96rem;color:#0f172a}.cc-feature-card small{font-size:.82rem;color:#64748b;margin-top:3px}.cc-feature-icon{width:43px;height:43px;flex:0 0 43px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem}.cc-feature-icon.blue{background:#e0f2fe;color:#0b6dcc}.cc-feature-icon.green{background:#dcfce7;color:#059669}.cc-feature-icon.yellow{background:#fef3c7;color:#d97706}.cc-feature-icon.orange{background:#ffedd5;color:#ea580c}
+  @media(max-width:1023px){.cc-hero-visual{min-height:390px}.cc-laptop{left:8%;right:6%}.cc-laptop-screen{height:285px}.cc-code-orbit b{width:46px;height:46px}.cc-code-orbit{font-size:.68rem}}
+  @media(max-width:767px){.cc-home-hero .py-12{padding-top:2.6rem;padding-bottom:2.6rem}.cc-hero-kicker{font-size:.68rem;letter-spacing:.18em}.cc-hero-title{font-size:2.65rem}.cc-hero-copy{font-size:1rem;margin-top:16px}.cc-hero-search{border-width:3px}.cc-hero-search button{padding:11px 16px}.cc-hero-search button span{display:none}.cc-hero-benefits{gap:14px 20px}.cc-hero-benefits>div{min-width:42%}.cc-benefit-icon{width:40px;height:40px}.cc-hero-visual{min-height:330px;margin-top:12px}.cc-laptop{left:6%;right:4%;bottom:8px}.cc-laptop-screen{height:230px;border-width:6px}.cc-editor-code{font-size:9px;padding:8px}.cc-code-orbit b{width:38px;height:38px;font-size:.75rem;border-radius:10px}.cc-orbit-html{left:0}.cc-orbit-css{left:23%}.cc-orbit-js{left:45%}.cc-orbit-py{right:17%}.cc-orbit-sql{right:0}.cc-orbit-php{right:-2%;top:50%}.cc-orbit-seo{right:7%;bottom:0}.cc-slider-controls button{width:36px;height:36px;font-size:1.6rem}}
+  html.dark-theme .cc-feature-strip{background:#0f172a;border-color:#334155}html.dark-theme .cc-feature-card{background:#172033;border-color:#334155}html.dark-theme .cc-feature-card strong{color:#f8fafc}html.dark-theme .cc-feature-card small{color:#94a3b8}
+</style>
+
+<script is:inline>
+  const heroForm = document.getElementById('hero-search-form');
+  const heroInput = document.getElementById('hero-search');
+  heroForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const main = document.getElementById('main-search');
+    if (main && heroInput) {
+      main.value = heroInput.value;
+      main.dispatchEvent(new Event('input', { bubbles: true }));
+      main.focus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+</script>
 <style>
   @keyframes float1 { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(-2deg); } }
   @keyframes float2 { 0%, 100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(10px) rotate(2deg); } }
