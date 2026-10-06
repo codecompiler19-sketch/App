@@ -138,17 +138,17 @@ const tutorialLinks = [
         <div class="max-w-screen-2xl mx-auto px-4 lg:px-8">
           <div class="flex items-center justify-between gap-4 min-h-[48px]">
             <nav class="flex items-center gap-1 overflow-x-auto whitespace-nowrap scrollbar-hide" aria-label="Primary navigation">
-              <a href="/" class="cc-top-link cc-active"><span class="cc-top-icon">⌂</span> Home</a>
-              <a href="/tutorials/" class="cc-top-link"><span class="cc-top-icon">📖</span> Tutorials</a>
-              <a href="/programs/" class="cc-top-link"><span class="cc-top-icon">{ }</span> Programs</a>
-              <a href="/interview-questions/" class="cc-top-link"><span class="cc-top-icon">▣</span> Interview Questions</a>
-              <a href="/definitions/" class="cc-top-link"><span class="cc-top-icon">▤</span> Definitions</a>
-              <a href="/blog/" class="cc-top-link"><span class="cc-top-icon">▥</span> Blog</a>
+              <a href="/" class="cc-top-link cc-active"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H4.5A1.5 1.5 0 0 1 3 19.5v-9Z"/><path d="M9 21v-7h6v7"/></svg></span> Home</a>
+              <a href="/tutorials/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z"/></svg></span> Tutorials</a>
+              <a href="/programs/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4C6.3 4 6 5.3 6 7v3c0 1.5-.5 2-2 2 1.5 0 2 .5 2 2v3c0 1.7.3 3 2 3M16 4c1.7 0 2 1.3 2 3v3c0 1.5.5 2 2 2-1.5 0-2 .5-2 2v3c0 1.7-.3 3-2 3"/></svg></span> Programs</a>
+              <a href="/interview-questions/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span> Interview Questions</a>
+              <a href="/definitions/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M16 3v4h4M8 11h8M8 15h8"/></svg></span> Definitions</a>
+              <a href="/blog/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M16 3v4h4M8 11h8M8 15h6"/></svg></span> Blog</a>
             </nav>
             <div class="hidden lg:flex items-center gap-1 whitespace-nowrap">
               <button id="theme-toggle" class="cc-top-link" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()"><span class="cc-sun">☀</span> Light</button>
               <button class="cc-top-link" type="button" onclick="document.getElementById('main-search')?.focus()" aria-label="Focus search"><span class="cc-search-symbol">⌕</span> Search</button>
-              <a href="/about/" class="cc-top-link"><span class="cc-top-icon">◐</span> About</a>
+              <a href="/about/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18V3Z"/><path d="M12 3a9 9 0 0 1 0 18"/></svg></span> About</a>
             </div>
           </div>
         </div>
@@ -227,7 +227,7 @@ const tutorialLinks = [
       .cc-topbar{max-height:64px;opacity:1;overflow:hidden;transition:max-height .28s ease,opacity .2s ease,border-color .28s ease;will-change:max-height,opacity}.cc-topbar.cc-topbar-hidden{max-height:0;opacity:0;border-bottom-color:transparent}.cc-top-link{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .7rem;color:#0f172a;font-size:.95rem;font-weight:600;text-decoration:none;border-bottom:2px solid transparent;transition:all .18s ease}
       .cc-top-link:hover{color:#0f172a;background:#f8fafc}
       .cc-top-link.cc-active{border-bottom-color:#fbbf24}
-      .cc-top-icon{font-size:1rem;line-height:1;min-width:1.1rem;text-align:center}
+      .cc-top-icon{display:inline-flex;align-items:center;justify-content:center;min-width:1.25rem;height:1.35rem;color:#10243d}.cc-nav-svg{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.cc-top-link.cc-active .cc-nav-svg{color:#9a7200}
       .cc-sun{color:#fbbf24;font-size:1.2rem;line-height:1}.cc-search-symbol{font-size:1.35rem;line-height:.8;font-weight:700}
       .cc-main-search{position:relative;width:100%;display:flex;align-items:center;min-height:48px;border:1px solid #d8dde6;border-radius:9999px;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.03);transition:border-color .18s ease,box-shadow .18s ease}
       .cc-main-search:focus-within{border-color:#f5b900;box-shadow:0 0 0 3px rgba(251,191,36,.15)}
