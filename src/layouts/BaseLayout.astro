@@ -134,114 +134,79 @@ const tutorialLinks = [
     <!-- NEW HEADER & NAVBAR                                          -->
     <!-- ============================================================ -->
     <header class="bg-white sticky top-0 z-50 shadow-sm flex flex-col relative">
-      <!-- ROW 1: Mobile Hamburger, Logo, Desktop Search, Theme Toggle -->
-      <div class="max-w-screen-2xl w-full mx-auto px-3 sm:px-5 py-3 flex items-center justify-between gap-4 relative z-20 bg-white">
-        
-        <!-- Mobile Global Hamburger -->
-        <button class="hamburger md:hidden" id="ham" onclick="toggleMenu()" aria-label="Toggle Global Menu">
-          <span></span><span></span><span></span>
-        </button>
-
-        <!-- Logo -->
-        <a href="/" class="!py-0 flex-shrink-0 inline-flex items-center" aria-label="CodesCompiler">
-          <img
-            src="/images/codescompiler-logo.svg"
-            alt="CodesCompiler"
-            width="220"
-            height="50"
-            class="w-[180px] md:w-[220px] h-auto"
-            decoding="async"
-          />
-        </a>
-
-        <!-- Desktop Search -->
-        <div class="hidden md:block flex-1 max-w-2xl mx-auto relative" id="search-wrapper">
-          <div class="search-wrap w-full !max-w-none">
-            <input type="text" id="main-search" placeholder="Search tutorials, e.g. HTML" autocomplete="off" class="w-full">
-            <span class="search-icon">🔍</span>
-            <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+      <div class="w-full border-b border-slate-200 bg-white">
+        <div class="max-w-screen-2xl mx-auto px-4 lg:px-8">
+          <div class="flex items-center justify-between gap-4 min-h-[48px]">
+            <nav class="flex items-center gap-1 overflow-x-auto whitespace-nowrap scrollbar-hide" aria-label="Primary navigation">
+              <a href="/" class="cc-top-link cc-active"><span class="cc-top-icon">⌂</span> Home</a>
+              <a href="/tutorials/" class="cc-top-link"><span class="cc-top-icon">📖</span> Tutorials</a>
+              <a href="/programs/" class="cc-top-link"><span class="cc-top-icon">{ }</span> Programs</a>
+              <a href="/interview-questions/" class="cc-top-link"><span class="cc-top-icon">▣</span> Interview Questions</a>
+              <a href="/definitions/" class="cc-top-link"><span class="cc-top-icon">▤</span> Definitions</a>
+              <a href="/blog/" class="cc-top-link"><span class="cc-top-icon">▥</span> Blog</a>
+            </nav>
+            <div class="hidden lg:flex items-center gap-1 whitespace-nowrap">
+              <button id="theme-toggle" class="cc-top-link" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()"><span class="cc-sun">☀</span> Light</button>
+              <button class="cc-top-link" type="button" onclick="document.getElementById('main-search')?.focus()" aria-label="Focus search"><span class="cc-search-symbol">⌕</span> Search</button>
+              <a href="/about/" class="cc-top-link"><span class="cc-top-icon">◐</span> About</a>
+            </div>
           </div>
         </div>
-
-        <!-- Dark Mode Toggle -->
-        <button id="theme-toggle" class="flex-shrink-0 p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600 dark-hover-bg" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()">
-          <svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <!-- Default Moon -->
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-          </svg>
-        </button>
       </div>
 
-      <!-- ROW 2 (Mobile only): Full Width Search -->
-      <div class="md:hidden px-3 pb-3 bg-white relative z-20" id="mobile-search-wrapper">
-        <div class="search-wrap w-full !max-w-none">
-          <input type="text" id="mobile-search" placeholder="Search tutorials..." autocomplete="off" class="w-full">
-          <span class="search-icon">🔍</span>
-          <div id="mobile-search-dropdown" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-50 overflow-hidden max-h-80 overflow-y-auto"></div>
+      <div class="w-full bg-white">
+        <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 py-4">
+          <div class="flex items-center gap-5">
+            <button class="hamburger md:hidden flex-shrink-0" id="ham" onclick="toggleMenu()" aria-label="Toggle Global Menu"><span></span><span></span><span></span></button>
+            <a href="/" class="flex-shrink-0 inline-flex items-center" aria-label="CodesCompiler">
+              <img src="/images/codescompiler-logo.svg" alt="CodesCompiler" width="260" height="59" class="w-[190px] sm:w-[220px] lg:w-[260px] h-auto" decoding="async" />
+            </a>
+            <div class="hidden md:block flex-1 relative" id="search-wrapper">
+              <div class="cc-main-search">
+                <span class="cc-main-search-icon" aria-hidden="true">⌕</span>
+                <input type="text" id="main-search" placeholder="Search tutorials, e.g. HTML, Python, CSS, examples..." autocomplete="off" aria-label="Search tutorials">
+                <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-xl z-[60] overflow-hidden max-h-80 overflow-y-auto"></div>
+              </div>
+            </div>
+            <button id="mobile-theme-toggle" class="md:hidden flex-shrink-0 p-2 rounded-full hover:bg-slate-100 text-slate-700" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()"><span class="text-xl">☾</span></button>
+          </div>
         </div>
       </div>
 
-      <!-- ROW 2 (Desktop): Mega Menu Navigation -->
-      <div class="hidden md:block w-full border-t border-gray-800 bg-[#1b1b2f] relative" id="mega-nav-bar" style="position:relative;">
+      <div class="w-full border-y border-slate-200 bg-white">
         <div class="max-w-screen-2xl mx-auto overflow-x-auto scrollbar-hide">
-          <ul class="nav-links !h-[44px] !gap-0 justify-center">
-            {navItems.map((item: any) => {
-              if (item.type === 'link') {
-                return <li><a href={item.href} class="!text-[12.5px] !px-3">{item.label}</a></li>;
-              }
-              if (item.type === 'mega') {
-                return (
-                  <li class="mega-item group">
-                    <a href="#" class="!text-[12.5px] !px-3">{item.label} <span class="arr">▾</span></a>
-                    <div class="mega-panel">
-                      <div class="mega-inner">
-                        <div class="mega-hero">
-                          <div class="mega-hero-title">{item.heroTitle}</div>
-                          <div class="mega-hero-desc">{item.heroDesc}</div>
-                          <a href={item.exploreHref} class="mega-explore-btn">Explore All →</a>
-                        </div>
-                        {item.sections.map((sec: any) => (
-                          <div class="mega-col">
-                            <div class="mega-col-title">{sec.title}</div>
-                            {sec.links.map((link: any) => (
-                              <a href={link.href} class="mega-link">
-                                {link.label}
-                                {link.badge && <span class="mega-badge">{link.badge}</span>}
-                              </a>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </li>
-                );
-              }
-            })}
-          </ul>
+          <nav class="flex min-w-max items-stretch" aria-label="Programming languages">
+            <a href="/tutorial/html-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-html">5</span><span>HTML</span><span class="cc-chevron">⌄</span></a>
+            <a href="/tutorial/css-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-css">3</span><span>CSS</span><span class="cc-chevron">⌄</span></a>
+            <a href="/tutorial/javascript-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-js">JS</span><span>JavaScript</span><span class="cc-chevron">⌄</span></a>
+            <a href="/tutorial/python-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-python">Py</span><span>Python</span><span class="cc-chevron">⌄</span></a>
+            <a href="/tutorial/sql-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-sql">DB</span><span>SQL</span><span class="cc-chevron">⌄</span></a>
+            <a href="/tutorial/php-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-php">php</span><span>PHP</span><span class="cc-chevron">⌄</span></a>
+            <a href="/tutorial/seo-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-seo">↗</span><span>SEO</span><span class="cc-chevron">⌄</span></a>
+          </nav>
         </div>
       </div>
-      
-      <!-- Slot for Tutorial Sub-Header (Kids/Tutorial sidebars) -->
-      <slot name="sub-header" />
 
-      <!-- Mobile Drawer -->
+      <div class="md:hidden px-4 py-3 bg-white border-b border-slate-200 relative" id="mobile-search-wrapper">
+        <div class="cc-main-search">
+          <span class="cc-main-search-icon" aria-hidden="true">⌕</span>
+          <input type="text" id="mobile-search" placeholder="Search tutorials..." autocomplete="off" aria-label="Search tutorials">
+          <div id="mobile-search-dropdown" class="hidden absolute left-4 right-4 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-[60] overflow-hidden max-h-80 overflow-y-auto"></div>
+        </div>
+      </div>
+
       <div class="mobile-drawer" id="drawer">
         {navItems.map((item: any) => {
           if (item.type === 'mega' || item.type === 'dropdown') {
             return (
               <div class="m-item">
-                <div class="m-header" onclick="toggleSection(this)">
-                  {item.label} <span class="m-arr">▼</span>
-                </div>
+                <div class="m-header" onclick="toggleSection(this)">{item.label} <span class="m-arr">▼</span></div>
                 <div class="m-body">
                   {item.sections.map((sec: any) => (
                     <>
                       {sec.title && <div style="padding:6px 18px 2px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#aaa;font-weight:700;">{sec.title}</div>}
                       {sec.links.map((link: any) => (
-                        <a href={link.href}>
-                          {link.label}
-                          {link.badge && <span class="mbadge soon">{link.badge}</span>}
-                        </a>
+                        <a href={link.href}>{link.label}{link.badge && <span class="mbadge soon">{link.badge}</span>}</a>
                       ))}
                     </>
                   ))}
@@ -252,13 +217,29 @@ const tutorialLinks = [
             return <a href={item.href} class="m-single">{item.label}</a>;
           }
         })}
-
         <a href="/about/" class="m-single">About</a>
         <a href="/contact/" class="m-single">Contact</a>
+        <a href="/tutorial/html-introduction/" class="m-getstarted">🚀 Get Started Free</a>
+      </div>
+    </header>
 
-      <a href="/tutorial/html-introduction/" class="m-getstarted">🚀 Get Started Free</a>
-    </div>
-  </header>
+    <style is:global>
+      .cc-top-link{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .7rem;color:#0f172a;font-size:.95rem;font-weight:600;text-decoration:none;border-bottom:2px solid transparent;transition:all .18s ease}
+      .cc-top-link:hover{color:#0f172a;background:#f8fafc}
+      .cc-top-link.cc-active{border-bottom-color:#fbbf24}
+      .cc-top-icon{font-size:1rem;line-height:1;min-width:1.1rem;text-align:center}
+      .cc-sun{color:#fbbf24;font-size:1.2rem;line-height:1}.cc-search-symbol{font-size:1.35rem;line-height:.8;font-weight:700}
+      .cc-main-search{position:relative;width:100%;display:flex;align-items:center;min-height:48px;border:1px solid #d8dde6;border-radius:9999px;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.03);transition:border-color .18s ease,box-shadow .18s ease}
+      .cc-main-search:focus-within{border-color:#f5b900;box-shadow:0 0 0 3px rgba(251,191,36,.15)}
+      .cc-main-search-icon{flex:0 0 auto;margin-left:1.15rem;margin-right:.6rem;font-size:1.75rem;line-height:1;color:#0f172a;transform:rotate(-20deg)}
+      .cc-main-search input{width:100%;border:0;outline:0;background:transparent;color:#0f172a;font-size:1rem;padding:.8rem 1.1rem .8rem 0}.cc-main-search input::placeholder{color:#94a3b8}
+      .cc-lang-link{min-width:145px;flex:1 0 0;display:flex;align-items:center;justify-content:center;gap:.7rem;min-height:68px;padding:.65rem .9rem;color:#0f172a;text-decoration:none;font-weight:700;font-size:1.02rem;border-right:1px solid #e2e8f0;transition:background .18s ease,color .18s ease}
+      .cc-lang-link:first-child{border-left:1px solid #e2e8f0}.cc-lang-link:hover{background:#fffaf0;color:#0f172a}
+      .cc-lang-icon{width:40px;height:40px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;line-height:1;flex-shrink:0;box-shadow:0 1px 3px rgba(15,23,42,.12)}
+      .cc-html{background:#f16529;color:#fff;font-size:1.55rem}.cc-css{background:#2965f1;color:#fff;font-size:1.55rem}.cc-js{background:#f7df1e;color:#111827;font-size:.85rem}.cc-python{background:linear-gradient(135deg,#3776ab 0 50%,#ffd343 50% 100%);color:#fff;font-size:.8rem}.cc-sql{background:#7c83d8;color:#fff;font-size:.7rem}.cc-php{background:#8892bf;color:#fff;font-size:.75rem;font-style:italic}.cc-seo{background:#16a34a;color:#fff;font-size:1.4rem}.cc-chevron{color:#0f172a;font-size:1.1rem;margin-left:.05rem}
+      @media(max-width:900px){.cc-lang-link{min-width:125px}}@media(max-width:640px){.cc-top-link{padding:.5rem .55rem;font-size:.86rem}.cc-lang-link{min-width:112px;min-height:58px;font-size:.92rem}.cc-lang-icon{width:34px;height:34px}}
+      html.dark-theme .cc-top-link,html.dark-theme .cc-lang-link{color:#e5e7eb}html.dark-theme .cc-top-link:hover,html.dark-theme .cc-lang-link:hover{background:#172033}html.dark-theme .cc-main-search{background:#0f172a;border-color:#334155}html.dark-theme .cc-main-search input{color:#f8fafc}html.dark-theme .cc-main-search input::placeholder{color:#94a3b8}html.dark-theme .cc-main-search-icon,html.dark-theme .cc-chevron{color:#e2e8f0}
+    </style>
 
     <!-- ============================================================ -->
     <!-- MAIN CONTENT + SIDEBAR WRAPPER                               -->
