@@ -9,30 +9,34 @@
   },
   {
     "label": "JavaScript",
-    "href": "/tutorial/js-introduction"
-  },
-  {
-    "label": "SEO",
-    "href": "/tutorial/seo-overview"
+    "href": "/tutorial/javascript-introduction"
   },
   {
     "label": "Python",
-    "href": "/tutorial/python-guide"
+    "href": "/tutorial/python-introduction"
   },
   {
     "label": "SQL",
-    "href": "/tutorial/sql-guide"
+    "href": "/tutorial/sql-introduction"
   },
   {
-    "label": "About",
-    "href": "/about"
+    "label": "PHP",
+    "href": "/tutorial/php-introduction"
   },
   {
-    "label": "Contact",
-    "href": "/contact"
+    "label": "SEO",
+    "href": "/tutorial/seo-introduction"
   },
   {
-    "label": "Coding ",
-    "href": "/coding"
+    "label": "Posts",
+    "href": "/blog"
+  },
+  {
+    "label": "Books",
+    "href": "/books"
+  },
+  {
+    "label": "Kids",
+    "href": "/kids"
   }
 ]

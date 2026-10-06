@@ -51,7 +51,7 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
 ---
 
 <BaseLayout
-  title="Posts | CodesCompiler"
+  title="Web Development & Coding Blog — CodesCompiler"
   description="Explore coding projects, UI designs, and web development tutorials. Build real HTML, CSS, and JavaScript projects step by step."
 >
   <!-- ============================================================ -->
@@ -129,7 +129,7 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
         <ul class="recent-list">
           {recentPosts.map(post => (
             <li class="recent-item">
-              <a href={`/blog/${post.slug}`} class="recent-link">
+              <a href={`/blog/${post.data.permalink || post.slug}/`} class="recent-link">
                 {post.data.image && (
                   <img
                     src={post.data.image}
@@ -172,7 +172,7 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
       {featured.length > 0 && (
         <div class="featured-section">
           <div class="section-label">⭐ Featured Post</div>
-          <a href={`/blog/${featured[0].slug}`} class="featured-card">
+          <a href={`/blog/${featured[0].data.permalink || featured[0].slug}/`} class="featured-card">
             {featured[0].data.image && (
               <div class="featured-img-wrap">
                 <img
@@ -220,7 +220,7 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
       <div class="posts-grid" id="postsGrid">
         {sorted.map(post => (
           <a
-            href={`/blog/${post.slug}`}
+            href={`/blog/${post.data.permalink || post.slug}/`}
             class="post-card"
             data-category={post.data.category}
             data-tags={JSON.stringify(post.data.tags ?? [])}
@@ -270,11 +270,11 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
       </div>
 
       <!-- Pagination Controls -->
-      <div id="paginationContainer" class="pagination-container hidden">
-        <button id="prevPage" class="page-btn">← Prev</button>
-        <span id="pageInfo" class="page-info">Page 1 of 1</span>
-        <button id="nextPage" class="page-btn">Next →</button>
-      </div>
+      <nav id="paginationContainer" class="pagination-container hidden" aria-label="Blog pagination">
+        <button id="prevPage" class="page-btn" type="button" aria-label="Go to previous blog page">← Prev</button>
+        <span id="pageInfo" class="page-info" aria-live="polite">Page 1 of 1</span>
+        <button id="nextPage" class="page-btn" type="button" aria-label="Go to next blog page">Next →</button>
+      </nav>
 
     </main>
 
@@ -306,12 +306,28 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
   const nextBtn      = document.getElementById('nextPage');
   const pageInfo     = document.getElementById('pageInfo');
 
-  let activeCat  = 'all';
-  let activeTag  = null;
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCategory = urlParams.get('cat');
+  const urlTag = urlParams.get('tag');
+
+  // Filters are UI state, not SEO landing pages. Keep the state functional but avoid
+  // leaving crawlable query URLs in the browser after the initial state is applied.
+  if (urlCategory || urlTag) {
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+  }
+
+  const categorySlug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const initialCategory = urlCategory
+    ? cats.find(cat => categorySlug(cat) === urlCategory)
+    : null;
+
+  let activeCat  = initialCategory || 'all';
+  let activeTag  = urlTag ? decodeURIComponent(urlTag) : null;
   let searchTerm = '';
   
   // Pagination State
-  let currentPage = 1;
+  const hashPage = Number(new URLSearchParams(window.location.hash.replace(/^#/, '')).get('page'));
+  let currentPage = Number.isFinite(hashPage) && hashPage > 0 ? hashPage : 1;
   const itemsPerPage = 10;
   let totalPages = 1;
 
@@ -356,6 +372,7 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
     if (totalPages > 1) {
       pagContainer.classList.remove('hidden');
       pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+      history.replaceState(null, '', currentPage === 1 ? window.location.pathname + window.location.search : `#page=${currentPage}`);
       prevBtn.disabled = currentPage === 1;
       nextBtn.disabled = currentPage === totalPages;
     } else {
@@ -413,7 +430,13 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
     filterCards();
   });
   
-  // Initialize
+  // Initialize from shareable category/tag URLs.
+  if (activeCat !== 'all') {
+    catBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.cat === activeCat));
+  }
+  if (activeTag) {
+    tagBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tag === activeTag));
+  }
   filterCards();
 </script>
 

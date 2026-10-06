@@ -5,11 +5,20 @@ const tutorialsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    category: z.enum(['html', 'css', 'javascript', 'seo', 'python', 'sql', 'php']),
+    category: z.string().optional(),
     order: z.number(),
     group: z.string().optional(),
     seoTitle: z.string().optional(),
     permalink: z.string().optional(),
+    ogType: z.string().optional(),
+    ogImage: z.string().optional(),
+    keywords: z.string().optional(),
+    noindex: z.boolean().optional(),
+    author: z.string().optional(),
+    date: z.union([z.string(), z.date()]).optional(),
+    tags: z.array(z.string()).optional(),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
   }),
 });
 
