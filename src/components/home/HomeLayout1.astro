@@ -38,8 +38,8 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
       </div>
 
       <div class="cc-hero-visual" aria-label="Coding workspace illustration">
-        <div class="cc-code-orbit cc-orbit-html"><b>5</b><span>HTML</span></div>
-        <div class="cc-code-orbit cc-orbit-css"><b>3</b><span>CSS</span></div>
+        <div class="cc-code-orbit cc-orbit-html"><b class="cc-orbit-logo cc-orbit-html-logo">HTML</b><span>HTML</span></div>
+        <div class="cc-code-orbit cc-orbit-css"><b class="cc-orbit-logo cc-orbit-css-logo">CSS</b><span>CSS</span></div>
         <div class="cc-code-orbit cc-orbit-js"><b>JS</b><span>JavaScript</span></div>
         <div class="cc-code-orbit cc-orbit-py"><b>Py</b><span>Python</span></div>
         <div class="cc-code-orbit cc-orbit-sql"><b>DB</b><span>SQL</span></div>
@@ -191,6 +191,7 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
   });
 </script>
 <style>
+      .cc-orbit-logo{font-size:.68rem!important;letter-spacing:-.02em;font-weight:800!important}.cc-orbit-html-logo{font-size:.62rem!important}.cc-orbit-css-logo{font-size:.68rem!important}
   @keyframes float1 { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(-2deg); } }
   @keyframes float2 { 0%, 100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(10px) rotate(2deg); } }
   @keyframes float3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
