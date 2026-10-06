@@ -54,4 +54,4 @@ jobs:
             exit 0
           fi
           git commit -m "Sync staging with CodesCompiler production"
-          git push origin HEAD:sync/production-to-staging
+          git push --force origin HEAD:sync/production-to-staging
