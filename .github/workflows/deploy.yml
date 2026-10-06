@@ -10,10 +10,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
   build:
     name: Build
@@ -46,8 +42,11 @@ jobs:
     needs: build
     runs-on: ubuntu-24.04
     environment:
-      name: github-pages
+      name: appcompiler-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: appcompiler-pages
+      cancel-in-progress: false
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
