@@ -15,62 +15,205 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
 };
 ---
 
-<section class="cc-home-hero relative w-full overflow-hidden">
+<section class="cc-home-hero relative w-full overflow-hidden" id="cc-home-hero">
   <div class="cc-hero-glow cc-hero-glow-a"></div>
   <div class="cc-hero-glow cc-hero-glow-b"></div>
   <div class="relative z-10 max-w-screen-2xl mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
-    <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
-      <div class="max-w-3xl">
-        <p class="cc-hero-kicker">FREE PROGRAMMING TUTORIALS</p>
-        <h1 class="cc-hero-title">Learn to Code with<br/><span>Step-by-Step</span> Tutorials</h1>
-        <p class="cc-hero-copy">Free programming tutorials, examples, definitions, interview questions and more. Learn HTML, CSS, JavaScript, Python, SQL, PHP and SEO with easy-to-follow guides.</p>
-        <form id="hero-search-form" class="cc-hero-search" role="search">
-          <span class="cc-hero-search-icon" aria-hidden="true">⌕</span>
-          <input id="hero-search" type="search" autocomplete="off" placeholder="Search tutorials, examples, questions..." aria-label="Search tutorials, examples and questions" />
-          <button type="submit">⌕ <span>Search</span></button>
-        </form>
-        <div class="cc-hero-benefits">
-          <div><span class="cc-benefit-icon cc-benefit-green">◆</span><span><strong>Free</strong><small>Tutorials</small></span></div>
-          <div><span class="cc-benefit-icon cc-benefit-blue">&lt;/&gt;</span><span><strong>Practical</strong><small>Examples</small></span></div>
-          <div><span class="cc-benefit-icon cc-benefit-purple">▤</span><span><strong>Interview</strong><small>Questions</small></span></div>
-          <div><span class="cc-benefit-icon cc-benefit-orange">▤</span><span><strong>Detailed</strong><small>Explanations</small></span></div>
-        </div>
-      </div>
+    <div class="cc-hero-slider-stage">
 
-      <div class="cc-hero-visual" aria-label="Coding workspace illustration">
-        <div class="cc-code-orbit cc-orbit-html"><b class="cc-orbit-logo cc-orbit-html-logo">HTML</b><span>HTML</span></div>
-        <div class="cc-code-orbit cc-orbit-css"><b class="cc-orbit-logo cc-orbit-css-logo">CSS</b><span>CSS</span></div>
-        <div class="cc-code-orbit cc-orbit-js"><b>JS</b><span>JavaScript</span></div>
-        <div class="cc-code-orbit cc-orbit-py"><b>Py</b><span>Python</span></div>
-        <div class="cc-code-orbit cc-orbit-sql"><b>DB</b><span>SQL</span></div>
-        <div class="cc-code-orbit cc-orbit-php"><b>php</b><span>PHP</span></div>
-        <div class="cc-code-orbit cc-orbit-seo"><b>↗</b><span>SEO</span></div>
-
-        <div class="cc-laptop">
-          <div class="cc-laptop-screen">
-            <div class="cc-editor-top"><i></i><i></i><i></i><span>index.html</span></div>
-            <div class="cc-editor-code">
-              <div><em>1</em><span><b>&lt;!DOCTYPE</b> html&gt;</span></div>
-              <div><em>2</em><span><b>&lt;html</b> lang=<mark>"en"</mark>&gt;</span></div>
-              <div><em>3</em><span><b>&lt;head&gt;</b></span></div>
-              <div><em>4</em><span>&nbsp;&nbsp;&lt;meta charset=<mark>"UTF-8"</mark>&gt;</span></div>
-              <div><em>5</em><span>&nbsp;&nbsp;&lt;title&gt;<strong>CodesCompiler</strong>&lt;/title&gt;</span></div>
-              <div><em>6</em><span><b>&lt;/head&gt;</b></span></div>
-              <div><em>7</em><span><b>&lt;body&gt;</b></span></div>
-              <div><em>8</em><span>&nbsp;&nbsp;&lt;h1&gt;<strong>Learn Coding</strong>&lt;/h1&gt;</span></div>
-              <div><em>9</em><span>&nbsp;&nbsp;&lt;p&gt;Build your skills step by step.&lt;/p&gt;</span></div>
-              <div><em>10</em><span><b>&lt;/body&gt;</b></span></div>
-              <div><em>11</em><span><b>&lt;/html&gt;</b></span></div>
+      <!-- Slide 1: Learn to Code -->
+      <article class="cc-hero-slide is-active" data-slide="0" aria-hidden="false">
+        <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
+          <div class="max-w-3xl">
+            <p class="cc-hero-kicker">FREE PROGRAMMING TUTORIALS</p>
+            <h1 class="cc-hero-title">Learn to Code with<br/><span>Step-by-Step</span> Tutorials</h1>
+            <p class="cc-hero-copy">Free programming tutorials, examples, definitions, interview questions and more. Learn HTML, CSS, JavaScript, Python, SQL, PHP and SEO with easy-to-follow guides.</p>
+            <form id="hero-search-form" class="cc-hero-search" role="search">
+              <span class="cc-hero-search-icon" aria-hidden="true">⌕</span>
+              <input id="hero-search" type="search" autocomplete="off" placeholder="Search tutorials, examples, questions..." aria-label="Search tutorials, examples and questions" />
+              <button type="submit">⌕ <span>Search</span></button>
+            </form>
+            <div class="cc-hero-benefits">
+              <div><span class="cc-benefit-icon cc-benefit-green">◆</span><span><strong>Free</strong><small>Tutorials</small></span></div>
+              <div><span class="cc-benefit-icon cc-benefit-blue">&lt;/&gt;</span><span><strong>Practical</strong><small>Examples</small></span></div>
+              <div><span class="cc-benefit-icon cc-benefit-purple">▤</span><span><strong>Interview</strong><small>Questions</small></span></div>
+              <div><span class="cc-benefit-icon cc-benefit-orange">▤</span><span><strong>Detailed</strong><small>Explanations</small></span></div>
             </div>
           </div>
-          <div class="cc-laptop-base"></div>
+          <div class="cc-hero-visual" aria-label="Coding workspace illustration">
+            <div class="cc-code-orbit cc-orbit-html"><b class="cc-orbit-logo cc-orbit-html-logo">HTML</b><span>HTML</span></div>
+            <div class="cc-code-orbit cc-orbit-css"><b class="cc-orbit-logo cc-orbit-css-logo">CSS</b><span>CSS</span></div>
+            <div class="cc-code-orbit cc-orbit-js"><b>JS</b><span>JavaScript</span></div>
+            <div class="cc-code-orbit cc-orbit-py"><b>Py</b><span>Python</span></div>
+            <div class="cc-code-orbit cc-orbit-sql"><b>DB</b><span>SQL</span></div>
+            <div class="cc-code-orbit cc-orbit-php"><b>php</b><span>PHP</span></div>
+            <div class="cc-code-orbit cc-orbit-seo"><b>↗</b><span>SEO</span></div>
+            <div class="cc-laptop">
+              <div class="cc-laptop-screen">
+                <div class="cc-editor-top"><i></i><i></i><i></i><span>index.html</span></div>
+                <div class="cc-editor-code">
+                  <div><em>1</em><span><b>&lt;!DOCTYPE</b> html&gt;</span></div>
+                  <div><em>2</em><span><b>&lt;html</b> lang=<mark>"en"</mark>&gt;</span></div>
+                  <div><em>3</em><span><b>&lt;head&gt;</b></span></div>
+                  <div><em>4</em><span>&nbsp;&nbsp;&lt;meta charset=<mark>"UTF-8"</mark>&gt;</span></div>
+                  <div><em>5</em><span>&nbsp;&nbsp;&lt;title&gt;<strong>CodesCompiler</strong>&lt;/title&gt;</span></div>
+                  <div><em>6</em><span><b>&lt;/head&gt;</b></span></div>
+                  <div><em>7</em><span><b>&lt;body&gt;</b></span></div>
+                  <div><em>8</em><span>&nbsp;&nbsp;&lt;h1&gt;<strong>Learn Coding</strong>&lt;/h1&gt;</span></div>
+                  <div><em>9</em><span>&nbsp;&nbsp;&lt;p&gt;Build your skills step by step.&lt;/p&gt;</span></div>
+                  <div><em>10</em><span><b>&lt;/body&gt;</b></span></div>
+                  <div><em>11</em><span><b>&lt;/html&gt;</b></span></div>
+                </div>
+              </div>
+              <div class="cc-laptop-base"></div>
+            </div>
+          </div>
         </div>
-      </div>
+      </article>
+
+      <!-- Slide 2: Practice With Real Code -->
+      <article class="cc-hero-slide" data-slide="1" aria-hidden="true">
+        <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
+          <div class="max-w-3xl">
+            <p class="cc-hero-kicker">PRACTICE WHILE YOU LEARN</p>
+            <h2 class="cc-hero-title">Don't Just Read Code.<br/><span>Practice It.</span></h2>
+            <p class="cc-hero-copy">Turn every concept into hands-on practice. Write code, run examples, and see the result immediately as you learn.</p>
+            <div class="cc-hero-pills">
+              <span>✦ Write Code</span><span>▶ Run Examples</span><span>✓ See Results</span>
+            </div>
+            <a href="/tutorials/" class="cc-hero-cta">Start Practicing <b>→</b></a>
+          </div>
+          <div class="cc-slide-visual cc-practice-visual" aria-label="Interactive coding editor illustration">
+            <div class="cc-practice-window">
+              <div class="cc-practice-bar"><i></i><i></i><i></i><span>try-it-yourself.html</span></div>
+              <div class="cc-practice-body">
+                <div class="cc-practice-editor">
+                  <small>HTML</small>
+                  <pre><code>&lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;p&gt;I am learning to code.&lt;/p&gt;</code></pre>
+                  <button type="button">▶ Run Code</button>
+                </div>
+                <div class="cc-practice-output">
+                  <small>OUTPUT</small>
+                  <div class="cc-output-paper"><h3>Hello, World!</h3><p>I am learning to code.</p><span class="cc-cursor"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="cc-float-chip cc-chip-run">▶ Instant Output</div>
+            <div class="cc-float-chip cc-chip-free">✓ Free to Practice</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 3: Build Real Projects -->
+      <article class="cc-hero-slide" data-slide="2" aria-hidden="true">
+        <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
+          <div class="max-w-3xl">
+            <p class="cc-hero-kicker">LEARN BY BUILDING</p>
+            <h2 class="cc-hero-title">Learn Coding by Building<br/><span>Real Projects</span></h2>
+            <p class="cc-hero-copy">Move from simple examples to useful projects. Build websites and JavaScript apps that turn your knowledge into practical skills.</p>
+            <div class="cc-project-stats"><div><strong>HTML</strong><small>Web Pages</small></div><div><strong>CSS</strong><small>Beautiful UI</small></div><div><strong>JS</strong><small>Interactive Apps</small></div></div>
+            <a href="/programs/" class="cc-hero-cta">Explore Programs <b>→</b></a>
+          </div>
+          <div class="cc-slide-visual cc-project-visual" aria-label="Coding projects illustration">
+            <div class="cc-project-board">
+              <div class="cc-project-header"><span>My Coding Projects</span><b>+ New Project</b></div>
+              <div class="cc-project-grid">
+                <div class="cc-project-card orange"><span>⌗</span><strong>Portfolio</strong><small>HTML + CSS</small><em>Completed ✓</em></div>
+                <div class="cc-project-card blue"><span>◫</span><strong>Calculator</strong><small>JavaScript</small><em>Build next →</em></div>
+                <div class="cc-project-card purple"><span>◷</span><strong>Pomodoro</strong><small>JavaScript</small><em>Practice</em></div>
+                <div class="cc-project-card green"><span>✓</span><strong>To-Do App</strong><small>JS + Local Storage</small><em>Challenge yourself</em></div>
+              </div>
+            </div>
+            <div class="cc-project-code">&lt;build&gt; <b>something useful</b> &lt;/build&gt;</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 4: Interview Preparation -->
+      <article class="cc-hero-slide" data-slide="3" aria-hidden="true">
+        <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
+          <div class="max-w-3xl">
+            <p class="cc-hero-kicker">INTERVIEW PREPARATION</p>
+            <h2 class="cc-hero-title">Prepare for Your Next<br/><span>Coding Interview</span></h2>
+            <p class="cc-hero-copy">Practice the questions developers are asked most often. Review concepts, strengthen your answers, and prepare topic by topic.</p>
+            <div class="cc-interview-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span><span>SQL</span></div>
+            <a href="/interview-questions/" class="cc-hero-cta">Practice Interview Questions <b>→</b></a>
+          </div>
+          <div class="cc-slide-visual cc-interview-visual" aria-label="Coding interview questions illustration">
+            <div class="cc-interview-panel">
+              <div class="cc-interview-top"><span>Interview Practice</span><b>Question 24 / 100</b></div>
+              <div class="cc-question"><small>JAVASCRIPT</small><h3>What is a closure in JavaScript?</h3><div class="cc-answer-line"><b>A</b><span>A function bundled with its lexical environment.</span></div><div class="cc-answer-line"><b>B</b><span>A loop that never ends.</span></div><div class="cc-answer-line"><b>C</b><span>A CSS property.</span></div></div>
+              <div class="cc-interview-footer"><span>● Concept</span><span>● Interview Tip</span><span>● Example</span></div>
+            </div>
+            <div class="cc-score-card"><strong>85%</strong><span>Ready to improve</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 5: Beginner to Advanced -->
+      <article class="cc-hero-slide" data-slide="4" aria-hidden="true">
+        <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
+          <div class="max-w-3xl">
+            <p class="cc-hero-kicker">YOUR LEARNING JOURNEY</p>
+            <h2 class="cc-hero-title">Start as a Beginner.<br/><span>Grow With Confidence.</span></h2>
+            <p class="cc-hero-copy">Follow a clear path from fundamentals to advanced concepts. Learn one step at a time without getting lost.</p>
+            <div class="cc-path-points"><span>01 Fundamentals</span><span>02 Programming</span><span>03 Data &amp; Logic</span><span>04 Advanced Skills</span></div>
+            <a href="/tutorials/" class="cc-hero-cta">Start Your Journey <b>→</b></a>
+          </div>
+          <div class="cc-slide-visual cc-roadmap-visual" aria-label="Learning roadmap illustration">
+            <div class="cc-roadmap">
+              <div class="cc-roadmap-line"></div>
+              <div class="cc-road-step done"><b>01</b><span>HTML &amp; CSS</span><small>Build the foundation</small></div>
+              <div class="cc-road-step active"><b>02</b><span>JavaScript</span><small>Make it interactive</small></div>
+              <div class="cc-road-step"><b>03</b><span>Python &amp; SQL</span><small>Go deeper</small></div>
+              <div class="cc-road-step"><b>04</b><span>Programs &amp; CS</span><small>Level up</small></div>
+            </div>
+            <div class="cc-level-badge">BEGINNER → ADVANCED</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 6: Complete Coding Resources -->
+      <article class="cc-hero-slide" data-slide="5" aria-hidden="true">
+        <div class="grid lg:grid-cols-[1.03fr_.97fr] gap-10 lg:gap-4 items-center">
+          <div class="max-w-3xl">
+            <p class="cc-hero-kicker">YOUR CODING RESOURCE HUB</p>
+            <h2 class="cc-hero-title">Everything You Need to<br/><span>Become a Better Developer</span></h2>
+            <p class="cc-hero-copy">Learn, practice, prepare, and find quick answers — all in one place with free resources for developers at every level.</p>
+            <div class="cc-resource-pills"><span>📚 Tutorials</span><span>💻 Programs</span><span>🧠 Interviews</span><span>📖 Definitions</span></div>
+            <a href="/about/" class="cc-hero-cta">Explore CodesCompiler <b>→</b></a>
+          </div>
+          <div class="cc-slide-visual cc-resource-visual" aria-label="CodesCompiler resource dashboard illustration">
+            <div class="cc-resource-dashboard">
+              <div class="cc-dashboard-top"><span>CodesCompiler</span><b>Developer Hub</b></div>
+              <div class="cc-resource-grid">
+                <div><strong>📚</strong><b>Tutorials</b><small>Step-by-step learning</small></div>
+                <div><strong>💻</strong><b>Programs</b><small>Practical examples</small></div>
+                <div><strong>🧠</strong><b>Interviews</b><small>Prepare with questions</small></div>
+                <div><strong>📖</strong><b>Definitions</b><small>Quick explanations</small></div>
+                <div><strong>📰</strong><b>Blog</b><small>Tips &amp; guides</small></div>
+                <div><strong>🔎</strong><b>Search</b><small>Find it faster</small></div>
+              </div>
+            </div>
+            <div class="cc-resource-ribbon">LEARN • PRACTICE • BUILD • GROW</div>
+          </div>
+        </div>
+      </article>
+
     </div>
-    <div class="cc-slider-controls" aria-label="Hero slider">
-      <button type="button" aria-label="Previous slide">‹</button>
-      <span class="active"></span><span></span><span></span><span></span><span></span>
-      <button type="button" aria-label="Next slide">›</button>
+
+    <div class="cc-slider-controls" aria-label="Hero slider controls">
+      <button type="button" data-slider-prev aria-label="Previous slide">‹</button>
+      <div class="cc-slider-dots" role="tablist" aria-label="Select hero slide">
+        <button type="button" class="active" data-slide-dot="0" aria-label="Go to slide 1" aria-selected="true"></button>
+        <button type="button" data-slide-dot="1" aria-label="Go to slide 2" aria-selected="false"></button>
+        <button type="button" data-slide-dot="2" aria-label="Go to slide 3" aria-selected="false"></button>
+        <button type="button" data-slide-dot="3" aria-label="Go to slide 4" aria-selected="false"></button>
+        <button type="button" data-slide-dot="4" aria-label="Go to slide 5" aria-selected="false"></button>
+        <button type="button" data-slide-dot="5" aria-label="Go to slide 6" aria-selected="false"></button>
+      </div>
+      <button type="button" data-slider-next aria-label="Next slide">›</button>
     </div>
   </div>
 </section>
@@ -171,6 +314,30 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
   .cc-code-orbit{position:absolute;z-index:4;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,.5)}.cc-code-orbit b{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;box-shadow:0 10px 24px rgba(0,0,0,.22)}.cc-orbit-html{left:2%;top:8%;color:#fff}.cc-orbit-html b{background:#f05a28}.cc-orbit-css{left:25%;top:0;color:#fff}.cc-orbit-css b{background:#1976d2}.cc-orbit-js{left:46%;top:-3%;color:#fff}.cc-orbit-js b{background:#f1cf17;color:#111827}.cc-orbit-py{right:20%;top:0;color:#fff}.cc-orbit-py b{background:linear-gradient(135deg,#3776ab 0 50%,#ffd343 50% 100%)}.cc-orbit-sql{right:2%;top:16%;color:#fff}.cc-orbit-sql b{background:#7378d1}.cc-orbit-php{right:0;top:47%;color:#fff}.cc-orbit-php b{background:#8892bf;font-style:italic}.cc-orbit-seo{right:9%;bottom:5%;color:#fff}.cc-orbit-seo b{background:#16a34a}
   .cc-slider-controls{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:6px}.cc-slider-controls button{width:44px;height:44px;border:0;border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font-size:2rem;line-height:1;cursor:pointer}.cc-slider-controls span{width:10px;height:10px;border-radius:50%;background:#b8c4d2}.cc-slider-controls span.active{width:23px;border-radius:999px;background:#ffc400}
   .cc-feature-strip{background:#fff;border-bottom:1px solid #e5e7eb}.cc-feature-card{min-height:84px;border:1px solid #e5e7eb;border-radius:17px;background:linear-gradient(180deg,#fff,#f8fafc);display:flex;align-items:center;gap:13px;padding:13px 16px;box-shadow:0 4px 14px rgba(15,23,42,.04)}.cc-feature-card strong,.cc-feature-card small{display:block}.cc-feature-card strong{font-size:.96rem;color:#0f172a}.cc-feature-card small{font-size:.82rem;color:#64748b;margin-top:3px}.cc-feature-icon{width:43px;height:43px;flex:0 0 43px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem}.cc-feature-icon svg{width:25px;height:25px;display:block}.cc-feature-icon.blue{background:#e0f2fe;color:#0b6dcc}.cc-feature-icon.green{background:#dcfce7;color:#059669}.cc-feature-icon.yellow{background:#fef3c7;color:#d97706}.cc-feature-icon.orange{background:#ffedd5;color:#ea580c}
+
+  .cc-hero-slider-stage{position:relative}
+  .cc-hero-slide{display:none;animation:ccHeroFade .45s ease both}
+  .cc-hero-slide.is-active{display:block}
+  @keyframes ccHeroFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .cc-hero-pills,.cc-project-stats,.cc-interview-tags,.cc-path-points,.cc-resource-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .cc-hero-pills span,.cc-interview-tags span,.cc-resource-pills span{display:inline-flex;align-items:center;padding:9px 13px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.08);color:#e7f2ff;font-size:.85rem;font-weight:700}
+  .cc-hero-cta{display:inline-flex;align-items:center;gap:10px;margin-top:25px;padding:13px 21px;border-radius:999px;background:#ffc928;color:#111827;text-decoration:none;font-weight:900;box-shadow:0 10px 24px rgba(0,0,0,.16);transition:transform .2s ease,background .2s ease}
+  .cc-hero-cta:hover{background:#ffd54a;transform:translateY(-2px)}
+  .cc-hero-cta b{font-size:1.1rem}
+  .cc-project-stats{gap:24px}.cc-project-stats div{border-left:2px solid rgba(255,196,0,.8);padding-left:12px}.cc-project-stats strong,.cc-project-stats small{display:block}.cc-project-stats strong{font-size:1rem;color:#fff}.cc-project-stats small{font-size:.78rem;color:#b9cde0;margin-top:2px}
+  .cc-path-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:470px}.cc-path-points span{font-size:.9rem;font-weight:700;color:#dbeafe}
+  .cc-slide-visual{position:relative;min-height:420px;display:flex;align-items:center;justify-content:center}
+  .cc-practice-window{width:min(620px,100%);border-radius:18px;background:#101827;border:1px solid #2e4059;box-shadow:0 28px 50px rgba(0,0,0,.35);overflow:hidden;transform:perspective(1200px) rotateY(-6deg)}
+  .cc-practice-bar,.cc-interview-top,.cc-dashboard-top{height:42px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#172236;color:#dbe7f5;font-size:.78rem;font-weight:700}.cc-practice-bar{justify-content:flex-start;gap:7px}.cc-practice-bar i{width:9px;height:9px;border-radius:50%;background:#ef4444}.cc-practice-bar i:nth-child(2){background:#f59e0b}.cc-practice-bar i:nth-child(3){background:#22c55e}.cc-practice-bar span{margin-left:8px}
+  .cc-practice-body{display:grid;grid-template-columns:1fr 1fr;min-height:300px}.cc-practice-editor,.cc-practice-output{padding:17px}.cc-practice-editor{border-right:1px solid #2b3b52}.cc-practice-editor small,.cc-practice-output small{font-size:.68rem;font-weight:800;letter-spacing:.12em;color:#7dd3fc}.cc-practice-editor pre{margin:13px 0;background:#0b1220;border-radius:10px;padding:15px;color:#dbeafe;font:500 12px/1.7 'Fira Code',monospace;white-space:pre-wrap}.cc-practice-editor button{border:0;border-radius:9px;background:#22c55e;color:#052e16;font-weight:900;padding:9px 13px;cursor:pointer}.cc-output-paper{margin-top:13px;min-height:190px;border-radius:10px;background:#fff;padding:18px;color:#172033}.cc-output-paper h3{font-size:1.35rem;margin:0 0 7px}.cc-output-paper p{font-size:.86rem;color:#64748b}.cc-cursor{display:inline-block;width:7px;height:15px;background:#2563eb;vertical-align:middle;animation:ccBlink 1s step-end infinite}@keyframes ccBlink{50%{opacity:0}}
+  .cc-float-chip{position:absolute;border-radius:999px;padding:9px 13px;background:#fff;color:#10243d;font-size:.75rem;font-weight:900;box-shadow:0 12px 25px rgba(0,0,0,.2)}.cc-chip-run{right:0;top:11%}.cc-chip-free{left:0;bottom:10%;background:#16a34a;color:#fff}
+  .cc-project-board{width:min(620px,100%);border-radius:20px;background:#f8fafc;border:1px solid #d7e0eb;box-shadow:0 28px 50px rgba(0,0,0,.3);overflow:hidden;transform:rotate(-2deg)}.cc-project-header{height:52px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;background:#fff;color:#10243d;font-weight:900}.cc-project-header b{font-size:.72rem;padding:8px 12px;border-radius:999px;background:#ffc928;color:#111827}.cc-project-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px}.cc-project-card{position:relative;min-height:128px;border-radius:15px;padding:14px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 8px 18px rgba(15,23,42,.06)}.cc-project-card>span{width:35px;height:35px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;background:#f97316}.cc-project-card.blue>span{background:#2563eb}.cc-project-card.purple>span{background:#8b5cf6}.cc-project-card.green>span{background:#16a34a}.cc-project-card strong,.cc-project-card small,.cc-project-card em{display:block}.cc-project-card strong{margin-top:9px;color:#0f172a}.cc-project-card small{margin-top:2px;color:#64748b;font-size:.72rem}.cc-project-card em{margin-top:8px;color:#16a34a;font-size:.68rem;font-style:normal;font-weight:800}.cc-project-code{position:absolute;right:-4px;bottom:3%;padding:10px 14px;border-radius:10px;background:#0f172a;color:#94a3b8;font:600 11px 'Fira Code',monospace;box-shadow:0 10px 25px rgba(0,0,0,.25)}.cc-project-code b{color:#ffc928}
+  .cc-interview-panel{width:min(620px,100%);border-radius:20px;background:#fff;border:1px solid #d9e2ec;box-shadow:0 28px 50px rgba(0,0,0,.3);overflow:hidden;transform:perspective(1200px) rotateY(-5deg)}.cc-interview-top{background:#10243d}.cc-interview-top b{color:#ffc928;font-size:.68rem}.cc-question{padding:24px}.cc-question small{color:#2563eb;font-size:.68rem;font-weight:900;letter-spacing:.12em}.cc-question h3{margin:9px 0 18px;color:#0f172a;font-size:1.25rem}.cc-answer-line{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;margin-top:8px;border:1px solid #e2e8f0;border-radius:10px;color:#475569;font-size:.8rem}.cc-answer-line b{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dbeafe;color:#2563eb;font-size:.7rem}.cc-answer-line:first-of-type{border-color:#86efac;background:#f0fdf4}.cc-interview-footer{display:flex;gap:12px;padding:12px 18px;background:#f8fafc;color:#64748b;font-size:.68rem;font-weight:800}.cc-score-card{position:absolute;right:-4px;bottom:4%;padding:13px 16px;border-radius:14px;background:#16a34a;color:#fff;box-shadow:0 15px 28px rgba(0,0,0,.24);display:flex;flex-direction:column}.cc-score-card strong{font-size:1.45rem}.cc-score-card span{font-size:.68rem}
+  .cc-roadmap{position:relative;width:min(570px,100%);padding:25px 25px 20px 55px;border-radius:22px;background:rgba(255,255,255,.97);box-shadow:0 28px 50px rgba(0,0,0,.3);border:1px solid #dbe5ef}.cc-roadmap-line{position:absolute;left:83px;top:48px;bottom:42px;width:4px;border-radius:999px;background:linear-gradient(#16a34a,#ffc928,#60a5fa,#a78bfa)}.cc-road-step{position:relative;display:grid;grid-template-columns:48px 1fr;column-gap:15px;padding:10px 0 18px;color:#64748b}.cc-road-step b{grid-row:span 2;z-index:1;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#e2e8f0;color:#475569;font-size:.75rem}.cc-road-step.done b{background:#16a34a;color:#fff}.cc-road-step.active b{background:#ffc928;color:#111827;box-shadow:0 0 0 6px rgba(255,201,40,.15)}.cc-road-step span{font-weight:900;color:#0f172a;font-size:1rem}.cc-road-step small{font-size:.75rem;color:#64748b}.cc-level-badge{position:absolute;right:-2px;top:7%;padding:9px 12px;border-radius:999px;background:#10243d;color:#ffc928;font-size:.65rem;font-weight:900;box-shadow:0 10px 22px rgba(0,0,0,.25)}
+  .cc-resource-dashboard{width:min(620px,100%);border-radius:20px;background:#f8fafc;border:1px solid #d8e2ed;box-shadow:0 28px 50px rgba(0,0,0,.3);overflow:hidden;transform:perspective(1200px) rotateY(-5deg)}.cc-dashboard-top{height:48px;background:#10243d}.cc-dashboard-top b{color:#ffc928;font-size:.72rem}.cc-resource-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;padding:15px}.cc-resource-grid>div{min-height:112px;border-radius:14px;background:#fff;border:1px solid #e2e8f0;padding:12px;box-shadow:0 6px 14px rgba(15,23,42,.05)}.cc-resource-grid strong{display:block;font-size:1.25rem}.cc-resource-grid b{display:block;margin-top:7px;color:#0f172a;font-size:.82rem}.cc-resource-grid small{display:block;margin-top:3px;color:#64748b;font-size:.66rem}.cc-resource-grid>div:nth-child(1){border-top:3px solid #f97316}.cc-resource-grid>div:nth-child(2){border-top:3px solid #2563eb}.cc-resource-grid>div:nth-child(3){border-top:3px solid #8b5cf6}.cc-resource-grid>div:nth-child(4){border-top:3px solid #16a34a}.cc-resource-grid>div:nth-child(5){border-top:3px solid #f59e0b}.cc-resource-grid>div:nth-child(6){border-top:3px solid #06b6d4}.cc-resource-ribbon{position:absolute;right:-3px;bottom:4%;padding:10px 15px;border-radius:10px;background:#ffc928;color:#111827;font-size:.68rem;font-weight:900;box-shadow:0 12px 25px rgba(0,0,0,.22)}
+  .cc-slider-controls{display:flex;justify-content:center;align-items:center;gap:11px;margin-top:18px}.cc-slider-controls>button{width:44px;height:44px;border:0;border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font-size:2rem;line-height:1;cursor:pointer;transition:background .2s ease,transform .2s ease}.cc-slider-controls>button:hover{background:rgba(255,255,255,.24);transform:translateY(-1px)}.cc-slider-dots{display:flex;align-items:center;gap:8px}.cc-slider-dots button{width:9px;height:9px;padding:0;border:0;border-radius:999px;background:#b8c4d2;cursor:pointer;transition:width .2s ease,background .2s ease}.cc-slider-dots button.active{width:24px;background:#ffc400}
+  @media(prefers-reduced-motion:reduce){.cc-hero-slide{animation:none}.cc-cursor{animation:none}}
+
   @media(max-width:1023px){.cc-hero-visual{min-height:390px}.cc-laptop{left:8%;right:6%}.cc-laptop-screen{height:285px}.cc-code-orbit b{width:46px;height:46px}.cc-code-orbit{font-size:.68rem}}
   @media(max-width:767px){.cc-home-hero .py-12{padding-top:2.6rem;padding-bottom:2.6rem}.cc-hero-kicker{font-size:.68rem;letter-spacing:.18em}.cc-hero-title{font-size:2.65rem}.cc-hero-copy{font-size:1rem;margin-top:16px}.cc-hero-search{border-width:3px}.cc-hero-search button{padding:11px 16px}.cc-hero-search button span{display:none}.cc-hero-benefits{gap:14px 20px}.cc-hero-benefits>div{min-width:42%}.cc-benefit-icon{width:40px;height:40px}.cc-hero-visual{min-height:330px;margin-top:12px}.cc-laptop{left:6%;right:4%;bottom:8px}.cc-laptop-screen{height:230px;border-width:6px}.cc-editor-code{font-size:9px;padding:8px}.cc-code-orbit b{width:38px;height:38px;font-size:.75rem;border-radius:10px}.cc-orbit-html{left:0}.cc-orbit-css{left:23%}.cc-orbit-js{left:45%}.cc-orbit-py{right:17%}.cc-orbit-sql{right:0}.cc-orbit-php{right:-2%;top:50%}.cc-orbit-seo{right:7%;bottom:0}.cc-slider-controls button{width:36px;height:36px;font-size:1.6rem}}
   html.dark-theme .cc-feature-strip{background:#0f172a;border-color:#334155}html.dark-theme .cc-feature-card{background:#172033;border-color:#334155}html.dark-theme .cc-feature-card strong{color:#f8fafc}html.dark-theme .cc-feature-card small{color:#94a3b8}
@@ -189,6 +356,47 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
+
+  const heroSlides = Array.from(document.querySelectorAll('.cc-hero-slide'));
+  const heroDots = Array.from(document.querySelectorAll('[data-slide-dot]'));
+  const heroPrev = document.querySelector('[data-slider-prev]');
+  const heroNext = document.querySelector('[data-slider-next]');
+  const heroRoot = document.getElementById('cc-home-hero');
+  let heroIndex = 0;
+  let heroTimer;
+
+  function showHeroSlide(index, restart = true) {
+    heroIndex = (index + heroSlides.length) % heroSlides.length;
+    heroSlides.forEach((slide, i) => {
+      const active = i === heroIndex;
+      slide.classList.toggle('is-active', active);
+      slide.setAttribute('aria-hidden', String(!active));
+    });
+    heroDots.forEach((dot, i) => {
+      const active = i === heroIndex;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-selected', String(active));
+    });
+    if (restart) startHeroTimer();
+  }
+
+  function startHeroTimer() {
+    clearInterval(heroTimer);
+    heroTimer = window.setInterval(() => showHeroSlide(heroIndex + 1, false), 6500);
+  }
+
+  heroPrev?.addEventListener('click', () => showHeroSlide(heroIndex - 1));
+  heroNext?.addEventListener('click', () => showHeroSlide(heroIndex + 1));
+  heroDots.forEach((dot) => dot.addEventListener('click', () => showHeroSlide(Number(dot.dataset.slideDot))));
+
+  heroRoot?.addEventListener('mouseenter', () => clearInterval(heroTimer));
+  heroRoot?.addEventListener('mouseleave', startHeroTimer);
+  heroRoot?.addEventListener('focusin', () => clearInterval(heroTimer));
+  heroRoot?.addEventListener('focusout', () => {
+    if (!heroRoot.contains(document.activeElement)) startHeroTimer();
+  });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) startHeroTimer();
 </script>
 <style>
       .cc-orbit-logo{font-size:.68rem!important;letter-spacing:-.02em;font-weight:800!important}.cc-orbit-html-logo{font-size:.62rem!important}.cc-orbit-css-logo{font-size:.68rem!important}
