@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tutorials = [
+  { title: 'HTML Tutorial', text: 'Learn HTML from the basics with practical examples.', href: '/tutorial/html-introduction/', tag: 'HTML' },
+  { title: 'CSS Tutorial', text: 'Learn CSS layouts, styling, responsive design, and more.', href: '/tutorial/css-introduction/', tag: 'CSS' },
+  { title: 'JavaScript Tutorial', text: 'Learn JavaScript fundamentals and build interactive web pages.', href: '/tutorial/javascript-introduction/', tag: 'JS' },
+  { title: 'Python Tutorial', text: 'Learn Python step by step with beginner-friendly examples.', href: '/tutorial/python-introduction/', tag: 'Py' },
+  { title: 'SQL Tutorial', text: 'Learn SQL queries, databases, filtering, joins, and more.', href: '/tutorial/sql-introduction/', tag: 'SQL' },
+  { title: 'PHP Tutorial', text: 'Learn PHP fundamentals and server-side web development.', href: '/tutorial/php-introduction/', tag: 'PHP' },
+  { title: 'SEO Tutorial', text: 'Learn practical SEO concepts for better search visibility.', href: '/tutorial/seo-introduction/', tag: 'SEO' },
+];
+
+const colors = ['#f16529','#2965f1','#f7df1e','#3776ab','#7c83d8','#8892bf','#16a34a'];
+---
+
+<BaseLayout title="Programming Tutorials" description="Free step-by-step programming and web development tutorials for HTML, CSS, JavaScript, Python, SQL, PHP and SEO.">
+  <section class="page-hero">
+    <span class="eyebrow">LEARN TO CODE</span>
+    <h1>Programming Tutorials</h1>
+    <p>Step-by-step tutorials designed to help you learn coding from beginner to advanced topics.</p>
+  </section>
+
+  <main class="content-wrap">
+    <div class="intro">
+      <h2>Choose a Tutorial</h2>
+      <p>Start with any technology below and learn at your own pace with practical examples.</p>
+    </div>
+    <div class="card-grid">
+      {tutorials.map((item, i) => (
+        <a class="card" href={item.href}>
+          <span class="badge" style={`--badge:${colors[i]}`}>{item.tag}</span>
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+          <span class="learn">Start learning →</span>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+.page-hero{background:linear-gradient(135deg,#10243d,#173d67);padding:56px 20px 52px;text-align:center;color:#fff}.page-hero .eyebrow{display:inline-block;color:#f5b900;font-size:.78rem;font-weight:800;letter-spacing:.12em;margin-bottom:12px}.page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin:0 0 12px}.page-hero p{max-width:700px;margin:auto;color:#dbe7f5;font-size:1.08rem;line-height:1.6}.content-wrap{max-width:1180px;margin:auto;padding:42px 20px 70px}.intro{text-align:center;margin-bottom:28px}.intro h2{color:#10243d;font-size:1.8rem;margin:0 0 8px}.intro p{color:#64748b}.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.card{display:flex;flex-direction:column;padding:24px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;text-decoration:none;box-shadow:0 3px 12px rgba(15,23,42,.05);transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,23,42,.12)}.badge{width:48px;height:48px;border-radius:10px;background:var(--badge);display:grid;place-items:center;color:#fff;font-weight:800;font-size:.8rem;margin-bottom:18px}.card h2{font-size:1.25rem;color:#10243d;margin:0 0 8px}.card p{color:#64748b;line-height:1.55;margin:0 0 18px}.learn{margin-top:auto;color:#0f766e;font-weight:700}@media(max-width:800px){.card-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.card-grid{grid-template-columns:1fr}}
+</style>
