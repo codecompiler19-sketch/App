@@ -1,0 +1,57 @@
+name: Sync Production to Staging
+
+on:
+  push:
+    branches:
+      - sync/production-to-staging
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout staging repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Clone production repository
+        run: git clone --depth 1 https://github.com/codecompiler19-sketch/codescompiler.git /tmp/codescompiler
+
+      - name: Replace staging files with production files
+        shell: bash
+        run: |
+          set -e
+          rsync -a --delete --exclude='.git/' /tmp/codescompiler/ ./
+
+          printf 'app.codescompiler.com\n' > CNAME
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          replacements = [
+              Path("astro.config.mjs"),
+              Path("src/site-settings.json"),
+              Path("public/robots.txt"),
+          ]
+
+          for path in replacements:
+              if path.exists():
+                  text = path.read_text(encoding="utf-8")
+                  text = text.replace("https://codescompiler.com", "https://app.codescompiler.com")
+                  path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Commit synchronized staging tree
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Sync staging with CodesCompiler production"
+          git push origin HEAD:sync/production-to-staging
