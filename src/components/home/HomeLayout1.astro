@@ -297,7 +297,7 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
 
 
 <style>
-  .cc-home-hero{background:linear-gradient(115deg,#061d35 0%,#062b4e 48%,#075087 100%);color:#fff;isolation:isolate}
+  .cc-home-hero{background:linear-gradient(115deg,#061d35 0%,#062b4e 48%,#075087 100%);color:#fff;isolation:isolate;transition:background .45s ease}.cc-home-hero.cc-hero-dark{background:linear-gradient(115deg,#050b14 0%,#0a1322 52%,#101a2c 100%)}
   .cc-home-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 45%,rgba(0,168,255,.18),transparent 28%),radial-gradient(circle at 30% 20%,rgba(255,193,7,.08),transparent 30%);pointer-events:none}
   .cc-hero-glow{position:absolute;border-radius:9999px;filter:blur(55px);pointer-events:none}.cc-hero-glow-a{width:280px;height:280px;right:16%;top:4%;background:rgba(14,165,233,.16)}.cc-hero-glow-b{width:220px;height:220px;left:28%;bottom:0;background:rgba(37,99,235,.12)}
   .cc-hero-kicker{margin:0 0 10px;font-size:.78rem;letter-spacing:.28em;font-weight:700;color:#dbeafe}
@@ -372,6 +372,7 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
       slide.classList.toggle('is-active', active);
       slide.setAttribute('aria-hidden', String(!active));
     });
+    heroRoot?.classList.toggle('cc-hero-dark', heroIndex !== 0);
     heroDots.forEach((dot, i) => {
       const active = i === heroIndex;
       dot.classList.toggle('active', active);
