@@ -163,9 +163,11 @@ const tutorialLinks = [
             </a>
             <div class="hidden md:block flex-1 relative" id="search-wrapper">
               <div class="cc-main-search">
-                <span class="cc-main-search-icon" aria-hidden="true">⌕</span>
-                <input type="text" id="main-search" placeholder="Search tutorials, e.g. HTML, Python, CSS, examples..." autocomplete="off" aria-label="Search tutorials">
-                <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-xl z-[60] overflow-hidden max-h-80 overflow-y-auto"></div>
+                <input type="search" id="main-search" placeholder="Search tutorials, e.g. HTML, Python, CSS, examples..." autocomplete="off" aria-label="Search tutorials">
+                <span class="cc-main-search-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg>
+                </span>
+                <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-2"></div>
               </div>
             </div>
             <button id="mobile-theme-toggle" class="md:hidden flex-shrink-0 p-2 rounded-full hover:bg-slate-100 text-slate-700" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()"><span class="text-xl">☾</span></button>
@@ -189,9 +191,11 @@ const tutorialLinks = [
 
       <div class="md:hidden px-4 py-3 bg-white border-b border-slate-200 relative" id="mobile-search-wrapper">
         <div class="cc-main-search">
-          <span class="cc-main-search-icon" aria-hidden="true">⌕</span>
-          <input type="text" id="mobile-search" placeholder="Search tutorials..." autocomplete="off" aria-label="Search tutorials">
-          <div id="mobile-search-dropdown" class="hidden absolute left-4 right-4 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-[60] overflow-hidden max-h-80 overflow-y-auto"></div>
+          <input type="search" id="mobile-search" placeholder="Search tutorials..." autocomplete="off" aria-label="Search tutorials">
+          <span class="cc-main-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg>
+          </span>
+          <div id="mobile-search-dropdown" class="hidden absolute left-4 right-4 top-full mt-1"></div>
         </div>
       </div>
 
@@ -229,16 +233,37 @@ const tutorialLinks = [
       .cc-top-link.cc-active{border-bottom-color:#fbbf24}
       .cc-top-icon{display:inline-flex;align-items:center;justify-content:center;min-width:1.25rem;height:1.35rem;color:#10243d}.cc-nav-svg{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.cc-top-link.cc-active .cc-nav-svg{color:#9a7200}
       .cc-sun{color:#fbbf24;font-size:1.2rem;line-height:1}.cc-search-symbol{font-size:1.35rem;line-height:.8;font-weight:700}
-      .cc-main-search{position:relative;width:100%;display:flex;align-items:center;min-height:48px;border:1px solid #d8dde6;border-radius:9999px;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.03);transition:border-color .18s ease,box-shadow .18s ease}
+      .cc-main-search{position:relative;width:100%;display:flex;align-items:center;min-height:52px;border:1px solid #d8dde6;border-radius:9999px;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.03);transition:border-color .18s ease,box-shadow .18s ease}
       .cc-main-search:focus-within{border-color:#f5b900;box-shadow:0 0 0 3px rgba(251,191,36,.15)}
-      .cc-main-search-icon{flex:0 0 auto;margin-left:1.15rem;margin-right:.6rem;font-size:1.75rem;line-height:1;color:#0f172a;transform:rotate(-20deg)}
-      .cc-main-search input{width:100%;border:0;outline:0;background:transparent;color:#0f172a;font-size:1rem;padding:.8rem 1.1rem .8rem 0}.cc-main-search input::placeholder{color:#94a3b8}
+      .cc-main-search-icon{order:2;flex:0 0 24px;width:24px;height:24px;margin-right:1.05rem;color:#10243d;display:inline-flex;align-items:center;justify-content:center}
+      .cc-main-search-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .cc-main-search input{order:1;flex:1;min-width:0;width:100%;border:0;outline:0;background:transparent;color:#0f172a;font-size:1.08rem;font-weight:500;line-height:1.4;padding:.85rem .55rem .85rem 1.15rem}
+      .cc-main-search input::placeholder{color:#94a3b8;font-weight:400}
+      #search-wrapper{z-index:70}
+      #search-dropdown,.cc-search-dropdown{width:100%;background:#fff;border:1px solid #d7dee8;border-top:3px solid #f5b900;border-radius:0 0 16px 16px;box-shadow:0 16px 35px rgba(15,23,42,.16);overflow:hidden;max-height:420px;overflow-y:auto}
+      .cc-search-result{display:flex;align-items:center;gap:14px;min-height:68px;padding:11px 18px;text-decoration:none;border-bottom:1px solid #e8edf3;background:#fff;transition:background .16s ease,transform .16s ease}
+      .cc-search-result:last-child{border-bottom:0}
+      .cc-search-result:hover{background:#fff9e8}
+      .cc-search-result-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 40px;background:#10243d;color:#fff;font-size:13px;font-weight:800;letter-spacing:-.2px;box-shadow:0 3px 8px rgba(15,36,61,.12)}
+      .cc-search-result-icon.html{background:#f16529}.cc-search-result-icon.css{background:#2965f1}.cc-search-result-icon.javascript{background:#f7df1e;color:#111827}.cc-search-result-icon.python{background:#3776ab}.cc-search-result-icon.sql{background:#6972c7}.cc-search-result-icon.php{background:#8892bf}.cc-search-result-icon.seo{background:#16a34a}
+      .cc-search-result-copy{min-width:0;display:flex;flex-direction:column;gap:3px}
+      .cc-search-result-title{font-size:1.05rem;line-height:1.25;font-weight:700;color:#10243d}
+      .cc-search-result-meta{font-size:.82rem;line-height:1.2;font-weight:600;color:#64748b}
+      .cc-search-result-empty{padding:18px;font-size:1rem;color:#64748b;background:#fff}
+      .cc-search-result-empty strong{color:#10243d}
       .cc-lang-link{min-width:145px;flex:1 0 0;display:flex;align-items:center;justify-content:center;gap:.7rem;min-height:68px;padding:.65rem .9rem;color:#0f172a;text-decoration:none;font-weight:700;font-size:1.02rem;border-right:1px solid #e2e8f0;transition:background .18s ease,color .18s ease}
       .cc-lang-link:first-child{border-left:1px solid #e2e8f0}.cc-lang-link:hover{background:#fffaf0;color:#0f172a}
       .cc-lang-icon{width:40px;height:40px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;line-height:1;flex-shrink:0;box-shadow:0 1px 3px rgba(15,23,42,.12)}
       .cc-html{background:#f16529;color:#fff;font-size:1.55rem}.cc-css{background:#2965f1;color:#fff;font-size:1.55rem}.cc-js{background:#f7df1e;color:#111827;font-size:.85rem}.cc-python{background:linear-gradient(135deg,#3776ab 0 50%,#ffd343 50% 100%);color:#fff;font-size:.8rem}.cc-sql{background:#7c83d8;color:#fff;font-size:.7rem}.cc-php{background:#8892bf;color:#fff;font-size:.75rem;font-style:italic}.cc-seo{background:#16a34a;color:#fff;font-size:1.4rem}.cc-chevron{color:#0f172a;font-size:1.1rem;margin-left:.05rem}
       @media(max-width:900px){.cc-lang-link{min-width:125px}}@media(max-width:640px){.cc-top-link{padding:.5rem .55rem;font-size:.86rem}.cc-lang-link{min-width:112px;min-height:58px;font-size:.92rem}.cc-lang-icon{width:34px;height:34px}}
       html.dark-theme .cc-top-link,html.dark-theme .cc-lang-link{color:#e5e7eb}html.dark-theme .cc-top-link:hover,html.dark-theme .cc-lang-link:hover{background:#172033}html.dark-theme .cc-main-search{background:#0f172a;border-color:#334155}html.dark-theme .cc-main-search input{color:#f8fafc}html.dark-theme .cc-main-search input::placeholder{color:#94a3b8}html.dark-theme .cc-main-search-icon,html.dark-theme .cc-chevron{color:#e2e8f0}
+      html.dark-theme #search-dropdown{background:#0f172a;border-color:#334155;border-top-color:#f5b900}
+      html.dark-theme .cc-search-result{background:#0f172a;border-bottom-color:#253247}
+      html.dark-theme .cc-search-result:hover{background:#172033}
+      html.dark-theme .cc-search-result-title{color:#f8fafc}
+      html.dark-theme .cc-search-result-meta{color:#94a3b8}
+      html.dark-theme .cc-search-result-empty{background:#0f172a;color:#94a3b8}
+      html.dark-theme .cc-search-result-empty strong{color:#f8fafc}
     </style>
 
     <!-- ============================================================ -->
@@ -367,25 +392,42 @@ const tutorialLinks = [
       const allItems = tutorialLinks;
 
       function renderDropdown(query, ddEl) {
-        if (!query || query.length < 1) {
+        if (!ddEl) return;
+        if (!query || query.trim().length < 1) {
           ddEl.classList.add('hidden');
+          ddEl.innerHTML = '';
           return;
         }
-        const q = query.toLowerCase();
+
+        const q = query.trim().toLowerCase();
         const matches = allItems.filter(
           item => item.label.toLowerCase().includes(q) || item.cat.toLowerCase().includes(q)
         );
+
         if (matches.length === 0) {
-          ddEl.innerHTML = `<div class="px-4 py-3 text-sm text-gray-400 italic">No results found</div>`;
+          ddEl.innerHTML = `
+            <div class="cc-search-result-empty">
+              No tutorial found for <strong>"${query.trim()}"</strong>
+            </div>
+          `;
           ddEl.classList.remove('hidden');
           return;
         }
-        ddEl.innerHTML = matches.map(item => `
-          <a href="${item.href}" class="flex items-center gap-4 px-4 py-2.5 hover:bg-gray-50 border-b border-gray-100 last:border-none group">
-            <span class="text-xs font-bold text-[#04AA6D] uppercase w-16 flex-shrink-0">${item.cat}</span>
-            <span class="text-sm text-gray-800 group-hover:text-[#04AA6D]">${item.label}</span>
-          </a>
-        `).join('');
+
+        ddEl.innerHTML = matches.map(item => {
+          const iconClass = item.cat.toLowerCase().replace(/[^a-z]/g, '');
+          const shortIcon = item.cat === 'JavaScript' ? 'JS' : item.cat === 'Python' ? 'Py' : item.cat;
+          return `
+            <a href="${item.href}" class="cc-search-result">
+              <span class="cc-search-result-icon ${iconClass}">${shortIcon}</span>
+              <span class="cc-search-result-copy">
+                <span class="cc-search-result-title">${item.label}</span>
+                <span class="cc-search-result-meta">${item.cat} Tutorial &nbsp;•&nbsp; Step-by-step learning</span>
+              </span>
+            </a>
+          `;
+        }).join('');
+
         ddEl.classList.remove('hidden');
       }
 
