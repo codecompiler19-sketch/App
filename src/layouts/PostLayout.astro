@@ -80,7 +80,7 @@ const CATEGORY_MAP: Record<string, { color: string; bg: string; href: string }> 
   'Tabs':                { color: '#0369a1', bg: '#e0f2fe', href: '/blog?cat=tabs' },
   'Calendar':            { color: '#b91c1c', bg: '#fef2f2', href: '/blog?cat=calendar' }
 };
-const catMeta = category ? (CATEGORY_MAP[category] ?? { color: '#6b7280', bg: '#f3f4f6', href: '/blog' }) : null;
+const catMeta = category ? (CATEGORY_MAP[category] ?? { color: '#6b7280', bg: '#f3f4f6', href: '/blog/' }) : null;
 
 // All unique tags across posts
 const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
@@ -89,8 +89,8 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags ?? []))].sort();
 const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
 
 // ── SCHEMA.ORG JSON-LD ─────────────────────────────────────
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://app.codescompiler.com';
-const fullUrl = `${siteUrl}/blog/${slug}`;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://codescompiler.com';
+const fullUrl = canonicalUrl ? new URL(canonicalUrl, siteUrl).href : `${siteUrl}/blog/${slug}/`;
 
 const blogPostingSchema = {
   "@context": "https://schema.org",
@@ -98,10 +98,16 @@ const blogPostingSchema = {
   "headline": title,
   "description": description,
   "image": image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : undefined,
-  "author": {
-    "@type": "Person",
-    "name": author
-  },
+  "author": author === 'CodesCompiler'
+    ? {
+        "@type": "Organization",
+        "name": "CodesCompiler",
+        "url": siteUrl + '/'
+      }
+    : {
+        "@type": "Person",
+        "name": author
+      },
   "datePublished": date ? new Date(date).toISOString() : undefined,
   "publisher": {
     "@type": "Organization",
@@ -121,8 +127,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
-    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog` },
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl + '/' },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog/` },
     { "@type": "ListItem", "position": 3, "name": title, "item": fullUrl }
   ]
 };
@@ -148,7 +154,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
       <nav class="post-breadcrumb" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="sep">›</span>
-        <a href="/blog">Posts</a>
+        <a href="/blog/">Posts</a>
         <span class="sep">›</span>
         <span class="current" title={title}>{title}</span>
       </nav>
@@ -176,7 +182,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
         <h3 class="widget-title">📂 Categories</h3>
         <ul class="category-list">
           <li>
-            <a href="/blog" class="cat-link cat-all">
+            <a href="/blog/" class="cat-link cat-all">
               <span class="cat-icon">🌐</span>
               <span class="cat-name">All Posts</span>
               <span class="cat-count">{allPosts.length}</span>
@@ -200,7 +206,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
         <ul class="recent-list">
           {recentPosts.map(post => (
             <li class="recent-item">
-              <a href={`/blog/${post.slug}`} class="recent-link">
+              <a href={`/blog/${post.data.permalink || post.slug}/`} class="recent-link">
                 {post.data.image && (
                   <img
                     src={post.data.image}
@@ -229,7 +235,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
           <h3 class="widget-title">🏷️ Tags</h3>
           <div class="tag-cloud">
             {allTags.map(tag => (
-              <a href={`/blog?tag=${tag}`} class="tag-pill">#{tag}</a>
+              <a href={`/blog/?tag=${encodeURIComponent(tag)}`} class="tag-pill">#{tag}</a>
             ))}
           </div>
         </div>
@@ -240,19 +246,19 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
         <h3 class="widget-title">📢 Share This Post</h3>
         <div class="share-buttons">
           <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent('https://codescompiler.com')}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(fullUrl)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="share-btn share-twitter"
           >𝕏 Twitter</a>
           <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://codescompiler.com')}`}
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullUrl)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="share-btn share-facebook"
           >Facebook</a>
           <a
-            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + 'https://codescompiler.com')}`}
+            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + fullUrl)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="share-btn share-whatsapp"
@@ -286,7 +292,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
           </div>
           <div class="demo-bar-actions">
             <a
-              href={`/blog-demo/${slug}`}
+              href={`/blog-demo/${slug}/`}
               target="_blank"
               rel="noopener noreferrer"
               class="demo-btn demo-btn-green"
@@ -341,23 +347,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
 
       <hr class="post-divider" />
 
-      {toc.length > 0 && (
-        <div class="post-toc">
-          <h4 class="toc-title">
-            <svg width="18" height="18" fill="none" stroke="#04AA6D" stroke-width="2.5" viewBox="0 0 24 24" style="margin-top:-2px;">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/>
-            </svg>
-            Table of Contents
-          </h4>
-          <ul class="toc-list">
-            {toc.map(heading => (
-              <li class={`toc-depth-${heading.depth}`}>
-                <a href={`#${heading.slug}`}>{heading.text}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+
 
       <!-- MDX – Post Content -->
       <div class="post-content">
@@ -370,7 +360,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
           <h3 class="related-title">📖 You Might Also Like</h3>
           <div class="related-grid">
             {relatedPosts.map(rp => (
-              <a href={`/blog/${rp.data.permalink || rp.slug}`} class="related-card">
+              <a href={`/blog/${rp.data.permalink || rp.slug}/`} class="related-card">
                 {rp.data.image && (
                   <img src={rp.data.image} alt={rp.data.title} loading="lazy" />
                 )}
@@ -385,7 +375,7 @@ const schemaData = [blogPostingSchema, breadcrumbSchema];
 
       <!-- Back to Posts -->
       <div class="post-footer-nav">
-        <a href="/blog" class="back-btn">← Back to All Posts</a>
+        <a href="/blog/" class="back-btn">← Back to All Posts</a>
       </div>
     </main>
 

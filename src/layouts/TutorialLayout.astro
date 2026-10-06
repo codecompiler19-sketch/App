@@ -11,59 +11,108 @@ interface Props {
   headings?: { depth: number; slug: string; text: string }[];
   currentSlug?: string;
   seoTitle?: string;
+  ogType?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  keywords?: string;
+  author?: string;
 }
 
-const { title, description, category, categoryLabel, headings = [], currentSlug: propCurrentSlug, seoTitle } = Astro.props;
+const { title, description, category, categoryLabel, headings = [], currentSlug: propCurrentSlug, seoTitle, ogType, ogImage, noindex = false, keywords, author = 'CodesCompiler' } = Astro.props;
 
 // Get all tutorials for the current category to build the sidebar
 const tutorials = await getCollection('tutorials');
+const normCat = (category || '').toLowerCase().trim();
 const categoryTutorials = tutorials
-  .filter(t => t.data.category === category)
-  .sort((a, b) => a.data.order - b.data.order);
+  .filter(t => {
+    const c = (t.data.category || '').toLowerCase().trim();
+    return c === normCat || (normCat === 'css' && (c === 'css' || c === 'html & css'));
+  })
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
 const currentSlug = propCurrentSlug || Astro.url.pathname.replace(/\/$/, '').split('/').pop();
 
-// Build grouped sidebar structure
-type TutorialEntry = (typeof categoryTutorials)[number];
-const sidebarGroups: { label: string | null; items: TutorialEntry[] }[] = [];
+// Build grouped sidebar structure (CodesCompiler Style)
+const groupedMap = new Map<string, typeof categoryTutorials>();
 for (const t of categoryTutorials) {
-  const g = t.data.group ?? null;
-  const last = sidebarGroups[sidebarGroups.length - 1];
-  if (!last || last.label !== g) {
-    sidebarGroups.push({ label: g, items: [t] });
-  } else {
-    last.items.push(t);
+  let groupName = t.data.group?.trim();
+  if (!groupName) {
+    groupName = `${categoryLabel} Basics`;
   }
+  if (!groupedMap.has(groupName)) {
+    groupedMap.set(groupName, []);
+  }
+  groupedMap.get(groupName)!.push(t);
 }
+
+const sidebarGroups = Array.from(groupedMap.entries()).map(([label, items]) => ({
+  label,
+  items
+}));
 
 // UI colors for categories
 const CATEGORY_COLORS: Record<string, { bg: string; text: string }> = {
   html: { bg: 'bg-orange-100', text: 'text-orange-700' },
   css: { bg: 'bg-blue-100', text: 'text-blue-700' },
-  javascript: { bg: 'bg-yellow-100', text: 'text-yellow-700' },
-  seo: { bg: 'bg-green-100', text: 'text-green-700' },
-  python: { bg: 'bg-blue-100', text: 'text-blue-800' },
-  sql: { bg: 'bg-[#dbeafe]', text: 'text-[#336791]' },
-  php: { bg: 'bg-indigo-100', text: 'text-indigo-800' },
+  javascript: { bg: 'bg-yellow-100', text: 'text-yellow-800' },
+  seo: { bg: 'bg-emerald-100', text: 'text-emerald-700' },
+  python: { bg: 'bg-sky-100', text: 'text-sky-800' },
+  sql: { bg: 'bg-indigo-100', text: 'text-indigo-800' },
+  php: { bg: 'bg-purple-100', text: 'text-purple-800' },
+  c: { bg: 'bg-gray-200', text: 'text-gray-800' },
+  cpp: { bg: 'bg-blue-100', text: 'text-blue-900' },
+  java: { bg: 'bg-red-100', text: 'text-red-800' },
 };
-const catColor = CATEGORY_COLORS[category] ?? { bg: 'bg-gray-100', text: 'text-gray-700' };
+const catColor = CATEGORY_COLORS[normCat] ?? { bg: 'bg-gray-100', text: 'text-gray-700' };
+
+// Subtitles for tutorial categories (CodesCompiler style)
+const CATEGORY_SUBTITLES: Record<string, string> = {
+  html: 'HyperText Markup Language',
+  css: 'Cascading Style Sheets',
+  javascript: 'JavaScript Programming',
+  js: 'JavaScript Programming',
+  seo: 'Search Engine Optimization',
+  python: 'Python Programming',
+  sql: 'Structured Query Language',
+  php: 'PHP Scripting Language',
+  c: 'C Programming Language',
+  cpp: 'C++ Programming Language',
+  java: 'Java Programming Language',
+};
+const categorySubtitle = CATEGORY_SUBTITLES[normCat] || `${categoryLabel} Tutorial`;
 
 // Table of Contents (H2 and H3 only)
 const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
 
 // ── SCHEMA.ORG JSON-LD ─────────────────────────────────────
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://app.codescompiler.com';
-const fullUrl = `${siteUrl}/tutorial/${currentSlug}`;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://codescompiler.com';
+const fullUrl = new URL(`/tutorial/${currentSlug}/`, siteUrl).href;
+const categoryUrls: Record<string, string> = {
+  html: '/tutorial/html-introduction/',
+  css: '/tutorial/css-introduction/',
+  javascript: '/tutorial/javascript-introduction/',
+  seo: '/tutorial/seo-introduction/',
+  python: '/tutorial/python-introduction/',
+  sql: '/tutorial/sql-introduction/',
+  php: '/tutorial/php-introduction/',
+};
+const categoryUrl = categoryUrls[normCat] || `/tutorial/${normCat}-introduction/`;
 
 const tutorialSchema = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": title,
   "description": description,
-  "author": {
-    "@type": "Organization",
-    "name": "CodesCompiler"
-  },
+  "author": author === 'CodesCompiler'
+    ? {
+        "@type": "Organization",
+        "name": "CodesCompiler",
+        "url": siteUrl + '/'
+      }
+    : {
+        "@type": "Person",
+        "name": author
+      },
   "publisher": {
     "@type": "Organization",
     "name": "CodesCompiler",
@@ -82,8 +131,8 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
-    { "@type": "ListItem", "position": 2, "name": `${categoryLabel} Tutorial`, "item": `${siteUrl}/tutorial/${category}-introduction` },
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl + '/' },
+    { "@type": "ListItem", "position": 2, "name": `${categoryLabel} Tutorial`, "item": new URL(categoryUrl, siteUrl).href },
     { "@type": "ListItem", "position": 3, "name": title, "item": fullUrl }
   ]
 };
@@ -91,159 +140,169 @@ const breadcrumbSchema = {
 const schemaData = [tutorialSchema, breadcrumbSchema];
 ---
 
-<BaseLayout title={title} description={description} schemaData={schemaData}>
+<BaseLayout
+  title={title}
+  seoTitle={seoTitle}
+  ogType={ogType}
+  ogImage={ogImage}
+  description={description}
+  noindex={noindex}
+  keywords={keywords}
+  schemaData={schemaData}
+>
   <!-- TUTORIAL SUB-HEADER FOR MOBILE SIDEBAR -->
-  <div slot="sub-header" class="md:hidden bg-gray-50 flex items-center px-3 py-2 border-b border-gray-200 w-full relative z-10 shadow-sm">
-    <button id="sidebar-toggle" class="p-1.5 mr-2 rounded hover:bg-gray-200 transition-colors text-gray-700" aria-label="Toggle sidebar">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div slot="sub-header" class="md:hidden bg-white dark:bg-slate-800 flex items-center justify-between px-3.5 py-2.5 border-b border-slate-200 dark:border-slate-700/80 w-full relative z-20 shadow-xs">
+    <button id="sidebar-toggle" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-100 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" aria-label="Toggle tutorial menu">
+      <svg class="w-4 h-4 text-[#04AA6D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
+      <span>Topics Menu</span>
     </button>
-    <nav class="text-[11px] text-gray-500 flex items-center gap-1.5 flex-wrap font-medium" aria-label="Breadcrumb">
+    <nav class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-medium truncate max-w-[55%]" aria-label="Breadcrumb">
       <a href="/" class="hover:text-[#04AA6D] transition-colors">Home</a>
       <span>/</span>
-      <a href={`/tutorial/${category}-introduction`} class="hover:text-[#04AA6D] transition-colors capitalize">{category}</a>
+      <a href={`/tutorial/${category}-introduction/`} class="hover:text-[#04AA6D] transition-colors capitalize">{category}</a>
       <span>/</span>
-      <span class="text-gray-900 font-semibold truncate max-w-[140px]">{title}</span>
+      <span class="text-slate-900 dark:text-slate-100 font-semibold truncate">{title}</span>
     </nav>
   </div>
 
-  <div class="w-full" style="max-width: 1600px; margin: 0 auto;">
-  <div class="flex-1 flex overflow-hidden" style="min-height: 0;">
-    <!-- Sidebar -->
-    <aside
-      id="page-sidebar"
-      class="fixed top-[150px] bottom-0 left-0 z-50 md:z-0 w-64 bg-white border-r border-gray-100 transform -translate-x-full transition-transform duration-200 ease-in-out md:relative md:top-0 md:translate-x-0 overflow-y-auto"
-    >
-      <!-- Category badge -->
-      <div class="px-3 py-3 border-b border-gray-200 bg-gray-50 sticky top-0">
-        <span class={`inline-block text-xs font-bold uppercase tracking-widest px-2 py-1 rounded ${catColor.bg} ${catColor.text}`}>
-          {categoryLabel} Tutorial
-        </span>
-      </div>
-
-      <!-- Chapter links with optional group headers -->
-      <nav class="py-2 flex flex-col" aria-label={`${categoryLabel} chapters`}>
-        {sidebarGroups.map((group) => (
-          <>
-            {group.label && (
-              <div class="px-4 pt-4 pb-1 text-[0.7rem] font-extrabold uppercase tracking-widest text-gray-400 select-none">
-                {group.label}
-              </div>
-            )}
-            {group.items.map((tutorial) => {
-              const tutorialSlug = tutorial.data.permalink || tutorial.slug;
-              const isActive = tutorialSlug === currentSlug;
-              return (
-                <a
-                  href={`/tutorial/${tutorialSlug}`}
-                  aria-current={isActive ? 'page' : undefined}
-                  class={`block px-4 py-1.5 text-[0.82rem] font-medium border-l-4 transition-colors ${
-                    isActive
-                      ? 'border-[#04AA6D] bg-[#04AA6D] text-white'
-                      : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-[#04AA6D]'
-                  }`}
-                >
-                  {tutorial.data.title}
-                </a>
-              );
-            })}
-          </>
-        ))}
-      </nav>
-    </aside>
-
-    <!-- Overlay backdrop -->
-    <div
-      id="sidebar-backdrop"
-      class="fixed top-[150px] bottom-0 left-0 right-0 bg-black/50 z-30 hidden md:hidden"
-    ></div>
-
-    <div class="flex flex-1 min-w-0">
-      <!-- Article -->
-      <article class="flex-1 min-w-0 px-5 sm:px-8 lg:px-14 py-8 bg-white">
-        <!-- Breadcrumb (Desktop Only) -->
-        <nav class="hidden md:flex text-xs text-gray-400 mb-6 items-center gap-1 flex-wrap" aria-label="Breadcrumb">
-          <a href="/" class="hover:text-[#04AA6D] transition-colors">Home</a>
-          <span>/</span>
-          <a href={`/tutorial/${category}-introduction`} class="hover:text-[#04AA6D] transition-colors capitalize">{category}</a>
-          <span>/</span>
-          <span class="text-gray-600 truncate max-w-[180px]">{title}</span>
-        </nav>
-
-        <!-- Page Title & Description -->
-        <div class="mb-6 pb-5 border-b border-gray-100">
-          <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{seoTitle || title}</h1>
-          <p class="text-base text-gray-500">{description}</p>
-        </div>
-
-        <!-- Table of Contents -->
-        {toc.length > 0 && (
-          <div class="mb-10 p-6 bg-[#1b1b2f] rounded-xl border-l-4 border-[#04AA6D] shadow-md">
-            <h4 class="text-sm font-extrabold text-white uppercase tracking-widest mb-4 flex items-center gap-2">
-              <svg width="18" height="18" fill="none" stroke="#04AA6D" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7"/>
-              </svg>
-              Table of Contents
-            </h4>
-            <ul class="space-y-2">
-              {toc.map(heading => (
-                <li class={heading.depth === 3 ? "pl-5 text-[13.5px]" : "text-[14.5px] font-medium"}>
-                  <a href={`#${heading.slug}`} class="text-gray-300 hover:text-[#04AA6D] transition-colors">
-                    {heading.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <!-- Prose Content -->
-        <div class="prose prose-gray prose-sm sm:prose-base max-w-none
-          prose-headings:font-bold prose-headings:text-gray-900
-          prose-a:text-[#04AA6D] prose-a:no-underline hover:prose-a:underline
-          prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[#c7254e] prose-code:text-sm prose-code:font-normal
-          prose-pre:bg-[#282A35] prose-pre:text-gray-100 prose-pre:rounded-lg
-          prose-blockquote:border-[#04AA6D] prose-blockquote:bg-green-50 prose-blockquote:py-1
-          prose-li:text-gray-700">
-          <slot />
-        </div>
-
-        <!-- Prev / Next -->
-        {(() => {
-          const idx = categoryTutorials.findIndex(t => t.slug === currentSlug);
-          const prev = idx > 0 ? categoryTutorials[idx - 1] : null;
-          const next = idx < categoryTutorials.length - 1 ? categoryTutorials[idx + 1] : null;
-
-          if (!prev && !next) return null;
-
-          return (
-            <div class="mt-12 pt-8 border-t border-gray-100 flex items-center justify-between">
-              {prev &&
-                <a href={`/tutorial/${prev.data.permalink || prev.slug}`} class="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-[#04AA6D] transition-colors">
-                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                  {prev.data.title}
-                </a>
-              }
-              {next &&
-                <a href={`/tutorial/${next.data.permalink || next.slug}`} class="flex items-center gap-2 text-sm font-semibold text-[#04AA6D] hover:underline ml-auto">
-                  {next.data.title}
-                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-              }
+  <div class="w-full bg-[#f8fafc] dark:bg-[#0f172a] min-h-screen py-2 sm:py-5 px-1.5 sm:px-4 lg:px-6">
+    <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row gap-4 lg:gap-6 items-start">
+      <!-- Sidebar (CodesCompiler Style) -->
+      <aside
+        id="page-sidebar"
+        class="fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:inset-auto md:w-64 md:transform-none md:rounded-2xl md:border md:border-slate-200/80 dark:md:border-slate-700/80 overflow-y-auto shadow-2xl md:shadow-sm md:sticky md:top-[120px] md:max-h-[calc(100vh-140px)] flex-shrink-0 md:z-10"
+      >
+        <!-- Dark Header Banner (CodesCompiler Style) -->
+        <div class="bg-[#0d1e32] text-white p-3.5 flex items-center gap-3 border-b border-slate-800">
+          <!-- Logo / Image Placeholder -->
+          <div class="w-11 h-11 rounded bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0 overflow-hidden relative group">
+            <img
+              src={`/images/courses/${normCat}-banner.png`}
+              onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex'"
+              class="w-full h-full object-cover"
+              alt={`${categoryLabel} Banner`}
+            />
+            <div class="flex flex-col items-center justify-center w-full h-full text-white text-[11px] font-extrabold tracking-wider uppercase">
+              {normCat.substring(0, 3)}
             </div>
-          );
-        })()}
-      </article>
-
-      <!-- Right Sidebar (Ads & related) -->
-      <aside class="hidden xl:block w-72 flex-shrink-0 pt-8 pr-8 pb-8">
-        <div class="sticky top-20 flex flex-col gap-6">
-          <AdSlot format="vertical" />
+          </div>
+          <div class="min-w-0 flex-1">
+            <h2 class="text-sm font-extrabold tracking-wide uppercase text-white leading-snug truncate">
+              {categoryLabel}
+            </h2>
+            <p class="text-[11px] text-slate-300 font-normal leading-tight mt-0.5 truncate">
+              {categorySubtitle}
+            </p>
+          </div>
         </div>
+
+        <!-- Chapter links grouped by section with dotted line borders (CodesCompiler Style) -->
+        <nav class="pb-6 flex flex-col" aria-label={`${categoryLabel} chapters`}>
+          {sidebarGroups.map((group) => (
+            <div class="flex flex-col">
+              {group.label && (
+                <div class="px-3.5 pt-3 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 flex items-center gap-1.5 sticky top-0 z-10">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#04AA6D]"></span>
+                  <span>{group.label}</span>
+                </div>
+              )}
+              {group.items.map((tutorial) => {
+                const tutorialSlug = tutorial.data.permalink || tutorial.slug;
+                const isActive = tutorialSlug === currentSlug;
+                return (
+                  <a
+                    href={`/tutorial/${tutorialSlug}/`}
+                    aria-current={isActive ? 'page' : undefined}
+                    class={`group flex items-center justify-between px-3.5 py-2.5 text-[13px] border-b border-dotted border-slate-200 dark:border-slate-700/60 transition-colors duration-150 ${
+                      isActive
+                        ? 'bg-[#e6f4ea] dark:bg-emerald-950/40 text-slate-900 dark:text-emerald-300 font-bold'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-[#04AA6D]'
+                    }`}
+                  >
+                    <div class="flex items-center min-w-0 pr-2">
+                      <span class={`w-1.5 h-1.5 rounded-full mr-2.5 flex-shrink-0 ${isActive ? 'bg-[#04AA6D]' : 'bg-slate-300 dark:bg-slate-600 group-hover:bg-[#04AA6D]'}`}></span>
+                      <span class="truncate">{tutorial.data.title}</span>
+                    </div>
+                    {isActive && (
+                      <svg class="w-3.5 h-3.5 text-slate-600 dark:text-emerald-400 flex-shrink-0 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+          ))}
+        </nav>
       </aside>
+
+      <!-- Full screen mobile backdrop -->
+      <div
+        id="sidebar-backdrop"
+        class="fixed inset-0 bg-black/60 z-40 hidden md:hidden backdrop-blur-xs transition-opacity duration-300"
+      ></div>
+
+      <div class="flex flex-1 min-w-0 gap-5 lg:gap-6 items-start w-full">
+        <!-- Main Article White Card Container -->
+        <article class="flex-1 min-w-0 px-3.5 sm:px-8 lg:px-12 py-5 sm:py-8 bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-xs sm:shadow-sm overflow-hidden w-full">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight mb-5">{title}</h1>
+          <!-- Breadcrumb (Desktop Only) -->
+          <nav class="hidden md:flex text-xs text-slate-400 dark:text-slate-400 mb-6 items-center gap-1.5 flex-wrap font-medium" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-[#04AA6D] transition-colors">Home</a>
+            <span>/</span>
+            <a href={`/tutorial/${category}-introduction/`} class="hover:text-[#04AA6D] transition-colors capitalize">{category}</a>
+            <span>/</span>
+            <span class="text-slate-700 dark:text-slate-300 font-semibold truncate max-w-[220px]">{title}</span>
+          </nav>
+
+          <!-- Prose Content -->
+          <div class="prose prose-gray prose-sm sm:prose-base max-w-none break-words
+            prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white
+            prose-a:text-[#04AA6D] prose-a:no-underline hover:prose-a:underline
+            prose-code:bg-slate-100 dark:prose-code:bg-slate-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[#c7254e] prose-code:text-sm prose-code:font-normal prose-code:break-words
+            prose-pre:bg-[#282A35] prose-pre:text-gray-100 prose-pre:rounded-xl prose-pre:max-w-full prose-pre:overflow-x-auto
+            prose-blockquote:border-[#04AA6D] prose-blockquote:bg-green-50 dark:prose-blockquote:bg-emerald-950/30 prose-blockquote:py-1
+            prose-li:text-slate-700 dark:prose-li:text-slate-300">
+            <slot />
+          </div>
+
+          <!-- Prev / Next -->
+          {(() => {
+            const idx = categoryTutorials.findIndex(t => (t.data.permalink || t.slug) === currentSlug);
+            const prev = idx > 0 ? categoryTutorials[idx - 1] : null;
+            const next = idx < categoryTutorials.length - 1 ? categoryTutorials[idx + 1] : null;
+
+            if (!prev && !next) return null;
+
+            return (
+              <div class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-slate-200/80 dark:border-slate-700 flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
+                {prev &&
+                  <a href={`/tutorial/${prev.data.permalink || prev.slug}/`} class="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-[#04AA6D] transition-colors truncate max-w-[48%]">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    <span class="truncate">{prev.data.title}</span>
+                  </a>
+                }
+                {next &&
+                  <a href={`/tutorial/${next.data.permalink || next.slug}/`} class="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#04AA6D] hover:underline ml-auto truncate max-w-[48%] justify-end">
+                    <span class="truncate">{next.data.title}</span>
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </a>
+                }
+              </div>
+            );
+          })()}
+        </article>
+
+        <!-- Right Sidebar (Ads & related) -->
+        <aside class="hidden xl:block w-72 flex-shrink-0 py-2">
+          <div class="sticky top-[120px] flex flex-col gap-6">
+            <AdSlot format="vertical" />
+          </div>
+        </aside>
+      </div>
     </div>
-  </div>
   </div>
 
   <script is:inline>

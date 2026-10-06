@@ -1,0 +1,219 @@
+---
+title: "JavaScript - Operator Precedence"
+description: "Learn JavaScript - Operator Precedence with clear explanation, code examples, and interactive syntax guide."
+category: "javascript"
+order: 340
+group: "JavaScript Operators"
+seoTitle: "JavaScript - Operator Precedence — CodesCompiler JavaScript Guide"
+permalink: "javascript-operator-precedence"
+---
+
+
+# JavaScript - Operator Precedence
+
+
+
+
+In JavaScript,operator precedenceensures the priority of the operators to be executed when a single expression contains multiple operators. So, whatever expressions have higher priority, the compiler executes it first over other operators and then executes the operators with the lower precedence.
+
+
+Whenever you write any JavaScript expression with only 1 or 2 operators, you can easily understand the output of the expression. But when the expression contains multiple operators, you should know the concept of operator precedence to evaluate the expression correctly.
+
+
+The best example of operator precedence is that in traditional mathematics, the multiplication operator has higher precedence over the addition or subtraction operator. So, if any mathematical expression contains the multiplication and addition of both operators, you need to perform the multiplication first.
+
+
+# Associativity
+
+
+The term associativity refers to the direction compiler should follow while evaluating the expression. In many situations, operators have the same precedence. In such cases, ambiguity occurs that which operation the compiler should perform first. So, the compiler takes the help of associativity. It can be from left to right or right to left.
+
+
+For example, we need to execute the below expression.
+
+
+```javascript
+let res = 50/5*2;
+```
+
+
+
+- Considering the above expression as (50/5) * 2 gives 20 as an output.
+- Evaluating the expression like 50/ (5*2) gives the 5 as a resultant value.
+
+
+
+To resolve the above ambiguity, the compiler uses the associativity rule. The associativity for the division and multiplication operator is from left to right. So, it evaluates the expression as (50 / 5) * 2.
+
+
+The assignment operator has right-to-left associativity. Consider the below assignment expression.
+
+
+```javascript
+P = q = 90;
+```
+
+
+In the above expression, 90 is assigned to the q, and the value of the q variable is assigned to the p.
+
+
+In short, the JavaScript compiler evaluates the expression based on the operator precedence, and when multiple operators have the same precedence, it uses the associativity rule.
+
+
+## Operator Precedence Table
+
+
+The below table contains the operator, its description, associativity direction, and a short example.
+
+
+| Precedence | Operator | Description | Associativity | Example |
+| --- | --- | --- | --- | --- |
+| 1 | `()` | Grouping | L -> R | (expression) |
+| 2 | `.` | Member of object | L -> R | Object.property |
+| 2 | `()` | Function call | L -> R | Demo() |
+| 2 | `new` | To create objects | R -> L | new test() |
+| 2 | `[]` | Member of object | L -> R | Object["property"] |
+| 3 | `--` | Postfix decrement | - | p-- |
+| 3 | `++` | Postfix increment | - | p++ |
+| 4 | `--` | Prefix decrement | R -> L | --p |
+| 4 | `++` | Prefix increment | R -> L | ++p |
+| 4 | `typeof` | To get variable type | R -> L | typeof a |
+| 4 | `!` | Logical NOT | R -> L | !a |
+| 4 | `~` | Bitwise NOT | R -> L | ~p |
+| 4 | `-` | Unary minus | R -> L | -p |
+| 4 | `+` | Unary plus | R -> L | +p |
+| 4 | `delete` | Delete object property | R -> L | delete arr[0] |
+| 4 | `void` | Evaluates void | R -> L | void(0) |
+| 5 | `**` | Exponentiation | R -> L | p ** q |
+| 6 | `*` | Multiplication | L -> R | p * q |
+| 6 | `/` | Division | L -> R | p / q |
+| 6 | `%` | Modulo | L -> R | p % q |
+| 7 | `+` | Addition | L -> R | p + q |
+| 7 | `-` | Subtraction | L -> R | p - q |
+| 8 | `<<` | Left shift | L -> R | `p << 2` |
+| 8 | `>>` | Signed right shift | L -> R | `p >> 2` |
+| 8 | `>>>` | Unsigned right shift | L -> R | `p >>> 2` |
+| 9 | `in` | Property in object | L -> R | `x in y` |
+| 9 | `instanceof` | Instance of object | L -> R | `p instanceof Object` |
+| 9 | `<` | Less than | L -> R | `p < q` |
+| 9 | `<=` | Less than or equal to | L -> R | `p <= q` |
+| 9 | `>` | Greater than | L -> R | `p > q` |
+| 9 | `>=` | Greater than or equal to | L -> R | `p >= q` |
+| 10 | `==` | Equality | L -> R | `p == q` |
+| 10 | `!=` | Inequality | L -> R | `p != q` |
+| 10 | `===` | Strict equality | L -> R | `p === q` |
+| 10 | `!==` | Strict inequality | L -> R | `p !== q` |
+
+| 11 | `&` | Bitwise AND | L -> R | p & q |
+| 12 | `^` | Bitwise XOR | L -> R | p ^ q |
+| 13 | `|` | Bitwise OR | L -> R | p | q |
+| 14 | `&&` | Logical AND | L -> R | p && q |
+| 15 | `||` | Logical OR | L -> R | p || q |
+| 16 | `??` | Nullish Coalescing | R -> L | p ?? q |
+| 17 | `=` | Assignment | R -> L | p = q |
+| 17 | `+=` | Addition assignment | R -> L | p += q |
+| 17 | `-=` | Subtraction assignment | R -> L | p -= q |
+| 17 | `*=` | Multiplication assignment | R -> L | p *= q |
+| 17 | `/=` | Division assignment | R -> L | p /= q |
+| 17 | `%=` | Modulo assignment | R -> L | p %= q |
+| 17 | `**=` | Exponentiation assignment | R -> L | p **= q |
+| 17 | `<<=` | Left shift assignment | R -> L | `p <<= q` |
+| 17 | `>>=` | Right shift assignment | R -> L | `p >>= q` |
+| 17 | `>>>=` | Unsigned right shift assignment | R -> L | `p >>>= q` |
+
+| 17 | `&=` | Bitwise AND assignment | R -> L | p &= q |
+| 17 | `^=` | Bitwise XOR assignment | R -> L | p ^= q |
+| 17 | `|=` | Bitwise OR assignment | R -> L | p |= q |
+| 17 | `&&=` | Logical AND assignment | R -> L | p &&= q |
+| 17 | `||=` | Logical OR assignment | R -> L | p ||= q |
+| 17 | `=>` | Arrow function | - | (a, b) => &#123;&#125; |
+| 18 | `yield` | Pause / Resume | R -> L | yield p |
+| 19 | `,` | Comma operator | L -> R | (10, 20, 30) |
+
+
+
+## Examples
+
+
+Let's understand the operator precedence via simple examples.
+
+
+### Example
+
+
+In the example below, the first expression contains the division, modulo, and multiplication operators with the same precedence. So, the compiler will use the associativity rule, which is left to right for multiplication, division, and modulo operator.
+
+
+So, it divides the 30 by 15, takes modulo of (30/15) with 3, and multiples the ((30/15)%3) with 2.
+
+
+In the second expression, the exponentiation operator has right-to-left associativity. So, it evaluates the expression same as (2 *8 (3 ** 2)).
+
+
+```html
+<html>
+   <body>
+      <div id = "output"></div>
+      <script>
+         const first = 30 / 15 % 3 * 2;
+         const second = 2 ** 3 ** 2;
+         document.getElementById("output").innerHTML =
+            "The value of first expression is : " + first + "<br>" + 
+            "The value of second expression is : " + second;
+      </script>
+   </body>
+</html>
+```
+
+
+### Output
+
+
+It will produce the following result −
+
+
+```javascript
+The value of first expression is : 4
+The value of second expression is : 512
+```
+
+
+### Example
+
+
+This code demonstrates that you can use the grouping operator () to change the operator precedence. In the below code, we have taken the same expressions which we have taken in the above code, but we change the operator precedence.
+
+
+In the first expression, first, we take modulo and multiply the resultant value with 2. So, we get 0 and divide 30 by 0, returning infinity.
+
+
+In the second expression, the first expression evaluates the (2 ** 3) and (8 ** 2), which is equal to 64.
+
+
+```html
+<html>
+   <body>
+      <div id = "output"></div>
+      <script>
+         const first = 30 / ((15 % 3) * 2);
+         const second = (2 ** 3) ** 2;
+         document.getElementById("output").innerHTML =
+            "The value of first expression is : " + first + "<br>" + 
+            "The value of second expression is : " + second;
+      </script>
+   </body>
+</html>
+```
+
+
+### Output
+
+
+```javascript
+The value of first expression is : Infinity
+The value of second expression is : 64
+```
+
+
+The grouping operator can change operator precedence for any operator as it has the highest operator precedence.
+
