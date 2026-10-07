@@ -1,6 +1,7 @@
 ---
 export interface Props {
   initialHtml?: string;
+  initialHtmlBase64?: string;
   initialCss?: string;
   initialJs?: string;
   initialPhp?: string;
@@ -10,12 +11,17 @@ export interface Props {
 
 const {
   initialHtml = `<h1>Hello, CodesCompiler!</h1>\n<p>Edit this code and click <b>Run ▶</b></p>`,
+  initialHtmlBase64,
   initialCss  = `body {\n  font-family: sans-serif;\n  padding: 2rem;\n  background: #f0f4f8;\n}\nh1 { color: #04AA6D; }\np  { color: #555; }`,
   initialJs   = `// Your JavaScript here\nconsole.log("Welcome to CodesCompiler!");`,
   initialPhp  = ``,
   activeTab   = `html`,
   height = '520px',
 } = Astro.props;
+
+const resolvedHtml = initialHtmlBase64
+  ? new TextDecoder().decode(Uint8Array.from(atob(initialHtmlBase64), (char) => char.charCodeAt(0)))
+  : initialHtml;
 
 // Each Editor instance gets a unique ID so multiple editors on one page work independently
 const uid = Math.random().toString(36).slice(2, 9);
@@ -24,7 +30,7 @@ const uid = Math.random().toString(36).slice(2, 9);
 <div
   class="not-prose tiy-root my-8 rounded-xl border border-gray-200 shadow-lg overflow-hidden bg-[#1e1e2e]"
   style={`height:${height}`}
-  data-html={initialHtml}
+  data-html={resolvedHtml}
   data-css={initialCss}
   data-js={initialJs}
   data-php={initialPhp}
