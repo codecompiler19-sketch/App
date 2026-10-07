@@ -150,21 +150,14 @@ const schemaData = [tutorialSchema, breadcrumbSchema];
   keywords={keywords}
   schemaData={schemaData}
 >
-  <!-- TUTORIAL SUB-HEADER FOR MOBILE SIDEBAR -->
-  <div slot="sub-header" class="cc-tutorial-subheader md:hidden bg-white dark:bg-slate-800 flex items-center justify-between px-3.5 py-2.5 border-b border-slate-200 dark:border-slate-700/80 w-full relative z-20 shadow-xs">
-    <button id="sidebar-toggle" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-100 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" aria-label="Toggle tutorial menu">
-      <svg class="w-4 h-4 text-[#04AA6D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+  <!-- Mobile current-tutorial sidebar control.
+       BaseLayout places this button on the left side of the tutorial/language row. -->
+  <div slot="tutorial-nav-control">
+    <button id="sidebar-toggle" class="cc-mobile-sidebar-toggle" type="button" aria-label={`Open ${categoryLabel} tutorial topics`}>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
-      <span>Topics Menu</span>
     </button>
-    <nav class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 font-medium truncate max-w-[55%]" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-[#04AA6D] transition-colors">Home</a>
-      <span>/</span>
-      <a href={`/tutorial/${category}-introduction/`} class="hover:text-[#04AA6D] transition-colors capitalize">{category}</a>
-      <span>/</span>
-      <span class="text-slate-900 dark:text-slate-100 font-semibold truncate">{title}</span>
-    </nav>
   </div>
 
   <div class="w-full bg-[#f8fafc] dark:bg-[#0f172a] min-h-screen py-2 sm:py-5 px-1.5 sm:px-4 lg:px-6">
