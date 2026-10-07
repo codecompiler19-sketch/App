@@ -1,215 +1,393 @@
----
-title: "HTML Tutorial for Beginners: Learn HTML Free with a Live Editor"
-description: "Learn HTML from scratch with this free beginner tutorial. Write and run code in the live editor, no sign-up. Covers tags, elements and your first page."
+--- 
+title: "HTML Tutorial for Beginners: Learn HTML from Scratch"
+description: "Learn HTML from scratch with clear explanations, practical examples, and a free live editor. Build your first webpage and understand HTML elements, attributes, document structure, links, images, lists, forms, semantic HTML, and accessibility."
 category: "html"
 order: 10
 group: "HTML Basics"
-seoTitle: "HTML Tutorial for Beginners – Free Live Editor | CodesCompiler"
+seoTitle: "HTML Tutorial for Beginners – Learn HTML from Scratch | CodesCompiler"
 ogType: "article"
 ogImage: "/images/courses/html-banner.png"
 permalink: "html-index"
 ---
 
+import Editor from '../../components/Editor.astro';
 
-# HTML Tutorial for Beginners: Learn HTML Free with a Live Editor
+# HTML Tutorial for Beginners: Learn HTML from Scratch
 
+If you are new to web development, HTML is the best place to start. You do not need to know programming before learning it, and you can begin with nothing more than a text editor and a web browser.
 
-Welcome to your completely free tutorial on learning HTML from basic to advanced. This tutorial will guide you through the fundamental basics of HTML, from understanding its purpose to building your very first webpage. By the end, you'll have a strong foundation to start your journey in web development or web design.
+In this tutorial, we will start with the basics and gradually build a clear understanding of how HTML pages are structured. You will learn what HTML is, how elements and attributes work, how to create your first page, and how to add common content such as headings, paragraphs, links, images, lists, tables, and forms.
 
+The goal is not to memorize hundreds of tags. Instead, you will learn the ideas behind HTML so you can read existing markup, write your own pages, and confidently move on to CSS and JavaScript.
 
-Before writing any code, it's necessary to understand what HTML is and why it's the bedrock of every single website you visit online, irrespective of the programming language used.
+> **Tip:** You can practice the examples in a live HTML editor instead of creating files on your computer.
 
+## What Is HTML?
 
-# What is HTML?
+HTML stands for **HyperText Markup Language**. It is the standard markup language used to describe the structure and meaning of content on web pages.
 
+HTML is **not a programming language**. A programming language is used to write logic and instructions that perform computations or make decisions. HTML mainly describes what the content is: a heading, paragraph, link, image, list, form, article, navigation area, and so on.
 
-HTML stands forHyperTextMarkupLanguage. It is not a programming language, but amarkup languageused to create the structure and content of a webpage.
+Think of a web page as a building:
 
+- **HTML** provides the structure and content.
+- **CSS** controls presentation, such as colors, spacing, fonts, and layout.
+- **JavaScript** adds behavior and interactivity.
 
+For example:
 
-- HyperText:Refers to the "links" that connect web pages, allowing you to navigate the internet.
-- Markup Language:Refers to the use of "tags" (like `<h1>` or `<p>`) to define the layout and elements of your content.
+<Editor initialHtml={"<h1>Welcome to My Website</h1>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+CSS can make that heading look different, while JavaScript can change it after a user interacts with the page.
 
+## Why Should You Learn HTML?
 
-HTML is the skeleton of the page that gives every website its shape.
+HTML is useful whether you want to become a front-end developer, build your own website, create web pages for a business, or simply understand how websites work.
 
+Here are a few good reasons to learn it:
 
-Read more about HTML
+- **It is beginner-friendly.** You can create a page with only a few lines of HTML.
+- **It is the foundation of the web.** Modern websites rely on HTML to describe their content.
+- **It makes CSS easier to learn.** You need to understand the elements you are styling.
+- **It makes JavaScript easier to understand.** JavaScript often reads and changes HTML elements.
+- **It helps with accessibility and SEO.** Correct HTML gives browsers, search engines, and assistive technologies useful information about your content.
+- **It is useful in many careers.** Web developers, designers, content editors, marketers, and technical writers often work with HTML.
 
+## How Does HTML Work?
 
-## Why is Learning HTML Essential?
+An HTML document is made up of **elements**. Most elements have an opening tag, some content, and a closing tag.
 
+<Editor initialHtml={"<p>This is a paragraph.</p>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-Learning HTML is the first and most critical skill for anyone interested in making a career in web development or Designing.
+Here, \`<p>\` is the opening tag and \`</p>\` is the closing tag. Together with the text inside, they form a paragraph element.
 
+Some elements do not wrap around content. These are called **void elements**. For example:
 
+<Editor initialHtml={"<img src=\"photo.jpg\" alt=\"A mountain landscape\">"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-- Build Websites:It is the fundamental building block of all websites. You can't build a house without a foundation; similarly, you can't build a website without HTML.
-- Launch a Web Development or Design Career:A deep understanding of HTML is essential for roles such asFront-End Developer,Web Designer,Full-Stack Developer, and evenEmail Developer.
-- To Understand Other Languages:Knowing HTML makes it significantly easier to learn its companion technologies:CSS(for styling) andJavaScript(for functionality).
+The \`<img>\` element displays an image and does not need a closing \`</img>\` tag.
 
+## Your First HTML Page
 
+Let's create a small but complete HTML document. Save this code as \`index.html\` and open it in a browser.
 
-## Learn to Build Your First HTML Page
+<Editor initialHtml={"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My First HTML Page</title>\n</head>\n<body>\n    <h1>Hello, World!</h1>\n    <p>This is my first web page.</p>\n</body>\n</html>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+This example contains the basic pieces you will find in most HTML documents. Let's look at them one by one.
 
-Let's move from theory to practice. Here's how to create and view your very first webpage.
+## Understanding the Basic HTML Structure
 
+### \`<!DOCTYPE html>\`
 
-### What You Need
+The doctype tells the browser to use the modern HTML document mode. For new pages, use the HTML5 doctype:
 
+<Editor initialHtml={"<!DOCTYPE html>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+It is normally the first line of the document.
 
-- A Text Editor:Any simple text editor will work (e.g., Notepad on Windows, TextEdit on Mac, or more advanced editors like VS Code).
-- A Web Browser:Google Chrome, Firefox, or any modern browser to view your page.
+### \`<html>\`
 
+The \`<html>\` element is the root of the document. Everything else belongs inside it.
 
+It is good practice to specify the language of the page:
 
-### Basic HTML Document Example
+<Editor initialHtml={"<html lang=\"en\">"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+For a Hindi page, for example, you could use \`lang="hi"\`.
 
+### \`<head>\`
 
-- Open your text editor.
-- Copy and paste the code below into the editor.
-- Save the file with a .html extension, for example: my.html.
-- To see your work, find the file on your computer and double-click it. It will open in your default web browser.
+The \`<head>\` contains information about the document that is not normally displayed as page content. It can contain the title, character encoding, viewport settings, stylesheets, metadata, and other resources.
 
+<Editor initialHtml={"<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Website</title>\n</head>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+### \`<title>\`
 
-Try Our Free Online HTML Editor
+The \`<title>\` element defines the document title shown in the browser tab. It also helps users and search engines understand what the page is about.
 
+<Editor initialHtml={"<title>Learn HTML</title>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-## Elements of Basic HTML Structure
+### \`<body>\`
 
+The \`<body>\` contains the content visitors see and interact with, such as headings, paragraphs, images, links, buttons, lists, forms, and articles.
 
-Let's understand what each tag in that example does.
+<Editor initialHtml={"<body>\n    <h1>Learn HTML</h1>\n    <p>HTML gives a web page its structure.</p>\n</body>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+## HTML Elements and Tags
 
-### ```<!DOCTYPE html>```
+The words **tag** and **element** are often used interchangeably by beginners, but they are not exactly the same thing.
 
+A tag is the markup itself, such as \`<p>\` or \`</p>\`. An element is the complete structure, including its content:
 
-This declaration defines that the document is an HTML5 document. It must always be the very first line of your code.
+<Editor initialHtml={"<p>Hello HTML</p>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+Here, \`<p>\` and \`</p>\` are tags, while the complete paragraph is the element.
 
-### `<html>`...`</html>`
+Understanding this distinction becomes useful when you start working with the DOM and JavaScript.
 
+## HTML Attributes
 
-This is the root element of the page. All other elements are nested inside it.
+Attributes provide additional information about an element. They are written inside the opening tag.
 
+For example:
 
-### `<head>`...`</head>`
+<Editor initialHtml={"<a href=\"https://example.com\">Visit Example</a>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+Here, \`href\` is an attribute that tells the browser where the link should go.
 
-The `<head>` section contains meta-information that isn't displayed directly on the page, like the page title or links to CSS stylesheets.
+Another common example is the \`src\` and \`alt\` attributes of an image:
 
+<Editor initialHtml={"<img src=\"cat.jpg\" alt=\"A sleeping cat\">"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-### `<title>`...`</title>`
+The \`alt\` text is especially important for accessibility because screen readers can use it to describe the image.
 
+## Common HTML Elements You Should Learn First
 
-The `<title>` tag sets the title of the webpage. This is what you see in the browser tab and what search engines use as the main title in search results.
+You do not need to learn every HTML element on your first day. Start with the elements you will use most often.
 
+### Headings: \`<h1>\` to \`<h6>\`
 
-### `<body>`...`</body>`
+HTML has six heading levels, from \`<h1>\` through \`<h6>\`.
 
+<Editor initialHtml={"<h1>Main Page Heading</h1>\n<h2>Section Heading</h2>\n<h3>Subsection Heading</h3>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-The `<body>` tag contains all the visible content of your webpage—headings, paragraphs, images, links, etc.
+Use headings to organize the content of a page. Choose a heading level based on the structure of the content, not simply because it looks bigger or smaller.
 
+### Paragraphs: \`<p>\`
 
-## Essential HTML Elements (Tags)
+Use \`<p>\` for normal paragraphs of text.
 
+<Editor initialHtml={"<p>HTML is used to structure content on the web.</p>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-Elements are the building blocks of HTML. Here are the most common ones you'll use every day.
+### Links: \`<a>\`
 
+The anchor element creates links to other pages, files, sections of the same page, email addresses, and more.
 
-### Headings: `<h1>` to `<h6>`
+<Editor initialHtml={"<a href=\"https://example.com\">Visit Example</a>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+For links that open in a new tab, you will often see:
 
-HTML provides six levels of headings. `<h1>` is the most important (the main title of your content), while `<h6>` is the least.
+<Editor initialHtml={"<a href=\"https://example.com\" target=\"_blank\" rel=\"noopener\">Open Example</a>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+The \`rel="noopener"\` value is a good security practice when using \`target="_blank"\`.
 
-```html
-# Main Title ## A Sub-heading
-```
+### Images: \`<img>\`
 
+Use \`<img>\` to display an image.
 
-### Paragraphs: `<p>`
+<Editor initialHtml={"<img src=\"images/photo.jpg\" alt=\"A beautiful sunset\">"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+The \`alt\` attribute should describe the image when it conveys useful information. For a purely decorative image, an empty \`alt=""\` can be appropriate.
 
-The `<p>` tag defines a paragraph of text. Browsers automatically add space before and after each paragraph.
+### Lists
 
+An unordered list uses \`<ul>\` and an ordered list uses \`<ol>\`.
 
-```html
-This is a paragraph of text. You can write multiple sentences here.
-```
+<Editor initialHtml={"<ul>\n    <li>HTML</li>\n    <li>CSS</li>\n    <li>JavaScript</li>\n</ul>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+An ordered list is useful when the sequence matters:
 
-### Links: `<a>`
+<Editor initialHtml={"<ol>\n    <li>Open your editor</li>\n    <li>Write your HTML</li>\n    <li>Save the file</li>\n    <li>Open it in a browser</li>\n</ol>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+### Buttons: \`<button>\`
 
-The `<a>` (or anchor) tag creates a hyperlink. The href attribute specifies the URL to which the link points.
+Use \`<button>\` for actions that a user can perform, such as submitting a form or opening a menu.
 
+<Editor initialHtml={"<button type=\"button\">Click Me</button>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-```html
-Click here to visit Google
-```
+A button is different from a link: use a link when the user is navigating somewhere, and a button when the user is performing an action.
 
+## Semantic HTML
 
-### Comments: ```<!-- ... -->```
+Semantic elements describe the purpose of different parts of a page. Common examples include:
 
+<Editor initialHtml={"<header>\n    <nav>...</nav>\n</header>\n\n<main>\n    <article>\n        <h1>Article Title</h1>\n        <p>Article content...</p>\n    </article>\n</main>\n\n<footer>...</footer>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-You can add comments to your code to leave notes for yourself or others. The browser ignores comments.
+Some useful semantic elements are:
 
+- \`<header>\` for introductory content or a page or section header.
+- \`<nav>\` for a group of navigation links.
+- \`<main>\` for the main content of the page.
+- \`<article>\` for self-contained content such as an article or post.
+- \`<section>\` for a thematic section of content.
+- \`<aside>\` for related or supplementary content.
+- \`<footer>\` for footer information.
 
-```html
-<!--This is a comment-->
-```
+Semantic HTML makes your markup easier to understand and helps browsers and assistive technologies understand the structure of your page.
 
+## HTML Comments
 
-Learn more about HTML comments
+Comments are useful for leaving notes in your code. Browsers do not display them as page content.
 
+<Editor initialHtml={"<!-- This is an HTML comment -->"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-### Semantic HTML
+Comments are helpful while learning and maintaining projects, but never put passwords, API keys, or other secrets inside them. HTML sent to a browser is visible to the user.
 
+## HTML Forms
 
-As you advance, use semantic elements like `<header>`, `<footer>`, `<nav>`, and `<article>` to add meaning to your content when designing or developing a web page. This improves both accessibility and SEO.
+Forms allow users to enter and submit information.
 
+Here is a simple example:
 
-Learn more about HTML Basic Tags
+<Editor initialHtml={"<form action=\"/submit\" method=\"post\">\n    <label for=\"name\">Name:</label>\n    <input type=\"text\" id=\"name\" name=\"name\">\n\n    <button type=\"submit\">Submit</button>\n</form>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+Notice that the \`<label>\` is connected to the input through the matching \`for\` and \`id\` values. This makes the form easier to use with keyboards and assistive technologies.
 
-## HTML Tools and Resources
+HTML provides many useful input types, including \`text\`, \`email\`, \`number\`, \`date\`, \`password\`, \`checkbox\`, and \`radio\`.
 
+## HTML Tables
 
+Tables are designed for **tabular data**, such as prices, schedules, marks, or reports.
 
-- Online HTML Editor:To practice without setting up files, you can use an online editor that shows you a live preview of your code almost instantly. – Try Our Free Online HTML Editor
-- Further Practice:Once you are comfortable, test your knowledge with resources like anHTML Cheat Sheet,Interview Questions, andQuizzes.
+<Editor initialHtml={"<table>\n    <thead>\n        <tr>\n            <th>Name</th>\n            <th>Score</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>Rahul</td>\n            <td>90</td>\n        </tr>\n        <tr>\n            <td>Priya</td>\n            <td>95</td>\n        </tr>\n    </tbody>\n</table>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
+Use tables for data, not for designing the layout of a web page. CSS layout tools such as Flexbox and Grid are better suited for page layout.
 
+## HTML5 and Modern HTML
 
-## Frequently Asked Questions (FAQ) about HTML
+You may still hear people refer to **HTML5** as if it were a completely separate language. HTML5 introduced many important capabilities and semantic elements, but today it is more useful to think of HTML as a living web standard that continues to evolve.
 
+Modern HTML includes features for multimedia, forms, graphics, semantics, accessibility, and integration with browser APIs.
 
-Q1: Is HTML a programming language?
+For new projects, focus on current HTML practices rather than outdated elements such as \`<font>\`, \`<center>\`, or \`<frameset>\`.
 
+## HTML and Accessibility
 
-No, HTML is amarkup language. It structures content but lacks the logic and computational functions of a programming language.
+Good HTML is not only about making a page look correct. It should also make the page usable by as many people as possible.
 
+A few beginner-friendly accessibility habits are:
 
-Q2: What is the latest version of HTML?
+- Use meaningful heading levels to organize content.
+- Add useful \`alt\` text to informative images.
+- Use \`<button>\` for actions and \`<a>\` for navigation.
+- Associate form labels with their inputs.
+- Use semantic elements such as \`<main>\`, \`<nav>\`, and \`<footer>\` where appropriate.
+- Make sure interactive elements can be used with a keyboard.
+- Do not rely on color alone to communicate important information.
 
+These habits are useful from your first project; accessibility should not be something you add only after a website is finished.
 
-The latest major version isHTML5, which introduced many modern features like `<video>`, `<audio>`, and semantic elements.
+## How to Practice HTML
 
+The fastest way to learn HTML is to write small examples and change them yourself.
 
-Q3: What is the difference between `<head>` and `<header>`?
+Try this simple exercise:
 
+<Editor initialHtml={"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>My Profile</title>\n</head>\n<body>\n    <h1>My Profile</h1>\n    <p>Hello! I am learning HTML.</p>\n\n    <h2>My Hobbies</h2>\n    <ul>\n        <li>Reading</li>\n        <li>Learning to code</li>\n        <li>Photography</li>\n    </ul>\n\n    <p>\n        <a href=\"https://example.com\">My favorite website</a>\n    </p>\n</body>\n</html>"} initialCss="" initialJs="" activeTab="html" height="360px" />
 
-The `<head>` section is for browser and SEO metadata (such as the `<title>`) that is not visible on the page. The `<header>` is a semantic element used inside the `<body>` to define the introductory content or navigation links thatarevisible on the page.
+Change the heading, paragraph, hobbies, and link. Then add an image, a second section, and a contact form. Small experiments like these help you understand HTML much faster than memorizing tag lists.
 
+## HTML Editor: Practice Without Installing Anything
 
-Q4: How do you save an HTML file?
+If you do not want to create files on your computer, use the **free HTML editor on CodesCompiler** to write HTML and see the result while you learn.
 
+The important part is to practice. Type the examples yourself, change them, break them, and fix them. That is how HTML starts to feel natural.
 
-In your text editor, go to "File" -> "Save As" and save your document with a name followed by the.htmlextension (e.g., index.html).
+## What Should You Learn After HTML?
 
+Once you are comfortable creating HTML pages, the next step is **CSS**. CSS lets you control colors, fonts, spacing, responsive layouts, animations, and the overall visual design of a page.
+
+After CSS, learn **JavaScript** to add behavior and interactivity such as menus, form validation, dynamic content, calculators, games, and other browser-based features.
+
+A simple learning path is:
+
+**HTML → CSS → JavaScript → Front-End Projects → Advanced Web Development**
+
+You can also continue exploring the HTML tutorials on CodesCompiler to learn individual topics in more detail, including attributes, forms, tables, images, links, semantic elements, multimedia, and browser APIs.
+
+## Frequently Asked Questions About HTML
+
+<details>
+<summary><strong>Is HTML a programming language?</strong></summary>
+
+No. HTML is a markup language. It describes the structure and meaning of web content. Programming languages such as JavaScript, Python, Java, and PHP are used to write logic and perform computations.
+
+</details>
+
+<details>
+<summary><strong>Is HTML difficult to learn?</strong></summary>
+
+HTML is one of the easiest technologies for beginners to start with. You can create a working page with only a few elements. The bigger challenge is learning how to structure real-world pages cleanly and accessibly, which comes with practice.
+
+</details>
+
+<details>
+<summary><strong>Do I need to install software to learn HTML?</strong></summary>
+
+No. A text editor and a modern web browser are enough. You can also practice directly in an online HTML editor.
+
+</details>
+
+<details>
+<summary><strong>What is the latest version of HTML?</strong></summary>
+
+HTML is no longer released as a sequence of numbered versions such as HTML4, HTML5, and HTML6. The current standard is maintained as the **HTML Living Standard**, which is continuously updated as the web platform evolves.
+
+</details>
+
+<details>
+<summary><strong>What is the difference between <code>&lt;head&gt;</code> and <code>&lt;header&gt;</code>?</strong></summary>
+
+<code>&lt;head&gt;</code> contains document metadata and resources that are not normally displayed as page content. <code>&lt;header&gt;</code> is a visible semantic element inside the page body and is commonly used for introductory content, branding, or navigation.
+
+</details>
+
+<details>
+<summary><strong>What is an HTML attribute?</strong></summary>
+
+An attribute provides additional information about an HTML element. For example, <code>href</code> tells an <code>&lt;a&gt;</code> element where its link points, while <code>alt</code> provides alternative text for an image.
+
+</details>
+
+<details>
+<summary><strong>How do you save an HTML file?</strong></summary>
+
+Save the file with the <code>.html</code> extension. For example, <code>index.html</code>. You can then open the file directly in a modern web browser to see the page.
+
+</details>
+
+<details>
+<summary><strong>Can HTML create a complete website by itself?</strong></summary>
+
+HTML can create the structure and content of a website, but most modern websites also use CSS for presentation and JavaScript or server-side technologies for richer behavior and functionality.
+
+</details>
+
+
+## Start Learning HTML Today
+
+You do not need to understand the whole language before building your first page. Start with a heading, add a paragraph, create a link, and keep experimenting.
+
+The most important thing is to write HTML regularly. Once the basic structure becomes familiar, CSS and JavaScript will make much more sense because you will already understand the document they work with.
+
+**Ready to practice? Open the free HTML editor and start building your first page.**
+
+\`HTML → Structure → CSS → Design → JavaScript → Interactivity\`
+
+
+<style is:global>
+  article details {
+    margin: 0.75rem 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.65rem;
+    background: #fff;
+    overflow: hidden;
+  }
+  article details summary {
+    cursor: pointer;
+    padding: 0.9rem 1rem;
+    font-weight: 600;
+    color: #17365d;
+    list-style: none;
+  }
+  article details summary::-webkit-details-marker { display: none; }
+  article details summary::after {
+    content: '+';
+    float: right;
+    font-size: 1.15rem;
+    color: #04AA6D;
+  }
+  article details[open] summary::after { content: '−'; }
+  article details[open] summary { border-bottom: 1px solid #e5e7eb; }
+  article details > p { padding: 0.85rem 1rem 1rem; margin: 0; }
+</style>
