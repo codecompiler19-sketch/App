@@ -410,3 +410,61 @@ const CATEGORY_COLORS: Record<string, { color: string; bg: string }> = {
   .float-2 { animation: float2 10s ease-in-out infinite; }
   .float-3 { animation: float3 7s ease-in-out infinite; }
 </style>
+
+<style>
+  /* Homepage typography refinement — staging */
+  #courses .course-card h3 {
+    font-size: 2rem !important;
+    line-height: 1.15 !important;
+  }
+
+  #courses .course-card p {
+    font-size: 1rem !important;
+    line-height: 1.65 !important;
+  }
+
+  #courses .course-card > div > div > div > span {
+    font-size: 0.9rem !important;
+  }
+
+  #courses .course-card a,
+  #courses .course-card .inline-flex {
+    font-size: 0.95rem !important;
+  }
+
+  #courses > div > div:first-child p {
+    font-size: 1.125rem !important;
+    line-height: 1.7 !important;
+  }
+
+  #courses > div > div:first-child span {
+    font-size: 0.8rem !important;
+  }
+
+  .cc-feature-card strong {
+    font-size: 1.05rem !important;
+  }
+
+  .cc-feature-card small {
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+  }
+
+  @media (max-width: 767px) {
+    #courses .course-card h3 {
+      font-size: 1.8rem !important;
+    }
+
+    #courses .course-card p {
+      font-size: 1rem !important;
+    }
+
+    .cc-feature-card strong {
+      font-size: 1rem !important;
+    }
+
+    .cc-feature-card small {
+      font-size: 0.88rem !important;
+    }
+  }
+</style>
