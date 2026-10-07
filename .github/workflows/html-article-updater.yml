@@ -1,0 +1,56 @@
+name: HTML Article Updater
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: html-article-updater
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Rewrite next HTML article
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update one HTML article
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/update-html-article.mjs
+
+      - name: Install dependencies
+        if: steps.update.outcome == 'success'
+        run: npm install
+
+      - name: Build site before committing
+        if: steps.update.outcome == 'success'
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
+        run: npm run build
+
+      - name: Commit successful article update
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/tutorials content-update-progress.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Update next HTML tutorial article"
+          git push
