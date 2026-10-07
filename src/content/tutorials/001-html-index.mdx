@@ -11,6 +11,7 @@ permalink: "html-index"
 ---
 
 import Editor from '../../components/Editor.astro';
+import FaqItem from '../../components/FaqItem.astro';
 
 
 # HTML Tutorial for Beginners: Learn HTML from Scratch
@@ -325,29 +326,3 @@ The most important thing is to write HTML regularly. Once the basic structure be
 \`HTML → Structure → CSS → Design → JavaScript → Interactivity\`
 
 
-<style is:global>
-  article details {
-    margin: 0.75rem 0;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.65rem;
-    background: #fff;
-    overflow: hidden;
-  }
-  article details summary {
-    cursor: pointer;
-    padding: 0.9rem 1rem;
-    font-weight: 600;
-    color: #17365d;
-    list-style: none;
-  }
-  article details summary::-webkit-details-marker { display: none; }
-  article details summary::after {
-    content: '+';
-    float: right;
-    font-size: 1.15rem;
-    color: #04AA6D;
-  }
-  article details[open] summary::after { content: '−'; }
-  article details[open] summary { border-bottom: 1px solid #e5e7eb; }
-  article details > p { padding: 0.85rem 1rem 1rem; margin: 0; }
-</style>
