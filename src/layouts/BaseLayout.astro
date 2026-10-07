@@ -315,36 +315,53 @@ const tutorialLinks = [
         }
 
         .cc-mobile-sidebar-toggle {
-          width: 52px;
-          min-height: 58px;
+          min-width: 166px;
+          min-height: 54px;
+          margin: 7px 8px;
+          padding: 0 18px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
+          gap: 12px;
           border: 0;
-          background: #fff;
-          color: #0f172a;
+          border-radius: 13px;
+          background: #f1f5fb;
+          color: #172033;
           cursor: pointer;
-          padding: 0;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1;
+          white-space: nowrap;
+          box-shadow: none;
+          -webkit-tap-highlight-color: transparent;
         }
 
         .cc-mobile-sidebar-toggle svg {
-          width: 28px;
-          height: 28px;
+          width: 26px;
+          height: 26px;
+          flex: 0 0 26px;
           fill: none;
-          stroke: currentColor;
-          stroke-width: 2;
+          stroke: #04a875;
+          stroke-width: 2.2;
           stroke-linecap: round;
         }
 
         .cc-mobile-sidebar-toggle:active {
-          background: #f8fafc;
+          background: #e8eef7;
         }
 
-        html.dark-theme .cc-tutorial-mobile-control,
-        html.dark-theme .cc-mobile-sidebar-toggle {
+        html.dark-theme .cc-tutorial-mobile-control {
           background: #0f172a;
-          color: #e5e7eb;
           border-color: #334155;
+        }
+
+        html.dark-theme .cc-mobile-sidebar-toggle {
+          background: #1e293b;
+          color: #f1f5f9;
+        }
+
+        html.dark-theme .cc-mobile-sidebar-toggle:active {
+          background: #334155;
         }
 
         .cc-site-header.cc-header-compact #cc-brand-row {
