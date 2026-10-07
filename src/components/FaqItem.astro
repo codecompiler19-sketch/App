@@ -15,9 +15,9 @@ const { question, answer } = Astro.props;
 <style>
   .faq-item {
     margin: 0.75rem 0;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #17365d;
     border-radius: 0.65rem;
-    background: #fff;
+    background: #17365d;
     overflow: hidden;
   }
 
@@ -25,8 +25,9 @@ const { question, answer } = Astro.props;
     cursor: pointer;
     padding: 0.9rem 1rem;
     font-weight: 600;
-    color: #17365d;
+    color: #fff;
     list-style: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   .faq-item summary::-webkit-details-marker {
@@ -37,19 +38,29 @@ const { question, answer } = Astro.props;
     content: '+';
     float: right;
     font-size: 1.15rem;
-    color: #04AA6D;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .faq-item[open] {
+    background: #fff;
+    border-color: #e5e7eb;
+  }
+
+  .faq-item[open] summary {
+    color: #17365d;
+    border-bottom: 1px solid #e5e7eb;
   }
 
   .faq-item[open] summary::after {
     content: '−';
-  }
-
-  .faq-item[open] summary {
-    border-bottom: 1px solid #e5e7eb;
+    color: #04AA6D;
   }
 
   .faq-item p {
     padding: 0.85rem 1rem 1rem;
     margin: 0;
+    color: #17365d;
+    background: #fff;
   }
 </style>
