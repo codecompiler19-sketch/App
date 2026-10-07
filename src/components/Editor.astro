@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 
 const resolvedHtml = initialHtmlBase64
-  ? new TextDecoder().decode(Uint8Array.from(atob(initialHtmlBase64), (char) => char.charCodeAt(0)))
+  ? Buffer.from(initialHtmlBase64, 'base64').toString('utf8')
   : initialHtml;
 
 // Each Editor instance gets a unique ID so multiple editors on one page work independently
