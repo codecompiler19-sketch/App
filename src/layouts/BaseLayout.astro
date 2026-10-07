@@ -154,7 +154,7 @@ const tutorialLinks = [
         </div>
       </div>
 
-      <div class="w-full bg-white">
+      <div id="cc-brand-row" class="w-full bg-white">
         <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 py-4">
           <div class="flex items-center gap-5">
             <button class="hamburger md:hidden flex-shrink-0" id="ham" onclick="toggleMenu()" aria-label="Toggle Global Menu"><span></span><span></span><span></span></button>
@@ -175,7 +175,7 @@ const tutorialLinks = [
         </div>
       </div>
 
-      <div class="w-full border-y border-slate-200 bg-white">
+      <div class="cc-lang-strip w-full border-y border-slate-200 bg-white">
         <div class="max-w-screen-2xl mx-auto overflow-x-auto scrollbar-hide">
           <nav class="flex min-w-max items-stretch" aria-label="Programming languages">
             <a href="/tutorial/html-introduction/" class="cc-lang-link"><span class="cc-lang-icon cc-html" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h14l-1.5 17L12 22 6.5 20 5 3Z"/><path d="M8 7h8l-.25 3H8.3l.25 3h7.05l-.25 3-3.35 1-3.35-1"/></svg></span><span>HTML</span></a>
@@ -227,7 +227,81 @@ const tutorialLinks = [
       </div>
     </header>
 
+    <!-- Mobile reading mode: collapse everything except the brand row while scrolling down. -->
+    <script is:inline>
+      (() => {
+        const header = document.getElementById('site-header');
+        if (!header) return;
+
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        const updateMobileHeader = () => {
+          ticking = false;
+          if (window.innerWidth > 767) {
+            header.classList.remove('cc-header-compact');
+            lastScrollY = window.scrollY;
+            return;
+          }
+
+          const currentY = window.scrollY;
+          const scrollingDown = currentY > lastScrollY;
+          const scrollingUp = currentY < lastScrollY;
+
+          if (currentY <= 24) {
+            header.classList.remove('cc-header-compact');
+          } else if (scrollingDown && currentY > 56) {
+            header.classList.add('cc-header-compact');
+          } else if (scrollingUp) {
+            header.classList.remove('cc-header-compact');
+          }
+
+          lastScrollY = currentY;
+        };
+
+        const onScroll = () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateMobileHeader);
+            ticking = true;
+          }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', updateMobileHeader, { passive: true });
+        updateMobileHeader();
+      })();
+    </script>
+
     <style is:global>
+      /* Mobile reading mode: keep only hamburger + logo + theme control visible while reading. */
+      @media (max-width: 767px) {
+        .cc-site-header.cc-header-compact #cc-topbar,
+        .cc-site-header.cc-header-compact .cc-lang-strip,
+        .cc-site-header.cc-header-compact #mobile-search-wrapper,
+        .cc-site-header.cc-header-compact .cc-tutorial-subheader {
+          display: none !important;
+        }
+
+        .cc-site-header.cc-header-compact #cc-brand-row {
+          box-shadow: 0 2px 12px rgba(15, 23, 42, 0.10);
+        }
+
+        .cc-site-header.cc-header-compact #cc-brand-row > div {
+          padding-top: 7px !important;
+          padding-bottom: 7px !important;
+        }
+
+        .cc-site-header.cc-header-compact #cc-brand-row img {
+          width: 150px !important;
+          max-height: 38px;
+        }
+
+        .cc-site-header.cc-header-compact .hamburger {
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
+      }
+
       .cc-site-header{--cc-topbar-height:48px;transform:translateY(0);transition:transform .28s ease;will-change:transform}.cc-site-header.cc-header-hidden{transform:translateY(calc(-1 * var(--cc-topbar-height)))}.cc-topbar{min-height:48px;transition:opacity .2s ease;will-change:opacity}.cc-topbar.cc-topbar-hidden{opacity:0}.cc-top-link{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .7rem;color:#0f172a;font-size:.95rem;font-weight:600;text-decoration:none;border-bottom:2px solid transparent;transition:all .18s ease}
       .cc-top-link:hover{color:#0f172a;background:#f8fafc}
       .cc-top-link.cc-active{border-bottom-color:#fbbf24}
@@ -449,6 +523,16 @@ const tutorialLinks = [
 
       // Mobile Menu JS
       function toggleMenu() {
+        const tutorialSidebar = document.getElementById('page-sidebar');
+        const tutorialToggle = document.getElementById('sidebar-toggle');
+
+        // On tutorial pages, the mobile hamburger is the always-available
+        // Topics Menu so readers can switch chapters without returning to the top.
+        if (window.innerWidth < 768 && tutorialSidebar && tutorialToggle) {
+          tutorialToggle.click();
+          return;
+        }
+
         const ham = document.getElementById('ham');
         const drawer = document.getElementById('drawer');
         if(ham && drawer) {
