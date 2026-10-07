@@ -168,7 +168,8 @@ if (!rewritten.startsWith("---")) {
 
 await fs.writeFile(filePath, rewritten + "\n");
 
-progress.updated = progress.completed.length + 1;
+if (!progress.completed.includes(nextFile)) progress.completed.push(nextFile);
+progress.updated = progress.completed.length;
 progress.remaining = allFiles.length - progress.updated;
 progress.lastStatus = "updated";
 progress.lastMessage = `Prepared ${nextFile} for build validation.`;
