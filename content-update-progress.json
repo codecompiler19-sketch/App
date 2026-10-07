@@ -1,11 +1,13 @@
 {
   "section": "html",
   "total": 107,
-  "updated": 0,
-  "remaining": 107,
-  "completed": [],
+  "updated": 1,
+  "remaining": 106,
+  "completed": [
+    "001-html-index.mdx"
+  ],
   "current": null,
-  "lastRun": null,
-  "lastStatus": "not_started",
-  "lastMessage": "HTML article updater is ready."
+  "lastRun": "2026-10-07T20:29:56.219Z",
+  "lastStatus": "ready",
+  "lastMessage": "001-html-index.mdx is already updated manually; automation will continue with the next HTML article."
 }
