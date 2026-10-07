@@ -1,14 +1,15 @@
 {
   "section": "html",
   "total": 107,
-  "updated": 2,
-  "remaining": 105,
+  "updated": 3,
+  "remaining": 104,
   "completed": [
     "001-html-index.mdx",
-    "002-html-roadmap.mdx"
+    "002-html-roadmap.mdx",
+    "003-html-overview.mdx"
   ],
   "current": null,
-  "lastRun": "2026-10-08T03:03:00+05:30",
+  "lastRun": "2026-10-08T04:07:27+05:30",
   "lastStatus": "success",
-  "lastMessage": "Updated 002-html-roadmap.mdx. Automation will continue with the next HTML article."
+  "lastMessage": "Updated 003-html-overview.mdx. Automation will continue with the next HTML article."
 }

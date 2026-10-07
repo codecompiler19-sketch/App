@@ -8,102 +8,532 @@ seoTitle: "What is HTML? An Introduction for Complete Beginners — CodesCompile
 permalink: "html-overview"
 ---
 
+import Editor from '../../components/Editor.astro';
+import FaqItem from '../../components/FaqItem.astro';
+
 # What is HTML? An Introduction for Complete Beginners
 
-HTML stands for HyperText Markup Language. It is used to structure the content on the web by using various elements (commonly known as tags). These HTML elements define the different sections of a web page, such as headings, paragraphs, links to other webpages, listings, images, tables, etc. These elements tell the browser about the content and formatting to display.
+If you are starting web development, HTML is the first technology you should understand. You do not need to know a programming language first. A text editor and a modern browser are enough to begin.
 
-HTML is HyperText + Markup Language. Where,
+**HTML (HyperText Markup Language)** describes the structure and meaning of content on a web page. It tells the browser whether a piece of content is a heading, paragraph, link, image, list, form, article, navigation area, and so on.
 
-- HyperText refers to the way in which Web pages (HTML documents) are linked together. Thus, the link available on a webpage is called "HyperText".
+HTML is often described as the **skeleton of a web page**:
 
-- Markup Language , which means you use HTML to simply "mark up" a text document with tags that tell a Web browser how to structure it to display.
+- **HTML** gives the page structure and meaning.
+- **CSS** controls presentation, such as colors, spacing, typography, and layout.
+- **JavaScript** adds behavior and interactivity.
 
-## What is an HTML Element?
+The goal of this article is not to make you memorize a long list of tags. Instead, you will learn the ideas that make HTML easier to read and write correctly.
 
-An HTML element is a basic building block to create a webpage, and It is created by a start tag, content, and end tag. In an HTML element, the content is placed between a start and end tag.
+## What Does HTML Mean?
 
-The basic syntax of an HTML element is −
+The name has two important parts.
 
-```html
-<tag_name>content</tag_name>
-```
+### HyperText
 
-Consider the following example demonstrates an HTML element −
+**HyperText** refers to documents that can be connected through links. A link can take a visitor from one document to another, jump to a section on the same page, or point to another useful resource.
 
-```html
-<h1>It is top-level heading</h1>
-```
-
-Here,
-
-- `<h1>` is the start tag.
-
-- " It is top-level heading " is the content, which is placed inside the start and end tags.
-
-- `</h1>` is the closing tag.
-
-## HTML Page Structure
-
-HTML page structure (or, HTML basic structure) consists of the essential elements that are required to create an HTML document that can be displayed on the browser.
-
-The following image shows the page structure of an HTML document −
-
-HTML page structure contains `<!DOCTYPE html>`, `<html>`, `<head>`, `<title>`, `<body>`, and other tags that will be shown on the homepage.
-
-Where,
-
-- `<!DOCTYPE html>` − It defines the document type as HTML.
-
-- `<html>` − It is a root element for an HTML document. All elements are placed inside this element.
-
-- `<head>` − The head tag may contain scripts and styles that are useful page functionalities. Meta tags are also placed inside this tag.
-
-- `<title>` − It defines the webpage's title.
-
-- `<body>` − It defines the body of the webpage, all elements that are used to display content on the browser placed inside the body tag.
-
-- `<h1>` and `p` − The h1 tag defines page heading, and p tag defines paragraph.
-
-## Web Browser Role
-
-The role of a web browser is to read HTML documents from the given path (either from the server or from a local device) and display it on the webpages. All web browsers, such as Google Chrome, Safari, Firefox, etc., are compatible with reading HTML documents. You can use any of the web browsers to display your HTML document in web format.
-
-## The `<!DOCTYPE>` Declaration
-
-The `<!DOCTYPE>` declaration tag is used by the web browser to understand the version of the HTML used in the document. The current version of HTML is 5 and it makes use of the following declaration −
+For example:
 
 ```html
-<!DOCTYPE html>
+<a href="/tutorial/html-index/">Learn HTML</a>
 ```
 
-There are many other declaration types that can be used in HTML documents, depending on what version of HTML is being used. We will see more details on this while discussing the `<!DOCTYPE...>` tag along with other HTML tags.
+The `href` attribute tells the browser where the link should go.
 
-## HTML Tags Vs. Elements Vs. Attributes
+### Markup Language
 
-HTML tags are the keywords that can be used for a specific purpose to display and format the content on the webpage.
+A **markup language** uses markup to describe content. HTML does not normally tell the browser to perform a calculation or make a business decision. Instead, it marks content as a heading, paragraph, list item, form control, and so on.
 
-HTML elements are the basic building blocks that are made with the help of tags and content. An HTML element is created with a start tag, a content, and an end tag.
+That distinction is important: **HTML is a markup language, not a programming language.**
 
-And, HTML attributes provide additional information about HTML elements; in order to define or change their behavior. Attributes are used with an opening tag.
+## Why Is HTML Important?
 
-## HTML Tags Case Sensitivity
+Almost every web page needs HTML to describe its content. Even highly interactive applications ultimately present content through elements in the browser's document.
 
-HTML tags are not case-sensitive. They can be written in uppercase or in lowercase. But the World Wide Web Consortium (W3C) recommends using lowercase tags starting from HTML 4.
+Learning HTML gives you a foundation for:
 
-## Importance of HTML
+- building simple web pages;
+- understanding how existing websites are structured;
+- learning CSS because you know what you are styling;
+- learning JavaScript because you understand the elements scripts interact with;
+- creating forms and other user interfaces;
+- improving accessibility through meaningful structure;
+- writing content that search engines and other tools can interpret more reliably.
 
-HTML is the fundamental building blocks of the World Wide Web. Any page that you visit on the web contains HTML tags. HTML is important for the various reasons −
+Good HTML is not about making a page look impressive by itself. It is about giving the browser a clear description of what the content means.
 
-- HTML defines webpage structure and helps to design websites.
+## Your First HTML Example
 
-- With the help of CSS and JavaScript, HTML helps to create beautiful and interactive websites.
+Here is a very small example:
 
-- HTML helps in search engine optimization by optimizing the tags based on the targeted keywords.
+<Editor initialHtmlBase64="PGgxPkhlbGxvLCBIVE1MITwvaDE+CjxwPlRoaXMgcGFnZSBoYXMgc3RydWN0dXJlLCBub3Qgc3R5bGluZy48L3A+" initialJs="" activeTab="html" height="360px" />
 
-- HTML helps to navigate (or browse) different pages and websites from anywhere on the internet.
+The browser turns the markup into a heading followed by a paragraph. There is no CSS here, and that is fine. HTML's first job is to describe the content.
 
-- HTML supports user input and forms; you can easily get information from anywhere in the world (you may need background database support for it).
+Try changing the heading text in the editor. Then change the paragraph. Seeing the rendered result while editing is a useful way to build intuition.
 
-- HTML follows an open standard by W3C. Thus, HTML supports all browsers on any type of device. You do not need to change the HTML for the different browsers or devices.
+## What Is an HTML Element?
 
-To learn HTML, you will need to study various tags and understand how they behave, while formatting a textual document. Learning HTML is simple, as users have to learn the usage of different tags in order to format the text or images to make a beautiful webpage.
+An **HTML element** is a complete piece of markup that represents something in a document.
+
+A common element has:
+
+1. an opening tag;
+2. content;
+3. a closing tag.
+
+For example:
+
+```html
+<p>This is a paragraph.</p>
+```
+
+Here, `<p>` is the opening tag, the text is the element's content, and `</p>` is the closing tag.
+
+The complete `<p>...</p>` structure is the **element**.
+
+### Tags and elements are not exactly the same
+
+Beginners often use "tag" and "element" as if they mean the same thing. In casual conversation that is common, but technically they are different.
+
+- **Tag:** the markup such as `<p>` or `</p>`.
+- **Element:** the complete construct, including its content.
+
+This distinction becomes more useful when you start working with the DOM and JavaScript.
+
+## HTML Attributes
+
+Attributes add information to an element. They normally appear inside the opening tag.
+
+For example:
+
+```html
+<a href="/tutorial/html-index/">HTML Tutorial</a>
+```
+
+The `href` attribute gives the anchor element its destination.
+
+Another example is an image:
+
+```html
+<img src="/images/html-editor.png" alt="HTML code editor showing a web page">
+```
+
+Here:
+
+- `src` identifies the image resource;
+- `alt` provides alternative text.
+
+Attributes are not just optional decoration. Many HTML features depend on them, and some are important for accessibility, browser behavior, or form processing.
+
+## The Basic Structure of an HTML Document
+
+A normal HTML document has a predictable structure:
+
+<Editor initialHtmlBase64="PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0idXRmLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MSI+CiAgPHRpdGxlPk15IEZpcnN0IEhUTUwgUGFnZTwvdGl0bGU+CjwvaGVhZD4KPGJvZHk+CiAgPGgxPldlbGNvbWU8L2gxPgogIDxwPkkgYW0gbGVhcm5pbmcgaG93IEhUTUwgZ2l2ZXMgY29udGVudCBtZWFuaW5nLjwvcD4KICA8YSBocmVmPSIvdHV0b3JpYWwvaHRtbC1pbmRleC8iPkNvbnRpbnVlIGxlYXJuaW5nIEhUTUw8L2E+CjwvYm9keT4KPC9odG1sPg==" initialJs="" activeTab="html" height="360px" />
+
+The important pieces are the document type declaration, the root `html` element, the `head`, and the `body`.
+
+### `<!doctype html>`
+
+The doctype is a declaration, not a normal HTML element. In modern HTML, use:
+
+```html
+<!doctype html>
+```
+
+It tells the browser to use standards mode for the document. You do not need to specify "HTML5" as a version number.
+
+Modern HTML is maintained as a **Living Standard** rather than as a sequence of numbered releases such as "HTML6".
+
+### `<html>`
+
+The `html` element is the root of the document. All the document's other elements are descendants of it.
+
+It is good practice to specify the primary language:
+
+```html
+<html lang="en">
+```
+
+For a Hindi document, you could use `lang="hi"`. Choosing the correct language helps browsers and assistive technologies interpret the content appropriately.
+
+### `<head>`
+
+The `head` contains document metadata and resources that are not normally displayed as page content.
+
+Common children include:
+
+- `meta` elements for metadata;
+- `title` for the document title;
+- `link` for external resources such as stylesheets;
+- `style` for embedded CSS;
+- `script` for scripts;
+- icons and other document resources.
+
+### `<title>`
+
+The `title` element supplies the document title. Browsers commonly display it in the browser tab or window title.
+
+```html
+<title>HTML Basics for Beginners</title>
+```
+
+Use a useful, page-specific title rather than repeating the same title on every page.
+
+### `<body>`
+
+The `body` contains the document's actual page content, such as headings, paragraphs, links, images, forms, articles, and navigation.
+
+```html
+<body>
+  <h1>Learn HTML</h1>
+  <p>HTML gives web content structure and meaning.</p>
+</body>
+```
+
+## How a Browser Uses HTML
+
+When you open an HTML document, the browser reads the markup and builds an internal representation of the document, commonly called the **DOM (Document Object Model)**.
+
+The browser then uses that document structure when it renders the page. CSS can style the elements, and JavaScript can read or modify the DOM.
+
+This is why HTML, CSS, and JavaScript fit together:
+
+1. HTML describes the content and structure.
+2. CSS describes presentation.
+3. JavaScript can add behavior and update the document.
+
+The browser does not simply display the raw HTML source as text. It parses the markup and creates the document that you see and interact with.
+
+## HTML Elements You Will Use Often
+
+You do not need to learn every HTML element at once. Start with the elements that appear frequently in real pages.
+
+### Headings
+
+HTML provides six heading elements, from `h1` to `h6`.
+
+```html
+<h1>HTML Tutorial</h1>
+<h2>HTML Elements</h2>
+<h3>Paragraphs</h3>
+```
+
+Use headings to describe the hierarchy of the content. Do not choose a heading only because its default size looks good; CSS can change its appearance.
+
+### Paragraphs
+
+Use `p` for normal paragraphs:
+
+```html
+<p>HTML describes the structure of web content.</p>
+```
+
+### Links
+
+Use the anchor element, `a`, for navigation:
+
+```html
+<a href="/tutorial/html-roadmap/">Follow the HTML roadmap</a>
+```
+
+Choose link text that tells the visitor what they will reach. "Read more" is often less useful than a specific description.
+
+### Lists
+
+Use `ul` for an unordered list and `ol` when the order matters:
+
+```html
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
+
+<ol>
+  <li>Write the HTML</li>
+  <li>Save the file</li>
+  <li>Open it in a browser</li>
+</ol>
+```
+
+### Images
+
+The `img` element embeds an image:
+
+```html
+<img src="/images/profile.jpg" alt="Portrait of the site author">
+```
+
+For an informative image, write alternative text that communicates its useful meaning. For a purely decorative image, an empty `alt=""` is normally appropriate.
+
+Do not stuff keywords into `alt` text. Alternative text is primarily for users who cannot see the image and for cases where the image cannot be displayed.
+
+### Buttons
+
+Use `button` for an action:
+
+```html
+<button type="button">Open menu</button>
+```
+
+Use an anchor when the user is navigating to another URL. Use a button when the user is asking the page to perform an action.
+
+That simple distinction prevents many accessibility and interaction problems.
+
+## Semantic HTML
+
+HTML is more useful when elements describe the role of the content rather than merely providing generic boxes.
+
+For example:
+
+<Editor initialHtmlBase64="PGhlYWRlcj4KICA8aDE+Q2l0eSBHdWlkZTwvaDE+CjwvaGVhZGVyPgo8bWFpbj4KICA8YXJ0aWNsZT4KICAgIDxoMj5UaHJlZSBwbGFjZXMgdG8gdmlzaXQ8L2gyPgogICAgPHA+Q2hvb3NlIGEgcGxhY2UgYW5kIHBsYW4geW91ciBkYXkuPC9wPgogIDwvYXJ0aWNsZT4KPC9tYWluPgo8Zm9vdGVyPgogIDxwPlVwZGF0ZWQgMjAyNjwvcD4KPC9mb290ZXI+" initialJs="" activeTab="html" height="360px" />
+
+Useful semantic elements include:
+
+- `header` for introductory content or a page or section header;
+- `nav` for a major group of navigation links;
+- `main` for the primary content of the document;
+- `article` for self-contained content that could stand on its own;
+- `section` for a thematic grouping of content;
+- `aside` for related or complementary content;
+- `footer` for footer information.
+
+Semantic HTML does not automatically make a page accessible, but it gives browsers and assistive technologies meaningful structure to work with.
+
+A good rule is to ask: **What does this content mean?** Choose the HTML element that best expresses that meaning, then use CSS to make it look the way you want.
+
+## Void Elements
+
+Not every HTML element has a closing tag. HTML has **void elements**, which cannot contain child content.
+
+Common examples include:
+
+- `img`
+- `br`
+- `hr`
+- `meta`
+- `link`
+- `input`
+
+For example:
+
+```html
+<input type="email" name="email">
+```
+
+Do not write `</input>` or `</img>` in normal HTML. Also note that the XML-style `<input />` syntax is not required for HTML.
+
+## HTML Comments
+
+Comments are useful for notes that should remain in the source without becoming visible page content:
+
+```html
+<!-- Add the navigation links here later. -->
+```
+
+The browser does not display the comment as normal page content.
+
+Never use HTML comments to store passwords, API keys, or other secrets. HTML source is delivered to the browser, so visitors can inspect it.
+
+## Tables and Tabular Data
+
+Use tables when the information naturally has rows and columns, such as a schedule, price comparison, or report.
+
+A basic table can look like this:
+
+```html
+<table>
+  <caption>Course schedule</caption>
+  <thead>
+    <tr>
+      <th scope="col">Course</th>
+      <th scope="col">Level</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HTML</td>
+      <td>Beginner</td>
+    </tr>
+    <tr>
+      <td>CSS</td>
+      <td>Beginner</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+The `caption` describes the table, while `th` identifies header cells. The `scope` attribute can make the relationship between headers and their data clearer.
+
+Do not use tables to create page layouts. CSS Flexbox and Grid are the appropriate tools for layout.
+
+## Forms and User Input
+
+Forms let visitors enter and submit information.
+
+A useful beginner example is:
+
+```html
+<form action="/contact" method="post">
+  <label for="email">Email address</label>
+  <input id="email" name="email" type="email" autocomplete="email" required>
+  <button type="submit">Send</button>
+</form>
+```
+
+Notice the matching `for="email"` and `id="email"`. That association gives the input a clear label and makes the label itself clickable.
+
+As you continue learning, practice:
+
+- `textarea` for longer text;
+- `select` and `option` for choices;
+- checkboxes and radio buttons;
+- `fieldset` and `legend` for related groups of controls;
+- validation attributes such as `required`, `min`, `max`, and `pattern`.
+
+Browser validation is useful for the user experience, but a real application must still validate untrusted input on the server.
+
+## HTML and Accessibility
+
+Good HTML starts with accessibility rather than adding it as a final step.
+
+Begin with a few practical habits:
+
+- use headings to communicate content hierarchy;
+- provide useful alternative text for informative images;
+- use real links for navigation;
+- use real buttons for actions;
+- associate form labels with their controls;
+- use semantic landmarks such as `main`, `nav`, and `footer`;
+- make interactive controls usable with a keyboard;
+- do not rely on color alone to communicate important information;
+- prefer native HTML features before reaching for ARIA.
+
+A useful test is to temporarily ignore the visual design and read the HTML structure. If the page still has a sensible order and clear relationships, the markup is probably doing its job well.
+
+## Are HTML Tags Case-Sensitive?
+
+HTML syntax is generally **ASCII case-insensitive** for element and attribute names. For example, browsers treat `<P>` and `<p>` as the same HTML element.
+
+Even though uppercase can work, modern code normally uses lowercase element and attribute names:
+
+```html
+<h1>Use lowercase HTML</h1>
+```
+
+Lowercase is easier to read and consistent with current HTML authoring conventions.
+
+Attribute **values** can have different rules depending on the attribute, so do not assume that changing the case of a value is always harmless.
+
+## HTML and CSS Are Different
+
+A common beginner mistake is expecting HTML to control the visual design of a page.
+
+HTML describes what the content is. CSS describes how that content should look.
+
+For example:
+
+```html
+<h1>Product Guide</h1>
+<p>Learn how to choose the right product.</p>
+```
+
+You can use CSS to change the font, color, spacing, width, and layout of those elements without changing what they mean.
+
+This separation makes websites easier to maintain: the same semantic HTML can be presented differently on a phone, desktop screen, print stylesheet, or another interface.
+
+## HTML and JavaScript Are Different
+
+JavaScript adds behavior that HTML alone does not provide.
+
+For example, HTML can create a button:
+
+```html
+<button type="button" id="show-message">Show message</button>
+<p id="message" hidden>Hello!</p>
+```
+
+JavaScript can listen for a click and reveal the paragraph. HTML provides the structure; JavaScript provides the behavior.
+
+As a beginner, it helps to keep those responsibilities separate instead of trying to solve every visual or interactive problem with HTML.
+
+## HTML5 and Modern HTML
+
+You will often see the term **HTML5** in older tutorials and documentation. HTML5 introduced important features such as semantic elements, native multimedia, and richer form controls.
+
+For modern development, however, it is better to think of HTML as a continuously evolving web standard. HTML is maintained as a Living Standard by WHATWG rather than being developed as a sequence of new numbered versions such as "HTML6".
+
+That is why a modern tutorial should focus on current HTML behavior and practices rather than telling you to wait for a future numbered version.
+
+You should also avoid obsolete presentational elements such as `font`, `center`, and `frameset`. Use semantic HTML and CSS instead.
+
+## HTML Does Not Need to Look Complicated
+
+A useful HTML document can be surprisingly small:
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About Me</title>
+</head>
+<body>
+  <main>
+    <h1>About Me</h1>
+    <p>I am learning how to build websites with HTML.</p>
+  </main>
+</body>
+</html>
+```
+
+You do not need dozens of elements to make a valid page. Start with a clear structure and add elements when the content requires them.
+
+## A Simple Practice Exercise
+
+Try building a one-page profile.
+
+Start with:
+
+1. one `h1` containing your name;
+2. one paragraph describing yourself;
+3. a list of three interests;
+4. one link to a useful website;
+5. one informative image with appropriate `alt` text.
+
+Then improve it by adding:
+
+- a `header`;
+- a `main` element;
+- a section for your interests;
+- a simple contact form;
+- a meaningful document title.
+
+The important part is to change the code yourself. Add an element, refresh the page, inspect the result, and fix anything that does not behave as expected.
+
+## Frequently Asked Questions
+
+<FaqItem question="Is HTML a programming language?" answer="No. HTML is a markup language used to describe the structure and meaning of web content. Programming languages such as JavaScript, Python, Java, and PHP are used to write logic and perform computations." />
+
+<FaqItem question="What is the difference between an HTML tag and an HTML element?" answer="A tag is the markup such as an opening tag or closing tag. An element is the complete HTML construct, including its content and tags when applicable." />
+
+<FaqItem question="Do I need to learn CSS before HTML?" answer="No. HTML comes first because it provides the structure that CSS styles. Once you understand basic HTML, learning HTML and CSS together is a practical way to build complete pages." />
+
+<FaqItem question="Is HTML5 still the latest version of HTML?" answer="HTML5 is an important milestone in HTML's history, but modern HTML is maintained as a Living Standard rather than as a sequence of numbered releases. Focus on current HTML features and authoring practices." />
+
+<FaqItem question="Can I learn HTML without installing software?" answer="Yes. A text editor and a modern web browser are enough to create and test HTML files. You can also practice examples in an online editor." />
+
+## What Should You Learn Next?
+
+Once you understand what HTML is and how its basic structure works, continue with individual HTML elements and practical page-building exercises.
+
+A sensible order is:
+
+**HTML structure → elements and attributes → links and images → lists and tables → forms → semantic HTML → accessibility → CSS → JavaScript**
+
+You do not need to memorize every tag before moving forward. Build small pages, read the HTML you wrote, inspect the result in your browser, and improve the structure as you learn.
+
+The more real pages you build, the easier it becomes to choose the right HTML element for the content you are working with.
