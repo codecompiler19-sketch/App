@@ -19,7 +19,7 @@ jobs:
     name: Rewrite next HTML article
     runs-on: ubuntu-24.04
     environment:
-      name: github-pages
+      name: appcompiler-pages
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
