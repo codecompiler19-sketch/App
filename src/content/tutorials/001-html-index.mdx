@@ -72,18 +72,7 @@ The \`<img>\` element displays an image and does not need a closing \`</img>\` t
 
 Let's create a small but complete HTML document. Save this code as \`index.html\` and open it in a browser.
 
-<Editor initialHtml={`\\u003c!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First HTML Page</title>
-</head>
-<body>
-    <h1>Hello, World!</h1>
-    <p>This is my first web page.</p>
-</body>
-</html>`} initialCss="" initialJs="" activeTab="html" height="360px" />
+<Editor initialHtml={["\\x3C!DOCTYPE html>", "<html lang=\"en\">", "<head>", "    <meta charset=\"UTF-8\">", "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">", "    <title>My First HTML Page</title>", "</head>", "<body>", "    <h1>Hello, World!</h1>", "    <p>This is my first web page.</p>", "</body>", "</html>"].join("\n")} initialCss="" initialCss="" initialJs="" activeTab="html" height="360px" />
 
 This example contains the basic pieces you will find in most HTML documents. Let's look at them one by one.
 
@@ -93,7 +82,7 @@ This example contains the basic pieces you will find in most HTML documents. Let
 
 The doctype tells the browser to use the modern HTML document mode. For new pages, use the HTML5 doctype:
 
-<Editor initialHtml={`\\u003c!DOCTYPE html>`} initialCss="" initialJs="" activeTab="html" height="360px" />
+<Editor initialHtml={"\\x3C!DOCTYPE html>"} initialCss="" initialCss="" initialJs="" activeTab="html" height="360px" />
 
 It is normally the first line of the document.
 
@@ -285,29 +274,7 @@ The fastest way to learn HTML is to write small examples and change them yoursel
 
 Try this simple exercise:
 
-<Editor initialHtml={`\\u003c!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
-</head>
-<body>
-    <h1>My Profile</h1>
-    <p>Hello! I am learning HTML.</p>
-
-    <h2>My Hobbies</h2>
-    <ul>
-        <li>Reading</li>
-        <li>Learning to code</li>
-        <li>Photography</li>
-    </ul>
-
-    <p>
-        <a href="https://example.com">My favorite website</a>
-    </p>
-</body>
-</html>`} initialCss="" initialJs="" activeTab="html" height="360px" />
+<Editor initialHtml={["\\x3C!DOCTYPE html>", "<html lang=\"en\">", "<head>", "    <meta charset=\"UTF-8\">", "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">", "    <title>My Profile</title>", "</head>", "<body>", "    <h1>My Profile</h1>", "    <p>Hello! I am learning HTML.</p>", "", "    <h2>My Hobbies</h2>", "    <ul>", "        <li>Reading</li>", "        <li>Learning to code</li>", "        <li>Photography</li>", "    </ul>", "", "    <p>", "        <a href=\"https://example.com\">My favorite website</a>", "    </p>", "</body>", "</html>"].join("\n")} initialCss="" initialCss="" initialJs="" activeTab="html" height="360px" />
 
 Change the heading, paragraph, hobbies, and link. Then add an image, a second section, and a contact form. Small experiments like these help you understand HTML much faster than memorizing tag lists.
 
