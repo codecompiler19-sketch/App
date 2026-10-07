@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: html-article-updater
@@ -16,6 +18,8 @@ jobs:
   update:
     name: Rewrite next HTML article
     runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,24 +37,30 @@ jobs:
         run: node scripts/update-html-article.mjs
 
       - name: Install dependencies
-        if: steps.update.outcome == 'success'
         run: npm install
 
       - name: Build site before committing
-        if: steps.update.outcome == 'success'
         env:
           NODE_OPTIONS: "--max-old-space-size=8192"
         run: npm run build
 
       - name: Commit successful article update
-        if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/content/tutorials content-update-progress.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
-            exit 0
+          else
+            git commit -m "Update next HTML tutorial article"
+            git push
           fi
-          git commit -m "Update next HTML tutorial article"
-          git push
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./dist
+
+      - name: Deploy updated site
+        id: deployment
+        uses: actions/deploy-pages@v4
