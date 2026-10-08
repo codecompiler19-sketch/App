@@ -195,9 +195,9 @@ const tutorialLinks = [
           </div>
           {Astro.url.pathname.startsWith('/tutorial/') && (
             <nav class="md:hidden flex-1 min-w-0 flex items-center justify-end gap-2 px-3 text-sm text-slate-500" aria-label="Breadcrumb">
-              <a href="/" class="flex-shrink-0 hover:text-[#04AA6D]">Home</a>
+              <a href="/" class="flex-shrink-0 hover:text-[#ffc400]">Home</a>
               <span aria-hidden="true">/</span>
-              <a href={`/tutorial/${(Astro.url.pathname.split('/')[2] || 'html').replace(/-introduction$/, '')}-introduction/`} class="flex-shrink-0 capitalize hover:text-[#04AA6D]">{(Astro.url.pathname.split('/')[2] || 'Tutorial').replace(/-introduction$/, '')}</a>
+              <a href={`/tutorial/${(Astro.url.pathname.split('/')[2] || 'html').replace(/-introduction$/, '')}-introduction/`} class="flex-shrink-0 capitalize hover:text-[#ffc400]">{(Astro.url.pathname.split('/')[2] || 'Tutorial').replace(/-introduction$/, '')}</a>
               <span aria-hidden="true">/</span>
               <span class="min-w-0 truncate font-semibold text-slate-800" title={title}>{title}</span>
             </nav>
@@ -508,7 +508,7 @@ const tutorialLinks = [
               <a href="/books/javascript-for-kids/" class="hover:text-white transition-colors text-zinc-400">JavaScript for Kids</a>
               <a href="/books/python-for-kids/" class="hover:text-white transition-colors text-zinc-400">Python for Kids</a>
               <a href="/books/c-programming-for-kids/" class="hover:text-white transition-colors text-zinc-400">C Programming</a>
-              <a href="/books/" class="hover:text-white transition-colors text-zinc-400 font-medium text-xs text-[#04AA6D] uppercase tracking-wider pt-1">View All Books →</a>
+              <a href="/books/" class="hover:text-white transition-colors text-zinc-400 font-medium text-xs text-[#ffc400] uppercase tracking-wider pt-1">View All Books →</a>
             </div>
           </div>
 
@@ -711,10 +711,10 @@ const tutorialLinks = [
       html.dark-theme .text-gray-600, html.dark-theme .text-gray-500, html.dark-theme p { color: #94a3b8 !important; }
       html.dark-theme .border-gray-100, html.dark-theme .border-gray-200, html.dark-theme .border-b, html.dark-theme .border-t, html.dark-theme .border-r { border-color: #334155 !important; }
       html.dark-theme input { background-color: #1e293b !important; color: #f8fafc !important; border-color: #334155 !important; }
-      html.dark-theme .hover\:bg-gray-100:hover, html.dark-theme .hover\:bg-gray-50:hover, html.dark-theme .dropdown a:hover, html.dark-theme .m-body a:hover, html.dark-theme .dark-hover-bg:hover { background-color: #334155 !important; color: #04AA6D !important; }
+      html.dark-theme .hover\:bg-gray-100:hover, html.dark-theme .hover\:bg-gray-50:hover, html.dark-theme .dropdown a:hover, html.dark-theme .m-body a:hover, html.dark-theme .dark-hover-bg:hover { background-color: #334155 !important; color: #ffc400 !important; }
       html.dark-theme .hamburger span { background: #cbd5e1; }
       html.dark-theme .prose code, html.dark-theme .post-content code { background-color: #1e293b; color: #f472b6; }
-      html.dark-theme .prose blockquote, html.dark-theme .post-content blockquote { background-color: #1e293b; border-left-color: #04AA6D; color: #94a3b8; }
+      html.dark-theme .prose blockquote, html.dark-theme .post-content blockquote { background-color: #1e293b; border-left-color: #ffc400; color: #94a3b8; }
       html.dark-theme .prose th, html.dark-theme .post-content th { background-color: #1e293b; color: #f8fafc; border-color: #334155; }
       html.dark-theme .prose td, html.dark-theme .post-content td { border-color: #334155; color: #cbd5e1; }
       html.dark-theme .prose tr:nth-child(even) td, html.dark-theme .post-content tr:nth-child(even) td { background-color: #1e293b; }
@@ -724,24 +724,24 @@ const tutorialLinks = [
       /* ============================================================ */
       .top-bar { background: #1b1b2f; padding: 7px 32px; display: flex; align-items: center; justify-content: flex-end; gap: 22px; }
       .top-bar a { color: #bbb; text-decoration: none; font-size: 13px; transition: color 0.2s; }
-      .top-bar a:hover { color: #04AA6D; }
-      .top-bar .btn-started { background: #04AA6D; color: #fff !important; padding: 5px 16px; border-radius: 5px; font-weight: 600; font-size: 13px; }
-      .top-bar .btn-started:hover { background: #038a58 !important; }
+      .top-bar a:hover { color: #ffc400; }
+      .top-bar .btn-started { background: #ffc400; color: #fff !important; padding: 5px 16px; border-radius: 5px; font-weight: 600; font-size: 13px; }
+      .top-bar .btn-started:hover { background: #d6a400 !important; }
 
-      .navbar { background: #fff; border-bottom: 3px solid #04AA6D; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; position: sticky; top: 0; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+      .navbar { background: #fff; border-bottom: 3px solid #ffc400; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; gap: 16px; position: sticky; top: 0; z-index: 9999; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
       .logo { font-size: 22px; font-weight: 800; color: #1b1b2f; text-decoration: none; white-space: nowrap; padding: 14px 0; flex-shrink: 0; }
-      .logo span { color: #04AA6D; }
+      .logo span { color: #ffc400; }
 
       .search-wrap { flex: 1; max-width: 340px; position: relative; }
       .search-wrap input { width: 100%; padding: 8px 40px 8px 16px; border: 1.5px solid #ddd; border-radius: 50px; font-size: 13.5px; outline: none; background: #f9f9f9; color: #333; transition: border 0.2s, box-shadow 0.2s; }
-      .search-wrap input:focus { border-color: #04AA6D; box-shadow: 0 0 0 3px rgba(4,170,109,0.12); background: #fff; }
+      .search-wrap input:focus { border-color: #ffc400; box-shadow: 0 0 0 3px rgba(255,196,0,0.18); background: #fff; }
       .search-wrap input::placeholder { color: #aaa; }
-      .search-wrap .search-icon { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: #04AA6D; font-size: 15px; pointer-events: none; }
+      .search-wrap .search-icon { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: #ffc400; font-size: 15px; pointer-events: none; }
 
       .nav-links { display: flex; align-items: stretch; justify-content: center; list-style: none; gap: 0; height: 56px; flex-shrink: 0; margin: 0; padding: 0; }
       .nav-links > li { position: relative; display: flex; align-items: stretch; }
       .nav-links > li > a { display: flex; align-items: center; gap: 6px; padding: 0 16px; color: #f8fafc; text-decoration: none; font-size: 13.5px; font-weight: 600; white-space: nowrap; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
-      .nav-links > li > a:hover, .nav-links > li:hover > a { color: #04AA6D; background: rgba(4, 170, 109, 0.1); border-bottom-color: #04AA6D; }
+      .nav-links > li > a:hover, .nav-links > li:hover > a { color: #ffc400; background: rgba(255, 196, 0, 0.12); border-bottom-color: #ffc400; }
       .nav-links > li > a .arr { font-size: 9px; margin-top: 1px; transition: transform 0.2s; opacity: 0.7; }
       .nav-links > li:hover > a .arr { transform: rotate(180deg); }
 
@@ -756,7 +756,7 @@ const tutorialLinks = [
         left: 0;
         right: 0;
         background: #ffffff;
-        border-top: 3px solid #04AA6D;
+        border-top: 3px solid #ffc400;
         box-shadow: 0 8px 40px rgba(0,0,0,0.12);
         z-index: 99999;
         animation: dropFade 0.18s ease;
@@ -773,7 +773,7 @@ const tutorialLinks = [
       .mega-hero {
         flex-shrink: 0;
         width: 190px;
-        background: linear-gradient(135deg, #04AA6D, #027a4e);
+        background: linear-gradient(135deg, #ffc400, #b88900);
         border-radius: 10px;
         padding: 20px 16px;
         margin-right: 20px;
@@ -788,7 +788,7 @@ const tutorialLinks = [
       .mega-explore-btn {
         display: inline-block;
         background: #ffffff;
-        color: #04AA6D !important;
+        color: #ffc400 !important;
         font-size: 12px;
         font-weight: 700;
         padding: 7px 14px;
@@ -797,7 +797,7 @@ const tutorialLinks = [
         transition: background 0.2s;
         margin-top: 4px;
       }
-      .mega-explore-btn:hover { background: #f0fff8 !important; }
+      .mega-explore-btn:hover { background: #fff8d6 !important; }
       .mega-col {
         flex-shrink: 0;
         min-width: 155px;
@@ -831,7 +831,7 @@ const tutorialLinks = [
         gap: 8px;
         border-radius: 4px;
       }
-      .mega-link:hover { color: #04AA6D !important; background: #f0fff8 !important; }
+      .mega-link:hover { color: #ffc400 !important; background: #fff8d6 !important; }
       .mega-badge {
         font-size: 9px;
         font-weight: 700;
@@ -855,24 +855,24 @@ const tutorialLinks = [
       .mobile-drawer.open { display: flex; }
       .mobile-search { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; position: relative; }
       .mobile-search input { width: 100%; padding: 9px 40px 9px 16px; border: 1.5px solid #ddd; border-radius: 50px; font-size: 13.5px; outline: none; background: #f9f9f9; }
-      .mobile-search input:focus { border-color: #04AA6D; }
-      .mobile-search .si { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); color: #04AA6D; }
+      .mobile-search input:focus { border-color: #ffc400; }
+      .mobile-search .si { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); color: #ffc400; }
       .m-item { border-bottom: 1px solid #f2f2f2; }
       .m-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; font-size: 14px; font-weight: 600; color: #1b1b2f; cursor: pointer; background: #fafafa; user-select: none; }
-      .m-header:hover { background: #f0fff8; color: #04AA6D; }
-      .m-header .m-arr { font-size: 11px; color: #04AA6D; transition: transform 0.25s; }
+      .m-header:hover { background: #fff8d6; color: #ffc400; }
+      .m-header .m-arr { font-size: 11px; color: #ffc400; transition: transform 0.25s; }
       .m-header.active .m-arr { transform: rotate(180deg); }
-      .m-header.active { color: #04AA6D; background: #f0fff8; }
+      .m-header.active { color: #ffc400; background: #fff8d6; }
       .m-body { display: none; flex-direction: column; background: #fff; padding: 4px 0 8px; }
       .m-body.open { display: flex; }
       .m-body a { display: flex; align-items: center; gap: 10px; padding: 9px 32px; color: #444; text-decoration: none; font-size: 13.5px; transition: color 0.15s, background 0.15s; }
-      .m-body a:hover { color: #04AA6D; background: #f5fff9; }
+      .m-body a:hover { color: #ffc400; background: #fffaf0; }
       .m-body a .di { font-size: 14px; width: 18px; text-align: center; }
-      .m-body .mbadge { margin-left: auto; background: #04AA6D; color: #fff; font-size: 10px; padding: 1px 7px; border-radius: 20px; font-weight: 700; }
+      .m-body .mbadge { margin-left: auto; background: #ffc400; color: #fff; font-size: 10px; padding: 1px 7px; border-radius: 20px; font-weight: 700; }
       .m-body .mbadge.soon { background: #ff9800; }
       .m-single { display: flex; align-items: center; gap: 10px; padding: 13px 18px; font-size: 14px; font-weight: 500; color: #333; text-decoration: none; border-bottom: 1px solid #f2f2f2; transition: color 0.15s, background 0.15s; }
-      .m-single:hover { color: #04AA6D; background: #f5fff9; }
-      .m-getstarted { margin: 14px 18px; display: block; background: #04AA6D; color: #fff; text-align: center; padding: 11px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; }
+      .m-single:hover { color: #ffc400; background: #fffaf0; }
+      .m-getstarted { margin: 14px 18px; display: block; background: #ffc400; color: #fff; text-align: center; padding: 11px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; }
 
       @media (max-width: 900px) {
         .nav-links, #search-wrapper, .top-bar { display: none; }
@@ -915,7 +915,7 @@ const tutorialLinks = [
         margin-top: 2em;
         margin-bottom: 1em;
         color: #1f2937;
-        border-left: 4px solid #04AA6D;
+        border-left: 4px solid #ffc400;
         padding-left: 12px;
         line-height: 1.3;
       }
@@ -943,14 +943,14 @@ const tutorialLinks = [
       }
 
       .prose a, .post-content a {
-        color: #04AA6D;
+        color: #ffc400;
         text-decoration: underline;
         text-underline-offset: 3px;
         font-weight: 500;
         transition: color 0.15s ease;
       }
       .prose a:hover, .post-content a:hover {
-        color: #038a58;
+        color: #d6a400;
       }
 
       .prose ul, .post-content ul {
@@ -978,8 +978,8 @@ const tutorialLinks = [
       }
 
       .prose blockquote, .post-content blockquote {
-        border-left: 4px solid #04AA6D;
-        background: #f0fdf4;
+        border-left: 4px solid #ffc400;
+        background: #fff8d6;
         padding: 1rem 1.2rem;
         margin: 1.5em 0;
         font-style: italic;
@@ -1099,7 +1099,7 @@ const tutorialLinks = [
         transform: translateY(-50%);
         width: 24px;
         height: 24px;
-        background: #04AA6D;
+        background: #ffc400;
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50%;
         color: #ffffff;
@@ -1113,7 +1113,7 @@ const tutorialLinks = [
       }
 
       .social-sidebar-toggle:hover {
-        background: #038a58;
+        background: #d6a400;
       }
 
       .social-sidebar.collapsed .social-sidebar-toggle {
