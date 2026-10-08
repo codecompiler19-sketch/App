@@ -8,92 +8,346 @@ seoTitle: "CSS - Introduction — CodesCompiler CSS Guide"
 permalink: "css-what-is-css"
 ---
 
+import Editor from "../../components/Editor.astro";
+
 # CSS - Introduction
 
-CSS is acronym of Cascading Style Sheets . It helps to define the presentation of HTML elements as a separate file known as CSS file having .css extension.
+CSS (Cascading Style Sheets) is the language used to control how HTML content looks and how it is laid out on a web page. HTML gives a page its structure; CSS controls the presentation of that structure.
+
+With CSS, you can change colors, fonts, spacing, borders, backgrounds, alignment, responsive layouts, and much more without changing the meaning or structure of the HTML.
 
 ## What is CSS?
 
-- CSS stands for Cascading Style Sheets, used to describe the presentation and design of a web pages.
+CSS stands for **Cascading Style Sheets**.
 
-- Using CSS, you can control the color of the text, the style of fonts, the spacing between paragraphs, how columns are sized and laid out, what background images or colors are used.
-
-- CSS can control the layout of multiple web pages all at once.
-
-## CSS Styling Example
-
-Following is layout of a webpage, click the button below to add CSS styling to the page and see difference between a webpage with and without CSS.
-
-Webpage Layout
-
-Click to Add Style
-
-You can toggle between styled version and unstyled version of this page using above button.
-
-© 2024 Webpage Layout. All rights reserved.
-
-## Why Use CSS?
-
-- CSS Saves Time: You can write CSS once and then reuse same sheet in multiple HTML pages.
-
-- Pages Load Faster: If you are using CSS, you do not need to write HTML tag or attributes every time. Just write one CSS rule of a tag and apply it to all the occurrences of that tag.
-
-- Easy Maintenance: To make a global change, simply change the style, and all elements in all the web pages will be updated automatically.
-
-- Superior Styles to HTML: CSS has a much wider array of attributes than HTML, so you can get a far better look to your HTML page.
-
-- Multiple Device Compatibility: For the same HTML document, different versions of a website can be presented for different screen widths
-
-- Global Web Standards: Now most of the HTML attributes are being deprecated and it is being recommended to use CSS.
-
-## CSS Syntax
-
-Syntax of CSS consist of selectors and declaration used to apply styles to HTML elements.
+A CSS rule tells the browser which HTML elements to target and which styles to apply. For example:
 
 ```css
-selector {
-    property: value;
+p {
+  color: darkblue;
+  font-size: 18px;
 }
 ```
 
-- The selector targets the HTML element/elements that you want to style.
+This rule targets every `<p>` element and makes its text dark blue with an 18-pixel font size.
 
-- The declaration block contains one or more declarations enclosed in curly braces &#123;&#125; .
+CSS can be written in a separate stylesheet, inside a `<style>` element, or directly on an HTML element with the `style` attribute. In real projects, external stylesheets are usually preferred because they keep structure and presentation separate and make styles easier to reuse.
 
-- Each declaration consists of a property and a value separated by a colon : . Declarations are separated by semicolons ; .
+## HTML and CSS Work Together
 
-There are several types of selectors available in CSS, commonly used selectors are classes, IDs and tags. To know complete list of selectors visit CSS Selectors article.
+Think of a web page as a house:
 
-## CSS History and Versions
+- **HTML** provides the structure, such as headings, paragraphs, buttons, and sections.
+- **CSS** controls the appearance, such as colors, spacing, borders, and layout.
+- **JavaScript** can add behavior, such as responding to clicks or updating content.
 
-Current version of CSS3 and early versions were CSS1 and CSS2. As of now CSS is continuesly evolving and adapting new capabilities that full fills the current website's requirements.
+Here is a small HTML document with CSS:
 
-Cascading Style Sheets level 1 (CSS1) came out of W3C as a recommendation in December 1996. This version describes the CSS language as well as a simple visual formatting model for all the HTML tags.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    h1 {
+      color: #1d4ed8;
+    }
 
-CSS2 became a W3C recommendation in May 1998 and builds on CSS1. This version adds support for media-specific style sheets e.g. printers and aural devices, downloadable fonts, element positioning and tables.
+    p {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to CSS</h1>
+  <p>CSS makes HTML pages easier to read and more attractive.</p>
+</body>
+</html>
+```
 
-CSS3 was became a W3C recommendation in June 1999 and builds on older versions CSS. It has divided into documentations is called as Modules and here each module having new extension features defined in CSS2.
+The HTML provides the content, while the CSS rules determine how that content is displayed.
 
-### CSS3 Modules
+## Try CSS Yourself
 
-CSS3 Modules are having old CSS specifications as well as extension features.
+The editor below contains a small HTML page and its CSS. Change the CSS and click **Run** to see the result immediately.
 
-- Selectors
+<Editor
+  initialHtmlBase64="PG1haW4gY2xhc3M9ImNhcmQiPgogIDxoMj5XZWxjb21lIHRvIENTUzwvaDI+CiAgPHA+Q1NTIGNvbnRyb2xzIGhvdyB0aGlzIGNvbnRlbnQgbG9va3MuPC9wPgogIDxidXR0b24+VHJ5IENTUzwvYnV0dG9uPgo8L21haW4+"
+  initialCss={`body {
+  font-family: Arial, sans-serif;
+  padding: 24px;
+  background: #f3f4f6;
+}
 
-- Box Model
+.card {
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+}
 
-- Backgrounds and Borders
+.card h2 {
+  margin-top: 0;
+  color: #1d4ed8;
+}
 
-- Image Values and Replaced Content
+.card button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #04AA6D;
+  color: white;
+  cursor: pointer;
+}`}
+  activeTab="css"
+  height="520px"
+/>
 
-- Text Effects
+### What you should see
 
-- 2D and 3D Transformations
+The preview shows a simple card with:
 
-- Animations
+- a light page background
+- a white content card
+- rounded corners and a shadow
+- a blue heading
+- a styled green button
 
-- Multiple Column Layout
+Try changing `background`, `color`, `padding`, or `border-radius` to see how each CSS declaration changes the page.
 
-- User Interface
+## Why Use CSS?
 
-> For a quick guide on types of style used in CSS, visit our CSS cheat-sheet
+CSS is important because it makes web pages easier to build, maintain, and adapt.
+
+### 1. Reuse styles
+
+A single stylesheet can style many HTML pages. You do not need to repeat the same declarations in every document.
+
+### 2. Keep structure and presentation separate
+
+HTML can focus on meaningful content and structure while CSS handles visual presentation. This separation makes both easier to maintain.
+
+### 3. Make global changes quickly
+
+If several pages use the same stylesheet, changing one CSS rule can update the appearance of many elements at once.
+
+### 4. Build responsive layouts
+
+CSS provides tools such as media queries, flexible units, Flexbox, and Grid for creating layouts that work across phones, tablets, and desktop screens.
+
+### 5. Create accessible, readable interfaces
+
+Good CSS can improve spacing, typography, contrast, focus states, and responsive behavior without changing the underlying semantic HTML.
+
+## CSS Syntax
+
+A basic CSS rule has a **selector** followed by a **declaration block**:
+
+```css
+selector {
+  property: value;
+}
+```
+
+For example:
+
+```css
+h1 {
+  color: navy;
+  margin-bottom: 12px;
+}
+```
+
+Here is what each part means:
+
+- `h1` is the **selector**. It targets `<h1>` elements.
+- `{ ... }` is the **declaration block**.
+- `color` and `margin-bottom` are **properties**.
+- `navy` and `12px` are the corresponding **values**.
+- Each declaration normally ends with a semicolon.
+
+You can put multiple declarations in the same rule:
+
+```css
+.card {
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+}
+```
+
+CSS has many kinds of selectors, including element, class, ID, attribute, pseudo-class, and pseudo-element selectors. You will learn them in more detail in the CSS Selectors section.
+
+## How CSS Cascades
+
+The word **cascading** describes how the browser resolves multiple CSS rules that apply to the same element.
+
+For example, if two rules set the color of the same paragraph, the browser considers factors such as origin, importance, specificity, and source order when deciding which declaration wins.
+
+A simple example of source order is:
+
+```css
+p {
+  color: blue;
+}
+
+p {
+  color: green;
+}
+```
+
+Both rules target the same paragraphs. Because the selectors have the same specificity and the second declaration appears later, the paragraph will normally be green.
+
+Specificity and the cascade become especially important as a stylesheet grows.
+
+## Ways to Add CSS
+
+There are three common ways to apply CSS.
+
+### External CSS
+
+An external stylesheet is stored in a separate `.css` file and linked from HTML:
+
+```html
+<link rel="stylesheet" href="styles.css">
+```
+
+This is generally the best choice for multi-page websites because the same stylesheet can be reused.
+
+### Internal CSS
+
+CSS can be placed inside a `<style>` element:
+
+```html
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+</style>
+```
+
+Internal CSS can be useful when styles are specific to a single HTML document.
+
+### Inline CSS
+
+CSS can also be written directly on an HTML element:
+
+```html
+<p style="color: crimson;">Important message</p>
+```
+
+Inline styles are useful for very specific cases, but they are usually harder to maintain when used throughout a project.
+
+## CSS History and Modern CSS
+
+CSS has evolved significantly since its early specifications.
+
+- **CSS1** was published as a W3C Recommendation in 1996 and established the foundation of the language.
+- **CSS2** followed in 1998 and added capabilities such as positioning, media-specific styles, and more advanced presentation features.
+- **CSS3** introduced a modular approach in which individual specifications could evolve independently.
+
+It is more accurate to think of modern CSS as a collection of continuously evolving modules rather than a single language version called \"CSS3\". Features such as Grid, Flexbox, animations, custom properties, media queries, and CSS nesting have been added through separate specifications.
+
+## Common CSS Concepts You Will Learn
+
+As you continue through this CSS tutorial, you will work with topics such as:
+
+- selectors
+- colors and backgrounds
+- fonts and text
+- units and measurements
+- the box model
+- margins and padding
+- borders
+- display and positioning
+- Flexbox
+- CSS Grid
+- responsive design
+- media queries
+- transitions and animations
+- transforms
+- pseudo-classes and pseudo-elements
+- custom properties
+- modern CSS nesting
+
+Each concept builds on the previous ones, so practicing small examples is one of the best ways to learn.
+
+## Common Beginner Mistakes
+
+### Forgetting the semicolon
+
+This is easy to miss when writing several declarations:
+
+```css
+p {
+  color: blue;
+  font-size: 18px;
+}
+```
+
+Although the final semicolon can sometimes be omitted, keeping semicolons consistently makes your CSS easier to edit and reduces mistakes.
+
+### Confusing a class with an element selector
+
+A class selector starts with a dot:
+
+```css
+.notice {
+  color: orange;
+}
+```
+
+It targets HTML such as:
+
+```html
+<p class="notice">Read this message.</p>
+```
+
+An element selector does not use a dot:
+
+```css
+p {
+  color: orange;
+}
+```
+
+### Using IDs for reusable styling
+
+An ID should identify a unique element in a document. For reusable styles, classes are usually a better choice:
+
+```css
+.button {
+  padding: 10px 16px;
+}
+```
+
+### Writing overly specific selectors
+
+Very specific selectors can make styles difficult to override later. Prefer simple, reusable selectors when possible.
+
+## CSS Best Practices
+
+- Use meaningful class names.
+- Prefer external stylesheets for shared styles.
+- Keep selectors as simple as practical.
+- Use responsive units and layouts where appropriate.
+- Use CSS variables for values that are reused.
+- Avoid unnecessary inline styles.
+- Keep related rules organized and easy to scan.
+- Test layouts at different screen sizes.
+- Use sufficient color contrast and visible keyboard focus states.
+- Validate your HTML so CSS is applied to a predictable document structure.
+
+## What to Learn Next
+
+Now that you understand what CSS is and how a CSS rule is structured, the next useful step is to learn **CSS syntax and how declarations are written**.
+
+Continue with:
+
+- CSS Syntax
+- Ways to Include CSS
+- Types of CSS
+- CSS Measurement Units
+- CSS Selectors
+
+These topics will give you the foundation needed for the layout and styling techniques later in the tutorial.
