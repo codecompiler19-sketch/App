@@ -8,225 +8,335 @@ seoTitle: "SQL Tutorial for Beginners (Learn SQL Free) — CodesCompiler"
 permalink: "sql-introduction"
 ---
 
-
 # SQL Tutorial
 
+SQL (Structured Query Language) is the standard language used to work with data in relational databases. With SQL, you can create database objects, add and change records, retrieve information, control access, and manage relationships between tables.
 
+This tutorial introduces the core SQL concepts in a practical order, from basic database operations to queries, constraints, joins, indexes, transactions, functions, and other advanced topics.
 
+## What Is SQL?
 
+SQL is a declarative language for working with relational data. Instead of describing every programming step required to find or change data, you describe the result you want and let the database engine determine how to execute the statement.
 
-
-# SQL Tutorial
-
-
-OurSQL tutorialhelps you learn SQL (Structured Query Language) in simple and easy steps so that you can start your database programming quickly. It covers most of the important concepts related to SQL for a basic to advanced understanding of SQL and to get a feel of how SQL works.
-
-
-SQL (Structured Query Language) is a programming language which is used to manage data stored in relational databases like MySQL, MS Access, SQL Server, Oracle, Sybase, Informix, Postgres etc.
-
-
-SQLis a database computer language designed for the retrieval and management of data in a relational databases like MySQL, MS Access, SQL Server, Oracle, Sybase, Informix, Postgres etc.SQLstands forStructured Query Language. SQL was developed in the 1970s by IBM Computer Scientists.
-
-
-SQLis not a database management system, but it is a query language which is used to store and retrieve the data from a database or in simple words SQL is a language that communicates with databases.
-
-
-## SQL Examples
-
-
-Consider we have following CUSTOMERS table which stores customer's ID, Name, Age, Salary, City and Country −
-
-
-IDNameAgeSalaryCityCountry1Ramesh322000.00MarylandUSA2Mukesh405000.00New YorkUSA3Sumit454500.00MuscatOman4Kaushik252500.00KolkataIndia5Hardik293500.00BhopalIndia6Komal383500.00SaharanpurIndia7Ayush253500.00DelhiIndia
-
-
-SQL makes it easy to manipulate this data using simple DML (Data Manipulation Language) Statements. For example, if we want to list down all the customers from USA then following will be the SQL query.
-
+For example, the following query asks a database for customers who live in the USA:
 
 ```sql
-SELECT * FROM CUSTOMERS WHERE country = 'USA';
+SELECT *
+FROM customers
+WHERE country = 'USA';
 ```
 
+A database such as MySQL, PostgreSQL, SQL Server, or Oracle executes the query against its own SQL dialect. The core SQL concepts are shared, although individual database systems provide different functions, data types, administrative commands, and extensions.
 
-This will produce the following result:
+SQL is a language, not a database management system (DBMS). A DBMS is the software that stores and manages the data; SQL is one of the main ways applications and people communicate with it.
 
+## SQL Example
 
-IDNameAgeSalaryCityCountry1Ramesh322000.00MarylandUSA2Mukesh405000.00New YorkUSA
+Suppose a `customers` table contains the following columns:
 
+| id | name | age | salary | city | country |
+|---:|---|---:|---:|---|---|
+| 1 | Ramesh | 32 | 22000.00 | Maryland | USA |
+| 2 | Mukesh | 40 | 50000.00 | New York | USA |
+| 3 | Sumit | 45 | 45000.00 | Muscat | Oman |
+| 4 | Kaushik | 25 | 25000.00 | Kolkata | India |
+| 5 | Hardik | 29 | 35000.00 | Bhopal | India |
+| 6 | Komal | 38 | 35000.00 | Saharanpur | India |
+| 7 | Ayush | 25 | 35000.00 | Delhi | India |
+
+To return only customers from the USA:
+
+```sql
+SELECT id, name, age, salary, city, country
+FROM customers
+WHERE country = 'USA';
+```
+
+Expected result:
+
+| id | name | age | salary | city | country |
+|---:|---|---:|---:|---|---|
+| 1 | Ramesh | 32 | 22000.00 | Maryland | USA |
+| 2 | Mukesh | 40 | 50000.00 | New York | USA |
+
+The important parts of this query are:
+
+- `SELECT` chooses the columns to return.
+- `FROM` identifies the table to read.
+- `WHERE` filters rows that match a condition.
+- `'USA'` is a string literal used for comparison.
+
+Using explicit column names instead of `SELECT *` is usually preferable in application code because it makes the result shape clear and avoids returning unnecessary columns.
 
 ## SQL Online Editor
 
+The SQL tutorial includes an online editor for trying SQL examples directly in the browser. When an example is supported by the editor, you can modify the query and execute it to see the result without first installing a database server locally.
 
-We have providedSQL Online Editorwhich helps you  toEditandExecutethe SQL code directly from your browser. Try to click the iconto run the following SQL code to be executed onCUSTOMERStable and print the records matching with the given condition.
-
+For example:
 
 ```sql
-SELECT * FROM CUSTOMERS WHERE country = 'USA';
+SELECT *
+FROM customers
+WHERE country = 'USA';
 ```
 
-
-So now, you do not need to do a sophisticated setup to execute all the examples given in this tutorial because we are providing youOnline SQL Editor, which allows you to edit your code and compile it online. You can try ourOnline SQL Editor.
-
+An online editor is useful for learning syntax and experimenting with queries. For production applications, however, SQL statements run through the database system used by the application, such as MySQL, PostgreSQL, SQL Server, or another supported DBMS.
 
 ## SQL Basic Commands
 
-
-We have a list of standard SQL commands to interact with relational databases, These commands are CREATE, SELECT, INSERT, UPDATE, DELETE, DROP and TRUNCATE and can be classified into the following groups based on their nature −
-
+SQL statements are commonly grouped by the kind of work they perform. The exact classification can vary between database systems and learning resources, but the following groups provide a useful starting point.
 
 ### Data Definition Language (DDL)
 
+DDL statements define or change the structure of database objects such as tables, views, and indexes.
 
-A Data Definition Language (DDL) is a computer language which is used to create and modify the structure of database objects which include tables, views, schemas, and indexes etc.
+| Command | Purpose |
+|---|---|
+| `CREATE` | Creates a database object such as a table or view. |
+| `ALTER` | Changes the definition of an existing object. |
+| `DROP` | Removes a database object. |
+| `TRUNCATE` | Removes all rows from a table while keeping the table structure. |
 
+For example:
 
-CommandDescriptionDemoCREATECreates a new table, a view of a table, or other object in the database.DemoALTERModifies an existing database object, such as a table.DemoDROPDeletes an entire table, a view of a table or other objects in the database.DemoTRUNCATETruncates the entire table in a go.Demo
-
+```sql
+CREATE TABLE customers (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    country VARCHAR(50)
+);
+```
 
 ### Data Manipulation Language (DML)
 
+DML statements add, change, or remove rows in tables.
 
-A Data Manipulation Language (DML) is a computer programming language which is used for adding, deleting, and modifying data in a database.
+| Command | Purpose |
+|---|---|
+| `INSERT` | Adds new rows. |
+| `UPDATE` | Changes existing rows. |
+| `DELETE` | Removes rows. |
 
+Example:
 
-CommandDescriptionDemoSELECTRetrieves certain records from one or more tables.DemoINSERTCreates a record.DemoUPDATEModifies records.DemoDELETEDeletes records.Demo
+```sql
+INSERT INTO customers (id, name, country)
+VALUES (8, 'Neha', 'India');
+```
 
+Always use a suitable `WHERE` condition when updating or deleting only specific rows:
+
+```sql
+UPDATE customers
+SET country = 'India'
+WHERE id = 8;
+```
+
+### Data Query Language (DQL)
+
+`SELECT` is used to retrieve data from one or more tables.
+
+```sql
+SELECT name, country
+FROM customers
+WHERE country = 'India';
+```
+
+Some references call `SELECT` part of DML rather than DQL. The terminology is less important than understanding how the statement works.
 
 ### Data Control Language (DCL)
 
+DCL statements manage permissions and access to database objects.
 
-Data Control Language (DCL) is a computer programming language which is used to control access to data stored in a database.
+| Command | Purpose |
+|---|---|
+| `GRANT` | Gives specified privileges to a user or role. |
+| `REVOKE` | Removes previously granted privileges. |
 
+The exact permission syntax differs between database systems.
 
-CommandDescriptionDemoGRANTGives a privilege to userDemoREVOKETakes back privileges granted from user.Demo
+### Transaction Control Language (TCL)
 
+Transaction control statements manage groups of changes that should be treated as a unit.
 
-## Why to Learn SQL?
+Common examples include:
 
+- `COMMIT` — permanently saves the current transaction.
+- `ROLLBACK` — reverses changes that have not been committed.
+- `SAVEPOINT` — creates a point to which a transaction can be partially rolled back in systems that support it.
 
-SQL (Structured Query Language) is a MUST for the students and working professionals to become a great Software Engineer specially when they are working in Software Development Domain. SQL is the most common language used almost in every application software including banking, finance, education, security etc. to store and manipulate data.
+## Why Learn SQL?
 
+SQL is important because relational databases are widely used in web applications, business systems, banking, reporting, analytics, inventory systems, and many other types of software.
 
-SQL is fairly easy to learn, so if you are starting to learn any programming language then it is very much advised that you should also learn SQL and other Database related concepts to become a complete Software Programmer. There are many good reasons which makes SQL as the first choice of any programmer −
+Learning SQL helps you:
 
+- Retrieve exactly the data an application needs.
+- Insert, update, and delete records safely.
+- Design tables and relationships.
+- Aggregate and analyze data.
+- Combine information from multiple tables with joins.
+- Add constraints that protect data quality.
+- Understand database performance and indexes.
+- Work with databases from programming languages and application frameworks.
 
-SQL is the standard language for any Relational Database System. All the Relational Data Base Management Systems (RDBMS) like MySQL, MS Access, Oracle, Sybase, Informix, Postgres and SQL Server use SQL as their standard database language.
+SQL is also relatively approachable for beginners because many queries read close to natural language. Becoming proficient, however, requires practice with data modeling, query logic, transactions, performance, and the particular SQL dialect used by your database.
 
+## SQL Dialects
 
-Also, software industry is using different dialects of SQL, such as −
+SQL is standardized, but database products implement their own dialects and extensions.
 
+Examples include:
 
+- Microsoft SQL Server — T-SQL
+- Oracle Database — PL/SQL
+- PostgreSQL — PostgreSQL's SQL implementation and extensions
+- MySQL — MySQL SQL dialect
+- SQLite — SQLite's SQL implementation
 
-- MS SQL Server using T-SQL,
-- Oracle using PL/SQL,
-- MS Access version of SQL is called JET SQL (native format) etc.
-
-
+The fundamental statements such as `SELECT`, `INSERT`, `UPDATE`, and `DELETE` are widely shared, but syntax and available features can differ. When writing portable SQL, check the documentation for the database system you are targeting.
 
 ## SQL Applications
 
+SQL is used for many database tasks, including:
 
-SQL is one of the most widely used Query Language over the databases. SQL provides following functionality to the database programmers −
+- Querying records from one or more tables.
+- Inserting new data.
+- Updating existing data.
+- Deleting data.
+- Creating and modifying tables, views, and indexes.
+- Enforcing data integrity with constraints.
+- Grouping and aggregating data for reports.
+- Joining related tables.
+- Managing transactions.
+- Controlling access to database objects.
+- Supporting application features such as search, filtering, reporting, and dashboards.
 
+For example, an application might use SQL to find the total number of customers from each country:
 
+```sql
+SELECT country, COUNT(*) AS customer_count
+FROM customers
+GROUP BY country
+ORDER BY customer_count DESC;
+```
 
-- Execute different database queries against a database.
-- Define the data in a database and manipulate that data.
-- Create data in a relational database management system.
-- Access data from the relational database management system.
-- Create and drop databases and tables.
-- Create and maintain database users.
-- Create view, stored procedure, functions in a database.
-- Set permissions on tables, procedures and views.
+This query first groups rows by country, counts the rows in each group, and then sorts the groups by the calculated count.
 
+## Who Should Learn SQL?
 
+This SQL tutorial is useful for:
 
-## Who Should Learn SQL
+- Students learning databases.
+- Web and application developers.
+- Backend developers.
+- Data analysts.
+- Database administrators who are building SQL fundamentals.
+- Test engineers working with database-backed applications.
+- Anyone who needs to read, analyze, or manage relational data.
 
-
-ThisSQL tutorialwill help both students as well as working professionals who want to develop applications based on some databases like banking systems, support systems, information systems, web websites, mobile apps or personal blogs etc. We recommend reading this tutorial, in the sequence listed in the left side menu.
-
-
-Today, SQL is an essential language to learn for anyone involved in the software applicatipon development process including Software Developers, Software Designers, and Project Managers etc.
-
+The tutorial is organized so that you can start with basic concepts and gradually move to queries, constraints, joins, indexes, transactions, functions, and more advanced database topics.
 
 ## Prerequisites to Learn SQL
 
+You do not need to be an advanced programmer to start learning SQL. Basic computer knowledge is enough to begin.
 
-Though we have tried our best to present the SQL concepts in a simple and easy way, still before you start learning SQL concepts given in this tutorial, it is assumed that you are already aware about some basic concepts of computer science, what is a database, especially the basics of RDBMS and associated concepts.
+It helps to understand these concepts:
 
+- What a database is.
+- What a table, row, and column represent.
+- The basic idea of a relational database.
+- How values such as numbers, text, and dates are stored.
 
-This tutorial will give you enough understanding on the various concepts of SQL along with suitable examples so that you can start your Software Development journey immediately after finishing this tutorial.
-
+As you progress, knowledge of programming concepts such as variables, conditions, and functions can make it easier to use SQL from an application, but it is not required for learning the SQL language itself.
 
 ## SQL Online Quizzes
 
+The SQL tutorial can also be used to prepare for technical interviews and certification exams. Practice questions are useful for checking whether you understand a concept rather than simply memorizing syntax.
 
-This SQL tutorial helps you prepare for technical interviews and certification exams. We have provided various quizzes and assignments to check your learning level. Given quizzes have multiple choice type of questions and their answers with short explanation.
+For example:
 
+**Q1. SQL was originally developed by which organization?**
 
-Following is a sample quiz, try to attempt any of the given answers:
+- A. Google
+- B. Microsoft
+- C. IBM
+- D. Apple
 
+**Answer: C. IBM**
 
-Show AnswerQ 1- The SQL programming language was developed by which of the following:A- Google in 1990sB- Microsoft in 1980sC- IBM in 1970sD- None of the AboveAnswer : CExplanationThe SQL programming language was developed in the 1970s by IBM researchers Raymond Boyce and Donald Chamberlin.
+SQL grew out of IBM's work on relational database systems in the 1970s. The language was initially known as SEQUEL before becoming SQL.
 
-
-Start your online quizStart SQL Quiz.
-
+When practicing SQL questions, try to explain why an answer is correct. This builds understanding that is more useful than memorizing isolated facts.
 
 ## SQL Jobs and Opportunities
 
+SQL is a foundational skill for many database-related and data-focused roles. Common roles that use SQL include:
 
-SQL professionals are very much in high demand as the data turn out is increasing exponentially. Almost every major company is recruiting IT professionals having good experience with SQL.
+- Database Administrator (DBA)
+- Database Developer
+- Backend Developer
+- Data Analyst
+- Business Intelligence Developer
+- ETL Developer
+- Data Engineer
+- Database Testing Engineer
+- Database Migration Specialist
 
+SQL is often used together with another technology such as Python, Java, PHP, JavaScript, or a data-analysis platform. The most useful skill is not just knowing SQL syntax, but being able to turn a real data requirement into a correct, maintainable query.
 
-Average annual salary for a SQL professional is around $150,000. Though it can vary depending on the location. Following are the great companies who keep recruiting SQL professionals like Database Administrator (DBA), Database Developer, Database Testers, Data Scientist, ETL Developer, Database Migration Expert, Cloud Database Expert etc:
+## Frequently Asked Questions About SQL
 
+### What are SQL skills?
 
+SQL skills include writing queries, filtering and sorting results, joining tables, inserting and updating records, aggregating data, creating database objects, and understanding constraints and transactions.
 
-- Google
-- Amazon
-- Netflix
-- Infosys
-- TCS
-- Tech Mahindra
-- Wipro
-- Pinterest
-- Uber
-- Trello
-- Many more...
+### What are the main categories of SQL commands?
 
+A common classification is DDL, DML, DCL, TCL, and DQL. Different books and database systems may classify `SELECT` differently, so focus on what each statement does rather than relying only on the category name.
 
+### How long does it take to learn SQL?
 
-So, you could be the next potential employee for any of these major companies. We have developed a great learning material for SQL which will help you prepare for the technical interviews and certification exams based on SQL. So, start learning SQL using our simple and effective tutorial anywhere and anytime absolutely at your pace.
+You can learn basic SQL syntax relatively quickly, but becoming confident takes practice. Start with simple `SELECT` queries and gradually learn filtering, sorting, grouping, joins, subqueries, constraints, transactions, and performance concepts.
 
+### What are the benefits of SQL compared with spreadsheets?
 
-## Frequently Asked Questions about SQL
+SQL is designed for querying and managing relational data. It can work with large datasets, combine related tables, enforce data integrity, support concurrent applications, and allow repeatable queries. Spreadsheets remain useful for many analysis and presentation tasks, but they are not a replacement for a database system.
 
+### How do I start learning SQL?
 
-There are some very Frequently Asked Questions(FAQ) about SQL, this section tries to answer them briefly.
+A practical learning path is:
 
+1. Learn databases, tables, rows, and columns.
+2. Learn `SELECT` and `WHERE`.
+3. Practice `INSERT`, `UPDATE`, and `DELETE`.
+4. Learn sorting, grouping, and aggregate functions.
+5. Learn joins and subqueries.
+6. Understand primary keys, foreign keys, and other constraints.
+7. Learn indexes and transactions.
+8. Practice with realistic datasets and small projects.
 
-What are SQL skills?SQL skills help software programmers and data experts maintain, create and retrieve information from relational databases like MySQL, Oracle, MS SQL Server etc., which store data into columns and rows. It also allows them to access, update, manipulate, insert and modify data in efficient way.A relational database stores information in tabular form, with rows and columns representing different data attributes and the various relationships between the data values.
+### What are the four basic SQL operations?
 
+The four common data operations are:
 
-What are the 5 different types of SQL?There are 5 main types of commands. DDL (Data Definition Language) commands, DML (Data Manipulation Language) commands, and DCL (Data Control Language) commands, Transaction Control Language(TCL) commands and Data Query Language(DQL) commands.
+- `SELECT` — reads data.
+- `INSERT` — adds data.
+- `UPDATE` — changes existing data.
+- `DELETE` — removes data.
 
+These operations are often summarized as CRUD: Create, Read, Update, and Delete.
 
-How long should it take to learn SQL?SQL is very easy to learn. You can learn SQL in as little as two to three weeks. However, it can take months of practice before you feel comfortable using it. Determining how long it takes to learn SQL also depends on how you plan to use it. Following this SQL tutorial will give you enough confidence to work on any software development related to database.
+### What are SQL data types?
 
+SQL data types depend on the database system, but common groups include numeric types, character/text types, date and time types, Boolean types, and database-specific types such as JSON or binary data.
 
-What are the benefits of using SQL over Excel?SQL queries are also more flexible and powerful than Excel formulas and SQL is fast which can handle large amount of data. Unlike Excel, SQL can handle well over one million fields of data with ease.
+### Where should I learn SQL?
 
+Follow this SQL tutorial from the basics through queries, data modeling, joins, constraints, indexes, transactions, functions, and advanced topics. The best way to learn is to combine reading with regular hands-on query practice.
 
-How do I start learning SQL?Here are the summarized list of tips which you can follow to start learning SQL.First and the most important is to make your mind to learn SQL.Install MySQL or MariaDB database on your computer system.Follow our tutorial step by step starting from very begining.Read more articles, watch online courses or buy a book on SQL to enhance your knowledge in SQL.Try to develop a small software using PHP or Python which makes use of database.
+## Start Learning SQL
 
+Begin with the SQL basics and run the examples as you learn. Then continue through the tutorial in order, practicing each new statement against a small sample database.
 
-What are the 4 basic commands in SQL?Following are four basic SQL Operations or SQL Statements.SELECT statement selects data from database tables.UPDATE statement updates existing data into database tables.INSERT statement inserts new data into database tables.DELETE statement deletes existing data from database tables.
-
-
-What are data types in SQL?Following are following three SQL data types.String Data types.Numeric Data types.Date and time Data types.
-
-
-Which is the best place to learn SQL?You can use our simple and the best SQL tutorial to learn SQL. We have removed all the unnecessary complexity while teaching you SQL concepts. You can start learning it nowStart Learning SQL.
-
+The more you practice writing and explaining your own queries, the easier it becomes to use SQL confidently in real applications and data projects.
