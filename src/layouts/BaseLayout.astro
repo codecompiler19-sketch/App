@@ -197,7 +197,7 @@ const tutorialLinks = [
             <nav class="md:hidden flex-1 min-w-0 flex items-center justify-end gap-2 px-3 text-sm text-slate-500" aria-label="Breadcrumb">
               <a href="/" class="flex-shrink-0 hover:text-[#04AA6D]">Home</a>
               <span aria-hidden="true">/</span>
-              <a href={`/tutorial/${Astro.url.pathname.split('/')[2] || 'html'}-introduction/`} class="flex-shrink-0 capitalize hover:text-[#04AA6D]">{Astro.url.pathname.split('/')[2]?.replace(/-introduction$/, '') || 'Tutorial'}</a>
+              <a href={`/tutorial/${(Astro.url.pathname.split('/')[2] || 'html').replace(/-introduction$/, '')}-introduction/`} class="flex-shrink-0 capitalize hover:text-[#04AA6D]">{(Astro.url.pathname.split('/')[2] || 'Tutorial').replace(/-introduction$/, '')}</a>
               <span aria-hidden="true">/</span>
               <span class="min-w-0 truncate font-semibold text-slate-800" title={title}>{title}</span>
             </nav>
