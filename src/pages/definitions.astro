@@ -1,34 +1,389 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
 
-const definitions = [
-  ['HTML','HyperText Markup Language — the standard markup language used to structure web pages.','/tutorial/html-introduction/'],
-  ['CSS','Cascading Style Sheets — used to style and lay out web pages.','/tutorial/css-introduction/'],
-  ['JavaScript','A programming language used to add behavior and interactivity to web pages.','/tutorial/javascript-introduction/'],
-  ['Python','A general-purpose programming language known for readable syntax and broad use.','/tutorial/python-introduction/'],
-  ['SQL','Structured Query Language used to work with relational databases.','/tutorial/sql-introduction/'],
-  ['SEO','Search Engine Optimization — practices that help pages become easier to discover in search engines.','/tutorial/seo-introduction/'],
-  ['Algorithm','A step-by-step procedure for solving a problem or completing a task.','/cs-basics/algorithms/'],
-  ['Data Structure','A way of organizing and storing data so it can be accessed and modified efficiently.','/cs-basics/data-structures/'],
+const glossary = [
+  { letter: 'A', terms: [
+    ['Algorithm','A step-by-step procedure used to solve a problem or perform a task.'],
+    ['API','Application Programming Interface; a set of rules that lets software systems communicate.'],
+    ['Application','A software program designed to perform tasks for a user or another system.'],
+    ['Array','A data structure that stores multiple values in an ordered collection.'],
+    ['Artificial Intelligence','Technology that enables computers to perform tasks that normally require human intelligence.'],
+    ['Authentication','The process of verifying the identity of a user, device, or service.'],
+    ['Authorization','The process of deciding what an authenticated user or system is allowed to access.'],
+    ['ASCII','A character encoding standard representing letters, numbers, and symbols with numeric codes.'],
+    ['Assembly Language','A low-level programming language closely related to a computer processor instruction set.'],
+    ['Automation','Using software or machines to perform tasks with little or no manual intervention.'],
+  ]},
+  { letter: 'B', terms: [
+    ['Backup','A copy of data kept so it can be restored after loss, damage, or accidental deletion.'],
+    ['Bandwidth','The amount of data that a network connection can transfer in a given period.'],
+    ['Binary','A number system using only 0 and 1, fundamental to digital computing.'],
+    ['BIOS','Firmware that initializes hardware and starts the boot process on many computers.'],
+    ['Bit','The smallest common unit of digital information, represented as 0 or 1.'],
+    ['Bluetooth','A short-range wireless technology used to connect compatible devices.'],
+    ['Booting','The process of starting a computer and loading its operating system.'],
+    ['Browser','Software used to access and interact with websites on the internet.'],
+    ['Buffer','A temporary memory area used to hold data while it is being transferred or processed.'],
+    ['Bug','An error or defect in software that causes unexpected behavior.'],
+  ]},
+  { letter: 'C', terms: [
+    ['Cache','Fast temporary storage that keeps frequently used data for quicker access.'],
+    ['CPU','Central Processing Unit; the processor that executes instructions and performs calculations.'],
+    ['Cloud Computing','Using computing resources such as servers and storage over a network, usually the internet.'],
+    ['Compiler','Software that translates source code into another form, commonly machine or executable code.'],
+    ['Computer Network','A group of connected devices that communicate and share resources.'],
+    ['Cookie','Small data stored by a website in a browser to remember information about a visit.'],
+    ['CSS','Cascading Style Sheets; a language used to control the appearance and layout of web pages.'],
+    ['Cybersecurity','The practice of protecting computers, networks, applications, and data from digital threats.'],
+    ['Command Line','A text-based interface where users enter commands to interact with a computer.'],
+    ['Cryptography','Techniques for protecting information by transforming it using mathematical methods.'],
+  ]},
+  { letter: 'D', terms: [
+    ['Database','An organized collection of data that can be stored, searched, and managed.'],
+    ['Data Structure','A method of organizing data so it can be accessed and modified efficiently.'],
+    ['Data Type','A classification that defines what kind of value a variable or field can hold.'],
+    ['Debugging','The process of finding, understanding, and fixing software errors.'],
+    ['DNS','Domain Name System; translates domain names into IP addresses and other network records.'],
+    ['Domain Name','A human-readable name used to identify a website or internet service.'],
+    ['Docker','A platform for packaging applications and their dependencies into portable containers.'],
+    ['Driver','Software that allows an operating system to communicate with a hardware device.'],
+    ['DDoS','Distributed Denial-of-Service; an attack that overwhelms a service with large amounts of traffic.'],
+    ['Digital Signature','A cryptographic mechanism used to verify the origin and integrity of digital data.'],
+  ]},
+  { letter: 'E', terms: [
+    ['E-commerce','Buying and selling products or services through electronic networks such as the internet.'],
+    ['Encryption','Converting readable data into a protected form that requires a key or method to decode.'],
+    ['Ethernet','A family of wired networking technologies commonly used in local area networks.'],
+    ['Exception','An event or condition that interrupts normal program execution and can be handled by software.'],
+    ['Executable','A file containing instructions that a computer can run as a program.'],
+    ['Edge Computing','Processing data closer to where it is produced instead of relying only on a central cloud.'],
+    ['Embedded System','A computer system built into a larger device to perform dedicated functions.'],
+    ['Environment Variable','A named value supplied by the operating environment and used by programs for configuration.'],
+  ]},
+  { letter: 'F', terms: [
+    ['Firewall','A security system that controls network traffic according to defined rules.'],
+    ['File System','The method an operating system uses to organize and store files on storage media.'],
+    ['Firmware','Software stored in hardware that provides low-level control of a device.'],
+    ['Framework','A reusable software structure that provides conventions, tools, and components for development.'],
+    ['Function','A reusable block of code designed to perform a particular operation.'],
+    ['FTP','File Transfer Protocol; a protocol used to transfer files between networked computers.'],
+    ['Frontend','The part of an application that users see and interact with directly.'],
+    ['Full Stack','Development involving both the frontend and backend parts of an application.'],
+  ]},
+  { letter: 'G', terms: [
+    ['Gateway','A network device or service that connects different networks or protocols.'],
+    ['Git','A distributed version control system used to track changes in files and source code.'],
+    ['GitHub','A platform for hosting, collaborating on, and managing software repositories.'],
+    ['GPU','Graphics Processing Unit; a processor designed for highly parallel computations, especially graphics.'],
+    ['GUI','Graphical User Interface; a visual interface using elements such as windows, menus, and buttons.'],
+    ['Garbage Collection','Automatic memory management that identifies and frees memory no longer in use.'],
+    ['Generative AI','AI systems capable of generating new content such as text, images, audio, or code.'],
+    ['GigaByte','A unit of digital storage commonly representing about one billion bytes.'],
+  ]},
+  { letter: 'H', terms: [
+    ['Hardware','The physical components of a computer or electronic system.'],
+    ['HTML','HyperText Markup Language; the standard markup language used to structure web pages.'],
+    ['HTTP','HyperText Transfer Protocol; a protocol used for communication between web clients and servers.'],
+    ['HTTPS','The secure form of HTTP that uses encryption to protect web communication.'],
+    ['Hash','A fixed-length value generated from data by a hash function.'],
+    ['Hard Drive','A storage device that stores digital data, traditionally using magnetic disks.'],
+    ['Host','A computer or system connected to a network that provides or uses services.'],
+    ['Hyperlink','A clickable reference that takes a user to another resource or location.'],
+  ]},
+  { letter: 'I', terms: [
+    ['IP Address','A numerical address used to identify a device or network interface on an IP network.'],
+    ['Internet','A worldwide system of interconnected computer networks that communicate using standard protocols.'],
+    ['IDE','Integrated Development Environment; software that combines tools for writing, testing, and debugging code.'],
+    ['Input Device','Hardware used to enter data or commands into a computer, such as a keyboard or mouse.'],
+    ['Inheritance','An object-oriented programming feature where a class derives properties and behavior from another class.'],
+    ['Interface','A defined point of interaction between software components, systems, or users.'],
+    ['IoT','Internet of Things; physical devices connected to networks that can collect or exchange data.'],
+    ['Index','A data structure or database object that helps locate information more efficiently.'],
+  ]},
+  { letter: 'J', terms: [
+    ['Java','A general-purpose, object-oriented programming language designed to run across platforms.'],
+    ['JavaScript','A programming language widely used to add behavior and interactivity to websites and applications.'],
+    ['JSON','JavaScript Object Notation; a lightweight text format commonly used for structured data exchange.'],
+    ['JIT Compiler','A Just-In-Time compiler that translates code during program execution to improve performance.'],
+    ['JVM','Java Virtual Machine; the runtime environment that executes Java bytecode.'],
+    ['JWT','JSON Web Token; a compact token format commonly used to represent claims between systems.'],
+    ['JQuery','A JavaScript library that simplified DOM manipulation and browser scripting.'],
+    ['Jupyter Notebook','An interactive environment for combining executable code, text, data, and visualizations.'],
+  ]},
+  { letter: 'K', terms: [
+    ['Kernel','The core part of an operating system that manages hardware and system resources.'],
+    ['Keyboard','An input device used to enter text, commands, and other data.'],
+    ['Key-Value Pair','A data representation that associates a key with a corresponding value.'],
+    ['Keyword','A reserved or specially recognized word in a programming language.'],
+    ['Kubernetes','An open-source platform for automating deployment and management of containerized applications.'],
+    ['Kilobyte','A unit of digital information commonly representing 1,024 bytes in computing contexts.'],
+    ['Knowledge Base','An organized collection of information that can be searched or used by people or software.'],
+  ]},
+  { letter: 'L', terms: [
+    ['LAN','Local Area Network; a network connecting devices within a limited geographic area.'],
+    ['Linux','An open-source family of operating systems based on the Linux kernel.'],
+    ['Loop','A programming structure that repeats a block of instructions while a condition or collection is processed.'],
+    ['Library','A collection of reusable code that developers can include in applications.'],
+    ['Load Balancer','A system that distributes requests across multiple servers or resources.'],
+    ['Localhost','A hostname that refers to the computer on which a program is currently running.'],
+    ['Latency','The delay between sending a request and receiving a response.'],
+    ['Log File','A record of events, activities, or errors generated by a system or application.'],
+  ]},
+  { letter: 'M', terms: [
+    ['Machine Learning','A branch of AI where systems learn patterns from data to make predictions or decisions.'],
+    ['Memory','Computer storage used to hold data and instructions for processing.'],
+    ['Microprocessor','A processor implemented on a single integrated circuit.'],
+    ['Motherboard','The main circuit board that connects and allows communication among computer components.'],
+    ['MAC Address','A hardware-level network identifier assigned to a network interface.'],
+    ['Metadata','Data that describes other data, such as a file type, author, or creation date.'],
+    ['Middleware','Software that connects application components, services, or systems and handles common operations.'],
+    ['Multithreading','Executing multiple threads within a process so work can progress concurrently.'],
+  ]},
+  { letter: 'N', terms: [
+    ['Network','A group of connected computers or devices that communicate and share resources.'],
+    ['Network Protocol','A defined set of rules that devices follow when communicating over a network.'],
+    ['NIC','Network Interface Card; hardware that enables a device to connect to a network.'],
+    ['Node','A device, computer, or endpoint participating in a network or distributed system.'],
+    ['NoSQL','A group of database technologies designed for flexible or non-relational data models.'],
+    ['NAT','Network Address Translation; a technique for translating addresses between network contexts.'],
+    ['Namespace','A named scope used to organize identifiers and prevent naming conflicts.'],
+    ['Null','A value or state indicating that no meaningful value is currently assigned.'],
+  ]},
+  { letter: 'O', terms: [
+    ['Operating System','System software that manages hardware and provides services for applications and users.'],
+    ['Object-Oriented Programming','A programming approach that organizes software around objects containing data and behavior.'],
+    ['Open Source','Software whose source code is made available under terms that allow specified use, study, and modification.'],
+    ['Overclocking','Running hardware components above their rated operating settings to increase performance.'],
+    ['OAuth','An authorization framework that allows applications to obtain limited access to resources without sharing passwords.'],
+    ['ORM','Object-Relational Mapping; a technique for working with database records through programming objects.'],
+    ['Output Device','Hardware that presents processed information, such as a monitor, printer, or speaker.'],
+    ['Opcode','A code representing a processor instruction in machine-level programming.'],
+  ]},
+  { letter: 'P', terms: [
+    ['Programming Language','A formal language used to write instructions that computers can execute or interpret.'],
+    ['Python','A high-level general-purpose programming language known for readable syntax and broad applications.'],
+    ['PHP','A server-side scripting language widely used for web development.'],
+    ['Process','A running instance of a program with its own execution state and resources.'],
+    ['Protocol','A set of rules that defines how systems communicate or exchange information.'],
+    ['Proxy Server','An intermediary that receives requests from clients and forwards them to other servers.'],
+    ['Pixel','The smallest addressable picture element in a digital image or display.'],
+    ['Port','A logical communication endpoint used by network services and applications.'],
+  ]},
+  { letter: 'Q', terms: [
+    ['Query','A request for information or an operation from a database, search system, or service.'],
+    ['Queue','A data structure that normally processes elements in first-in, first-out order.'],
+    ['Quantum Computing','A computing approach that uses quantum mechanical principles to process information.'],
+    ['Quick Sort','A sorting algorithm that partitions data around a selected pivot and recursively sorts the parts.'],
+    ['Query Parameter','A value included in a URL or request to pass additional information to a server.'],
+    ['Quality Assurance','Processes used to prevent defects and improve the quality and reliability of software.'],
+    ['QR Code','A two-dimensional barcode that stores information readable by compatible devices.'],
+  ]},
+  { letter: 'R', terms: [
+    ['RAM','Random Access Memory; fast temporary memory used by a computer while programs are running.'],
+    ['ROM','Read-Only Memory; non-volatile memory traditionally used to store persistent instructions or data.'],
+    ['Router','A network device that forwards packets between networks.'],
+    ['Recursion','A programming technique in which a function calls itself to solve smaller versions of a problem.'],
+    ['Repository','A storage location where source code, files, or software packages are maintained.'],
+    ['REST API','An API style that uses standard HTTP methods and resource-oriented URLs for communication.'],
+    ['Runtime','The period during which a program is executing, or the environment that supports its execution.'],
+    ['Responsive Design','A web design approach that adapts layouts to different screen sizes and devices.'],
+  ]},
+  { letter: 'S', terms: [
+    ['Software','Programs and related instructions that tell computer hardware what to do.'],
+    ['SQL','Structured Query Language used to create, read, update, and manage relational database data.'],
+    ['Server','A computer or software system that provides resources or services to other systems.'],
+    ['SSD','Solid-State Drive; a storage device that uses flash memory rather than spinning disks.'],
+    ['Syntax','The rules that define how statements must be written in a programming language.'],
+    ['Source Code','Human-readable code written by developers before it is compiled or otherwise executed.'],
+    ['SSH','Secure Shell; a protocol commonly used for secure remote access to computers.'],
+    ['Subnet','A logically divided portion of an IP network.'],
+    ['SSL','Secure Sockets Layer; an older security protocol that preceded modern TLS.'],
+    ['Stack','A data structure that normally processes elements in last-in, first-out order.'],
+  ]},
+  { letter: 'T', terms: [
+    ['TCP','Transmission Control Protocol; a reliable, connection-oriented transport protocol used on IP networks.'],
+    ['TCP/IP','The suite of networking protocols that underpins communication across the internet.'],
+    ['Thread','A unit of execution within a process that can run concurrently with other threads.'],
+    ['Token','A unit of data or authentication information used by a programming language, AI system, or security system.'],
+    ['Terminal','A text-based interface used to enter commands and interact with a computer.'],
+    ['TLS','Transport Layer Security; a cryptographic protocol used to protect network communication.'],
+    ['TypeScript','A programming language that extends JavaScript with static typing and other development features.'],
+    ['Two-Factor Authentication','A security method requiring two different types of verification to sign in.'],
+  ]},
+  { letter: 'U', terms: [
+    ['URL','Uniform Resource Locator; an address used to identify a resource on the web or another network.'],
+    ['UI','User Interface; the visual and interactive parts through which a user operates software.'],
+    ['UX','User Experience; the overall experience a person has while using a product or service.'],
+    ['UDP','User Datagram Protocol; a connectionless transport protocol with low overhead.'],
+    ['Unicode','A standard that assigns codes to characters from many writing systems.'],
+    ['USB','Universal Serial Bus; a standard for connecting devices and transferring data and power.'],
+    ['Ubuntu','A popular Linux-based operating system distribution.'],
+    ['Unit Testing','Testing an individual function, class, or small software component in isolation.'],
+  ]},
+  { letter: 'V', terms: [
+    ['Variable','A named storage location used by a program to hold a value that may change.'],
+    ['Virtual Machine','A software-based computer that runs an operating system and applications in an isolated environment.'],
+    ['Version Control','A system for tracking changes to files and coordinating work among developers.'],
+    ['VPN','Virtual Private Network; a technology that creates a protected connection over another network.'],
+    ['Virtualization','Creating software-based versions of computing resources such as servers, storage, or networks.'],
+    ['VLAN','Virtual Local Area Network; a logical network segment created within switching infrastructure.'],
+    ['VoIP','Voice over Internet Protocol; technology for carrying voice communication over IP networks.'],
+    ['Viewport','The visible area of a web page or application window available to the user.'],
+  ]},
+  { letter: 'W', terms: [
+    ['Web Server','Software or hardware that receives web requests and delivers web content or services.'],
+    ['Website','A collection of related web pages and resources available under a domain or web address.'],
+    ['Wi-Fi','A family of wireless networking technologies used to connect devices to local networks.'],
+    ['WAN','Wide Area Network; a network spanning a large geographic area.'],
+    ['Web API','An interface that allows software applications to communicate through web protocols.'],
+    ['WebSocket','A protocol that provides persistent, two-way communication between a client and server.'],
+    ['WordPress','An open-source content management system widely used to build websites and blogs.'],
+    ['Web Hosting','A service that provides server resources for storing and delivering websites.'],
+  ]},
+  { letter: 'X', terms: [
+    ['XML','Extensible Markup Language; a text format for representing structured and hierarchical data.'],
+    ['XHTML','A stricter, XML-based formulation of HTML.'],
+    ['XSS','Cross-Site Scripting; a vulnerability where malicious scripts are injected into web content.'],
+    ['XaaS','Anything as a Service; a broad model of delivering technology capabilities as online services.'],
+    ['XOR','Exclusive OR; a logical operation that is true when exactly one input is true.'],
+    ['XPath','A language for selecting nodes or values from an XML or XML-like document.'],
+    ['X.509','A standard format for digital certificates used in public-key security systems.'],
+  ]},
+  { letter: 'Y', terms: [
+    ['YAML','A human-readable data serialization format commonly used for configuration files.'],
+    ['Yottabyte','A very large unit of digital information equal to 1,024 zettabytes in binary usage.'],
+    ['Y2K','The Year 2000 computer problem caused by software that represented years with only two digits.'],
+    ['Yarn','A JavaScript package manager used to install and manage project dependencies.'],
+    ['Yottabit','A unit of digital information equal to eight yottabytes.'],
+    ['Yield','A programming construct used in some languages to produce values from an iterator or generator.'],
+  ]},
+  { letter: 'Z', terms: [
+    ['Zero-Day','A software or hardware vulnerability that is unknown or has not yet been patched by its vendor.'],
+    ['Zip','A common archive format used to compress and package files.'],
+    ['Zig','A general-purpose programming language focused on performance, control, and simplicity.'],
+    ['Zettabyte','A unit of digital information equal to 1,024 exabytes in binary usage.'],
+    ['Zigbee','A low-power wireless communication technology often used in IoT and smart-home devices.'],
+    ['Zombie Process','A process that has finished execution but still has an entry in a process table awaiting its parent.'],
+    ['Zero Trust','A security approach that continuously verifies access rather than automatically trusting a network location.'],
+  ]},
 ];
+
+const letters = glossary.map((group) => group.letter);
+const totalTerms = glossary.reduce((sum, group) => sum + group.terms.length, 0);
 ---
 
-<BaseLayout title="Programming Definitions" description="Easy-to-understand programming and computer science definitions for HTML, CSS, JavaScript, Python, SQL, SEO and core concepts.">
-  <section class="hero"><span>CODING GLOSSARY</span><h1>Programming Definitions</h1><p>Understand common programming and computer science terms in simple language.</p></section>
-  <main class="wrap">
-    <h2>Popular Definitions</h2>
-    <div class="grid">
-      {definitions.map(([term,definition,href]) => (
-        <a class="card" href={href}>
-          <h3>{term}</h3>
-          <p>{definition}</p>
-          <strong>Learn more →</strong>
-        </a>
-      ))}
+<BaseLayout
+  title="Computer Definitions A-Z"
+  description="A-Z computer definitions covering hardware, software, programming, networking, databases, cybersecurity, web development, cloud computing, AI and computer science."
+>
+  <section class="hero">
+    <div class="hero-inner">
+      <span>COMPUTER GLOSSARY</span>
+      <h1>Computer Definitions A-Z</h1>
+      <p>Learn computer and technology terms in simple language — from hardware and software to programming, networking, databases, cybersecurity, cloud and AI.</p>
+      <div class="hero-meta"><strong>{totalTerms}+ terms</strong><span>•</span><span>A to Z computer glossary</span></div>
     </div>
+  </section>
+
+  <main class="layout">
+    <aside class="sidebar left-sidebar">
+      <div class="side-card alphabet-card">
+        <h2>Browse A–Z</h2>
+        <nav aria-label="Definition letters">
+          {letters.map((letter) => <a href={`#letter-${letter}`}>{letter}</a>)}
+        </nav>
+      </div>
+
+      <div class="side-card">
+        <h2>Computer Topics</h2>
+        <nav aria-label="Computer topics">
+          <a href="/cs-basics/">Computer Science</a>
+          <a href="/tutorial/html-introduction/">Web Development</a>
+          <a href="/tutorial/javascript-introduction/">Programming</a>
+          <a href="/tutorial/sql-introduction/">Databases</a>
+          <a href="/tutorial/python-introduction/">Python</a>
+          <a href="/tutorial/seo-introduction/">SEO</a>
+          <a href="/tutorials/">All Tutorials</a>
+        </nav>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="intro">
+        <div>
+          <span class="eyebrow">COMPLETE GLOSSARY</span>
+          <h2>Computer Terms &amp; Definitions</h2>
+          <p>Search or browse the glossary to quickly understand common terms from the world of computers and information technology.</p>
+        </div>
+        <label class="definition-search">
+          <span>Search definitions</span>
+          <input id="definition-search" type="search" placeholder="Search a term..." autocomplete="off" />
+        </label>
+      </div>
+
+      <div class="topic-strip" aria-label="Glossary categories">
+        <span>Hardware</span><span>Software</span><span>Programming</span><span>Networking</span><span>Databases</span><span>Security</span><span>Cloud</span><span>AI</span>
+      </div>
+
+      <div class="letter-list">
+        {glossary.map((group) => (
+          <section class="letter-section" id={`letter-${group.letter}`} data-letter-section={group.letter}>
+            <div class="letter-heading">
+              <span>{group.letter}</span>
+              <div><h2>{group.letter} Computer Terms</h2><small>{group.terms.length} definitions</small></div>
+            </div>
+            <div class="term-grid">
+              {group.terms.map(([term, definition]) => (
+                <article class="term-card" data-term={term.toLowerCase()} data-definition={definition.toLowerCase()}>
+                  <h3>{term}</h3>
+                  <p>{definition}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <div id="no-results" class="no-results" hidden>
+        <strong>No definition found.</strong>
+        <span>Try a different computer term or browse the A–Z menu.</span>
+      </div>
+    </section>
+
+    <aside class="ads" aria-label="Advertisements">
+      <AdSlot format="vertical" />
+      <AdSlot format="rectangle" />
+    </aside>
   </main>
 </BaseLayout>
 
+<script>
+  const input = document.getElementById('definition-search') as HTMLInputElement | null;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.term-card'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('.letter-section'));
+  const noResults = document.getElementById('no-results');
+
+  input?.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    let matches = 0;
+
+    cards.forEach((card) => {
+      const haystack = `${card.dataset.term || ''} ${card.dataset.definition || ''}`;
+      const visible = !query || haystack.includes(query);
+      card.hidden = !visible;
+      if (visible) matches++;
+    });
+
+    sections.forEach((section) => {
+      const visibleCards = section.querySelectorAll('.term-card:not([hidden])').length;
+      section.hidden = Boolean(query) && visibleCards === 0;
+    });
+
+    if (noResults) noResults.hidden = matches > 0 || !query;
+  });
+</script>
+
 <style>
-.hero{background:linear-gradient(135deg,#10243d,#173d67);color:#fff;text-align:center;padding:56px 20px}.hero span{color:#f5b900;font-size:.78rem;font-weight:800;letter-spacing:.12em}.hero h1{font-size:clamp(2rem,4vw,3rem);margin:12px 0}.hero p{color:#dbe7f5;font-size:1.08rem}.wrap{max-width:1120px;margin:auto;padding:44px 20px 70px}.wrap h2{text-align:center;color:#10243d;font-size:1.8rem;margin:0 0 28px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{padding:22px;border:1px solid #e2e8f0;border-radius:14px;background:#fff;text-decoration:none;box-shadow:0 3px 12px rgba(15,23,42,.05);transition:.2s}.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,23,42,.12)}.card h3{color:#10243d;font-size:1.2rem;margin:0 0 10px}.card p{color:#64748b;line-height:1.55;min-height:78px}.card strong{color:#0f766e}@media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.hero{background:linear-gradient(135deg,#10243d,#173d67);color:#fff;padding:52px 20px}.hero-inner{max-width:1360px;margin:auto}.hero span,.eyebrow{color:#f5b900;font-size:.75rem;font-weight:800;letter-spacing:.12em}.hero h1{font-size:clamp(2rem,4vw,3rem);margin:10px 0 8px}.hero p{color:#dbe7f5;font-size:1.05rem;line-height:1.6;margin:0;max-width:820px}.hero-meta{display:flex;gap:10px;align-items:center;margin-top:17px;color:#cbd5e1;font-size:.9rem}.hero-meta strong{color:#fff}.layout{max-width:1360px;margin:auto;padding:32px 20px 70px;display:grid;grid-template-columns:220px minmax(0,1fr) 180px;gap:24px;align-items:start}.sidebar,.ads{position:sticky;top:18px}.side-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:18px;box-shadow:0 3px 12px rgba(15,23,42,.05)}.side-card h2{font-size:.9rem;color:#10243d;margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid #e2e8f0}.side-card nav{display:flex;flex-direction:column;gap:3px}.side-card a{color:#475569;text-decoration:none;padding:8px 9px;border-radius:7px;font-size:.9rem}.side-card a:hover{background:#eff6ff;color:#0f766e}.alphabet-card nav{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.alphabet-card a{text-align:center;font-weight:800;color:#10243d;background:#f8fafc}.alphabet-card a:hover{background:#04aa6d;color:#fff}.content{min-width:0}.intro{display:flex;justify-content:space-between;align-items:end;gap:22px;margin:4px 0 17px}.intro h2{font-size:1.75rem;color:#10243d;margin:7px 0}.intro p{color:#64748b;line-height:1.6;margin:0;max-width:680px}.definition-search{width:230px;flex:0 0 230px}.definition-search span{display:block;font-size:.78rem;font-weight:700;color:#475569;margin-bottom:5px}.definition-search input{width:100%;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:8px;padding:10px 12px;font:inherit;outline:none;background:#fff}.definition-search input:focus{border-color:#04aa6d;box-shadow:0 0 0 3px rgba(4,170,109,.12)}.topic-strip{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:25px}.topic-strip span{font-size:.76rem;font-weight:700;color:#0f766e;background:#ecfdf5;border:1px solid #d1fae5;padding:5px 9px;border-radius:999px}.letter-section{scroll-margin-top:100px;margin-bottom:35px}.letter-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px}.letter-heading>span{width:42px;height:42px;display:grid;place-items:center;background:#10243d;color:#f5b900;border-radius:9px;font-size:1.15rem;font-weight:900}.letter-heading h2{margin:0;color:#10243d;font-size:1.35rem}.letter-heading small{color:#94a3b8}.term-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.term-card{padding:17px;border:1px solid #e2e8f0;border-radius:10px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,.035);transition:.18s}.term-card:hover{border-color:#b8e8d4;box-shadow:0 6px 18px rgba(15,23,42,.07);transform:translateY(-1px)}.term-card h3{font-size:1.02rem;color:#10243d;margin:0 0 7px}.term-card p{color:#64748b;line-height:1.55;font-size:.91rem;margin:0}.ads{display:flex;flex-direction:column;gap:20px;align-items:center}.no-results{padding:30px;text-align:center;border:1px dashed #cbd5e1;border-radius:12px;background:#f8fafc;color:#64748b;display:flex;flex-direction:column;gap:5px}.no-results strong{color:#10243d}@media(max-width:1050px){.layout{grid-template-columns:200px minmax(0,1fr)}.ads{display:none}}@media(max-width:760px){.layout{grid-template-columns:1fr;padding:22px 14px 50px}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}.side-card{margin:0}.intro{display:block}.definition-search{display:block;width:100%;margin-top:18px}.term-grid{grid-template-columns:1fr}.hero{padding:38px 16px}.letter-section{scroll-margin-top:85px}}@media(max-width:480px){.sidebar{grid-template-columns:1fr}.alphabet-card nav{grid-template-columns:repeat(6,1fr)}.term-card{padding:15px}}
 </style>
