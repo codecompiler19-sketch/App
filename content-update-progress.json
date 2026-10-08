@@ -1,16 +1,17 @@
 {
   "section": "html",
   "total": 107,
-  "updated": 4,
-  "remaining": 103,
+  "updated": 5,
+  "remaining": 102,
   "completed": [
     "001-html-index.mdx",
     "002-html-roadmap.mdx",
     "003-html-overview.mdx",
-    "004-html-history-and-evolution.mdx"
+    "004-html-history-and-evolution.mdx",
+    "005-html-editors.mdx"
   ],
   "current": null,
-  "lastRun": "2026-10-08T05:04:46+05:30",
+  "lastRun": "2026-10-08T06:06:51+05:30",
   "lastStatus": "success",
-  "lastMessage": "Updated 004-html-history-and-evolution.mdx. Automation will continue with the next HTML article."
+  "lastMessage": "Updated 005-html-editors.mdx. Automation will continue with the next HTML article."
 }
