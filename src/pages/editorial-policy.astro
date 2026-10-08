@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lastUpdated = 'October 9, 2026';
+---
+
+<BaseLayout
+  title="Editorial Policy"
+  description="Editorial Policy for CodesCompiler educational tutorials, programming examples, and technical content."
+>
+  <article class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white shadow-sm my-8 rounded-lg">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Editorial Policy</h1>
+    <p class="text-sm text-gray-500 mb-8"><strong>Last Updated:</strong> {lastUpdated}</p>
+
+    <div class="prose prose-brand prose-lg max-w-none">
+      <h2>Our Goal</h2>
+      <p>
+        CodesCompiler aims to publish practical, understandable, and useful educational
+        content about web development, programming, computer science, SEO, and related
+        technologies.
+      </p>
+
+      <h2>Content Standards</h2>
+      <ul>
+        <li>We aim to explain technical concepts clearly for the intended skill level.</li>
+        <li>Examples are written and organized to help readers learn by doing.</li>
+        <li>We review content for clarity, broken links, obvious errors, and outdated information when updates are identified.</li>
+        <li>We may revise articles as programming languages, browsers, libraries, tools, and best practices evolve.</li>
+      </ul>
+
+      <h2>Corrections and Updates</h2>
+      <p>
+        Technology changes quickly. If you notice an inaccurate statement, outdated example,
+        broken link, or other issue, please contact us with the page URL and the suggested
+        correction. We may update the page after review.
+      </p>
+
+      <h2>Advertising and Editorial Independence</h2>
+      <p>
+        Advertising may help support the free availability of CodesCompiler. Advertisements
+        are separate from editorial content, and advertising does not guarantee a favorable
+        editorial treatment of a product, service, company, or technology.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Editorial corrections and suggestions can be sent to
+        <a href="mailto:contact@codescompiler.com">contact@codescompiler.com</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
