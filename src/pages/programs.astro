@@ -1,34 +1,84 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
 
-const programs = [
-  { title: 'HTML Programs', text: 'Practice HTML with small examples and page-building exercises.', href: '/tutorial/html-introduction/' },
-  { title: 'CSS Programs', text: 'Practice layouts, buttons, cards, navigation and responsive styles.', href: '/tutorial/css-introduction/' },
-  { title: 'JavaScript Programs', text: 'Solve JavaScript problems and build interactive features.', href: '/tutorial/javascript-introduction/' },
-  { title: 'Python Programs', text: 'Practice Python fundamentals, logic and problem solving.', href: '/tutorial/python-introduction/' },
-  { title: 'SQL Programs', text: 'Practice database queries, filtering, sorting and joins.', href: '/tutorial/sql-introduction/' },
-  { title: 'Computer Science', text: 'Explore algorithms, data structures, operating systems and DBMS.', href: '/cs-basics/programming-basics/' },
+const languages = [
+  ['HTML', '/programs/html/'], ['CSS', '/programs/css/'], ['JavaScript', '/programs/javascript/'],
+  ['Python', '/programs/python/'], ['SQL', '/programs/sql/'], ['PHP', '/programs/php/'],
+];
+
+const tutorials = [
+  ['HTML Tutorials', '/tutorial/html-introduction/'], ['CSS Tutorials', '/tutorial/css-introduction/'],
+  ['JavaScript Tutorials', '/tutorial/javascript-introduction/'], ['Python Tutorials', '/tutorial/python-introduction/'],
+  ['SQL Tutorials', '/tutorial/sql-introduction/'], ['PHP Tutorials', '/tutorial/php-introduction/'],
+];
+
+const featured = [
+  ['HTML Programs', '100 HTML practice programs covering elements, forms, tables, media and page structure.', '/programs/html/'],
+  ['CSS Programs', '100 CSS programs covering selectors, layouts, Flexbox, Grid, responsive design and UI components.', '/programs/css/'],
+  ['JavaScript Programs', '100 JavaScript programs covering variables, functions, arrays, DOM, events and modern JS.', '/programs/javascript/'],
+  ['Python Programs', '100 Python programs covering fundamentals, strings, lists, functions, OOP and problem solving.', '/programs/python/'],
+  ['SQL Programs', '100 SQL programs covering SELECT, filtering, joins, grouping, subqueries and database operations.', '/programs/sql/'],
+  ['PHP Programs', '100 PHP programs covering syntax, forms, arrays, functions, OOP and web development basics.', '/programs/php/'],
 ];
 ---
 
-<BaseLayout title="Programming Programs" description="Practice programming with coding examples and programs for HTML, CSS, JavaScript, Python, SQL and computer science.">
-  <section class="hero"><span>CODING PRACTICE</span><h1>Programming Programs</h1><p>Practice coding concepts with simple programs and examples.</p></section>
-  <main class="wrap">
-    <h2>Explore Programs</h2>
-    <p class="lead">Choose a programming area and start practicing.</p>
-    <div class="grid">
-      {programs.map(item => (
-        <a class="card" href={item.href}>
-          <div class="icon">&lt;/&gt;</div>
-          <h3>{item.title}</h3>
-          <p>{item.text}</p>
-          <strong>Explore →</strong>
-        </a>
-      ))}
+<BaseLayout title="Programming Programs" description="Practice 600+ coding programs with 100 programs each for HTML, CSS, JavaScript, Python, SQL and PHP.">
+  <section class="hero">
+    <div class="hero-inner">
+      <span>CODING PRACTICE</span>
+      <h1>Programming Programs</h1>
+      <p>Practice real coding problems with organized program collections for every language.</p>
     </div>
+  </section>
+
+  <main class="layout">
+    <aside class="sidebar left-sidebar">
+      <div class="side-card">
+        <h2>Programming Languages</h2>
+        <nav aria-label="Programming languages">
+          {languages.map(([name, href]) => <a href={href}>{name}</a>)}
+        </nav>
+      </div>
+      <div class="side-card">
+        <h2>Tutorials</h2>
+        <nav aria-label="Tutorials">
+          {tutorials.map(([name, href]) => <a href={href}>{name}</a>)}
+        </nav>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="intro">
+        <span class="eyebrow">PROGRAM LIBRARY</span>
+        <h2>Choose a Programming Language</h2>
+        <p>Each section contains around 100 practice programs, organized from beginner concepts to more advanced coding exercises.</p>
+      </div>
+
+      <div class="program-grid">
+        {featured.map(([title, text, href], index) => (
+          <a class="program-card" href={href}>
+            <div class="card-top"><span class="number">{String(index + 1).padStart(2, '0')}</span><span class="count">100 Programs</span></div>
+            <h3>{title}</h3>
+            <p>{text}</p>
+            <strong>View Programs →</strong>
+          </a>
+        ))}
+      </div>
+
+      <div class="practice-note">
+        <strong>Start with beginner programs</strong>
+        <span>Use the language menu to move from basic syntax and logic to arrays, functions, objects, databases and practical projects.</span>
+      </div>
+    </section>
+
+    <aside class="ads" aria-label="Advertisements">
+      <AdSlot format="vertical" />
+      <AdSlot format="rectangle" />
+    </aside>
   </main>
 </BaseLayout>
 
 <style>
-.hero{background:linear-gradient(135deg,#10243d,#173d67);color:#fff;text-align:center;padding:56px 20px}.hero span{color:#f5b900;font-size:.78rem;font-weight:800;letter-spacing:.12em}.hero h1{font-size:clamp(2rem,4vw,3rem);margin:12px 0}.hero p{color:#dbe7f5;font-size:1.08rem}.wrap{max-width:1120px;margin:auto;padding:44px 20px 70px}.wrap>h2{text-align:center;color:#10243d;font-size:1.8rem;margin:0 0 6px}.lead{text-align:center;color:#64748b;margin-bottom:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{padding:24px;border:1px solid #e2e8f0;border-radius:16px;background:#fff;text-decoration:none;box-shadow:0 3px 12px rgba(15,23,42,.05);transition:.2s}.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,23,42,.12)}.icon{width:48px;height:48px;border-radius:10px;background:#10243d;color:#f5b900;display:grid;place-items:center;font-weight:800;font-family:monospace;margin-bottom:16px}.card h3{color:#10243d;font-size:1.2rem;margin:0 0 8px}.card p{color:#64748b;line-height:1.55;min-height:50px}.card strong{color:#0f766e}@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.hero{background:linear-gradient(135deg,#10243d,#173d67);color:#fff;padding:52px 20px}.hero-inner{max-width:1280px;margin:auto}.hero span,.eyebrow{color:#f5b900;font-size:.75rem;font-weight:800;letter-spacing:.12em}.hero h1{font-size:clamp(2rem,4vw,3rem);margin:10px 0 8px}.hero p{color:#dbe7f5;font-size:1.05rem;margin:0;max-width:700px}.layout{max-width:1360px;margin:auto;padding:32px 20px 70px;display:grid;grid-template-columns:220px minmax(0,1fr) 180px;gap:24px;align-items:start}.sidebar,.ads{position:sticky;top:18px}.side-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:18px;box-shadow:0 3px 12px rgba(15,23,42,.05)}.side-card h2{font-size:.9rem;color:#10243d;margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid #e2e8f0}.side-card nav{display:flex;flex-direction:column;gap:3px}.side-card a{color:#475569;text-decoration:none;padding:8px 9px;border-radius:7px;font-size:.9rem}.side-card a:hover{background:#eff6ff;color:#0f766e}.content{min-width:0}.intro{margin:4px 0 22px}.intro h2{font-size:1.75rem;color:#10243d;margin:7px 0}.intro p{color:#64748b;line-height:1.6;margin:0;max-width:800px}.program-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.program-card{display:block;padding:21px;border:1px solid #e2e8f0;border-radius:12px;background:#fff;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.04);transition:.2s}.program-card:hover{transform:translateY(-2px);border-color:#cbd5e1;box-shadow:0 8px 22px rgba(15,23,42,.08)}.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.number{width:38px;height:38px;border-radius:9px;background:#10243d;color:#f5b900;display:grid;place-items:center;font-weight:800;font-family:monospace}.count{font-size:.75rem;font-weight:700;color:#0f766e;background:#ecfdf5;padding:5px 8px;border-radius:999px}.program-card h3{color:#10243d;font-size:1.12rem;margin:0 0 7px}.program-card p{color:#64748b;font-size:.9rem;line-height:1.5;margin:0 0 14px}.program-card strong{color:#0f766e;font-size:.88rem}.ads{display:flex;flex-direction:column;gap:20px;align-items:center}.practice-note{margin-top:22px;padding:17px 19px;border-left:4px solid #f5b900;background:#f8fafc;border-radius:8px;color:#475569;display:flex;flex-direction:column;gap:4px}.practice-note strong{color:#10243d}@media(max-width:1050px){.layout{grid-template-columns:200px minmax(0,1fr)}.ads{display:none}}@media(max-width:700px){.layout{grid-template-columns:1fr;padding:22px 14px 50px}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}.side-card{margin:0}.program-grid{grid-template-columns:1fr}.hero{padding:38px 16px}}@media(max-width:480px){.sidebar{grid-template-columns:1fr}.side-card nav{display:grid;grid-template-columns:1fr 1fr}}
 </style>
