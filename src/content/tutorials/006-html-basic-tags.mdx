@@ -10,223 +10,267 @@ permalink: "html-basic-tags"
 
 # HTML Basic Tags: A Guide for Complete Beginners with Examples
 
-HTML tags are the fundamental elements of HTML used for defining the structure of the document. These are letters or words enclosed by angle brackets ( `< and >` ).
+HTML tags are the building blocks of an HTML document. They tell the browser what each piece of content represents, such as a heading, paragraph, list, or thematic break.
 
-Usually, most of the HTML tags contain an opening and a closing tag. Each tag has a different meaning, and the browser reads the tags and displays the contents enclosed by them accordingly.
+Most elements use an opening tag and a closing tag:
 
-For example, if we wrap any text in the paragraph (`p`) tag, the browser displays it as a separate paragraph. In this tutorial, we will discuss all the basic tags in HTML .
+```html
+<p>This is a paragraph.</p>
+```
+
+Some HTML elements are **void elements**, which do not have closing tags. Common examples include `<br>`, `<hr>`, `<img>`, and `<input>`.
+
+In this tutorial, you'll learn the basic tags you'll use frequently when creating HTML pages, along with practical examples and a few important HTML5 conventions.
 
 ## Heading Tags
 
-Heading tags are used to define headings of documents. You can use different sizes for your headings. HTML also has six levels of headings, which use the elements `<h1>` , `<h2>` , `<h3>` , `<h4>` , `<h5>` , and `<h6>` . While displaying any heading, the browser adds one line before and one line after that heading.
+HTML provides six heading levels, from `<h1>` through `<h6>`. Use headings to describe the structure of your content, not simply to make text look larger.
+
+- `<h1>` is normally the main heading of a page.
+- `<h2>` introduces a major section.
+- `<h3>` and the remaining levels represent progressively nested sections.
 
 ### Example
-
-Following HTML code demonstrates various levels of headings:
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Heading Example</title>
+  <title>Heading Example</title>
 </head>
 <body>
-   <h1>This is heading 1</h1>
-   ## This is heading 2
-   ### This is heading 3
-   <h4>This is heading 4</h4>
-   <h5>This is heading 5</h5>
-   <h6>This is heading 6</h6>
+  <h1>HTML Basics</h1>
+  <h2>HTML Elements</h2>
+  <h3>Heading Elements</h3>
+  <h4>Details</h4>
+  <h5>Additional Notes</h5>
+  <h6>Smallest Heading Level</h6>
 </body>
 </html>
 ```
+
+The browser gives each heading a default visual style, but you should use CSS when you need to change its size, spacing, or appearance.
 
 ## Paragraph Tag
 
-The `p` tag offers a way to structure your text into different paragraphs. Each paragraph of text should go in between an opening `p` and a closing  tag.
+The `<p>` element represents a paragraph of text. Keep separate ideas or blocks of prose in separate paragraph elements.
 
 ### Example
-
-The following example demonstrates the use of paragraph (`p`) tag, here we are defining 3 paragraphs −
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Paragraph Example</title>
+  <title>Paragraph Example</title>
 </head>
 <body>
-   <p>Here is a first paragraph of text.</p>
-   <p>Here is a second paragraph of text.</p>
-   <p>Here is a third paragraph of text.</p>
+  <p>HTML gives a page its structure.</p>
+  <p>CSS controls presentation and layout.</p>
+  <p>JavaScript can add behavior and interaction.</p>
 </body>
 </html>
 ```
+
+A browser automatically places paragraphs on separate lines and applies default spacing. For custom spacing, use CSS rather than adding empty paragraphs.
 
 ## Line Break Tag
 
-The `<br>` tag is used to insert a line break in the text. It forces the content after it to appear on the next line. This tag is used whenever you want the text to break into a new line without starting a new paragraph.
+The `<br>` element inserts a line break inside the current flow of text. It is useful when the line break itself is meaningful, such as in an address, poem, or short piece of formatted text.
 
-Note : The `<br>` tag is an empty tag and does not need a closing tag.
+`<br>` is a void element, so it does not have a closing tag.
 
 ### Example
-
-The following example demonstrates the use of break (`<br>`) tag −
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Line Break Example</title>
+  <title>Line Break Example</title>
 </head>
 <body>
-   <p>Hello</p><br>You delivered your assignment on time.<br>Thanks<br>Mahnaz
+  <p>
+    CodeCompiler<br>
+    New Delhi<br>
+    India
+  </p>
 </body>
 </html>
 ```
 
-## Center Tag
+Do not use repeated `<br>` elements to create page spacing. Use CSS margins and padding for layout.
 
-In HTML, the alignment should be handled using CSS rather than deprecated tags. The `<center>` tag, previously used to align content to the center of a web page, is deprecated in HTML5. You can use the text-align: center; property of CSS to center text or inline elements.
+## Centering Content
 
-### Example
+The old `<center>` element is obsolete in modern HTML and should not be used. Center content with CSS instead.
 
-The following example demonstrates how to center a paragraph using CSS:
+For example, the `text-align: center` property can center text inside its containing element:
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Centering Content Example</title>
-   <style>
-      .center-text {
-         text-align: center;
-      }
-   </style>
+  <title>Centering Content Example</title>
+  <style>
+    .center-text {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-   <p>This text is not in the center.</p>
-   p class="center-text"This text is in the center.
+  <p>This paragraph uses the normal alignment.</p>
+  <p class="center-text">This paragraph is centered with CSS.</p>
 </body>
 </html>
 ```
 
-## Horizonal Rule Tag
+CSS can also be used to center larger page sections with modern layout techniques such as Flexbox and Grid.
 
-The `<hr>` tag is used to insert a horizontal line across the page. It is commonly used to separate sections of content visually.
+## Horizontal Rule Tag
 
-Note : Like `<br>` tag, the `<hr>` tag is also an empty tag and does not need a closing tag.
+The `<hr>` element represents a thematic break between sections of content. Browsers usually display it as a horizontal line, but its meaning is more important than its default appearance.
+
+`<hr>` is a void element, so it does not need a closing tag.
 
 ### Example
-
-The following example draws a horizontal line between two paragraphs −
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Horizontal Line Example</title>
+  <title>Horizontal Rule Example</title>
 </head>
 <body>
-   <p>This is paragraph one and should be on top.</p>
-   <hr>
-   <p>This is paragraph two and should be at bottom.</p>
+  <h2>Introduction</h2>
+  <p>This section introduces the topic.</p>
+
+  <hr>
+
+  <h2>Next Section</h2>
+  <p>This section contains related information.</p>
 </body>
 </html>
 ```
 
-On executing the above example, you can see a straight line dividing the two paragraphs.
+You can style the rule with CSS when the default appearance does not match your design.
 
-The `<hr />` tag is an example of the empty element, where you do not need opening and closing tags, as there is nothing to go in between them.
-
-The `<hr />` element has a space between the characters hr and the forward slash. If you omit this space, older browsers will have trouble rendering the horizontal line, while if you miss the forward slash character and just use `<hr>` , it is not valid in XHTML.
+In HTML5, write the element as `<hr>`. The XHTML-style `<hr />` syntax is also commonly encountered, but the slash is not required in HTML.
 
 ## Preserve Formatting Tag
 
-The `<pre>` tag is used to preserve the formatting. Whenever you want to display content on the webpage exactly in the same format as it was written in the HTML document, you can use the `<pre>` tag. It preserves the formatting of source code, including line breaks and indentation.
+The `<pre>` element represents preformatted text. Whitespace, line breaks, and indentation inside a `<pre>` element are preserved by the browser.
+
+It is useful for content such as terminal output, configuration snippets, or simple text where spacing is meaningful.
 
 ### Example
-
-The following example demonstrates the use of the `<pre>` tag. Here, we are displaying some code that should keep the formatting exactly the same as it is written inside the `<pre>` tag −
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Preserve Formatting Example</title>
+  <title>Preserve Formatting Example</title>
 </head>
 <body>
-   <pre>
-      function testFunction( strText ){
-         alert (strText)
-      }
-   </pre>
+  <pre>
+function greet(name) {
+  console.log("Hello, " + name);
+}
+  </pre>
 </body>
 </html>
 ```
 
+For source code, it is common to combine `<pre>` with `<code>`:
+
 ```html
-function testFunction( strText ){
- alert (strText)
-}
+<pre><code>function greet(name) {
+  console.log("Hello, " + name);
+}</code></pre>
 ```
+
+The `<pre>` element preserves whitespace, while `<code>` identifies the content as computer code.
 
 ## Non-breaking Spaces
 
-Non-breaking spaces prevent an automatic line break and are displayed using the &nbsp; entity.
+A normal space can be collapsed by HTML's rendering rules, while the non-breaking space entity `&amp;nbsp;` represents a space that should not be used as a line-breaking opportunity.
 
-Suppose if you want to use the phrase "12 Angry Men." Here, you would not want a browser to split the "12, Angry" and "Men" across two lines −
-
-An example of this technique appears in the movie "12 Angry Men."
-
-In cases, where you do not want the client browser to break text, you should use a nonbreaking space entity &nbsp; instead of a normal space. For example, when coding the "12 Angry Men" in a paragraph, you should use something similar to the following code −
+A common use is keeping a short phrase together. For example, a product name or name-and-number combination may benefit from a non-breaking space.
 
 ### Example
-
-The following example demonstrates the use of &nbsp; entity −
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Nonbreaking Spaces Example</title>
+  <title>Non-breaking Space Example</title>
 </head>
 <body>
-   <p>An example of this technique appears in the movie "12 Angry Men."</p>
-   pAn example of this technique appears in the movie "12&nbsp;&nbsp;&nbsp;Angry Men."
+  <p>The movie is called 12&nbsp;Angry&nbsp;Men.</p>
 </body>
 </html>
 ```
 
-On executing the above example, it will display the sentence: An example of this technique appears in the movie "12 Angry Men." twice. Since we have added 3 " " characters between 12 and men , the second time, you can observe three spaces.
+The browser displays the non-breaking spaces as normal visible spaces, but it will avoid breaking the line at those spaces when wrapping the text.
+
+Avoid using many non-breaking spaces for indentation or page layout. Use CSS for layout and spacing instead.
 
 ## Listing Tags
 
-The `<ul>` and `<ol>` tags create the unordered and ordered listings, and to display list items, the `<li>` tag is used.
+HTML provides several elements for creating lists. The most common are:
 
-### Example
+- `<ul>` for an unordered list, where item order is not important.
+- `<ol>` for an ordered list, where sequence matters.
+- `<li>` for each list item.
 
-The following example demonstrates the use of listing tags −
+### Unordered List Example
+
+```html
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
+```
+
+This produces a bulleted list.
+
+### Ordered List Example
+
+```html
+<ol>
+  <li>Open your code editor.</li>
+  <li>Create an HTML file.</li>
+  <li>Open the file in a browser.</li>
+</ol>
+```
+
+This produces a numbered list.
+
+A complete page can combine both list types:
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Listing Tags Example</title>
+  <title>List Example</title>
 </head>
 <body>
-  ## Unordered list
+  <h1>Learning Plan</h1>
+
+  <h2>Topics</h2>
   <ul>
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
   </ul>
-  ## Ordered list
-  <ul>
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
-  </ul>  
+
+  <h2>First Steps</h2>
+  <ol>
+    <li>Create an HTML file.</li>
+    <li>Add your page structure.</li>
+    <li>Open the page in a browser.</li>
+  </ol>
 </body>
 </html>
 ```
+
+Lists are useful for navigation, instructions, features, menus, and many other types of structured content. Choose the list element based on the meaning of the content rather than its visual appearance.
