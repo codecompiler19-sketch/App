@@ -1,27 +1,79 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lastUpdated = 'October 9, 2026';
 ---
 
-<BaseLayout title="Terms of Service" description="Terms of Service for using CodesCompiler.com">
-  <div class="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white shadow-sm my-8 rounded-lg">
-    <h1 class="text-4xl font-extrabold text-gray-900 mb-6">Terms of Service</h1>
-    <div class="prose prose-brand prose-lg">
-      <p><em>Last Updated: [Current Date]</em></p>
+<BaseLayout
+  title="Terms of Service"
+  description="Terms of Service for using CodesCompiler educational content, tutorials, examples, and tools."
+>
+  <article class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white shadow-sm my-8 rounded-lg">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Terms of Service</h1>
+    <p class="text-sm text-gray-500 mb-8"><strong>Last Updated:</strong> {lastUpdated}</p>
 
-      <h2>1. Acceptance of Terms</h2>
-      <p>By accessing and using CodesCompiler.com, you accept and agree to be bound by the terms and provision of this agreement.</p>
+    <div class="prose prose-brand prose-lg max-w-none">
+      <h2>1. Acceptance of These Terms</h2>
+      <p>
+        By accessing or using CodesCompiler, you agree to these Terms of Service and our
+        <a href="/privacy-policy/">Privacy Policy</a>. If you do not agree with these terms,
+        please do not use the website.
+      </p>
 
-      <h2>2. Use of Content</h2>
-      <p>The tutorials, code examples, and materials provided on this website are for educational purposes. You may use the code snippets in your own projects without restriction, but reproducing the tutorials as your own on another platform is prohibited.</p>
+      <h2>2. Educational Content</h2>
+      <p>
+        CodesCompiler provides tutorials, programming examples, definitions, articles,
+        references, and interactive tools for educational and informational purposes.
+        Content may be updated, changed, or removed as technologies and best practices evolve.
+      </p>
 
-      <h2>3. Disclaimer of Warranties</h2>
-      <p>The information and code on this site are provided "as is" without any representations or warranties, express or implied. We make no representations or warranties in relation to this website or the information and materials provided on this website.</p>
+      <h2>3. Use of Code Examples</h2>
+      <p>
+        Code examples are intended for learning and experimentation. You are responsible for
+        reviewing, testing, securing, and adapting any code before using it in a production
+        environment.
+      </p>
 
-      <h2>4. User Generated Content</h2>
-      <p>Any code you run in the "Try It Yourself" editor is executed locally in your browser. We do not store or claim ownership of your experimental code.</p>
+      <h2>4. Intellectual Property</h2>
+      <p>
+        Unless otherwise stated, the original text, graphics, branding, and website design
+        published by CodesCompiler are protected by applicable intellectual-property laws.
+        Individual code examples may be used for learning and incorporated into your own
+        projects, subject to any license or attribution stated on the relevant page.
+      </p>
 
-      <h2>5. Changes to Terms</h2>
-      <p>CodesCompiler reserves the right to modify these terms at any time. We will do so by posting and drawing attention to the updated terms on the Site.</p>
+      <h2>5. Prohibited Use</h2>
+      <p>
+        You must not use the website to distribute malware, attack or disrupt services,
+        attempt unauthorized access, abuse interactive tools, scrape the service in a way
+        that causes harm, or violate applicable laws.
+      </p>
+
+      <h2>6. Third-Party Services and Links</h2>
+      <p>
+        The website may include third-party advertisements, links, tools, or services.
+        Third-party services are governed by their own terms and policies. CodesCompiler
+        does not control and is not responsible for third-party services.
+      </p>
+
+      <h2>7. Disclaimer and Limitation</h2>
+      <p>
+        CodesCompiler is provided on an "as is" and "as available" basis. We do not guarantee
+        that the website or its content will always be accurate, complete, uninterrupted,
+        secure, or free of errors.
+      </p>
+
+      <h2>8. Changes to These Terms</h2>
+      <p>
+        We may update these Terms of Service from time to time. The updated version will be
+        posted on this page and will include a revised "Last Updated" date.
+      </p>
+
+      <h2>9. Contact Us</h2>
+      <p>
+        Questions about these Terms can be sent to
+        <a href="mailto:contact@codescompiler.com">contact@codescompiler.com</a>.
+      </p>
     </div>
-  </div>
+  </article>
 </BaseLayout>
