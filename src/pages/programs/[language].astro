@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../../components/AdSlot.astro';
+
+const language = Astro.params.language || 'python';
+
+const data = {
+  html: {
+    name: 'HTML', description: 'Practice HTML with 100 structured exercises covering page structure, text, links, media, forms, tables and semantic elements.',
+    topics: ['Basic HTML document','Headings and paragraphs','Text formatting','Links and navigation','Images and alt text','Ordered lists','Unordered lists','Description lists','Tables and captions','Table headers and cells','Forms and labels','Text input fields','Radio buttons','Checkboxes','Select menus','Textarea forms','Buttons and submit forms','HTML5 semantic layout','Header and footer','Navigation menus','Article and section elements','Audio and video','Iframe embedding','Figure and figcaption','Responsive meta setup']
+  },
+  css: {
+    name: 'CSS', description: 'Practice CSS with 100 exercises covering selectors, colors, typography, box model, layouts, Flexbox, Grid, animations and responsive design.',
+    topics: ['Element selectors','Class selectors','ID selectors','Grouping selectors','Attribute selectors','Colors and backgrounds','Font styling','Text alignment','Borders and radius','Box model','Padding and margin','Width and height','Display property','Positioning elements','Z-index layering','Overflow handling','Pseudo-classes','Pseudo-elements','CSS variables','Flexbox row layout','Flexbox column layout','Flexbox navigation','CSS Grid basics','Grid card layout','Responsive media queries']
+  },
+  javascript: {
+    name: 'JavaScript', description: 'Practice JavaScript with 100 exercises covering variables, operators, strings, arrays, objects, functions, DOM, events, storage and modern JavaScript.',
+    topics: ['Variables with let','Constants with const','Arithmetic operators','Comparison operators','Logical operators','Conditional statements','Switch statements','For loops','While loops','Nested loops','String methods','Template literals','Array creation','Array methods','Array iteration','Array filtering','Array sorting','Object creation','Object methods','Destructuring','Spread operator','Rest parameters','Functions','Arrow functions','Callback functions']
+  },
+  python: {
+    name: 'Python', description: 'Practice Python with 100 exercises covering syntax, numbers, strings, lists, tuples, dictionaries, functions, files, exceptions and OOP.',
+    topics: ['Hello World program','Variables and data types','Arithmetic operations','Number conversion','Even or odd number','Positive or negative number','Largest of three numbers','Simple calculator','For loop practice','While loop practice','Nested loops','Number patterns','String slicing','String methods','Palindrome string','Count characters','Reverse a string','List creation','List methods','List searching','Tuple operations','Set operations','Dictionary operations','Functions','Lambda functions']
+  },
+  sql: {
+    name: 'SQL', description: 'Practice SQL with 100 exercises covering SELECT, filtering, sorting, aggregation, joins, subqueries, constraints, views and database operations.',
+    topics: ['Create a database','Create a table','Insert records','Select all rows','Select specific columns','WHERE filtering','AND conditions','OR conditions','IN operator','BETWEEN operator','LIKE operator','ORDER BY sorting','LIMIT results','DISTINCT values','COUNT records','SUM values','AVG values','MIN and MAX','GROUP BY','HAVING clause','INNER JOIN','LEFT JOIN','RIGHT JOIN','Self join','Subquery']
+  },
+  php: {
+    name: 'PHP', description: 'Practice PHP with 100 exercises covering syntax, variables, strings, arrays, forms, functions, sessions, files, OOP and web development.',
+    topics: ['PHP Hello World','Variables and constants','Data types','Arithmetic operators','Comparison operators','Conditional statements','Switch statements','For loops','While loops','Foreach loops','String functions','String concatenation','Array creation','Indexed arrays','Associative arrays','Array functions','Sorting arrays','Multidimensional arrays','Functions','Function parameters','Return values','Anonymous functions','Form handling','GET parameters','POST form handling']
+  }
+};
+
+const languageData = data[language as keyof typeof data] || data.python;
+const languages = [['HTML','html'],['CSS','css'],['JavaScript','javascript'],['Python','python'],['SQL','sql'],['PHP','php']];
+const tutorials = [['HTML Tutorials','/tutorial/html-introduction/'],['CSS Tutorials','/tutorial/css-introduction/'],['JavaScript Tutorials','/tutorial/javascript-introduction/'],['Python Tutorials','/tutorial/python-introduction/'],['SQL Tutorials','/tutorial/sql-introduction/'],['PHP Tutorials','/tutorial/php-introduction/']];
+
+const programs = Array.from({ length: 100 }, (_, index) => {
+  const topic = languageData.topics[index % languageData.topics.length];
+  const level = index < 25 ? 'Beginner' : index < 50 ? 'Basic Practice' : index < 75 ? 'Intermediate' : 'Advanced Practice';
+  const cycle = Math.floor(index / languageData.topics.length) + 1;
+  return {
+    number: index + 1,
+    title: cycle === 1 ? topic : `${topic} — Practice ${cycle}`,
+    level
+  };
+});
+---
+
+<BaseLayout title={`${languageData.name} Programs`} description={languageData.description}>
+  <section class="hero">
+    <div class="hero-inner">
+      <a class="back" href="/programs/">← All Programs</a>
+      <span>CODING PRACTICE</span>
+      <h1>{languageData.name} Programs</h1>
+      <p>{languageData.description}</p>
+    </div>
+  </section>
+
+  <main class="layout">
+    <aside class="sidebar left-sidebar">
+      <div class="side-card">
+        <h2>Programming Languages</h2>
+        <nav aria-label="Programming languages">
+          {languages.map(([name, slug]) => <a class={slug === language ? 'active' : ''} href={`/programs/${slug}/`}>{name}</a>)}
+        </nav>
+      </div>
+      <div class="side-card">
+        <h2>Tutorials</h2>
+        <nav aria-label="Tutorials">
+          {tutorials.map(([name, href]) => <a href={href}>{name}</a>)}
+        </nav>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="heading-row">
+        <div>
+          <span class="eyebrow">{languageData.name.toUpperCase()} PRACTICE</span>
+          <h2>100 {languageData.name} Programs</h2>
+        </div>
+        <span class="total">100 Programs</span>
+      </div>
+      <p class="lead">Work through these exercises from beginner concepts to more advanced practice. Pick any program to start coding.</p>
+
+      <div class="program-list">
+        {programs.map(program => (
+          <article class="program-item" id={`program-${program.number}`}>
+            <span class="number">{String(program.number).padStart(3, '0')}</span>
+            <div class="program-copy">
+              <span class="level">{program.level}</span>
+              <h3>{program.title}</h3>
+              <p>Practice this {languageData.name} coding exercise and strengthen your programming fundamentals.</p>
+            </div>
+            <span class="arrow">→</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <aside class="ads" aria-label="Advertisements">
+      <AdSlot format="vertical" />
+      <AdSlot format="rectangle" />
+    </aside>
+  </main>
+</BaseLayout>
+
+<style>
+.hero{background:linear-gradient(135deg,#10243d,#173d67);color:#fff;padding:38px 20px 48px}.hero-inner{max-width:1360px;margin:auto}.hero span,.eyebrow{display:block;color:#f5b900;font-size:.75rem;font-weight:800;letter-spacing:.12em}.back{display:inline-block;color:#dbe7f5;text-decoration:none;font-size:.88rem;margin-bottom:25px}.back:hover{color:#fff}.hero h1{font-size:clamp(2rem,4vw,2.8rem);margin:9px 0 8px}.hero p{color:#dbe7f5;font-size:1rem;line-height:1.6;margin:0;max-width:780px}.layout{max-width:1360px;margin:auto;padding:32px 20px 70px;display:grid;grid-template-columns:220px minmax(0,1fr) 180px;gap:24px;align-items:start}.sidebar,.ads{position:sticky;top:18px}.side-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:18px;box-shadow:0 3px 12px rgba(15,23,42,.05)}.side-card h2{font-size:.9rem;color:#10243d;margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid #e2e8f0}.side-card nav{display:flex;flex-direction:column;gap:3px}.side-card a{color:#475569;text-decoration:none;padding:8px 9px;border-radius:7px;font-size:.9rem}.side-card a:hover,.side-card a.active{background:#eff6ff;color:#0f766e;font-weight:700}.content{min-width:0}.heading-row{display:flex;justify-content:space-between;align-items:flex-end;gap:15px}.heading-row h2{font-size:1.8rem;color:#10243d;margin:7px 0 0}.total{font-size:.78rem;font-weight:800;color:#0f766e;background:#ecfdf5;padding:7px 10px;border-radius:999px;white-space:nowrap}.lead{color:#64748b;line-height:1.6;margin:8px 0 22px}.program-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.program-item{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #e2e8f0;border-radius:10px;background:#fff;scroll-margin-top:20px}.program-item:hover{border-color:#cbd5e1;box-shadow:0 5px 16px rgba(15,23,42,.06)}.number{flex:0 0 39px;width:39px;height:39px;border-radius:8px;background:#10243d;color:#f5b900;display:grid;place-items:center;font-size:.72rem;font-weight:800;font-family:monospace}.program-copy{min-width:0;flex:1}.level{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#0f766e;font-weight:800}.program-copy h3{color:#10243d;font-size:.94rem;margin:3px 0 4px}.program-copy p{color:#64748b;font-size:.77rem;line-height:1.4;margin:0}.arrow{color:#0f766e;font-weight:800}.ads{display:flex;flex-direction:column;gap:20px;align-items:center}@media(max-width:1050px){.layout{grid-template-columns:200px minmax(0,1fr)}.ads{display:none}}@media(max-width:700px){.layout{grid-template-columns:1fr;padding:22px 14px 50px}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}.side-card{margin:0}.program-list{grid-template-columns:1fr}.heading-row{align-items:flex-start;flex-direction:column;gap:8px}.hero{padding:30px 16px 40px}}@media(max-width:480px){.sidebar{grid-template-columns:1fr}.side-card nav{display:grid;grid-template-columns:1fr 1fr}}
+</style>
