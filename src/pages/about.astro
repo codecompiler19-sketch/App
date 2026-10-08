@@ -1,71 +1,101 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+
+const languages = [
+  ['HTML', '/tutorial/html-introduction/'],
+  ['CSS', '/tutorial/css-introduction/'],
+  ['JavaScript', '/tutorial/javascript-introduction/'],
+  ['Python', '/tutorial/python-introduction/'],
+  ['SQL', '/tutorial/sql-introduction/'],
+  ['PHP', '/tutorial/php-introduction/'],
+  ['SEO', '/tutorial/seo-introduction/'],
+];
+
+const features = [
+  ['Programming Programs', '/programs/'],
+  ['Interview Questions', '/interview-questions/'],
+  ['Definitions A–Z', '/definitions/'],
+  ['Computer Science', '/cs-basics/'],
+  ['Books & Learning Guides', '/books/'],
+  ['Blog & Articles', '/blog/'],
+  ['Contact Us', '/contact/'],
+];
+
+const blogLinks = [
+  ['Latest Blog Articles', '/blog/'],
+  ['Web Development Tutorials', '/tutorial/html-introduction/'],
+  ['Programming Resources', '/programs/'],
+];
 ---
 
 <BaseLayout
   title="About Us"
-  description="Learn about CodesCompiler, our educational mission, tutorials, coding resources, and commitment to useful technical content."
+  description="Learn about CodesCompiler, our educational mission, tutorials, coding resources, definitions, interview questions, and commitment to useful technical content."
 >
-  <article class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white shadow-sm my-8 rounded-lg">
-    <h1 class="text-4xl font-extrabold text-gray-900 mb-6">About CodesCompiler</h1>
-
-    <div class="prose prose-brand prose-lg max-w-none">
-      <p>
-        <strong>CodesCompiler</strong> is an independent educational website focused on
-        practical programming and web-development learning. We create free tutorials,
-        examples, references, definitions, interview questions, coding programs, articles,
-        and interactive learning resources.
-      </p>
-
-      <h2>Our Mission</h2>
-      <p>
-        Our mission is to make technical education easier to understand and accessible to
-        learners at different skill levels. We aim to explain concepts step by step and
-        provide practical examples that readers can test and adapt.
-      </p>
-
-      <h2>What We Publish</h2>
-      <ul>
-        <li>HTML, CSS, JavaScript, Python, SQL, PHP, and SEO tutorials.</li>
-        <li>Programming examples and practice programs.</li>
-        <li>Technical definitions and computer-science terminology.</li>
-        <li>Programming interview questions and preparation resources.</li>
-        <li>Web-development articles, tools, references, and learning guides.</li>
-        <li>Educational resources and beginner-friendly books.</li>
-      </ul>
-
-      <h2>How We Support the Website</h2>
-      <p>
-        Much of CodesCompiler is available free of charge. We may use advertising, including
-        Google AdSense, to help support hosting, development, maintenance, and the continued
-        creation of educational content.
-      </p>
-
-      <h2>Content Quality</h2>
-      <p>
-        We work to keep our tutorials useful, clear, and relevant. Because programming
-        languages, browsers, frameworks, libraries, and online services change frequently,
-        some content may need updates over time. Please see our
-        <a href="/editorial-policy/">Editorial Policy</a> for more information.
-      </p>
-
-      <h2>Transparency</h2>
-      <p>
-        We provide public information about our privacy practices, cookies, terms, and
-        advertising. You can review our
-        <a href="/privacy-policy/">Privacy Policy</a>,
-        <a href="/cookie-policy/">Cookie Policy</a>,
-        <a href="/terms-of-service/">Terms of Service</a>, and
-        <a href="/disclaimer/">Disclaimer</a>.
-      </p>
-
-      <h2>Contact Us</h2>
-      <p>
-        For questions, corrections, feedback, advertising-related inquiries, or other
-        website matters, please email
-        <a href="mailto:contact@codescompiler.com">contact@codescompiler.com</a>
-        or visit our <a href="/contact/">Contact Us</a> page.
-      </p>
+  <section class="about-hero">
+    <div class="hero-inner">
+      <span class="eyebrow">ABOUT CODESCOMPILER</span>
+      <h1>Helping Everyone Learn to Code</h1>
+      <p>Explore our mission, learning resources, and the tools we provide to help learners build their programming and computer-science skills.</p>
     </div>
-  </article>
+  </section>
+
+  <main class="about-layout">
+    <aside class="sidebar left-sidebar" aria-label="Coding languages and website features">
+      <section class="side-card">
+        <h2>Coding Languages</h2>
+        <nav>{languages.map(([name, href]) => <a href={href}>{name}<span>→</span></a>)}</nav>
+      </section>
+      <section class="side-card">
+        <h2>Explore CodesCompiler</h2>
+        <nav>{features.map(([name, href]) => <a href={href}>{name}<span>→</span></a>)}</nav>
+      </section>
+    </aside>
+
+    <article class="about-content">
+      <div class="content-panel">
+        <h2>About CodesCompiler</h2>
+        <p><strong>CodesCompiler</strong> is an independent educational website focused on practical programming and web-development learning. We create free tutorials, examples, references, definitions, interview questions, coding programs, articles, and interactive learning resources.</p>
+
+        <h2>Our Mission</h2>
+        <p>Our mission is to make technical education easier to understand and accessible to learners at different skill levels. We aim to explain concepts step by step and provide practical examples that readers can test and adapt.</p>
+
+        <h2>What We Publish</h2>
+        <ul>
+          <li>HTML, CSS, JavaScript, Python, SQL, PHP, and SEO tutorials.</li>
+          <li>Programming examples and practice programs.</li>
+          <li>Technical definitions and computer-science terminology.</li>
+          <li>Programming interview questions and preparation resources.</li>
+          <li>Web-development articles, tools, references, and learning guides.</li>
+          <li>Educational resources and beginner-friendly books.</li>
+        </ul>
+
+        <h2>How We Support the Website</h2>
+        <p>Much of CodesCompiler is available free of charge. We may use advertising, including Google AdSense, to help support hosting, development, maintenance, and the continued creation of educational content.</p>
+
+        <h2>Content Quality</h2>
+        <p>We work to keep our tutorials useful, clear, and relevant. Because programming languages, browsers, frameworks, libraries, and online services change frequently, some content may need updates over time. Please see our <a href="/editorial-policy/">Editorial Policy</a> for more information.</p>
+
+        <h2>Transparency</h2>
+        <p>We provide public information about our privacy practices, cookies, terms, and advertising. You can review our <a href="/privacy-policy/">Privacy Policy</a>, <a href="/cookie-policy/">Cookie Policy</a>, <a href="/terms-of-service/">Terms of Service</a>, and <a href="/disclaimer/">Disclaimer</a>.</p>
+
+        <h2>Contact Us</h2>
+        <p>For questions, corrections, feedback, advertising-related inquiries, or other website matters, please email <a href="mailto:contact@codescompiler.com">contact@codescompiler.com</a> or visit our <a href="/contact/">Contact Us</a> page.</p>
+      </div>
+    </article>
+
+    <aside class="right-sidebar" aria-label="Advertisements and blog links">
+      <section class="side-card blog-card">
+        <h2>From the Blog</h2>
+        <nav>{blogLinks.map(([name, href]) => <a href={href}>{name}<span>→</span></a>)}</nav>
+      </section>
+      <div class="ad-block"><AdSlot format="vertical" /></div>
+      <div class="ad-block"><AdSlot format="rectangle" /></div>
+    </aside>
+  </main>
 </BaseLayout>
+
+<style>
+.about-hero{background:linear-gradient(135deg,#10243d,#173d67);color:#fff;padding:48px 20px}.hero-inner{max-width:1360px;margin:auto}.eyebrow{display:block;color:#f5b900;font-size:.76rem;font-weight:800;letter-spacing:.13em;margin-bottom:10px}.about-hero h1{font-size:clamp(2rem,4vw,2.8rem);margin:0 0 10px}.about-hero p{color:#dbe7f5;max-width:780px;line-height:1.65;margin:0}.about-layout{max-width:1360px;margin:auto;padding:32px 20px 70px;display:grid;grid-template-columns:220px minmax(0,1fr) 180px;gap:24px;align-items:start}.sidebar,.right-sidebar{position:sticky;top:18px;min-width:0}.side-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:18px;box-shadow:0 3px 12px rgba(15,23,42,.05);overflow:hidden}.side-card h2{font-size:.9rem;color:#fff;background:#10243d;margin:-16px -16px 12px;padding:12px 16px;border-bottom:3px solid #f5b900;border-radius:11px 11px 0 0}.side-card nav{display:flex;flex-direction:column;gap:3px}.side-card a{display:flex;justify-content:space-between;gap:8px;color:#475569;text-decoration:none;padding:8px 9px;border-radius:7px;font-size:.88rem}.side-card a span{color:#9a6b00;font-weight:800}.side-card a:hover{background:#fff7d6;color:#8a5a00}.about-content{min-width:0}.content-panel{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:clamp(20px,3vw,36px);box-shadow:0 3px 14px rgba(15,23,42,.045);color:#475569;line-height:1.75}.content-panel h2{font-size:1.35rem;line-height:1.35;color:#10243d;margin:28px 0 10px;padding-bottom:8px;border-bottom:1px solid #e2e8f0}.content-panel h2:first-child{font-size:1.7rem;margin-top:0}.content-panel p{margin:0 0 14px}.content-panel ul{padding-left:22px;margin:0 0 18px}.content-panel li{padding:3px 0}.content-panel a{color:#8a5a00;text-decoration:underline;text-decoration-color:#f5b900;text-underline-offset:3px}.right-sidebar{display:flex;flex-direction:column;gap:18px;align-items:center}.blog-card{width:100%;box-sizing:border-box}.ad-block{width:100%;display:flex;justify-content:center;overflow:hidden}@media(max-width:1080px){.about-layout{grid-template-columns:205px minmax(0,1fr)}.right-sidebar{display:none}}@media(max-width:720px){.about-layout{grid-template-columns:1fr;padding:22px 14px 50px}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}.side-card{margin:0}.about-hero{padding:36px 16px}.about-content{order:2}.sidebar{order:1}}@media(max-width:480px){.sidebar{grid-template-columns:1fr}.content-panel{padding:20px}.content-panel h2:first-child{font-size:1.5rem}}
+</style>
