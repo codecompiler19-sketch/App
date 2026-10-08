@@ -2,6 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/AdSlot.astro';
 
+export function getStaticPaths() {
+  return ['html', 'css', 'javascript', 'python', 'sql', 'php'].map((language) => ({
+    params: { language },
+  }));
+}
+
 const language = Astro.params.language || 'python';
 
 const data = {
