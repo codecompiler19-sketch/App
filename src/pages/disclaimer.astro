@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const lastUpdated = 'October 9, 2026';
+---
+
+<BaseLayout
+  title="Disclaimer"
+  description="Disclaimer for CodesCompiler educational tutorials, code examples, tools, links, and advertising."
+>
+  <article class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white shadow-sm my-8 rounded-lg">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Disclaimer</h1>
+    <p class="text-sm text-gray-500 mb-8"><strong>Last Updated:</strong> {lastUpdated}</p>
+
+    <div class="prose prose-brand prose-lg max-w-none">
+      <h2>1. Educational Information</h2>
+      <p>
+        CodesCompiler provides programming tutorials, examples, definitions, articles,
+        references, and tools for educational and informational purposes. We make reasonable
+        efforts to keep our material useful and accurate, but technology changes frequently
+        and we cannot guarantee that every example or statement will always be current,
+        complete, or error-free.
+      </p>
+
+      <h2>2. Code Examples</h2>
+      <p>
+        Code examples are provided for learning and experimentation. You are responsible for
+        testing code and determining whether it is appropriate for your own project,
+        environment, security requirements, and production use.
+      </p>
+
+      <h2>3. External Links</h2>
+      <p>
+        Our website may contain links to third-party websites, documentation, products,
+        services, and social media platforms. We do not control those websites and are not
+        responsible for their content, availability, security, or privacy practices.
+      </p>
+
+      <h2>4. Advertising</h2>
+      <p>
+        CodesCompiler may display advertisements from Google AdSense and other advertising
+        partners. The appearance of an advertisement does not constitute an endorsement,
+        recommendation, or guarantee of the advertised product or service.
+      </p>
+
+      <h2>5. Availability</h2>
+      <p>
+        We try to keep CodesCompiler available and functional, but we do not guarantee
+        uninterrupted access. Features, tutorials, tools, links, and other website content
+        may be changed, removed, or temporarily unavailable.
+      </p>
+
+      <h2>6. Contact</h2>
+      <p>
+        If you find an error or have a correction suggestion, please contact
+        <a href="mailto:contact@codescompiler.com">contact@codescompiler.com</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
