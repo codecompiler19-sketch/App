@@ -300,34 +300,60 @@ const schemaData = [tutorialSchema, breadcrumbSchema];
   </div>
 
   <script is:inline>
-    (function () {
-      const btn      = document.getElementById('sidebar-toggle');
-      const sidebar  = document.getElementById('page-sidebar');
-      const backdrop = document.getElementById('sidebar-backdrop');
-      if (!btn || !sidebar || !backdrop) return;
-      function openSidebar() {
-        sidebar.classList.remove('-translate-x-full');
-        sidebar.classList.add('translate-x-0');
-        backdrop.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      }
-      function closeSidebar() {
-        sidebar.classList.add('-translate-x-full');
-        sidebar.classList.remove('translate-x-0');
-        backdrop.classList.add('hidden');
-        document.body.style.overflow = '';
-      }
-      btn.addEventListener('click', () => {
-        const isOpen = !sidebar.classList.contains('-translate-x-full');
-        if (isOpen) { closeSidebar(); } else { openSidebar(); }
-      });
-      backdrop.addEventListener('click', closeSidebar);
-      window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768) {
+    (() => {
+      function initTutorialSidebar() {
+        const btn = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('page-sidebar');
+        if (!btn || !sidebar || btn.dataset.sidebarBound === 'true') return;
+
+        // The toggle must work even if a page is missing the backdrop markup.
+        let backdrop = document.getElementById('sidebar-backdrop');
+        if (!backdrop) {
+          backdrop = document.createElement('button');
+          backdrop.type = 'button';
+          backdrop.id = 'sidebar-backdrop';
+          backdrop.className = 'hidden fixed inset-0 z-40 bg-slate-950/50';
+          backdrop.setAttribute('aria-label', 'Close tutorial topics');
+          document.body.appendChild(backdrop);
+        }
+
+        const openSidebar = () => {
+          sidebar.classList.remove('-translate-x-full');
+          sidebar.classList.add('translate-x-0');
+          backdrop.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          btn.setAttribute('aria-expanded', 'true');
+        };
+
+        const closeSidebar = () => {
+          sidebar.classList.add('-translate-x-full');
+          sidebar.classList.remove('translate-x-0');
           backdrop.classList.add('hidden');
           document.body.style.overflow = '';
-        }
-      });
+          btn.setAttribute('aria-expanded', 'false');
+        };
+
+        btn.setAttribute('aria-expanded', 'false');
+        btn.dataset.sidebarBound = 'true';
+        btn.addEventListener('click', () => {
+          if (sidebar.classList.contains('-translate-x-full')) openSidebar();
+          else closeSidebar();
+        });
+        backdrop.addEventListener('click', closeSidebar);
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) closeSidebar();
+        });
+        window.addEventListener('resize', () => {
+          if (window.innerWidth >= 768) closeSidebar();
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTutorialSidebar, { once: true });
+      } else {
+        initTutorialSidebar();
+      }
+      document.addEventListener('astro:page-load', initTutorialSidebar);
     })();
   </script>
 </BaseLayout>
