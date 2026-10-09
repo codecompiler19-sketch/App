@@ -149,7 +149,7 @@ const tutorialLinks = [
       <div id="cc-brand-row" class="w-full bg-white">
         <div class="max-w-screen-2xl mx-auto px-4 lg:px-8 py-4">
           <div class="flex items-center gap-5">
-            <button class="hamburger md:hidden flex-shrink-0" id="ham" onclick="toggleMenu()" aria-label="Toggle Global Menu"><span></span><span></span><span></span></button>
+            <button class="hamburger md:hidden flex-shrink-0" id="ham" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Toggle Global Menu"><span></span><span></span><span></span></button>
             <a href="/" class="flex-shrink-0 inline-flex items-center" aria-label="CodesCompiler">
               <img src="/images/codescompiler-logo.svg" alt="CodesCompiler" width="260" height="59" class="w-[190px] sm:w-[220px] lg:w-[260px] h-auto" decoding="async" />
             </a>
@@ -209,7 +209,7 @@ const tutorialLinks = [
           if (item.type === 'mega' || item.type === 'dropdown') {
             return (
               <div class="m-item">
-                <div class="m-header" onclick="toggleSection(this)">{item.label} <span class="m-arr">▼</span></div>
+                <button type="button" class="m-header w-full text-left" aria-expanded="false">{item.label} <span class="m-arr">▼</span></button>
                 <div class="m-body">
                   {item.sections.map((sec: any) => (
                     <>
@@ -476,30 +476,42 @@ const tutorialLinks = [
         }
       });
 
-      // Mobile Menu JS
-      function toggleMenu() {
-        const ham = document.getElementById('ham');
-        const drawer = document.getElementById('drawer');
-        if(ham && drawer) {
-          ham.classList.toggle('open');
-          drawer.classList.toggle('open');
+      // Mobile menu: delegated events survive Astro view transitions and avoid
+      // inline-handler/global-scope failures on mobile browsers.
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const hamburger = target.closest('#ham');
+        if (hamburger) {
+          const drawer = document.getElementById('drawer');
+          if (!drawer) return;
+          const isOpen = !drawer.classList.contains('open');
+          drawer.classList.toggle('open', isOpen);
+          hamburger.classList.toggle('open', isOpen);
+          hamburger.setAttribute('aria-expanded', String(isOpen));
+          return;
         }
-      }
 
-      function toggleSection(header) {
-        const body = header.nextElementSibling;
-        const isOpen = body.classList.contains('open');
+        const header = target.closest('.mobile-drawer .m-header');
+        if (header) {
+          const body = header.nextElementSibling;
+          if (!body || !body.classList.contains('m-body')) return;
+          const isOpen = !body.classList.contains('open');
 
-        // Close all
-        document.querySelectorAll('.m-body').forEach(b => b.classList.remove('open'));
-        document.querySelectorAll('.m-header').forEach(h => h.classList.remove('active'));
+          document.querySelectorAll('.mobile-drawer .m-body').forEach((item) => item.classList.remove('open'));
+          document.querySelectorAll('.mobile-drawer .m-header').forEach((item) => {
+            item.classList.remove('active');
+            item.setAttribute('aria-expanded', 'false');
+          });
 
-        // Open clicked if it was closed
-        if (!isOpen) {
-          body.classList.add('open');
-          header.classList.add('active');
+          if (isOpen) {
+            body.classList.add('open');
+            header.classList.add('active');
+            header.setAttribute('aria-expanded', 'true');
+          }
         }
-      }
+      });
 
 
       // ── Mega Menu: position panels below the full header ──
