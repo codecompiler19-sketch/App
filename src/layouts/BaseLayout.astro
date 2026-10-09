@@ -116,15 +116,6 @@ const tutorialLinks = [
   <!-- ADMIN-INJECTED-START -->
     <meta http-equiv="Cache-Control" content="public, max-age=3600" />
     <!-- ADMIN-INJECTED-END -->
-    <!-- Dark Mode Init -->
-    <script is:inline>
-      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark-theme');
-      } else {
-        document.documentElement.classList.remove('dark-theme');
-      }
-    </script>
-    
     {theme.customHeadCode && <Fragment set:html={theme.customHeadCode} />}
     <link rel="stylesheet" href="/custom.css" />
 </head>
@@ -148,7 +139,6 @@ const tutorialLinks = [
                <a href="/kids/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21c.6-4 2.8-6 7-6s6.4 2 7 6"/><path d="M8 13.5 6 12M16 13.5 18 12"/></svg></span> Kids</a>
             </nav>
             <div class="hidden lg:flex items-center gap-1 whitespace-nowrap">
-              <button id="theme-toggle" class="cc-top-link" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()"><span class="cc-sun">☀</span> Light</button>
               <button class="cc-top-link" type="button" onclick="document.getElementById('main-search')?.focus()" aria-label="Focus search"><span class="cc-search-symbol">⌕</span> Search</button>
               <a href="/about/" class="cc-top-link"><span class="cc-top-icon"><svg class="cc-nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18V3Z"/><path d="M12 3a9 9 0 0 1 0 18"/></svg></span> About</a>
             </div>
@@ -172,7 +162,6 @@ const tutorialLinks = [
                 <div id="search-dropdown" class="hidden absolute left-0 right-0 top-full mt-2"></div>
               </div>
             </div>
-            <button id="mobile-theme-toggle" class="md:hidden flex-shrink-0 p-2 rounded-full hover:bg-slate-100 text-slate-700" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()"><span class="text-xl">☾</span></button>
           </div>
         </div>
       </div>
@@ -512,32 +501,6 @@ const tutorialLinks = [
         }
       }
 
-      // Dark Mode JS
-      const themeIcon = document.getElementById('theme-icon');
-      const sunIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
-      const moonIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>`;
-
-      // Set initial icon
-      if (document.documentElement.classList.contains('dark-theme')) {
-        if(themeIcon) themeIcon.innerHTML = sunIcon;
-      }
-
-      function toggleDarkMode() {
-        if (document.documentElement.classList.contains('dark-theme')) {
-            document.documentElement.classList.remove('dark-theme');
-            localStorage.setItem('color-theme', 'light');
-            if(themeIcon) themeIcon.innerHTML = moonIcon;
-        } else {
-            document.documentElement.classList.add('dark-theme');
-            localStorage.setItem('color-theme', 'dark');
-            if(themeIcon) themeIcon.innerHTML = sunIcon;
-        }
-      }
-
-      // Add to window so inline onclicks work
-      window.toggleMenu = toggleMenu;
-      window.toggleSection = toggleSection;
-      window.toggleDarkMode = toggleDarkMode;
 
       // ── Mega Menu: position panels below the full header ──
       function positionMegaPanels() {
